@@ -9,7 +9,7 @@ public class ConsoleView implements PropertyChangeListener
 {
   public ConsoleView(Model model)
   {
-    //model.addListener(this);
+    model.addListener(this);
   }
 
   @Override
