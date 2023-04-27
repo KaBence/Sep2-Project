@@ -1,5 +1,6 @@
 package Client.View;
 
+import Client.View.Controllers.HomeController;
 import Client.ViewModel.ViewModelFactory;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Region;
@@ -24,7 +25,7 @@ public class ViewFactory
 
   private Region loadHomeView(){
     FXMLLoader loader=new FXMLLoader();
-    loader.setLocation(getClass().getResource("Home.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/Home.fxml"));
     try
     {
       Region root = loader.load();

@@ -1,5 +1,6 @@
-package Client.View;
+package Client.View.Controllers;
 
+import Client.View.ViewHandler;
 import Client.ViewModel.HomeViewModel;
 import javafx.scene.layout.Region;
 
