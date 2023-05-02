@@ -20,10 +20,10 @@ public class ViewHandler
 
   public void start(Stage primaryStage){
     this.primaryStage=primaryStage;
-    openView(ViewFactory.HOME);
+    openView(SceneNames.Home);
   }
 
-  public void openView(String id){
+  public void openView(SceneNames id){
     Region root =viewFactory.load(id);
     currentScene.setRoot(root);
     if (root.getUserData()==null){
