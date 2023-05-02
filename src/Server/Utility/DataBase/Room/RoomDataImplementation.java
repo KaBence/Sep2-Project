@@ -41,6 +41,22 @@ public class RoomDataImplementation implements RoomData
         bathroom, kitchen, balcony);
   }
 
+  @Override public Room deleteRoom(Room room)
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement ps = connection.prepareStatement(
+          "DELETE FROM (....) WHERE (...) = ?");
+      ps.setInt(1, room.getRoomNo());
+      ps.executeUpdate();
+    }
+    catch (SQLException ex)
+    {
+      System.err.println(ex.getMessage());
+    }
+    return room;
+  }
+
   @Override public ArrayList<Room> filter(String room)
   {
     ArrayList<Room> list = getAllRooms();
