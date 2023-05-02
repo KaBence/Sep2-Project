@@ -4,22 +4,18 @@ public class Room
 {
   private int roomNo,noOfBeds,size;
   private String orientation;
-  private boolean internet,tv,bathroom,kitchenet,peopleWithDisabilities,airConditioning,balcony;
+  private boolean internet,bathroom,kitchenet,balcony;
 
   public Room(int roomNo, int noOfBeds, int size, String orientation,
-      boolean internet, boolean tv, boolean bathroom, boolean kitchenet,
-      boolean peopleWithDisabilities, boolean airConditioning, boolean balcony)
+      boolean internet, boolean bathroom, boolean kitchenet, boolean balcony)
   {
     this.roomNo = roomNo;
     this.noOfBeds = noOfBeds;
     this.size = size;
     this.orientation = orientation;
     this.internet = internet;
-    this.tv = tv;
     this.bathroom = bathroom;
     this.kitchenet = kitchenet;
-    this.peopleWithDisabilities = peopleWithDisabilities;
-    this.airConditioning = airConditioning;
     this.balcony = balcony;
   }
 
@@ -73,16 +69,6 @@ public class Room
     this.internet = internet;
   }
 
-  public boolean isTv()
-  {
-    return tv;
-  }
-
-  public void setTv(boolean tv)
-  {
-    this.tv = tv;
-  }
-
   public boolean isBathroom()
   {
     return bathroom;
@@ -101,26 +87,6 @@ public class Room
   public void setKitchenet(boolean kitchenet)
   {
     this.kitchenet = kitchenet;
-  }
-
-  public boolean isPeopleWithDisabilities()
-  {
-    return peopleWithDisabilities;
-  }
-
-  public void setPeopleWithDisabilities(boolean peopleWithDisabilities)
-  {
-    this.peopleWithDisabilities = peopleWithDisabilities;
-  }
-
-  public boolean isAirConditioning()
-  {
-    return airConditioning;
-  }
-
-  public void setAirConditioning(boolean airConditioning)
-  {
-    this.airConditioning = airConditioning;
   }
 
   public boolean isBalcony()
