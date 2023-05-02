@@ -41,7 +41,7 @@ public class EmployeeHomeController
   }
 
   @FXML void addRoom(){
-
+    viewHandler.openView(SceneNames.AddRoom);
   }
 
   @FXML void Home(){
