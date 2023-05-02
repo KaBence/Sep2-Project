@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Controllers.EmployeeHomeController">
    <children>
-      <Button layoutX="463.0" layoutY="322.0" mnemonicParsing="false" onAction="#addRoom" text="Add a Room">
+      <Button layoutX="467.0" layoutY="286.0" mnemonicParsing="false" onAction="#addRoom" text="Add a Room">
          <font>
             <Font size="16.0" />
          </font>
@@ -22,5 +21,10 @@
             <TableColumn fx:id="tableOri" prefWidth="118.0" text="Orientation" />
         </columns>
       </TableView>
+      <Button layoutX="490.0" layoutY="331.0" mnemonicParsing="false" onAction="#Home" text="Home">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

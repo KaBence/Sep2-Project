@@ -11,6 +11,7 @@ public class ViewModelFactory
   private EmployeeHomeViewModel employeeHomeViewModel;
 
   private CustomerHomeViewModel customerHomeViewModel;
+  private AddRoomViewModel addRoomViewModel;
 
   public ViewModelFactory(Model model){
     homeViewModel=new HomeViewModel(model);
@@ -36,5 +37,10 @@ public class ViewModelFactory
   public CustomerHomeViewModel getCustomerHomeViewModel()
   {
     return customerHomeViewModel;
+  }
+
+  public AddRoomViewModel getAddRoomViewModel()
+  {
+    return addRoomViewModel;
   }
 }

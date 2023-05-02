@@ -1,5 +1,6 @@
 package Client.View.Controllers;
 
+import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.AddRoomViewModel;
 import Client.ViewModel.CustomerHomeViewModel;
@@ -33,6 +34,6 @@ public class AddRoomController
   }
 
   @FXML void Cancel(){
-
+    viewHandler.openView(SceneNames.EmployeeHome);
   }
 }
