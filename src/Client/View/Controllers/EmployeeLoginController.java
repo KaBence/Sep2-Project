@@ -2,24 +2,25 @@ package Client.View.Controllers;
 
 import Client.View.SceneNames;
 import Client.View.ViewHandler;
+import Client.ViewModel.EmployeeLoginViewModel;
 import Client.ViewModel.HomeViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 
-public class HomeController
+public class EmployeeLoginController
 {
   private Region root;
   private ViewHandler viewHandler;
-  private HomeViewModel homeViewModel;
-  public void init(ViewHandler viewHandler, HomeViewModel homeViewModel, Region root){
+  private EmployeeLoginViewModel viewModel;
+  public void init(ViewHandler viewHandler, EmployeeLoginViewModel viewModel, Region root){
     this.viewHandler=viewHandler;
-    this.homeViewModel=homeViewModel;
+    this.viewModel=viewModel;
     this.root=root;
 
   }
 
   public Region getRoot(){
-    root.setUserData("Home");
+    root.setUserData("Employee Login");
     return root;
   }
 
@@ -27,11 +28,7 @@ public class HomeController
 
   }
 
-  @FXML void employee(){
-    viewHandler.openView(SceneNames.EmployeeLogin);
-  }
-
-  @FXML void customer(){
-    viewHandler.openView(SceneNames.CustomerHome);
+  @FXML void login(){
+    viewHandler.openView(SceneNames.EmployeeHome);
   }
 }
