@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class RoomDataImplementation implements RoomData
 {
-  @Override public Connection getConnection() throws SQLException
+  private Connection getConnection() throws SQLException
   {
     return DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema= !!!!!!!!!!!",
@@ -55,6 +55,33 @@ public class RoomDataImplementation implements RoomData
       System.err.println(ex.getMessage());
     }
     return room;
+  }
+
+  @Override public Room updateRoom(Room room, int roomNumber, int numberOfBeds,
+      int size, String orientation, boolean internet, boolean bathroom,
+      boolean kitchen, boolean balcony)
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement ps = connection.prepareStatement(
+          "UPDATE  (....) SET (...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?, WHERE (...) = ?");
+      ps.setInt(1, roomNumber);
+      ps.setInt(2, numberOfBeds);
+      ps.setInt(3, size);
+      ps.setString(4, orientation);
+      ps.setBoolean(5, internet);
+      ps.setBoolean(6, bathroom);
+      ps.setBoolean(7, kitchen);
+      ps.setBoolean(8, balcony);
+      ps.setInt(9, room.getRoomNo());
+      ps.executeUpdate();
+    }
+    catch (SQLException ex)
+    {
+      System.err.println(ex.getMessage());
+    }
+    return new Room(roomNumber, numberOfBeds, size, orientation, internet,
+        bathroom, kitchen, balcony);
   }
 
   @Override public ArrayList<Room> filter(String room)
