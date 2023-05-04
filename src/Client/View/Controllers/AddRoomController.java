@@ -4,6 +4,7 @@ import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.AddRoomViewModel;
 import Client.ViewModel.CustomerHomeViewModel;
+import Server.Model.Room;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -44,7 +45,7 @@ public class AddRoomController
   }
 
   @FXML void Add(){
-
+    viewModel.addRoom(Integer.parseInt(roomNo.getText()),Integer.parseInt(beds.getText()),Integer.parseInt(size.getText()),orientation.getValue(),internet.isSelected(),bathroom.isSelected(),kitchen.isSelected(),balcony.isSelected());
   }
 
   @FXML void Cancel(){

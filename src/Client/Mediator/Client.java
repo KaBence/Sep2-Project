@@ -1,5 +1,6 @@
 package Client.Mediator;
 
+import Server.Model.Room;
 import Shared.SharedInterface;
 import dk.via.remote.observer.RemotePropertyChangeEvent;
 import dk.via.remote.observer.RemotePropertyChangeListener;
@@ -22,5 +23,12 @@ public class Client extends UnicastRemoteObject implements
       throws RemoteException
   {
 
+  }
+
+  public void addRoom(int roomNumber, int numberOfBeds, int size,
+      String orientation, boolean internet, boolean bathroom, boolean kitchen,
+      boolean balcony) throws RemoteException
+  {
+    sharedInterface.addRoom(roomNumber, numberOfBeds, size, orientation, internet, bathroom, kitchen, balcony);
   }
 }
