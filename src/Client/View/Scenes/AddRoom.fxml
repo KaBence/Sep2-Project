@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Controllers.AddRoomController">
+   <children>
+      <Label layoutX="34.0" layoutY="68.0" text="Room Number">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="317.0" layoutY="68.0" text="Number of Beds">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="118.0" text="Size of the room">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="333.0" layoutY="118.0" text="Orientation">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="357.0" layoutY="250.0" text="Internet">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="83.0" layoutY="187.0" text="Bathroom">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="85.0" layoutY="249.0" text="Kitchenet">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="334.0" layoutY="187.0" text="Has a balcony">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="roomNo" layoutX="143.0" layoutY="66.0" />
+      <Label layoutX="231.0" layoutY="20.0" text="Adding a Room">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="199.0" layoutY="345.0" mnemonicParsing="false" onAction="#Cancel" text="Cancel">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="347.0" layoutY="345.0" mnemonicParsing="false" onAction="#Add" text="Add">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <TextField fx:id="size" layoutX="143.0" layoutY="116.0" />
+      <TextField fx:id="beds" layoutX="437.0" layoutY="66.0" />
+      <Line endX="489.0" layoutX="111.0" layoutY="159.0" startX="-111.0" />
+      <CheckBox fx:id="bathroom" layoutX="176.0" layoutY="188.0" mnemonicParsing="false">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="kitchen" layoutX="176.0" layoutY="250.0" mnemonicParsing="false">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="balcony" layoutX="471.0" layoutY="188.0" mnemonicParsing="false">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="internet" layoutX="471.0" layoutY="251.0" mnemonicParsing="false">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
+      <ChoiceBox fx:id="orientation" layoutX="437.0" layoutY="116.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

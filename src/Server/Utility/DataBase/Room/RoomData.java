@@ -8,8 +8,9 @@ import java.util.ArrayList;
 
 public interface RoomData
 {
-  Connection getConnection() throws SQLException;
-  Room addNewRoom(int roomNumber,int numberOfBeds, int size, String orientation,boolean internet,boolean tv,boolean bathroom,boolean kitchen,boolean disable,boolean ac,boolean balcony);
-  Room getRoom(Room room);
+  Room addNewRoom(int roomNumber,int numberOfBeds, int size, String orientation,boolean internet,boolean bathroom,boolean kitchen,boolean balcony);
+  Room deleteRoom(Room room);
+  Room updateRoom(Room room,int roomNumber,int numberOfBeds, int size, String orientation,boolean internet,boolean bathroom,boolean kitchen,boolean balcony);
+  ArrayList<Room> filter(String room);
   ArrayList<Room> getAllRooms();
 }

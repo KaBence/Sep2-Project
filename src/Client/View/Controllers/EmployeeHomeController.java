@@ -1,5 +1,6 @@
 package Client.View.Controllers;
 
+import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.EmployeeHomeViewModel;
 import Client.ViewModel.HomeViewModel;
@@ -40,6 +41,10 @@ public class EmployeeHomeController
   }
 
   @FXML void addRoom(){
+    viewHandler.openView(SceneNames.AddRoom);
+  }
 
+  @FXML void Home(){
+    viewHandler.openView(SceneNames.Home);
   }
 }

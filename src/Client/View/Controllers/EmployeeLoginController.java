@@ -31,4 +31,8 @@ public class EmployeeLoginController
   @FXML void login(){
     viewHandler.openView(SceneNames.EmployeeHome);
   }
+
+  @FXML void Back(){
+    viewHandler.openView(SceneNames.Home);
+  }
 }

@@ -1,9 +1,6 @@
 package Client.View;
 
-import Client.View.Controllers.CustomerHomeController;
-import Client.View.Controllers.EmployeeHomeController;
-import Client.View.Controllers.EmployeeLoginController;
-import Client.View.Controllers.HomeController;
+import Client.View.Controllers.*;
 import Client.ViewModel.ViewModelFactory;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Region;
@@ -19,6 +16,7 @@ public class ViewFactory
   private EmployeeLoginController employeeLoginController;
   private EmployeeHomeController employeeHomeController;
   private CustomerHomeController customerHomeController;
+  private AddRoomController addRoomController;
 
   private ViewModelFactory viewModelFactory;
 
@@ -93,6 +91,22 @@ public class ViewFactory
     return customerHomeController.getRoot();
   }
 
+  private Region loadAddRoom(){
+    FXMLLoader loader=new FXMLLoader();
+    loader.setLocation(getClass().getResource("Scenes/AddRoom.fxml"));
+    try
+    {
+      Region root = loader.load();
+      addRoomController=loader.getController();
+      addRoomController.init(viewHandler,viewModelFactory.getAddRoomViewModel(),root);
+    }
+    catch(IOException e){
+      throw new IOError(e);
+    }
+    addRoomController.reset();
+    return addRoomController.getRoot();
+  }
+
 
   public Region load(SceneNames id){
     return switch (id){
@@ -100,6 +114,7 @@ public class ViewFactory
       case EmployeeLogin -> loadEmployeeLogin();
       case EmployeeHome -> loadEmployeeHome();
       case CustomerHome -> loadCustomerHome();
+      case AddRoom -> loadAddRoom();
       default -> throw new IllegalArgumentException("Unknown id");
     };
   }
