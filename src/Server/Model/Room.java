@@ -2,13 +2,14 @@ package Server.Model;
 
 public class Room
 {
-  private int roomNo,noOfBeds,size;
+  private int roomNo,noOfBeds,size,price;
   private String orientation;
   private boolean internet,bathroom,kitchenet,balcony;
 
-  public Room(int roomNo, int noOfBeds, int size, String orientation,
+  public Room(int roomNo, int noOfBeds, int size, int price, String orientation,
       boolean internet, boolean bathroom, boolean kitchenet, boolean balcony)
   {
+    this.price=price;
     this.roomNo = roomNo;
     this.noOfBeds = noOfBeds;
     this.size = size;

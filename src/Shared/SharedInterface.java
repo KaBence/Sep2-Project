@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 
 public interface SharedInterface extends Remote
 {
-  void addRoom(int roomNumber, int numberOfBeds, int size,
+  void addRoom(int roomNumber, int numberOfBeds, int size, int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException;
 }

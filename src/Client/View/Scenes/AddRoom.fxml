@@ -4,6 +4,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
@@ -91,5 +92,12 @@
          </font>
       </CheckBox>
       <ChoiceBox fx:id="orientation" layoutX="437.0" layoutY="116.0" prefWidth="150.0" />
+      <Label layoutX="85.0" layoutY="298.0" text="Price">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="orientation1" layoutX="142.0" layoutY="298.0" prefWidth="150.0" />
+      <Slider layoutX="310.0" layoutY="304.0" />
    </children>
 </AnchorPane>
