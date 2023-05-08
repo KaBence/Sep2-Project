@@ -1,6 +1,7 @@
 package Client.View;
 
 import Client.View.Controllers.*;
+import Client.ViewModel.EditRoomViewModel;
 import Client.ViewModel.ViewModelFactory;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Region;
@@ -17,6 +18,7 @@ public class ViewFactory
   private EmployeeHomeController employeeHomeController;
   private CustomerHomeController customerHomeController;
   private AddRoomController addRoomController;
+  private EditRoomController editRoomController;
 
   private ViewModelFactory viewModelFactory;
 
@@ -107,6 +109,22 @@ public class ViewFactory
     return addRoomController.getRoot();
   }
 
+  private Region loadEditRoom(){
+    FXMLLoader loader=new FXMLLoader();
+    loader.setLocation(getClass().getResource("Scenes/EditRoom.fxml"));
+    try
+    {
+      Region root = loader.load();
+      editRoomController=loader.getController();
+      editRoomController.init(viewHandler,viewModelFactory.getEditRoomViewModel(),root);
+    }
+    catch(IOException e){
+      throw new IOError(e);
+    }
+    editRoomController.reset();
+    return editRoomController.getRoot();
+  }
+
 
   public Region load(SceneNames id){
     return switch (id){
@@ -115,6 +133,7 @@ public class ViewFactory
       case EmployeeHome -> loadEmployeeHome();
       case CustomerHome -> loadCustomerHome();
       case AddRoom -> loadAddRoom();
+      case EditRoom -> loadEditRoom();
       default -> throw new IllegalArgumentException("Unknown id");
     };
   }
