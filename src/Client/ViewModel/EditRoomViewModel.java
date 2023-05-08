@@ -2,9 +2,7 @@ package Client.ViewModel;
 
 import Client.Model.Model;
 import Server.Model.Room;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.*;
 
 public class EditRoomViewModel
 {
@@ -30,6 +28,46 @@ public class EditRoomViewModel
 
   public void fill(){
     Room temp=model.getSelectedRoom();
-    internet=temp.isInternet();
+    internet.set(temp.isInternet());
+    balcony.set(temp.isBalcony());
+    bathroom.set(temp.isBathroom());
+    kitchen.set(temp.isKitchenet());
+    roomNumber.set(String.valueOf(temp.getRoomNo()));
+    numberOfBeds.set(String.valueOf(temp.getNoOfBeds()));
+    size.set(String.valueOf(temp.getSize()));
+    price.set(temp.getPrice());
+    orientation.set(temp.getOrientation());
+  }
+
+  public void bindInternet(BooleanProperty property){
+    property.bindBidirectional(internet);
+  }
+  public void bindBalcony(BooleanProperty property){
+    property.bindBidirectional(balcony);
+  }
+  public void bindBathroom(BooleanProperty property){
+    property.bindBidirectional(bathroom);
+  }
+  public void bindKitchen(BooleanProperty property){
+    property.bindBidirectional(kitchen);
+  }
+  public void bindRoomNo(StringProperty property){
+    property.bindBidirectional(roomNumber);
+  }
+
+  public void bindNoBeds(StringProperty  property){
+    property.bindBidirectional(numberOfBeds);
+  }
+
+  public void bindSize(StringProperty property){
+    property.bindBidirectional(size);
+  }
+
+  public void bindPrice(ObjectProperty<Integer > property){
+    property.bindBidirectional(price);
+  }
+
+  public void bindOrientation(ObjectProperty<String > property){
+    property.bindBidirectional(orientation);
   }
 }

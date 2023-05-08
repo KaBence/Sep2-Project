@@ -31,7 +31,7 @@ public class AddRoomController
 
     viewModel.bindNoBeds(beds.textProperty());
     viewModel.bindBalcony(balcony.selectedProperty());
-    viewModel.bindBathroom(balcony.selectedProperty());
+    viewModel.bindBathroom(bathroom.selectedProperty());
     viewModel.bindInternet(internet.selectedProperty());
     viewModel.bindKitchen(kitchen.selectedProperty());
     viewModel.bindPrice(price.valueProperty());
