@@ -5,6 +5,7 @@
       <root url="jar://$PROJECT_DIR$/../../../../Java/byte-buddy-agent-1.14.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../Java/objenesis-3.3.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../Java/mockito-core-5.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Java/postgresql-42.6.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
