@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class ModelManager implements Model
 {
   private Client client;
+  private Room selectedRoom;
   public ModelManager() throws IOException, NotBoundException
   {
     Registry registry= LocateRegistry.getRegistry(1337);
@@ -34,5 +35,15 @@ public class ModelManager implements Model
   @Override public ArrayList<Room> getAllRooms() throws RemoteException
   {
     return client.getAllRooms();
+  }
+
+  @Override public void saveSelectedRoom(Room room)
+  {
+    selectedRoom=room;
+  }
+
+  @Override public Room getSelectedRoom()
+  {
+    return selectedRoom;
   }
 }

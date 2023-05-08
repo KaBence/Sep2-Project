@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 
 public class EmployeeHomeController
@@ -55,5 +56,11 @@ public class EmployeeHomeController
 
   @FXML void Home(){
     viewHandler.openView(SceneNames.Home);
+  }
+
+  @FXML void tableClick(MouseEvent event){
+    viewModel.saveRoom(tableView.getSelectionModel().getSelectedItem());
+    if (event.getClickCount()==2)
+      viewHandler.openView(SceneNames.EditRoom);
   }
 }

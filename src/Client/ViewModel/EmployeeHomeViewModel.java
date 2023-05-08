@@ -47,6 +47,10 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     rooms.set(observableList);
   }
 
+  public void saveRoom(Room room){
+    model.saveSelectedRoom(room);
+  }
+
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     Platform.runLater(() -> {
