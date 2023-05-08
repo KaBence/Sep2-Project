@@ -21,12 +21,12 @@
       </Label>
       <TextField layoutX="272.0" layoutY="129.0" prefHeight="25.0" prefWidth="183.0" />
       <TextField layoutX="272.0" layoutY="179.0" prefHeight="25.0" prefWidth="183.0" />
-      <Button layoutX="271.0" layoutY="226.0" mnemonicParsing="false" onAction="#login" text="Login">
+      <Button layoutX="329.0" layoutY="226.0" mnemonicParsing="false" onAction="#login" text="Login">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label layoutX="217.0" layoutY="61.0" text="Employee Login">
+      <Label layoutX="217.0" layoutY="61.0" text="EmployeeLogin">
          <font>
             <Font name="Cambria Bold" size="24.0" />
          </font>
@@ -36,7 +36,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="signIn" layoutX="364.0" layoutY="337.0" mnemonicParsing="false" onAction="#login" text="Register a new Employee">
+      <Button fx:id="signIn" layoutX="490.0" layoutY="337.0" mnemonicParsing="false" onAction="#SignIn" text="Sign In">
          <font>
             <Font size="18.0" />
          </font>

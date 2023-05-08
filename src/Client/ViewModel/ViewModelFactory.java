@@ -12,14 +12,17 @@ public class ViewModelFactory
 
   private CustomerHomeViewModel customerHomeViewModel;
   private AddRoomViewModel addRoomViewModel;
+  private EmployeeSignInViewModel employeeSignInViewModel;
   private EditRoomViewModel editRoomViewModel;
 
-  public ViewModelFactory(Model model){
-    homeViewModel=new HomeViewModel(model);
-    employeeHomeViewModel=new EmployeeHomeViewModel(model);
-    employeeLoginViewModel=new EmployeeLoginViewModel(model);
-    customerHomeViewModel=new CustomerHomeViewModel(model);
-    addRoomViewModel=new AddRoomViewModel(model);
+  public ViewModelFactory(Model model)
+  {
+    homeViewModel = new HomeViewModel(model);
+    employeeHomeViewModel = new EmployeeHomeViewModel(model);
+    employeeLoginViewModel = new EmployeeLoginViewModel(model);
+    customerHomeViewModel = new CustomerHomeViewModel(model);
+    addRoomViewModel = new AddRoomViewModel(model);
+    employeeSignInViewModel = new EmployeeSignInViewModel(model);
     editRoomViewModel=new EditRoomViewModel(model);
   }
 
@@ -30,6 +33,11 @@ public class ViewModelFactory
   public EmployeeLoginViewModel getEmployeeLoginViewModel()
   {
     return employeeLoginViewModel;
+  }
+
+  public EmployeeSignInViewModel getEmployeeSignInViewModel()
+  {
+    return employeeSignInViewModel;
   }
 
   public EmployeeHomeViewModel getEmployeeHomeViewModel()
