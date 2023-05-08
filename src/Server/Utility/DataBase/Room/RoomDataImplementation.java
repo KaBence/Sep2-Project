@@ -22,7 +22,7 @@ public class RoomDataImplementation implements RoomData
   {
     return DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=hostelreservation",
-        "postgres", "asdQWE123");
+        "postgres", "12345");
   }
 
   @Override public Room addNewRoom(int roomNumber, int numberOfBeds, int size,int price,
@@ -120,18 +120,17 @@ public class RoomDataImplementation implements RoomData
       PreparedStatement ps = connection.prepareStatement(
           "Select * from room");
       ResultSet rs = ps.executeQuery();
-
       while (rs.next())
       {
-        int roomNumber = rs.getInt("");
-        int numberOfBeds = rs.getInt("");
-        int size = rs.getInt("");
-        int price =rs.getInt(" ");
-        String orientation = rs.getString("");
-        boolean internet = rs.getBoolean("");
-        boolean bathroom = rs.getBoolean("");
-        boolean kitchen = rs.getBoolean("");
-        boolean balcony = rs.getBoolean("");
+        int roomNumber = rs.getInt("roomNo");
+        int numberOfBeds = rs.getInt("noBeds");
+        int size = rs.getInt("size");
+        int price =rs.getInt("price");
+        String orientation = rs.getString("orientation");
+        boolean internet = rs.getBoolean("internet");
+        boolean bathroom = rs.getBoolean("bathroom");
+        boolean kitchen = rs.getBoolean("kitchen");
+        boolean balcony = rs.getBoolean("balcony");
 
         list.add(new Room(roomNumber, numberOfBeds, size, price, orientation, internet,
             bathroom, kitchen, balcony));
