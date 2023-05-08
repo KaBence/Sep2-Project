@@ -1,5 +1,6 @@
 package Client.View.Controllers;
 
+import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.EmployeeLoginViewModel;
 import Client.ViewModel.EmployeeSignInViewModel;
@@ -29,5 +30,9 @@ public class EmployeeSignInController
 
   @FXML void Add(){
 
+  }
+
+  @FXML void cancel(){
+    viewHandler.openView(SceneNames.Home);
   }
 }
