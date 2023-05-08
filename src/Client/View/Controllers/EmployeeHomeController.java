@@ -27,6 +27,7 @@ public class EmployeeHomeController
   public void init(ViewHandler viewHandler, EmployeeHomeViewModel viewModel, Region root){
     this.viewHandler=viewHandler;
     this.viewModel=viewModel;
+    this.viewModel.bindRoomList(tableView.itemsProperty());
     this.root=root;
 
   }

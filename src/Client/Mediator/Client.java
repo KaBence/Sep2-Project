@@ -8,6 +8,7 @@ import dk.via.remote.observer.RemotePropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class Client extends UnicastRemoteObject implements
     RemotePropertyChangeListener
@@ -31,5 +32,10 @@ public class Client extends UnicastRemoteObject implements
       boolean balcony) throws RemoteException
   {
     sharedInterface.addRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony);
+  }
+
+  public ArrayList<Room> getAllRooms() throws RemoteException
+  {
+    return sharedInterface.getAllRooms();
   }
 }

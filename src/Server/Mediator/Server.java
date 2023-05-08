@@ -6,6 +6,7 @@ import Shared.SharedInterface;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class Server extends UnicastRemoteObject implements SharedInterface
 {
@@ -21,4 +22,10 @@ public class Server extends UnicastRemoteObject implements SharedInterface
   {
     model.addRoom(roomNumber, numberOfBeds, size, price,orientation, internet, bathroom, kitchen, balcony);
   }
+
+  @Override public ArrayList<Room> getAllRooms()
+  {
+    return model.getAllRooms();
+  }
+
 }

@@ -1,6 +1,7 @@
 package Server.Model;
 
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 public interface Model
 {
@@ -9,4 +10,6 @@ public interface Model
   void addRoom(int roomNumber, int numberOfBeds, int size, int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony);
+
+  ArrayList<Room> getAllRooms();
 }
