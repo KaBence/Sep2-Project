@@ -29,6 +29,19 @@ public class AddRoomController
     this.viewModel=viewModel;
     this.root=root;
 
+    viewModel.bindNoBeds(beds.textProperty());
+    viewModel.bindBalcony(balcony.selectedProperty());
+    viewModel.bindBathroom(balcony.selectedProperty());
+    viewModel.bindInternet(internet.selectedProperty());
+    viewModel.bindKitchen(kitchen.selectedProperty());
+    viewModel.bindPrice(price.valueProperty());
+    viewModel.bindRoomNo(roomNo.textProperty());
+
+    viewModel.bindSize(size.textProperty());
+
+    viewModel.bindOrientation(orientation.valueProperty());
+
+
   }
 
   public void initialize(){
@@ -54,8 +67,7 @@ public class AddRoomController
 
   @FXML void Add() throws RemoteException
   {
-    viewModel.addRoom(Integer.parseInt(roomNo.getText()),Integer.parseInt(beds.getText()),Integer.parseInt(size.getText()),
-        price.getValue(), orientation.getValue(),internet.isSelected(),bathroom.isSelected(),kitchen.isSelected(),balcony.isSelected());
+    viewModel.addRoom();
   }
 
   @FXML void Cancel(){
