@@ -54,7 +54,7 @@
       <TextField fx:id="roomNo" layoutX="143.0" layoutY="66.0" />
       <Label layoutX="231.0" layoutY="20.0" text="Adding a Room">
          <font>
-            <Font name="Cambria Bold" size="20.0" />
+            <Font name="Cambria Bold" size="24.0" />
          </font>
       </Label>
       <Button layoutX="199.0" layoutY="345.0" mnemonicParsing="false" onAction="#Cancel" text="Cancel">
