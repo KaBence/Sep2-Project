@@ -22,7 +22,7 @@ public class RoomDataImplementation implements RoomData
   {
     return DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=hostelreservation",
-        "postgres", "asdQWE123");
+        "postgres", "password");
   }
 
   @Override public Room addNewRoom(int roomNumber, int numberOfBeds, int size,int price,
