@@ -16,6 +16,7 @@ public class Client extends UnicastRemoteObject implements
   private PropertyChangeSupport support;
   public Client(SharedInterface sharedInterface) throws RemoteException{
     support=new PropertyChangeSupport(this);
+    this.sharedInterface=sharedInterface;
   }
 
   @Override public void propertyChange(

@@ -18,6 +18,7 @@ public class ViewModelFactory
     employeeHomeViewModel=new EmployeeHomeViewModel(model);
     employeeLoginViewModel=new EmployeeLoginViewModel(model);
     customerHomeViewModel=new CustomerHomeViewModel(model);
+    addRoomViewModel=new AddRoomViewModel(model);
   }
 
   public HomeViewModel getHomeViewModel(){

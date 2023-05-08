@@ -6,10 +6,11 @@ import Client.ViewModel.AddRoomViewModel;
 import Client.ViewModel.CustomerHomeViewModel;
 import Server.Model.Room;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
+
+import java.rmi.RemoteException;
+import java.text.DecimalFormat;
 
 public class AddRoomController
 {
@@ -20,7 +21,9 @@ public class AddRoomController
 
   @FXML TextField roomNo,size,beds;
   @FXML ChoiceBox<String> orientation;
+  @FXML ChoiceBox<Integer> price;
   @FXML CheckBox internet,balcony,kitchen,bathroom;
+
   public void init(ViewHandler viewHandler, AddRoomViewModel viewModel, Region root){
     this.viewHandler=viewHandler;
     this.viewModel=viewModel;
@@ -33,6 +36,11 @@ public class AddRoomController
     orientation.getItems().add("West");
     orientation.getItems().add("South");
     orientation.getItems().add("East");
+
+    price.getItems().add(200);
+    price.getItems().add(270);
+    price.getItems().add(300);
+    price.getItems().add(500);
   }
 
   public Region getRoot(){
@@ -44,11 +52,14 @@ public class AddRoomController
 
   }
 
-  @FXML void Add(){
-    viewModel.addRoom(Integer.parseInt(roomNo.getText()),Integer.parseInt(beds.getText()),Integer.parseInt(size.getText()),orientation.getValue(),internet.isSelected(),bathroom.isSelected(),kitchen.isSelected(),balcony.isSelected());
+  @FXML void Add() throws RemoteException
+  {
+    viewModel.addRoom(Integer.parseInt(roomNo.getText()),Integer.parseInt(beds.getText()),Integer.parseInt(size.getText()),
+        price.getValue(), orientation.getValue(),internet.isSelected(),bathroom.isSelected(),kitchen.isSelected(),balcony.isSelected());
   }
 
   @FXML void Cancel(){
     viewHandler.openView(SceneNames.EmployeeHome);
   }
+
 }

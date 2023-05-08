@@ -7,11 +7,22 @@ import java.util.ArrayList;
 
 public class RoomDataImplementation implements RoomData
 {
+
+  public RoomDataImplementation(){
+    try
+    {
+      DriverManager.registerDriver(new org.postgresql.Driver());
+    }
+    catch (SQLException e)
+    {
+      System.err.println(e.getMessage());
+    }
+  }
   private Connection getConnection() throws SQLException
   {
     return DriverManager.getConnection(
-        "jdbc:postgresql://localhost:5432/postgres?currentSchema= !!!!!!!!!!!",
-        "postgres", "!!!!!!!!!");
+        "jdbc:postgresql://localhost:5432/postgres?currentSchema=hostelreservation",
+        "postgres", "asdQWE123");
   }
 
   @Override public Room addNewRoom(int roomNumber, int numberOfBeds, int size,int price,
@@ -21,7 +32,7 @@ public class RoomDataImplementation implements RoomData
     try (Connection connection = getConnection())
     {
       PreparedStatement ps = connection.prepareStatement(
-          "INSERT INTO game(....) VALUES(?,?,?,?,?,?,?,?,?)");
+          "INSERT INTO room(roomNo, noBeds, size,price, orientation, internet, bathroom, kitchen, balcony) VALUES(?,?,?,?,?,?,?,?,?)");
       ps.setInt(1, roomNumber);
       ps.setInt(2, numberOfBeds);
       ps.setInt(3, size);
