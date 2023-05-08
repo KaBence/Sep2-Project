@@ -3,6 +3,7 @@ package Client.View.Controllers;
 import Client.View.ViewHandler;
 import Client.ViewModel.EmployeeLoginViewModel;
 import Client.ViewModel.EmployeeSignInViewModel;
+import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 
 public class EmployeeSignInController
@@ -26,4 +27,7 @@ public class EmployeeSignInController
 
   }
 
+  @FXML void Add(){
+
+  }
 }
