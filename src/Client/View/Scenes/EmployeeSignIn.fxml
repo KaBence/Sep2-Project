@@ -8,7 +8,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Scenes.EmployeeSignIn">
    <children>
       <Label layoutX="167.0" layoutY="26.0" text="Adding a New Employee">
@@ -52,7 +51,7 @@
       <ChoiceBox fx:id="price" layoutX="430.0" layoutY="174.0" prefWidth="150.0" />
       <TextField fx:id="roomNo2" layoutX="127.0" layoutY="250.0" />
       <TextField fx:id="roomNo3" layoutX="430.0" layoutY="250.0" />
-      <Button layoutX="266.0" layoutY="319.0" mnemonicParsing="false" onAction="#Add" text="Sign in">
+      <Button layoutX="266.0" layoutY="319.0" mnemonicParsing="false" onAction="#Add" text="Register">
          <font>
             <Font size="17.0" />
          </font>
