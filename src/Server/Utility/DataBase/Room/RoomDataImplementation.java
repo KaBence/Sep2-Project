@@ -118,7 +118,7 @@ public class RoomDataImplementation implements RoomData
     try (Connection connection = getConnection())
     {
       PreparedStatement ps = connection.prepareStatement(
-          "Select * from ........");
+          "Select * from room");
       ResultSet rs = ps.executeQuery();
 
       while (rs.next())

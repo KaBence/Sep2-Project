@@ -32,21 +32,25 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     property.bindBidirectional(rooms);
   }
 
+  public void update(){
+    ArrayList<Room> allRooms;
+    try
+    {
+      allRooms = model.getAllRooms();
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+    ObservableList<Room> observableList = FXCollections.observableList(
+        allRooms);
+    rooms.set(observableList);
+  }
+
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     Platform.runLater(() -> {
-      ArrayList<Room> allRooms = new ArrayList<>();
-      try
-      {
-        allRooms = model.getAllRooms();
-      }
-      catch (RemoteException e)
-      {
-        throw new RuntimeException(e);
-      }
-      ObservableList<Room> observableList = FXCollections.observableList(
-          allRooms);
-      rooms.set(observableList);
+
     });
   }
 }

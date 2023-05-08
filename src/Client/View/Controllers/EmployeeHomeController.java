@@ -38,7 +38,7 @@ public class EmployeeHomeController
   }
 
   public void reset(){
-
+    viewModel.update();
   }
 
   @FXML void addRoom(){
