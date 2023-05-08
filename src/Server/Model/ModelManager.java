@@ -28,6 +28,11 @@ public class ModelManager implements Model
 
   @Override public ArrayList<Room> getAllRooms()
   {
+    ArrayList<Room> test=roomData.getAllRooms();
+    for (int i = 0; i < test.size(); i++)
+    {
+      System.out.println(test.get(i));
+    }
     return roomData.getAllRooms();
   }
 }

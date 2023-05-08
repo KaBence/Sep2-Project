@@ -1,6 +1,8 @@
 package Server.Model;
 
-public class Room
+import java.io.Serializable;
+
+public class Room implements Serializable
 {
   private int roomNo,noOfBeds,size,price;
   private String orientation;

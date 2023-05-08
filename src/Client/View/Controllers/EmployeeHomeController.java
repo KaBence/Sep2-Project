@@ -8,15 +8,16 @@ import Server.Model.Room;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 
 public class EmployeeHomeController
 {
   @FXML TableView<Room> tableView;
-  @FXML TableColumn<Integer,Room> tableRoomNo;
-  @FXML TableColumn<Integer,Room> tableBeds;
-  @FXML TableColumn<Integer,Room> tableSize;
-  @FXML TableColumn<Integer,String> tableOri;
+  @FXML TableColumn<Room,Integer> tableRoomNo;
+  @FXML TableColumn<Room,Integer> tableBeds;
+  @FXML TableColumn<Room,Integer> tableSize;
+  @FXML TableColumn<Room,String> tableOri;
   private Region root;
   private ViewHandler viewHandler;
   private EmployeeHomeViewModel viewModel;
@@ -30,6 +31,13 @@ public class EmployeeHomeController
     this.viewModel.bindRoomList(tableView.itemsProperty());
     this.root=root;
 
+  }
+
+  public void initialize(){
+    tableOri.setCellValueFactory(new PropertyValueFactory<Room,String  >("orientation"));
+    tableBeds.setCellValueFactory(new PropertyValueFactory<Room,Integer>("noOfBeds"));
+    tableSize.setCellValueFactory(new PropertyValueFactory<Room,Integer>("size"));
+    tableRoomNo.setCellValueFactory(new PropertyValueFactory<Room,Integer>("RoomNo"));
   }
 
   public Region getRoot(){
