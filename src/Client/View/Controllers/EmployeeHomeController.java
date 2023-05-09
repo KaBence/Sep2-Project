@@ -102,4 +102,16 @@ public class EmployeeHomeController
     if (event.getClickCount() == 2)
       viewHandler.openView(SceneNames.EditRoom);
   }
+  @FXML void checkIn(){
+
+  }
+  @FXML void checkOut(){
+
+  }
+  @FXML void back(){
+
+  }
+  @FXML void edit(){
+
+  }
 }
