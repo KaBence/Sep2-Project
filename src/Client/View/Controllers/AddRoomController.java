@@ -67,7 +67,26 @@ public class AddRoomController
 
   @FXML void Add() throws RemoteException
   {
-    viewModel.addRoom();
+    try
+    {
+      viewModel.addRoom();
+    }
+    catch (NumberFormatException e)
+    {
+      Alert empty = new Alert(Alert.AlertType.WARNING);
+      empty.setTitle("Invalid data");
+      empty.setHeaderText("You need to fill up mandatory fields: \nRoom number, Number of beds,\n Size of the room, Orientation and Price per night");
+      empty.showAndWait();
+    }
+    /*
+    catch (NumberFormatException e)
+    {
+      Alert empty = new Alert(Alert.AlertType.WARNING);
+      empty.setTitle("Invalid data");
+      empty.setHeaderText("Room number, Number of beds and Size of the room\nShould be a number");
+      empty.showAndWait();
+    }
+     */
   }
 
   @FXML void Cancel(){
