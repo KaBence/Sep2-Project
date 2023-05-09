@@ -76,13 +76,15 @@ public class EditRoomController
     viewHandler.openView(SceneNames.EmployeeHome);
   }
 
-  @FXML void delete(){
+  @FXML void delete() throws RemoteException
+  {
     Alert alert=new Alert(Alert.AlertType.WARNING,"Do you really want to delete this room from the system?",ButtonType.NO,ButtonType.YES);
     alert.setTitle("Warning");
     alert.setHeaderText(null);
     alert.showAndWait();
     if (alert.getResult()==ButtonType.YES){
-
+      viewModel.delete();
+      viewHandler.openView(SceneNames.EmployeeHome);
     }
   }
 }

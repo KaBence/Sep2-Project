@@ -33,8 +33,9 @@ public class EditRoomViewModel
     model.updateRoom(Integer.parseInt(roomNumber.getValue()),Integer.parseInt(numberOfBeds.getValue()),Integer.parseInt(size.getValue()),price.getValue(),orientation.getValue(),internet.getValue(),bathroom.getValue(),kitchen.getValue(),balcony.getValue());
   }
 
-  public void delete(){
-
+  public void delete() throws RemoteException
+  {
+    model.deleteRoom(Integer.parseInt(roomNumber.getValue()));
   }
 
   public void fill(){

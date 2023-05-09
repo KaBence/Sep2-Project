@@ -44,6 +44,11 @@ public class ModelManager implements Model
     client.updateRoom(roomNumber, numberOfBeds, size,price, orientation, internet, bathroom, kitchen, balcony);
   }
 
+  @Override public void deleteRoom(int roomNumber) throws RemoteException
+  {
+    client.deleteRoom(roomNumber);
+  }
+
   @Override public void saveSelectedRoom(Room room)
   {
     selectedRoom=room;
