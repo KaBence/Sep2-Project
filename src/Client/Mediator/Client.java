@@ -27,11 +27,11 @@ public class Client extends UnicastRemoteObject implements
 
   }
 
-  public void addRoom(int roomNumber, int numberOfBeds, int size, int price,
+  public Room addRoom(int roomNumber, int numberOfBeds, int size, int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException
   {
-    sharedInterface.addRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony);
+    return sharedInterface.addRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony);
   }
 
   public ArrayList<Room> getAllRooms() throws RemoteException
