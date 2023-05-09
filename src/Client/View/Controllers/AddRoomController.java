@@ -66,22 +66,40 @@ public class AddRoomController
 
   public void reset()
   {
-
+    roomNo.clear();
+    beds.clear();
+    size.clear();
+    orientation.setValue(null);
+    price.setValue(null);
+    internet.setSelected(false);
+    balcony.setSelected(false);
+    kitchen.setSelected(false);
+    bathroom.setSelected(false);
   }
 
   @FXML void Add() throws RemoteException
   {
+    boolean flag = true;
     try
     {
       viewModel.addRoom();
     }
-    catch (NumberFormatException e)
+    catch (RuntimeException e)
     {
       Alert empty = new Alert(Alert.AlertType.WARNING);
       empty.setTitle("Invalid data");
       empty.setHeaderText(
           "You need to fill up mandatory fields: \nRoom number, Number of beds and Size of the room as a number,\nOrientation and Price per night");
       empty.showAndWait();
+      flag = false;
+    }
+    if (flag)
+    {
+      Alert success = new Alert(Alert.AlertType.INFORMATION);
+      success.setTitle("Success");
+      success.setHeaderText("The room has been successfully added to the system");
+      success.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHome);
     }
   }
 
