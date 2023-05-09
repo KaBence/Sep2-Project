@@ -111,4 +111,9 @@ public class Room implements Serializable
   {
     this.price = price;
   }
+
+  public String toString()
+  {
+   return "Room number: "+roomNo+", Number of beds: "+noOfBeds+", Size of the room: "+size+"m², Orientation: "+orientation;
+  }
 }
