@@ -19,11 +19,11 @@ public class ModelManager implements Model
 
   }
 
-  @Override public void addRoom(int roomNumber, int numberOfBeds, int size,int price,
+  @Override public Room addRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony)
   {
-   roomData.addNewRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony);
+   return roomData.addNewRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony);
   }
 
   @Override public void updateRoom(int roomNumber, int numberOfBeds, int size,

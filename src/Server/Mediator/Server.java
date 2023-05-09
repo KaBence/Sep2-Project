@@ -16,11 +16,11 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     this.model=model;
   }
 
-  @Override public void addRoom(int roomNumber, int numberOfBeds, int size,int price,
+  @Override public Room addRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException
   {
-    model.addRoom(roomNumber, numberOfBeds, size, price,orientation, internet, bathroom, kitchen, balcony);
+    return model.addRoom(roomNumber, numberOfBeds, size, price,orientation, internet, bathroom, kitchen, balcony);
   }
 
   @Override public ArrayList<Room> getAllRooms()

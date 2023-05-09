@@ -1,6 +1,7 @@
 package Client.ViewModel;
 
 import Client.Model.Model;
+import Server.Model.Room;
 import javafx.beans.property.*;
 
 import java.rmi.RemoteException;
@@ -73,11 +74,11 @@ public class AddRoomViewModel
     property.bindBidirectional(orientation);
   }
 
-  public void addRoom() throws RemoteException
+  public Room addRoom() throws RemoteException
   {
     try
     {
-      model.addRoom(Integer.parseInt(roomNumber.getValue()),
+      return model.addRoom(Integer.parseInt(roomNumber.getValue()),
           Integer.parseInt(numberOfBeds.getValue()),
           Integer.parseInt(size.getValue()), price.getValue(),
           orientation.getValue(), internet.getValue(), bathroom.getValue(),
