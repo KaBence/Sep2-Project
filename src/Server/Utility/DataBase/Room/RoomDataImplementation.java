@@ -69,24 +69,23 @@ public class RoomDataImplementation implements RoomData
     return room;
   }
 
-  @Override public Room updateRoom(Room room, int roomNumber, int numberOfBeds,
+  @Override public Room updateRoom(int roomNumber, int numberOfBeds,
       int size,int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony)
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement ps = connection.prepareStatement(
-          "UPDATE  (....) SET (...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?, WHERE (...) = ?");
-      ps.setInt(1, roomNumber);
-      ps.setInt(2, numberOfBeds);
-      ps.setInt(3, size);
-      ps.setInt(4,price);
-      ps.setString(5, orientation);
-      ps.setBoolean(6, internet);
-      ps.setBoolean(7, bathroom);
-      ps.setBoolean(8, kitchen);
-      ps.setBoolean(9, balcony);
-      ps.setInt(10, room.getRoomNo());
+          "UPDATE  room SET (...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?, WHERE (...) = ?");
+      ps.setInt(1, numberOfBeds);
+      ps.setInt(2, size);
+      ps.setInt(3,price);
+      ps.setString(4, orientation);
+      ps.setBoolean(5, internet);
+      ps.setBoolean(6, bathroom);
+      ps.setBoolean(7, kitchen);
+      ps.setBoolean(8, balcony);
+      ps.setInt(9, roomNumber);
       ps.executeUpdate();
     }
     catch (SQLException ex)

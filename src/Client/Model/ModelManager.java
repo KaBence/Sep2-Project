@@ -37,6 +37,13 @@ public class ModelManager implements Model
     return client.getAllRooms();
   }
 
+  @Override public void updateRoom(int roomNumber, int numberOfBeds, int size,
+      int price, String orientation, boolean internet, boolean bathroom,
+      boolean kitchen, boolean balcony) throws RemoteException
+  {
+    client.updateRoom(roomNumber, numberOfBeds, size,price, orientation, internet, bathroom, kitchen, balcony);
+  }
+
   @Override public void saveSelectedRoom(Room room)
   {
     selectedRoom=room;

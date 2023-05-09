@@ -37,6 +37,19 @@ public class EditRoomController
     viewModel.bindSize(size.textProperty());
 
     viewModel.bindOrientation(orientation.valueProperty());
+    roomNo.setEditable(false);
+  }
+
+  public void initialize(){
+    orientation.getItems().add("North");
+    orientation.getItems().add("West");
+    orientation.getItems().add("South");
+    orientation.getItems().add("East");
+
+    price.getItems().add(200);
+    price.getItems().add(270);
+    price.getItems().add(300);
+    price.getItems().add(500);
   }
 
   public Region getRoot(){

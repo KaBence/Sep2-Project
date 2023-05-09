@@ -10,7 +10,7 @@ public interface RoomData
 {
   Room addNewRoom(int roomNumber,int numberOfBeds, int size,int price, String orientation,boolean internet,boolean bathroom,boolean kitchen,boolean balcony);
   Room deleteRoom(Room room);
-  Room updateRoom(Room room,int roomNumber,int numberOfBeds, int size,int price, String orientation,boolean internet,boolean bathroom,boolean kitchen,boolean balcony);
+  Room updateRoom(int roomNumber,int numberOfBeds, int size,int price, String orientation,boolean internet,boolean bathroom,boolean kitchen,boolean balcony);
   ArrayList<Room> filter(String room);
   ArrayList<Room> getAllRooms();
 }

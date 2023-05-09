@@ -28,4 +28,11 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     return model.getAllRooms();
   }
 
+  @Override public void updateRoom(int roomNumber, int numberOfBeds, int size,
+      int price, String orientation, boolean internet, boolean bathroom,
+      boolean kitchen, boolean balcony) throws RemoteException
+  {
+    model.updateRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony);
+  }
+
 }
