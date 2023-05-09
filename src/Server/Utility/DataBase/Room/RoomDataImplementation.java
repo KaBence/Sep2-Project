@@ -1,6 +1,7 @@
 package Server.Utility.DataBase.Room;
 
 import Server.Model.Room;
+import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -47,7 +48,9 @@ public class RoomDataImplementation implements RoomData
     }
     catch (SQLException ex)
     {
-      System.err.println(ex.getMessage());
+      Alert x = new Alert(Alert.AlertType.ERROR);
+      x.showAndWait();
+      //System.err.println(ex.getMessage());
     }
     return new Room(roomNumber, numberOfBeds, size,price, orientation, internet,
         bathroom, kitchen, balcony);

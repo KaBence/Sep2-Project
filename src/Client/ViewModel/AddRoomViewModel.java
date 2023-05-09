@@ -77,7 +77,6 @@ public class AddRoomViewModel
   {
     try
     {
-      //zrobic z if a nie z exception
       model.addRoom(Integer.parseInt(roomNumber.getValue()),
           Integer.parseInt(numberOfBeds.getValue()),
           Integer.parseInt(size.getValue()), price.getValue(),
