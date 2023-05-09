@@ -3,6 +3,8 @@ package Server.Mediator;
 import Server.Model.Model;
 import Server.Model.Room;
 import Shared.SharedInterface;
+import dk.via.remote.observer.RemotePropertyChangeListener;
+import dk.via.remote.observer.RemotePropertyChangeSupport;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -11,15 +13,25 @@ import java.util.ArrayList;
 public class Server extends UnicastRemoteObject implements SharedInterface
 {
   private Model model;
+
+  private RemotePropertyChangeSupport support;
   public Server(Model model) throws RemoteException
   {
     this.model=model;
+    support=new RemotePropertyChangeSupport();
+  }
+
+  @Override public void addPropertyChangeListener(
+      RemotePropertyChangeListener listener) throws RemoteException
+  {
+    support.addPropertyChangeListener(listener);
   }
 
   @Override public Room addRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException
   {
+    support.firePropertyChange("add",null,"123");
     return model.addRoom(roomNumber, numberOfBeds, size, price,orientation, internet, bathroom, kitchen, balcony);
   }
 
@@ -33,11 +45,15 @@ public class Server extends UnicastRemoteObject implements SharedInterface
       boolean kitchen, boolean balcony) throws RemoteException
   {
     model.updateRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony);
+    support.firePropertyChange("update",null,"123");
+
   }
 
   @Override public void deleteRoom(int roomNumber) throws RemoteException
   {
     model.deleteRoom(roomNumber);
+    support.firePropertyChange("delete",null,"123");
+
   }
 
 }

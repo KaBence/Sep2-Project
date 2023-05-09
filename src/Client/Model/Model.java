@@ -2,6 +2,7 @@ package Client.Model;
 
 import Server.Model.Room;
 
+import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -21,5 +22,7 @@ public interface Model
   void saveSelectedRoom(Room room);
 
   Room getSelectedRoom();
+
+  void addPropertyChangeListener(PropertyChangeListener listener);
 
 }

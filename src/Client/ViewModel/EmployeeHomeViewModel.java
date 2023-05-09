@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -18,13 +17,12 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
 {
   private Model model;
   private SimpleObjectProperty<ObservableList<Room>> rooms;
-  private PropertyChangeSupport support;
 
   public EmployeeHomeViewModel(Model model)
   {
     this.model = model;
+    model.addPropertyChangeListener(this);
     this.rooms = new SimpleObjectProperty<>();
-    this.support = new PropertyChangeSupport(this);
   }
 
   public void bindRoomList(ObjectProperty<ObservableList<Room>> property)
@@ -54,7 +52,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     Platform.runLater(() -> {
-
+      update();
     });
   }
 }

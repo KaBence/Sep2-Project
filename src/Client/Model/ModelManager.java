@@ -5,6 +5,7 @@ import Server.Model.Room;
 import Shared.SharedInterface;
 import javafx.scene.layout.Region;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
@@ -14,15 +15,19 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
-public class ModelManager implements Model
+public class ModelManager implements Model,PropertyChangeListener
 {
   private Client client;
   private Room selectedRoom;
+
+  private PropertyChangeSupport support;
   public ModelManager() throws IOException, NotBoundException
   {
     Registry registry= LocateRegistry.getRegistry(1337);
     SharedInterface sharedInterface=(SharedInterface) registry.lookup("HotelServer");
     client=new Client(sharedInterface);
+    client.addPropertyChangeListener(this);
+    support=new PropertyChangeSupport(this);
   }
 
   @Override public Room addRoom(int roomNumber, int numberOfBeds, int size,int price,
@@ -57,5 +62,16 @@ public class ModelManager implements Model
   @Override public Room getSelectedRoom()
   {
     return selectedRoom;
+  }
+
+  @Override public void addPropertyChangeListener(
+      PropertyChangeListener listener)
+  {
+    support.addPropertyChangeListener(listener);
+  }
+
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    support.firePropertyChange("update",null,evt.getNewValue());
   }
 }
