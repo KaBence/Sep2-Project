@@ -17,4 +17,8 @@ public interface SharedInterface extends Remote
   void updateRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException;
+
+  void deleteRoom(int roomNumber, int numberOfBeds, int size,int price,
+      String orientation, boolean internet, boolean bathroom, boolean kitchen,
+      boolean balcony) throws RemoteException;
 }

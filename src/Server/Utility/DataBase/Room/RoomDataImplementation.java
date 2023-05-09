@@ -56,13 +56,13 @@ public class RoomDataImplementation implements RoomData
         bathroom, kitchen, balcony);
   }
 
-  @Override public Room deleteRoom(Room room)
+  @Override public Room deleteRoom(int roomNumber)
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement ps = connection.prepareStatement(
           "DELETE FROM (....) WHERE (...) = ?");
-      ps.setInt(1, room.getRoomNo());
+      ps.setInt(1, roomNumber);
       ps.executeUpdate();
     }
     catch (SQLException ex)
@@ -79,7 +79,7 @@ public class RoomDataImplementation implements RoomData
     try (Connection connection = getConnection())
     {
       PreparedStatement ps = connection.prepareStatement(
-          "UPDATE  room SET (...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?,(...) = ?, WHERE (...) = ?");
+          "UPDATE  room SET noBeds = ?,size = ?,price = ?,orientation = ?,internet = ?,bathroom = ?,kitchen = ?,balcony = ? WHERE roomNo = ?");
       ps.setInt(1, numberOfBeds);
       ps.setInt(2, size);
       ps.setInt(3,price);

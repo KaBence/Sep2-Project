@@ -5,10 +5,10 @@ import Client.View.ViewHandler;
 import Client.ViewModel.EditRoomViewModel;
 import Client.ViewModel.HomeViewModel;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
+
+import java.rmi.RemoteException;
 
 public class EditRoomController
 {
@@ -61,11 +61,28 @@ public class EditRoomController
     viewModel.fill();
   }
 
-  @FXML void Save(){
-
+  @FXML void Save() throws RemoteException
+  {
+    viewModel.edit();
+    Alert alert=new Alert(Alert.AlertType.INFORMATION,"Edit Successful",
+        ButtonType.OK);
+    alert.setHeaderText(null);
+    alert.setTitle("Success");
+    alert.showAndWait();
+    viewHandler.openView(SceneNames.EmployeeHome);
   }
 
   @FXML void Cancel(){
     viewHandler.openView(SceneNames.EmployeeHome);
+  }
+
+  @FXML void delete(){
+    Alert alert=new Alert(Alert.AlertType.WARNING,"Do you really want to delete this room from the system?",ButtonType.NO,ButtonType.YES);
+    alert.setTitle("Warning");
+    alert.setHeaderText(null);
+    alert.showAndWait();
+    if (alert.getResult()==ButtonType.YES){
+
+    }
   }
 }

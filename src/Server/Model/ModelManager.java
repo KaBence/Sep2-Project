@@ -33,6 +33,13 @@ public class ModelManager implements Model
     roomData.updateRoom(roomNumber,numberOfBeds,size,price,orientation,internet,bathroom,kitchen,balcony);
   }
 
+  @Override public void deleteRoom(int roomNumber, int numberOfBeds, int size,
+      int price, String orientation, boolean internet, boolean bathroom,
+      boolean kitchen, boolean balcony)
+  {
+
+  }
+
   @Override public ArrayList<Room> getAllRooms()
   {
     return roomData.getAllRooms();

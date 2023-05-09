@@ -4,6 +4,8 @@ import Client.Model.Model;
 import Server.Model.Room;
 import javafx.beans.property.*;
 
+import java.rmi.RemoteException;
+
 public class EditRoomViewModel
 {
   private Model model;
@@ -24,6 +26,15 @@ public class EditRoomViewModel
     size= new SimpleStringProperty();
     price= new SimpleObjectProperty();
     orientation= new SimpleObjectProperty();
+  }
+
+  public void edit() throws RemoteException
+  {
+    model.updateRoom(Integer.parseInt(roomNumber.getValue()),Integer.parseInt(numberOfBeds.getValue()),Integer.parseInt(size.getValue()),price.getValue(),orientation.getValue(),internet.getValue(),bathroom.getValue(),kitchen.getValue(),balcony.getValue());
+  }
+
+  public void delete(){
+
   }
 
   public void fill(){
