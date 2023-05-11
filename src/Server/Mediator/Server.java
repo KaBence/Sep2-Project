@@ -1,6 +1,7 @@
 package Server.Mediator;
 
 import Server.Model.Customer;
+import Server.Model.Employee;
 import Server.Model.Model;
 import Server.Model.Room;
 import Shared.SharedInterface;
@@ -44,6 +45,11 @@ public class Server extends UnicastRemoteObject implements SharedInterface
   @Override public ArrayList<Customer> getAllCustomers() throws RemoteException
   {
     return model.getAllCustomers();
+  }
+
+  @Override public ArrayList<Employee> getAllEmployees() throws RemoteException
+  {
+    return model.getAllEmployees();
   }
 
   @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,
