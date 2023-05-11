@@ -2,22 +2,25 @@ package Client.ViewModel;
 
 import Client.Model.Model;
 import Client.View.ViewHandler;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class EditEmployeeViewModel
 {
   private Model model;
-  private SimpleStringProperty username, firstName, lastName, position, phoneNo;
+  private SimpleStringProperty username, firstName, lastName, phoneNo;
+  private SimpleObjectProperty<String> position;
 
   public EditEmployeeViewModel(Model model)
   {
     this.model = model;
-    this.username = new SimpleStringProperty();
-    this.firstName = new SimpleStringProperty();
-    this.lastName = new SimpleStringProperty();
-    this.position = new SimpleStringProperty();
-    this.phoneNo = new SimpleStringProperty();
+    username = new SimpleStringProperty();
+    firstName = new SimpleStringProperty();
+    lastName = new SimpleStringProperty();
+    position = new SimpleObjectProperty<>();
+    phoneNo = new SimpleStringProperty();
   }
 
   public void bindUsername(StringProperty property)
@@ -35,9 +38,9 @@ public class EditEmployeeViewModel
     property.bindBidirectional(lastName);
   }
 
-  public void bindPosition(StringProperty property)
+  public void bindPosition(ObjectProperty<String> property)
   {
-    property.bindBidirectional(property);
+    property.bindBidirectional(position);
   }
 
   public void bindPhoneNo(StringProperty property)

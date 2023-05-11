@@ -4,9 +4,10 @@ import Client.View.ViewHandler;
 import Client.ViewModel.EditEmployeeViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 
-import java.awt.*;
+
 
 public class EditEmployeeController
 {
@@ -22,11 +23,15 @@ public class EditEmployeeController
     this.viewHandler = viewHandler;
     this.viewModel = viewModel;
     this.root = root;
+    position.getItems().add("Manager");
+    position.getItems().add("Cleaner");
+    position.getItems().add("Handyman");
+    position.getItems().add("Receptionists");
 
-    this.viewModel.bindFirstName(firstName.);
-    this.viewModel.bindLastName();
-    this.viewModel.bindPosition();
-    this.viewModel.bindPhoneNo();
+    this.viewModel.bindFirstName(firstName.textProperty());
+    this.viewModel.bindLastName(lastName.textProperty());
+    this.viewModel.bindPosition(position.valueProperty());
+    this.viewModel.bindPhoneNo(phoneNo.textProperty());
   }
 
   public Region getRoot(){
