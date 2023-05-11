@@ -38,13 +38,14 @@ public class EmployeeDataImplementation implements EmployeeData
       psUser.executeUpdate();
 
       PreparedStatement psEmpoyee = connection.prepareStatement(
-          "INSERT INTO employee(username, firstName, lastName, String phoneNumber, String position");
+          "INSERT INTO employee(username, password,firstName, lastName, String phoneNumber, String position");
       psEmpoyee.setString(1, username);
-      psEmpoyee.setString(2, firstName);
-      psEmpoyee.setString(3, lastName);
-      psEmpoyee.setString(4, phoneNumber);
-      psEmpoyee.setString(5, position);
-      return new Employee(username, firstName, lastName, phoneNumber, position);
+      psEmpoyee.setString(2,password);
+      psEmpoyee.setString(3, firstName);
+      psEmpoyee.setString(4, lastName);
+      psEmpoyee.setString(5, phoneNumber);
+      psEmpoyee.setString(6, position);
+      return new Employee(username, password, firstName, lastName, phoneNumber, position);
     }
     catch (SQLException e)
     {
@@ -100,15 +101,16 @@ public class EmployeeDataImplementation implements EmployeeData
   {
     ArrayList<Employee> list= new ArrayList<>();
     try(Connection connection=getConnection()){
-      PreparedStatement ps= connection.prepareStatement("SELECT * from employee");
+      PreparedStatement ps= connection.prepareStatement("SELECT * from employee join \"user\" on employee.username = \"user\".username");
       ResultSet rs= ps.executeQuery();
       while (rs.next()){
         String username= rs.getString("username");
+        String password=rs.getString("password");
         String firstName= rs.getString("firstName");
         String lastName= rs.getString("lastName");
         String phoneNumber= rs.getString("phoneNumber");
         String position= rs.getString("position");
-        list.add(new Employee(username,firstName,lastName,phoneNumber,position));
+        list.add(new Employee(username,password,firstName,lastName,phoneNumber,position));
       }
     }
     catch (SQLException e)
