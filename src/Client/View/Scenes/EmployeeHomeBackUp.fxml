@@ -1,14 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Client.View.Scenes.EmployeeHomeBackUp"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Controllers.EmployeeHomeController">
+   <tabs>
+      <Tab fx:id="reservation" text="RESERVATIONS">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="TableViewReservation" layoutX="24.0" layoutY="22.0" onMouseClicked="#tableClick" prefHeight="328.0" prefWidth="408.0">
+                     <columns>
+                        <TableColumn fx:id="TableViewRoomNo" prefWidth="114.0" text="RoomNo" />
+                        <TableColumn fx:id="TableViewReservationCustomer" prefWidth="97.0" text="Customer" />
+                        <TableColumn fx:id="TableViewFromDate" prefWidth="91.0" text="fromDate" />
+                        <TableColumn fx:id="TableViewToDate" prefWidth="118.0" text="toDate" />
+                     </columns>
+                  </TableView>
+                  <Button fx:id="checkIn" layoutX="498.0" layoutY="269.0" mnemonicParsing="false" onAction="#checkIn" text="Check In" />
+                  <Button fx:id="checkOut" layoutX="494.0" layoutY="313.0" mnemonicParsing="false" onAction="#checkOut" text="Check out" />
+                  <Text layoutX="447.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="filtering need to be added" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="room" text="Rooms">
+         <content>
+            <AnchorPane prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <Button layoutX="460.0" layoutY="260.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="33.0" prefWidth="114.0" text="Add a Room">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <TableView fx:id="tableView" layoutX="17.0" layoutY="29.0" onMouseClicked="#tableClick" prefHeight="328.0" prefWidth="408.0">
+                     <columns>
+                        <TableColumn fx:id="tableRoomNo" prefWidth="114.0" text="RoomNo" />
+                        <TableColumn fx:id="tableBeds" prefWidth="97.0" text="NoOfBeds" />
+                        <TableColumn fx:id="tableSize" prefWidth="91.0" text="Size" />
+                        <TableColumn fx:id="tableOri" prefWidth="118.0" text="Orientation" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="510.0" layoutY="313.0" mnemonicParsing="false" onAction="#Home" prefHeight="18.0" prefWidth="64.0" text="Home">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="employeeInfo" text="Empoyee info">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tableViewEmployee" layoutX="40.0" layoutY="40.0" prefHeight="272.0" prefWidth="522.0">
+                     <columns>
+                        <TableColumn fx:id="employeeId" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="employeeFirstName" prefWidth="112.79998779296875" text="FIrst name" />
+                        <TableColumn fx:id="employeeLastName" prefWidth="108.79998779296875" text="last name" />
+                        <TableColumn fx:id="employeePosition" prefWidth="99.20001220703125" text="position" />
+                        <TableColumn fx:id="employeePhoneNumber" prefWidth="128.0" text="phoneNumber" />
+                     </columns>
+                  </TableView>
+                  <Button fx:id="back" layoutX="40.0" layoutY="324.0" mnemonicParsing="false" onAction="#back" text="Back" />
+                  <Button fx:id="edit" layoutX="512.0" layoutY="323.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="49.0" text="Edit" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="customerinfo" text="Customer info">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tableViewCustomer" layoutX="34.0" layoutY="28.0" prefHeight="272.0" prefWidth="522.0">
+                     <columns>
+                        <TableColumn fx:id="CustomerEmail" prefWidth="130.4000244140625" text="username/email" />
+                        <TableColumn fx:id="CustomerFirstName" prefWidth="89.5999755859375" text="FIrst name" />
+                        <TableColumn fx:id="CustomerLastName" prefWidth="92.00006103515625" text="last name" />
+                        <TableColumn fx:id="CustomerPhoneNumber" prefWidth="96.0" text="phone number" />
+                        <TableColumn fx:id="CustomerPayment" prefWidth="117.5999755859375" text="payment " />
+                     </columns>
+                  </TableView>
+                  <Button fx:id="back" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#back" text="Back" />
+                  <Button fx:id="edit" layoutX="506.0" layoutY="316.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="49.0" text="Edit" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>
