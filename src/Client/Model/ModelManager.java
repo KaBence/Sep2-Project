@@ -1,6 +1,7 @@
 package Client.Model;
 
 import Client.Mediator.Client;
+import Server.Model.Customer;
 import Server.Model.Room;
 import Shared.SharedInterface;
 
@@ -18,6 +19,7 @@ public class ModelManager implements Model,PropertyChangeListener
 {
   private Client client;
   private Room selectedRoom;
+  private Customer selectedCustomer;
 
   private PropertyChangeSupport support;
   public ModelManager() throws IOException, NotBoundException
@@ -41,6 +43,11 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.getAllRooms();
   }
 
+  @Override public ArrayList<Customer> getAllCustomers() throws RemoteException
+  {
+    return client.getAllCustomers();
+  }
+
   @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony) throws RemoteException
@@ -61,6 +68,16 @@ public class ModelManager implements Model,PropertyChangeListener
   @Override public Room getSelectedRoom()
   {
     return selectedRoom;
+  }
+
+  @Override public void saveSelectedCustomer(Customer customer)
+  {
+    selectedCustomer=customer;
+  }
+
+  @Override public Customer getSelectedCustomer()
+  {
+    return selectedCustomer;
   }
 
   @Override public void addPropertyChangeListener(
