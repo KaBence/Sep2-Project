@@ -1,6 +1,7 @@
 package Client.Mediator;
 
 import Server.Model.Customer;
+import Server.Model.Employee;
 import Server.Model.Room;
 import Shared.SharedInterface;
 import dk.via.remote.observer.RemotePropertyChangeEvent;
@@ -44,6 +45,11 @@ public class Client extends UnicastRemoteObject implements
 
   public ArrayList<Customer> getAllCustomers()throws RemoteException{
     return sharedInterface.getAllCustomers();
+  }
+
+  public ArrayList<Employee> getAllEmployees() throws RemoteException
+  {
+    return sharedInterface.getAllEmployees();
   }
 
   public String updateRoom(int roomNumber, int numberOfBeds, int size,int price,

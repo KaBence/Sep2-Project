@@ -2,6 +2,7 @@ package Client.Model;
 
 import Client.Mediator.Client;
 import Server.Model.Customer;
+import Server.Model.Employee;
 import Server.Model.Room;
 import Shared.SharedInterface;
 
@@ -46,6 +47,11 @@ public class ModelManager implements Model,PropertyChangeListener
   @Override public ArrayList<Customer> getAllCustomers() throws RemoteException
   {
     return client.getAllCustomers();
+  }
+
+  @Override public ArrayList<Employee> getAllEmployees() throws RemoteException
+  {
+    return client.getAllEmployees();
   }
 
   @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,
