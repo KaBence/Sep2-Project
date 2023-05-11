@@ -20,6 +20,7 @@ public class ViewFactory
   private AddRoomController addRoomController;
   private EmployeeSignInController employeeSignIn;
   private EditRoomController editRoomController;
+  private EditCustomerController editCustomerController;
 
   private ViewModelFactory viewModelFactory;
 
@@ -142,6 +143,22 @@ public class ViewFactory
     return editRoomController.getRoot();
   }
 
+  private Region loadEditCustomer(){
+    FXMLLoader loader=new FXMLLoader();
+    loader.setLocation(getClass().getResource("Scenes/EditCustomer.fxml"));
+    try
+    {
+      Region root = loader.load();
+      editCustomerController=loader.getController();
+      editCustomerController.init(viewHandler,viewModelFactory.getEditCustomerViewModel(),root);
+    }
+    catch(IOException e){
+      throw new IOError(e);
+    }
+    editCustomerController.reset();
+    return editCustomerController.getRoot();
+  }
+
 
   public Region load(SceneNames id){
     return switch (id){
@@ -152,7 +169,7 @@ public class ViewFactory
       case AddRoom -> loadAddRoom();
       case EditRoom -> loadEditRoom();
       case EmployeeSignIn -> loadEmployeeSignIn();
-      default -> throw new IllegalArgumentException("Unknown id");
+      case EditCustomer -> loadEditCustomer();
     };
   }
 }
