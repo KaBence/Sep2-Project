@@ -30,7 +30,14 @@ public class EditRoomViewModel
 
   public String edit() throws RemoteException
   {
-    return model.updateRoom(Integer.parseInt(roomNumber.getValue()),Integer.parseInt(numberOfBeds.getValue()),Integer.parseInt(size.getValue()),price.getValue(),orientation.getValue(),internet.getValue(),bathroom.getValue(),kitchen.getValue(),balcony.getValue());
+    try
+    {
+      return model.updateRoom(Integer.parseInt(roomNumber.getValue()),Integer.parseInt(numberOfBeds.getValue()),Integer.parseInt(size.getValue()),price.getValue(),orientation.getValue(),internet.getValue(),bathroom.getValue(),kitchen.getValue(),balcony.getValue());
+    }
+    catch (Exception e)
+    {
+      return "mandatory";
+    }
   }
 
   public String delete() throws RemoteException
