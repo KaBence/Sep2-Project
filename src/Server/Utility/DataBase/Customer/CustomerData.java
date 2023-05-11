@@ -8,7 +8,8 @@ public interface CustomerData
 {
   Customer addCustomer(String username, String password, String firstName,
       String lastName, String phoneNO, String paymentInfo);
-  String editCustomer();
-  String deleteCustomer();
+  String deleteCustomer(String username);
+  String editCustomer(String username, String password, String firstName,
+      String lastName, String phoneNO, String paymentInfo);
   ArrayList<Customer> getAllCustomers();
 }
