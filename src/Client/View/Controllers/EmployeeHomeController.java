@@ -38,6 +38,7 @@ public class EmployeeHomeController
     this.viewModel = viewModel;
     this.viewModel.bindRoomList(roomListView.itemsProperty());
     this.viewModel.bindCustomerList(customerListView.itemsProperty());
+    this.viewModel.bindEmployeeList(employeeListView.itemsProperty());
     this.root = root;
 
   }

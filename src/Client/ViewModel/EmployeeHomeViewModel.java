@@ -21,6 +21,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private Model model;
   private SimpleObjectProperty<ObservableList<Room>> rooms;
   private SimpleObjectProperty<ObservableList<Customer>> customers;
+  private SimpleObjectProperty<ObservableList<Employee>> employees;
 
   public EmployeeHomeViewModel(Model model)
   {
@@ -28,6 +29,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     model.addPropertyChangeListener(this);
     this.rooms = new SimpleObjectProperty<>();
     customers=new SimpleObjectProperty<>();
+    employees=new SimpleObjectProperty<>();
   }
 
   public void bindRoomList(ObjectProperty<ObservableList<Room>> property)
@@ -39,6 +41,10 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     property.bindBidirectional(customers);
   }
 
+  public void bindEmployeeList(ObjectProperty<ObservableList<Employee>> property){
+    property.bindBidirectional(employees);
+  }
+
   public void update(){
     ArrayList<Room> allRooms;
     ArrayList<Employee> allEmployee;
@@ -47,14 +53,16 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     {
       allRooms = model.getAllRooms();
       allCustomer=model.getAllCustomers();
+      allEmployee=model.getAllEmployees();
     }
     catch (RemoteException e)
     {
       throw new RuntimeException(e);
     }
-    ObservableList<Room> roomObservableList = FXCollections.observableList(
-        allRooms);
+    ObservableList<Room> roomObservableList = FXCollections.observableList(allRooms);
     ObservableList<Customer> customerObservableList= FXCollections.observableList(allCustomer);
+    ObservableList<Employee> employeeObservableList=FXCollections.observableList(allEmployee);
+    employees.set(employeeObservableList);
     customers.set(customerObservableList);
     rooms.set(roomObservableList);
   }

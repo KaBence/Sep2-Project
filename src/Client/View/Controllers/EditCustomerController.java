@@ -35,4 +35,16 @@ public class EditCustomerController
   public void reset(){
 
   }
+
+  @FXML void save(){
+
+  }
+
+  @FXML void cancel(){
+
+  }
+
+  @FXML void delete(){
+
+  }
 }

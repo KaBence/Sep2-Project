@@ -108,9 +108,9 @@ public class EmployeeDataImplementation implements EmployeeData
         String password=rs.getString("password");
         String firstName= rs.getString("firstName");
         String lastName= rs.getString("lastName");
-        String phoneNumber= rs.getString("phoneNumber");
+        String phoneNumber= rs.getString("phoneNo");
         String position= rs.getString("position");
-        list.add(new Employee(username,password,firstName,lastName,phoneNumber,position));
+        list.add(new Employee(username,firstName,lastName,position,phoneNumber,password));
       }
     }
     catch (SQLException e)

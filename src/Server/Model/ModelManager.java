@@ -2,6 +2,8 @@ package Server.Model;
 
 import Server.Utility.DataBase.Customer.CustomerData;
 import Server.Utility.DataBase.Customer.CustomerDataImplementation;
+import Server.Utility.DataBase.Employee.EmployeeData;
+import Server.Utility.DataBase.Employee.EmployeeDataImplementation;
 import Server.Utility.DataBase.Room.RoomData;
 import Server.Utility.DataBase.Room.RoomDataImplementation;
 
@@ -13,11 +15,14 @@ public class ModelManager implements Model
 {
   private RoomData roomData;
   private CustomerData customerData;
+
+  private EmployeeData employeeData;
   private PropertyChangeSupport support;
 
   public ModelManager(){
     roomData=new RoomDataImplementation();
     customerData=new CustomerDataImplementation();
+    employeeData=new EmployeeDataImplementation();
     support=new PropertyChangeSupport(this);
   }
 
@@ -57,6 +62,6 @@ public class ModelManager implements Model
 
   @Override public ArrayList<Employee> getAllEmployees()
   {
-    return null;
+    return employeeData.getAllEmployees();
   }
 }

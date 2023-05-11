@@ -117,7 +117,7 @@ public class CustomerDataImplementation implements CustomerData
       ResultSet rs = ps.executeQuery();
       while (rs.next())
       {
-        String username = rs.getString("customer.username");
+        String username = rs.getString("username");
         String firstName = rs.getString("firstName");
         String lastName = rs.getString("lastName");
         String phoneNO = rs.getString("phoneNo");
@@ -131,6 +131,7 @@ public class CustomerDataImplementation implements CustomerData
     }
     catch (SQLException e)
     {
+      System.err.println(e.getMessage());
       return null;
 
     }
