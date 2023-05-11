@@ -36,7 +36,7 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <ListView fx:id="roomListView" layoutX="20.0" layoutY="59.0" onMouseClicked="#tableClick" prefHeight="272.0" prefWidth="431.0" />
+                  <ListView fx:id="roomListView" layoutX="20.0" layoutY="59.0" onMouseClicked="#tableClickRoom" prefHeight="272.0" prefWidth="431.0" />
                </children>
             </AnchorPane>
          </content>
@@ -51,13 +51,13 @@
                </children></AnchorPane>
       </content>
     </Tab>
-      <Tab fx:id="customerinfo" text="Customer info">
+      <Tab fx:id="customerInfo" text="Customer info">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Button fx:id="back" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#back" text="Back" />
                   <Button fx:id="edit" layoutX="506.0" layoutY="316.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="49.0" text="Edit" />
-                  <ListView fx:id="customerListView" layoutX="34.0" layoutY="40.0" prefHeight="260.0" prefWidth="522.0" />
+                  <ListView fx:id="customerListView" layoutX="41.0" layoutY="31.0" onMouseClicked="#tableClickCustomer" prefHeight="269.0" prefWidth="502.0" />
                </children>
             </AnchorPane>
         </content>

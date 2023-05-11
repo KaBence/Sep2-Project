@@ -16,14 +16,14 @@ import javafx.scene.layout.Region;
 public class EmployeeHomeController
 {
   @FXML Button checkIn;
-  @FXML Button chckOut;
+  @FXML Button checkOut;
   @FXML Tab room;
   @FXML Tab employeeInfo;
-  @FXML Tab customerinfo;
+  @FXML Tab customerInfo;
   @FXML Tab reservation;
 
-  @FXML ListView<String> employeeListView;
-  @FXML ListView<String> customerListView;
+  @FXML ListView<Employee> employeeListView;
+  @FXML ListView<Customer> customerListView;
   @FXML ListView<Room> roomListView;
 
 
@@ -37,6 +37,7 @@ public class EmployeeHomeController
     this.viewHandler = viewHandler;
     this.viewModel = viewModel;
     this.viewModel.bindRoomList(roomListView.itemsProperty());
+    this.viewModel.bindCustomerList(customerListView.itemsProperty());
     this.root = root;
 
   }
@@ -63,11 +64,17 @@ public class EmployeeHomeController
     viewHandler.openView(SceneNames.Home);
   }
 
-  @FXML void tableClick(MouseEvent event)
+  @FXML void tableClickRoom(MouseEvent event)
   {
     viewModel.saveRoom(roomListView.getSelectionModel().getSelectedItem());
     if (event.getClickCount() == 2)
       viewHandler.openView(SceneNames.EditRoom);
+  }
+
+  @FXML void tableClickCustomer(MouseEvent event){
+    viewModel.saveCustomer(customerListView.getSelectionModel().getSelectedItem());
+    if (event.getClickCount()==2)
+      viewHandler.openView(SceneNames.EditCustomer);
   }
   @FXML void checkIn(){
 
