@@ -53,7 +53,7 @@ public class RoomDataImplementation implements RoomData
         bathroom, kitchen, balcony);
   }
 
-  @Override public void deleteRoom(int roomNumber)
+  @Override public String deleteRoom(int roomNumber)
   {
     try (Connection connection = getConnection())
     {
@@ -61,10 +61,12 @@ public class RoomDataImplementation implements RoomData
           "DELETE FROM room WHERE roomNo = ?");
       ps.setInt(1, roomNumber);
       ps.executeUpdate();
+      return "success";
     }
     catch (SQLException ex)
     {
       System.err.println(ex.getMessage());
+      return "error";
     }
   }
 

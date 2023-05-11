@@ -20,7 +20,7 @@ public interface SharedInterface extends Remote
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException;
 
-  void deleteRoom(int roomNumber) throws RemoteException;
+  String deleteRoom(int roomNumber) throws RemoteException;
 
 
 }

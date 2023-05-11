@@ -3,7 +3,6 @@ package Client.View.Controllers;
 import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.EditRoomViewModel;
-import Client.ViewModel.HomeViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
@@ -12,19 +11,20 @@ import java.rmi.RemoteException;
 
 public class EditRoomController
 {
+  @FXML TextField roomNo, size, beds;
+  @FXML ChoiceBox<String> orientation;
+  @FXML ChoiceBox<Integer> price;
+  @FXML CheckBox internet, balcony, kitchen, bathroom;
   private Region root;
   private ViewHandler viewHandler;
   private EditRoomViewModel viewModel;
 
-  @FXML TextField roomNo,size,beds;
-  @FXML ChoiceBox<String> orientation;
-  @FXML ChoiceBox<Integer> price;
-  @FXML CheckBox internet,balcony,kitchen,bathroom;
-  public void init(ViewHandler viewHandler, EditRoomViewModel viewModel, Region root){
-    this.viewHandler=viewHandler;
-    this.viewModel=viewModel;
-    this.root=root;
-
+  public void init(ViewHandler viewHandler, EditRoomViewModel viewModel,
+      Region root)
+  {
+    this.viewHandler = viewHandler;
+    this.viewModel = viewModel;
+    this.root = root;
 
     viewModel.bindNoBeds(beds.textProperty());
     viewModel.bindBalcony(balcony.selectedProperty());
@@ -40,7 +40,8 @@ public class EditRoomController
     roomNo.setEditable(false);
   }
 
-  public void initialize(){
+  public void initialize()
+  {
     orientation.getItems().add("North");
     orientation.getItems().add("West");
     orientation.getItems().add("South");
@@ -52,19 +53,21 @@ public class EditRoomController
     price.getItems().add(500);
   }
 
-  public Region getRoot(){
+  public Region getRoot()
+  {
     root.setUserData("Edit Room");
     return root;
   }
 
-  public void reset(){
+  public void reset()
+  {
     viewModel.fill();
   }
 
   @FXML void Save() throws RemoteException
   {
     viewModel.edit();
-    Alert alert=new Alert(Alert.AlertType.INFORMATION,"Edit Successful",
+    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful",
         ButtonType.OK);
     alert.setHeaderText(null);
     alert.setTitle("Success");
@@ -72,18 +75,35 @@ public class EditRoomController
     viewHandler.openView(SceneNames.EmployeeHome);
   }
 
-  @FXML void Cancel(){
+  @FXML void Cancel()
+  {
     viewHandler.openView(SceneNames.EmployeeHome);
   }
 
   @FXML void delete() throws RemoteException
   {
-    Alert alert=new Alert(Alert.AlertType.WARNING,"Do you really want to delete this room from the system?",ButtonType.NO,ButtonType.YES);
+    Alert alert = new Alert(Alert.AlertType.WARNING,
+        "Do you really want to delete this room from the system?",
+        ButtonType.NO, ButtonType.YES);
     alert.setTitle("Warning");
     alert.setHeaderText(null);
     alert.showAndWait();
-    if (alert.getResult()==ButtonType.YES){
-      viewModel.delete();
+    if (alert.getResult() == ButtonType.YES)
+    {
+      if (viewModel.delete().equals("success"))
+      {
+        Alert success = new Alert(Alert.AlertType.INFORMATION);
+        success.setHeaderText("Success");
+        success.setHeaderText("The room has been successfully removed");
+        success.showAndWait();
+      }
+      else
+      {
+        Alert error = new Alert(Alert.AlertType.ERROR);
+        error.setHeaderText("Error");
+        error.setHeaderText("You cannot delete this room right now");
+        error.showAndWait();
+      }
       viewHandler.openView(SceneNames.EmployeeHome);
     }
   }

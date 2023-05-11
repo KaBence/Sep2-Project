@@ -3,7 +3,6 @@ package Client.Model;
 import Client.Mediator.Client;
 import Server.Model.Room;
 import Shared.SharedInterface;
-import javafx.scene.layout.Region;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -49,9 +48,9 @@ public class ModelManager implements Model,PropertyChangeListener
     client.updateRoom(roomNumber, numberOfBeds, size,price, orientation, internet, bathroom, kitchen, balcony);
   }
 
-  @Override public void deleteRoom(int roomNumber) throws RemoteException
+  @Override public String deleteRoom(int roomNumber) throws RemoteException
   {
-    client.deleteRoom(roomNumber);
+    return client.deleteRoom(roomNumber);
   }
 
   @Override public void saveSelectedRoom(Room room)

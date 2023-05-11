@@ -49,11 +49,10 @@ public class Server extends UnicastRemoteObject implements SharedInterface
 
   }
 
-  @Override public void deleteRoom(int roomNumber) throws RemoteException
+  @Override public String deleteRoom(int roomNumber) throws RemoteException
   {
-    model.deleteRoom(roomNumber);
     support.firePropertyChange("delete",null,"123");
-
+    return model.deleteRoom(roomNumber);
   }
 
 }

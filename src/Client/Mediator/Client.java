@@ -48,9 +48,9 @@ public class Client extends UnicastRemoteObject implements
     sharedInterface.updateRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony);
   }
 
-  public void deleteRoom(int roomNumber) throws RemoteException
+  public String deleteRoom(int roomNumber) throws RemoteException
   {
-    sharedInterface.deleteRoom(roomNumber);
+    return sharedInterface.deleteRoom(roomNumber);
   }
 
   public void addPropertyChangeListener(PropertyChangeListener listener){

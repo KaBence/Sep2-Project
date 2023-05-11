@@ -1,7 +1,6 @@
 package Server.Model;
 
 import java.beans.PropertyChangeListener;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface Model
@@ -16,7 +15,7 @@ public interface Model
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony);
 
-  void deleteRoom(int roomNumber);
+  String deleteRoom(int roomNumber);
 
   ArrayList<Room> getAllRooms();
 

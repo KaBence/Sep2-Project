@@ -17,7 +17,7 @@ public interface Model
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException;
 
-  void deleteRoom(int roomNumber) throws RemoteException;
+  String deleteRoom(int roomNumber) throws RemoteException;
 
   void saveSelectedRoom(Room room);
 
