@@ -128,6 +128,7 @@ public class CustomerDataImplementation implements CustomerData
     catch (SQLException e)
     {
       return null;
+
     }
   }
 }
