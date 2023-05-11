@@ -28,9 +28,9 @@ public class EditRoomViewModel
     orientation= new SimpleObjectProperty();
   }
 
-  public void edit() throws RemoteException
+  public String edit() throws RemoteException
   {
-    model.updateRoom(Integer.parseInt(roomNumber.getValue()),Integer.parseInt(numberOfBeds.getValue()),Integer.parseInt(size.getValue()),price.getValue(),orientation.getValue(),internet.getValue(),bathroom.getValue(),kitchen.getValue(),balcony.getValue());
+    return model.updateRoom(Integer.parseInt(roomNumber.getValue()),Integer.parseInt(numberOfBeds.getValue()),Integer.parseInt(size.getValue()),price.getValue(),orientation.getValue(),internet.getValue(),bathroom.getValue(),kitchen.getValue(),balcony.getValue());
   }
 
   public String delete() throws RemoteException

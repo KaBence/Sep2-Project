@@ -11,7 +11,7 @@ public interface Model
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony);
 
-  void updateRoom(int roomNumber, int numberOfBeds, int size,int price,
+  String updateRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony);
 
@@ -19,4 +19,6 @@ public interface Model
 
   ArrayList<Room> getAllRooms();
 
+  ArrayList<Customer> getAllCustomers();
+  ArrayList<Employee> getAllEmployees();
 }

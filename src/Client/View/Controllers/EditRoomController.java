@@ -66,12 +66,21 @@ public class EditRoomController
 
   @FXML void Save() throws RemoteException
   {
-    viewModel.edit();
-    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful",
-        ButtonType.OK);
-    alert.setHeaderText(null);
-    alert.setTitle("Success");
-    alert.showAndWait();
+    if (viewModel.edit().equals("success"))
+    {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful",
+          ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Success");
+      alert.showAndWait();
+    }
+    else
+    {
+      Alert error = new Alert(Alert.AlertType.ERROR);
+      error.setHeaderText("Error");
+      error.setHeaderText("You cannot delete this room right now");
+      error.showAndWait();
+    }
     viewHandler.openView(SceneNames.EmployeeHome);
   }
 

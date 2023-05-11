@@ -41,11 +41,11 @@ public class Client extends UnicastRemoteObject implements
     return sharedInterface.getAllRooms();
   }
 
-  public void updateRoom(int roomNumber, int numberOfBeds, int size,int price,
+  public String updateRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException
   {
-    sharedInterface.updateRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony);
+    return sharedInterface.updateRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony);
   }
 
   public String deleteRoom(int roomNumber) throws RemoteException

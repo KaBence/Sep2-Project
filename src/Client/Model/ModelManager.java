@@ -41,11 +41,11 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.getAllRooms();
   }
 
-  @Override public void updateRoom(int roomNumber, int numberOfBeds, int size,
+  @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony) throws RemoteException
   {
-    client.updateRoom(roomNumber, numberOfBeds, size,price, orientation, internet, bathroom, kitchen, balcony);
+    return client.updateRoom(roomNumber, numberOfBeds, size,price, orientation, internet, bathroom, kitchen, balcony);
   }
 
   @Override public String deleteRoom(int roomNumber) throws RemoteException

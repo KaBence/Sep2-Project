@@ -70,7 +70,7 @@ public class RoomDataImplementation implements RoomData
     }
   }
 
-  @Override public Room updateRoom(int roomNumber, int numberOfBeds,
+  @Override public String updateRoom(int roomNumber, int numberOfBeds,
       int size,int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony)
   {
@@ -88,13 +88,13 @@ public class RoomDataImplementation implements RoomData
       ps.setBoolean(8, balcony);
       ps.setInt(9, roomNumber);
       ps.executeUpdate();
+      return "success";
     }
     catch (SQLException ex)
     {
       System.err.println(ex.getMessage());
+      return "error";
     }
-    return new Room(roomNumber, numberOfBeds, size, price, orientation, internet,
-        bathroom, kitchen, balcony);
   }
 
   @Override public ArrayList<Room> filter(String room)

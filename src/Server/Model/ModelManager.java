@@ -26,11 +26,11 @@ public class ModelManager implements Model
    return roomData.addNewRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony);
   }
 
-  @Override public void updateRoom(int roomNumber, int numberOfBeds, int size,
+  @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony)
   {
-    roomData.updateRoom(roomNumber,numberOfBeds,size,price,orientation,internet,bathroom,kitchen,balcony);
+    return roomData.updateRoom(roomNumber,numberOfBeds,size,price,orientation,internet,bathroom,kitchen,balcony);
   }
 
   @Override public String deleteRoom(int roomNumber)
@@ -41,5 +41,15 @@ public class ModelManager implements Model
   @Override public ArrayList<Room> getAllRooms()
   {
     return roomData.getAllRooms();
+  }
+
+  @Override public ArrayList<Customer> getAllCustomers()
+  {
+    return null;
+  }
+
+  @Override public ArrayList<Employee> getAllEmployees()
+  {
+    return null;
   }
 }

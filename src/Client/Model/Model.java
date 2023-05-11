@@ -13,7 +13,7 @@ public interface Model
       boolean balcony) throws RemoteException;
   ArrayList<Room> getAllRooms() throws RemoteException;
 
-  void updateRoom(int roomNumber, int numberOfBeds, int size,int price,
+  String updateRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException;
 
