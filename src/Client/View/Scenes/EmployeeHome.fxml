@@ -41,13 +41,13 @@
             </AnchorPane>
          </content>
     </Tab>
-    <Tab fx:id="employeeInfo" text="Empoyee info">
+    <Tab fx:id="employeeInfo" text="Employee info">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Button fx:id="back" layoutX="40.0" layoutY="324.0" mnemonicParsing="false" onAction="#back" text="Back" />
                   <Button fx:id="edit" layoutX="512.0" layoutY="323.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="49.0" text="Edit" />
-                  <ListView fx:id="employeeInfoListView" layoutX="40.0" layoutY="38.0" prefHeight="269.0" prefWidth="502.0" />
+                  <ListView fx:id="employeeListView" layoutX="40.0" layoutY="38.0" prefHeight="269.0" prefWidth="502.0" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -57,7 +57,7 @@
                <children>
                   <Button fx:id="back" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#back" text="Back" />
                   <Button fx:id="edit" layoutX="506.0" layoutY="316.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="49.0" text="Edit" />
-                  <ListView fx:id="customerInfoListView" layoutX="34.0" layoutY="40.0" prefHeight="260.0" prefWidth="522.0" />
+                  <ListView fx:id="customerListView" layoutX="34.0" layoutY="40.0" prefHeight="260.0" prefWidth="522.0" />
                </children>
             </AnchorPane>
         </content>
