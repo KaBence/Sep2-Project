@@ -66,7 +66,8 @@ public class EditRoomController
 
   @FXML void Save() throws RemoteException
   {
-    if (viewModel.edit().equals("success"))
+    String x = viewModel.edit();
+    if (x.equals("success"))
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful",
           ButtonType.OK);
@@ -74,11 +75,18 @@ public class EditRoomController
       alert.setTitle("Success");
       alert.showAndWait();
     }
+    else if (x.equals("mandatory"))
+    {
+      Alert mandatory = new Alert(Alert.AlertType.ERROR);
+      mandatory.setHeaderText("Error");
+      mandatory.setHeaderText("Mandatory fields can not be empty");
+      mandatory.showAndWait();
+    }
     else
     {
       Alert error = new Alert(Alert.AlertType.ERROR);
       error.setHeaderText("Error");
-      error.setHeaderText("You cannot delete this room right now");
+      error.setHeaderText("You cannot edit this room right now");
       error.showAndWait();
     }
     viewHandler.openView(SceneNames.EmployeeHome);
