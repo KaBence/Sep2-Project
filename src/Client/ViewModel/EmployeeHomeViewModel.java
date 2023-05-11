@@ -71,6 +71,11 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     model.saveSelectedRoom(room);
   }
 
+  public String deleteRoom(Room room) throws RemoteException
+  {
+    return model.deleteRoom(room.getRoomNo());
+  }
+
   public void saveCustomer(Customer customer){
     model.saveSelectedCustomer(customer);
   }

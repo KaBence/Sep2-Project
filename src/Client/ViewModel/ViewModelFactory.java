@@ -26,7 +26,7 @@ public class ViewModelFactory
     addRoomViewModel = new AddRoomViewModel(model);
     employeeSignInViewModel = new EmployeeSignInViewModel(model);
     editRoomViewModel=new EditRoomViewModel(model);
-    editRoomViewModel=new EditRoomViewModel(model);
+    editCustomerViewModel=new EditCustomerViewModel(model);
   }
 
   public HomeViewModel getHomeViewModel(){

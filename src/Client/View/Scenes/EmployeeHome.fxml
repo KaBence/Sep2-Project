@@ -26,17 +26,27 @@
          <content>
             <AnchorPane prefHeight="400.0" prefWidth="600.0">
                <children>
-                  <Button layoutX="460.0" layoutY="260.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="33.0" prefWidth="114.0" text="Add a Room">
+                  <Button layoutX="460.0" layoutY="260.0" mnemonicParsing="false" onAction="#addRoom" prefHeight="35.0" prefWidth="119.0" text="Add Room">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button layoutX="504.0" layoutY="313.0" mnemonicParsing="false" onAction="#Home" prefHeight="35.0" prefWidth="70.0" text="Home">
+                  <Button layoutX="485.0" layoutY="314.0" mnemonicParsing="false" onAction="#Home" prefHeight="35.0" prefWidth="70.0" text="Home">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
                   <ListView fx:id="roomListView" layoutX="20.0" layoutY="59.0" onMouseClicked="#tableClickRoom" prefHeight="272.0" prefWidth="431.0" />
+                  <Button layoutX="460.0" layoutY="211.0" mnemonicParsing="false" onAction="#editRoom" prefHeight="35.0" prefWidth="116.0" text="Edit Room">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="460.0" layoutY="168.0" mnemonicParsing="false" onAction="#deleteRoom" prefHeight="35.0" prefWidth="116.0" text="Delete Room">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </content>

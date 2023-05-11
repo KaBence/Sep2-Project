@@ -13,6 +13,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 
+import java.rmi.RemoteException;
+
 public class EmployeeHomeController
 {
   @FXML Button checkIn;
@@ -58,6 +60,51 @@ public class EmployeeHomeController
   @FXML void addRoom()
   {
     viewHandler.openView(SceneNames.AddRoom);
+  }
+
+  @FXML void editRoom(){
+    if (roomListView.getSelectionModel().getSelectedItem()==null){
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Select a room first",ButtonType.OK);
+      alert.setTitle("Error");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+      return;
+    }
+    viewHandler.openView(SceneNames.EditRoom);
+  }
+
+  @FXML void deleteRoom() throws RemoteException
+  {
+    if (roomListView.getSelectionModel().getSelectedItem()==null){
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Select a room first",ButtonType.OK);
+      alert.setTitle("Error");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+      return;
+    }
+    Alert alert=new Alert(Alert.AlertType.WARNING,"Do you really want to delete this room?",ButtonType.NO,ButtonType.YES);
+    alert.setTitle("Error");
+    alert.setHeaderText(null);
+    alert.showAndWait();
+    if (alert.getResult()==ButtonType.YES)
+      if (alert.getResult() == ButtonType.YES)
+      {
+        if (viewModel.deleteRoom(roomListView.getSelectionModel().getSelectedItem()).equals("success"))
+        {
+          Alert success = new Alert(Alert.AlertType.INFORMATION);
+          success.setHeaderText("Success");
+          success.setHeaderText("The room has been successfully removed");
+          success.showAndWait();
+        }
+        else
+        {
+          Alert error = new Alert(Alert.AlertType.ERROR);
+          error.setHeaderText("Error");
+          error.setHeaderText("You cannot delete this room right now");
+          error.showAndWait();
+        }
+        viewHandler.openView(SceneNames.EmployeeHome);
+      }
   }
 
   @FXML void Home()

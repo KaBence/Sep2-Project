@@ -1,5 +1,6 @@
 package Client.View.Controllers;
 
+import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.EditEmployeeViewModel;
 import javafx.fxml.FXML;
@@ -41,5 +42,13 @@ public class EditEmployeeController
 
   public void reset(){
 
+  }
+
+  @FXML void save(){
+
+  }
+
+  @FXML void cancel(){
+    viewHandler.openView(SceneNames.EmployeeHome);
   }
 }

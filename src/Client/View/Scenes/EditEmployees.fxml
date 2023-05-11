@@ -50,12 +50,12 @@
          </font>
       </TextField>
       <ChoiceBox fx:id="position" layoutX="76.0" layoutY="246.0" prefWidth="150.0" />
-      <Button layoutX="133.0" layoutY="340.0" mnemonicParsing="false" text="Cancel">
+      <Button layoutX="133.0" layoutY="340.0" mnemonicParsing="false" onAction="#cancel" text="Cancel">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button layoutX="410.0" layoutY="340.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" text="Save">
+      <Button layoutX="410.0" layoutY="340.0" mnemonicParsing="false" onAction="#save" prefHeight="31.0" prefWidth="65.0" text="Save">
          <font>
             <Font size="15.0" />
          </font>
