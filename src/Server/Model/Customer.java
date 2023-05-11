@@ -2,42 +2,48 @@ package Server.Model;
 
 import java.io.Serializable;
 
-public class Customer implements Serializable
+public class Customer extends Person implements Serializable
 {
-  private String username,firstName,lastName,phoneNo,paymentInfo;
+  private String paymentInfo;
 
   public Customer(String username, String firstName, String lastName,
-      String phoneNo, String paymentInfo)
+      String phoneNo, String paymentInfo,String password)
   {
-    this.username = username;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.phoneNo = phoneNo;
-    this.paymentInfo = paymentInfo;
+    super(firstName, lastName, password, phoneNo, username);
+    this.paymentInfo=paymentInfo;
   }
 
   public String getUsername()
   {
-    return username;
+    return super.getUsername();
+  }
+
+  public String getPassword()
+  {
+    return super.getPassword();
   }
 
   public String getFirstName()
   {
-    return firstName;
+    return super.getFirstName();
   }
 
   public String getLastName()
   {
-    return lastName;
+    return super.getLastName();
   }
 
   public String getPhoneNo()
   {
-    return phoneNo;
+    return super.getPhoneNo();
   }
 
   public String getPaymentInfo()
   {
     return paymentInfo;
+  }
+
+  public String toString(){
+    return super.toString()+paymentInfo;
   }
 }

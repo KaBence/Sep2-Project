@@ -1,22 +1,29 @@
 package Server.Model;
 
+import Server.Utility.DataBase.Customer.CustomerData;
+import Server.Utility.DataBase.Customer.CustomerDataImplementation;
 import Server.Utility.DataBase.Room.RoomData;
 import Server.Utility.DataBase.Room.RoomDataImplementation;
 
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 public class ModelManager implements Model
 {
   private RoomData roomData;
+  private CustomerData customerData;
+  private PropertyChangeSupport support;
 
   public ModelManager(){
     roomData=new RoomDataImplementation();
+    customerData=new CustomerDataImplementation();
+    support=new PropertyChangeSupport(this);
   }
 
   @Override public void addListener(PropertyChangeListener listener)
   {
-
+    support.addPropertyChangeListener(listener);
   }
 
   @Override public Room addRoom(int roomNumber, int numberOfBeds, int size,int price,
@@ -45,7 +52,7 @@ public class ModelManager implements Model
 
   @Override public ArrayList<Customer> getAllCustomers()
   {
-    return null;
+    return customerData.getAllCustomers();
   }
 
   @Override public ArrayList<Employee> getAllEmployees()

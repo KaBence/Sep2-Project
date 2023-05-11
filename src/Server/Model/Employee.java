@@ -2,36 +2,34 @@ package Server.Model;
 
 import java.io.Serializable;
 
-public class Employee implements Serializable
+public class Employee extends Person implements Serializable
 {
-  private String userID, firstName, lastName, position, phoneNo;
-  public Employee(String userID, String firstName, String lastName, String position, String phoneNo)
+  private String position;
+  public Employee(String userID, String firstName, String lastName, String position, String phoneNo,String password)
   {
-    this.userID = userID;
-    this.firstName = firstName;
-    this.lastName = lastName;
+    super(firstName,lastName,password,phoneNo,userID);
     this.position = position;
-    this.phoneNo = phoneNo;
   }
 
-  public String getUserID()
-  {
-    return userID;
-  }
 
   public String getUsername()
   {
-    return userID;
+    return super.getUsername();
   }
 
   public String getFirstName()
   {
-    return firstName;
+    return super.getFirstName();
   }
 
   public String getLastName()
   {
-    return lastName;
+    return super.getLastName();
+  }
+
+  @Override public String getPassword()
+  {
+    return super.getPassword();
   }
 
   public String getPosition()
@@ -41,11 +39,11 @@ public class Employee implements Serializable
 
   public String getPhoneNo()
   {
-    return phoneNo;
+    return super.getPhoneNo();
   }
 
   public String toString()
   {
-    return userID + " " + firstName  + " " + lastName + " " + position + " " + phoneNo;
+    return super.toString()+position;
   }
 }
