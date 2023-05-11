@@ -114,6 +114,6 @@ public class Room implements Serializable
 
   public String toString()
   {
-   return "Room number: "+roomNo+", Number of beds: "+noOfBeds+", Size of the room: "+size+"m², Orientation: "+orientation;
+   return "RoomNo: "+roomNo+", NoBeds: "+noOfBeds+", Size: "+size+"m², Orientation: "+orientation;
   }
 }
