@@ -44,6 +44,8 @@ public class CustomerDataImplementation implements CustomerData
       psCustomer.setString(3, lastName);
       psCustomer.setString(4, phoneNO);
       psCustomer.setString(5, paymentInfo);
+      psCustomer.executeUpdate();
+
       return new Customer(username, firstName, lastName, phoneNO, paymentInfo,
           password);
     }
@@ -94,6 +96,8 @@ public class CustomerDataImplementation implements CustomerData
           "UPDATE \"user\" SET password = ? WHERE username = ?");
       psUser.setString(1, password);
       psUser.setString(2, username);
+      psUser.executeUpdate();
+
       return "success";
     }
     catch (SQLException e)
