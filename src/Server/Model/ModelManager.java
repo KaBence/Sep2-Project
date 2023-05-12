@@ -45,9 +45,20 @@ public class ModelManager implements Model
     return roomData.updateRoom(roomNumber,numberOfBeds,size,price,orientation,internet,bathroom,kitchen,balcony);
   }
 
+  @Override public String updateCustomer(String username, String firstName,
+      String lastName, String phoneNumber, String payment)
+  {
+    return customerData.editCustomer(username,firstName, lastName, phoneNumber,payment);
+  }
+
   @Override public String deleteRoom(int roomNumber)
   {
     return roomData.deleteRoom(roomNumber);
+  }
+
+  @Override public String deleteSelectedCustomer(String username)
+  {
+    return customerData.deleteCustomer(username);
   }
 
   @Override public ArrayList<Room> getAllRooms()

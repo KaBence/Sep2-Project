@@ -59,11 +59,17 @@ public class Client extends UnicastRemoteObject implements
     return sharedInterface.updateRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony);
   }
 
+  public String updateCustomer(String username,String firstName, String lastName, String phoneNumber, String payment) throws RemoteException{
+    return sharedInterface.updateCustomer(username,firstName,lastName,phoneNumber,payment);
+  }
   public String deleteRoom(int roomNumber) throws RemoteException
   {
     return sharedInterface.deleteRoom(roomNumber);
   }
 
+  public String deleteSelectedCustomer(String username) throws RemoteException{
+    return sharedInterface.deleteSelectedCustomer(username);
+  }
   public void addPropertyChangeListener(PropertyChangeListener listener){
     support.addPropertyChangeListener(listener);
   }

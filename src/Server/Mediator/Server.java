@@ -17,10 +17,11 @@ public class Server extends UnicastRemoteObject implements SharedInterface
   private Model model;
 
   private RemotePropertyChangeSupport support;
+
   public Server(Model model) throws RemoteException
   {
-    this.model=model;
-    support=new RemotePropertyChangeSupport();
+    this.model = model;
+    support = new RemotePropertyChangeSupport();
   }
 
   @Override public void addPropertyChangeListener(
@@ -29,12 +30,13 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     support.addPropertyChangeListener(listener);
   }
 
-  @Override public Room addRoom(int roomNumber, int numberOfBeds, int size,int price,
-      String orientation, boolean internet, boolean bathroom, boolean kitchen,
-      boolean balcony) throws RemoteException
+  @Override public Room addRoom(int roomNumber, int numberOfBeds, int size,
+      int price, String orientation, boolean internet, boolean bathroom,
+      boolean kitchen, boolean balcony) throws RemoteException
   {
-    support.firePropertyChange("add",null,"123");
-    return model.addRoom(roomNumber, numberOfBeds, size, price,orientation, internet, bathroom, kitchen, balcony);
+    support.firePropertyChange("add", null, "123");
+    return model.addRoom(roomNumber, numberOfBeds, size, price, orientation,
+        internet, bathroom, kitchen, balcony);
   }
 
   @Override public ArrayList<Room> getAllRooms()
@@ -56,14 +58,30 @@ public class Server extends UnicastRemoteObject implements SharedInterface
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony) throws RemoteException
   {
+    support.firePropertyChange("update", null, "123");
+    return model.updateRoom(roomNumber, numberOfBeds, size, price, orientation,
+        internet, bathroom, kitchen, balcony);
+  }
+
+  @Override public String updateCustomer(String username, String firstName,
+      String lastName, String phoneNumber, String payment)
+      throws RemoteException
+  {
     support.firePropertyChange("update",null,"123");
-    return model.updateRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony);
+    return  model.updateCustomer(username,firstName,lastName,phoneNumber,payment);
   }
 
   @Override public String deleteRoom(int roomNumber) throws RemoteException
   {
-    support.firePropertyChange("delete",null,"123");
+    support.firePropertyChange("delete", null, "123");
     return model.deleteRoom(roomNumber);
+  }
+
+  @Override public String deleteSelectedCustomer(String username)
+      throws RemoteException
+  {
+    support.firePropertyChange("delete", null, "123");
+    return model.deleteSelectedCustomer(username);
   }
 
 }

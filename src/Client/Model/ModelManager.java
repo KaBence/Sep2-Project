@@ -61,6 +61,13 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.updateRoom(roomNumber, numberOfBeds, size,price, orientation, internet, bathroom, kitchen, balcony);
   }
 
+  @Override public String updateCustomer(String username, String firstName,
+      String lastName, String phoneNumber, String payment)
+      throws RemoteException
+  {
+    return client.updateCustomer(username,firstName,lastName,phoneNumber,payment);
+  }
+
   @Override public String deleteRoom(int roomNumber) throws RemoteException
   {
     return client.deleteRoom(roomNumber);
@@ -79,6 +86,12 @@ public class ModelManager implements Model,PropertyChangeListener
   @Override public void saveSelectedCustomer(Customer customer)
   {
     selectedCustomer=customer;
+  }
+
+  @Override public String deleteSelectedCustomer(String username)
+      throws RemoteException
+  {
+    return client.deleteSelectedCustomer(username);
   }
 
   @Override public Customer getSelectedCustomer()

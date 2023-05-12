@@ -14,8 +14,10 @@ public interface Model
   String updateRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony);
+  String updateCustomer(String username, String firstName, String lastName, String phoneNumber, String payment);
 
   String deleteRoom(int roomNumber);
+  String deleteSelectedCustomer(String username);
 
   ArrayList<Room> getAllRooms();
 

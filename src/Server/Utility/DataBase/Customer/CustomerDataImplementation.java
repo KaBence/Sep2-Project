@@ -78,13 +78,13 @@ public class CustomerDataImplementation implements CustomerData
     }
   }
 
-  @Override public String editCustomer(String username, String password,
+  @Override public String editCustomer(String username,
       String firstName, String lastName, String phoneNO, String paymentInfo)
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement psCustomer = connection.prepareStatement(
-          "UPDATE customer SET firstName = ?, lastName = ?, phoneNo = ?, paymentInfo = ? WHERE username = ?");
+          "UPDATE customer SET firstname = ?, lastname = ?, phoneno = ?, paymentinfo = ? WHERE username = ?");
       psCustomer.setString(1, firstName);
       psCustomer.setString(2, lastName);
       psCustomer.setString(3, phoneNO);
@@ -92,11 +92,6 @@ public class CustomerDataImplementation implements CustomerData
       psCustomer.setString(5, username);
       psCustomer.executeUpdate();
 
-      PreparedStatement psUser = connection.prepareStatement(
-          "UPDATE \"user\" SET password = ? WHERE username = ?");
-      psUser.setString(1, password);
-      psUser.setString(2, username);
-      psUser.executeUpdate();
 
       return "success";
     }
