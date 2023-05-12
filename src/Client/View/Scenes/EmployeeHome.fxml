@@ -68,7 +68,14 @@
                <children>
                   <Button fx:id="back" layoutX="40.0" layoutY="324.0" mnemonicParsing="false" onAction="#back" text="Back" />
                   <Button fx:id="edit" layoutX="512.0" layoutY="323.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="49.0" text="Edit" />
-                  <ListView fx:id="employeeListView" layoutX="40.0" layoutY="38.0" onMouseClicked="#tableClickEmployee" prefHeight="269.0" prefWidth="502.0" />
+                  <ListView fx:id="employeeListView" layoutX="11.0" layoutY="77.0" prefHeight="230.0" prefWidth="404.0" />
+                  <Line endX="-100.0" endY="194.66665649414062" layoutX="523.0" layoutY="134.0" startX="-100.0" startY="-116.66666412353516" stroke="#00000063" />
+                  <TextField layoutX="138.0" layoutY="40.0" promptText="Enter Employee info" />
+                  <TextField layoutX="438.0" layoutY="77.0" promptText="Username" />
+                  <TextField layoutX="437.0" layoutY="179.0" promptText="Last Name" />
+                  <TextField layoutX="438.0" layoutY="281.0" promptText="Phone number" />
+                  <TextField layoutX="438.0" layoutY="128.0" promptText="First Name" />
+                  <TextField layoutX="438.0" layoutY="233.0" promptText="Position" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -78,7 +85,7 @@
                <children>
                   <Button fx:id="back" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#back" text="Back" />
                   <Button fx:id="edit" layoutX="506.0" layoutY="316.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="49.0" text="Edit" />
-                  <ListView fx:id="customerListView" layoutX="42.0" layoutY="71.0" onMouseClicked="#tableClickCustomer" prefHeight="238.0" prefWidth="354.0" />
+                  <ListView fx:id="customerListView" layoutX="41.0" layoutY="31.0" onMouseClicked="#tableClickCustomer" prefHeight="269.0" prefWidth="502.0" />
                </children>
             </AnchorPane>
         </content>
