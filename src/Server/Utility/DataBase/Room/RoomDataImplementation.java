@@ -103,7 +103,7 @@ public class RoomDataImplementation implements RoomData
     ArrayList<Room> filter = new ArrayList<>();
     for (int i = 0; i < list.size(); i++)
     {
-      if (list.get(i).toString().contains(room))
+      if (list.get(i).roomInfo().contains(room))
       {
         filter.add(list.get(i));
       }

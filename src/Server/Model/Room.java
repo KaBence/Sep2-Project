@@ -112,6 +112,45 @@ public class Room implements Serializable
     this.price = price;
   }
 
+  public String hasInternet()
+  {
+    if (internet)
+    {
+      return "internet, ";
+    }
+    return "";
+  }
+ public String hasBathroom()
+ {
+   if (bathroom)
+   {
+     return "bathroom, ";
+   }
+   return "";
+ }
+
+  public String hasKichenet()
+  {
+   if (kitchenet)
+   {
+     return "kichenet, ";
+   }
+   return "";
+  }
+  public String hasBalcony()
+  {
+    if (balcony)
+    {
+      return "balcony";
+    }
+    return "";
+  }
+
+  public String roomInfo()
+  {
+    return toString()+" "+hasInternet()+hasBathroom()+hasKichenet()+hasBalcony();
+  }
+
   public String toString()
   {
    return "RoomNo: "+roomNo+", NoBeds: "+noOfBeds+", Size: "+size+"m², Orientation: "+orientation;
