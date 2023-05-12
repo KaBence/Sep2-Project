@@ -23,6 +23,7 @@ public class EmployeeHomeController
   @FXML Tab employeeInfo;
   @FXML Tab customerInfo;
   @FXML Tab reservation;
+  @FXML TabPane tabPane;
 
   @FXML ListView<Employee> employeeListView;
   @FXML ListView<Customer> customerListView;
