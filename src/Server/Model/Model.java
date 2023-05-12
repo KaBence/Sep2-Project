@@ -26,6 +26,7 @@ public interface Model
   ArrayList<Room> getAllRooms();
 
   ArrayList<Customer> getAllCustomers();
+  ArrayList<Customer> filterCustomer(String customer);
   ArrayList<Employee> getAllEmployees();
   ArrayList<Employee> filterEmployee(String employee);
 }

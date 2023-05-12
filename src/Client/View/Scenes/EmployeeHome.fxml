@@ -84,7 +84,7 @@
                <children>
                   <Button fx:id="back" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#back" text="Back" />
                   <ListView fx:id="customerListView" layoutX="14.0" layoutY="83.0" onMouseClicked="#tableClickCustomer" prefHeight="218.0" prefWidth="348.0" />
-                  <TextField layoutX="83.0" layoutY="28.0" promptText="Enter Customer Info" />
+                  <TextField fx:id="filteringCustomer" layoutX="83.0" layoutY="28.0" onKeyReleased="#filterCustomer" promptText="Enter Customer Info" />
                   <TextField layoutX="396.0" layoutY="83.0" promptText="Username" />
                   <TextField layoutX="396.0" layoutY="138.0" promptText="First Name" />
                   <TextField layoutX="396.0" layoutY="186.0" promptText="Last Name" />

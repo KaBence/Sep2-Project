@@ -1,6 +1,7 @@
 package Server.Utility.DataBase.Customer;
 
 import Server.Model.Customer;
+import Server.Model.Employee;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -131,13 +132,28 @@ public class CustomerDataImplementation implements CustomerData
     }
   }
 
-  @Override public ArrayList<Customer> getAllCustomersByUsername(String txt)
+  @Override public ArrayList<Customer> filterCustomers(String customer)
   {
-   ArrayList<Customer> list =getAllCustomers();
-   ArrayList<Customer> filter= new ArrayList<>();
+    ArrayList<Customer> list = getAllCustomers();
+    ArrayList<Customer> filter = new ArrayList<>();
     for (int i = 0; i < list.size(); i++)
     {
-      if(list.get(i).getUsername().contains(txt)){
+      if (list.get(i).toString().toLowerCase().contains(customer.toLowerCase()))
+      {
+        filter.add(list.get(i));
+      }
+    }
+    return filter;
+  }
+
+  @Override public ArrayList<Customer> getAllCustomersByUsername(String txt)
+  {
+    ArrayList<Customer> list = getAllCustomers();
+    ArrayList<Customer> filter = new ArrayList<>();
+    for (int i = 0; i < list.size(); i++)
+    {
+      if (list.get(i).getUsername().contains(txt))
+      {
         filter.add(list.get(i));
       }
     }

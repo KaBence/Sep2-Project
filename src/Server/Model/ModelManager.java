@@ -83,6 +83,11 @@ public class ModelManager implements Model
     return customerData.getAllCustomers();
   }
 
+  @Override public ArrayList<Customer> filterCustomer(String employee)
+  {
+    return customerData.filterCustomers(employee);
+  }
+
   @Override public ArrayList<Employee> getAllEmployees()
   {
     return employeeData.getAllEmployees();

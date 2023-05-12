@@ -31,6 +31,7 @@ public class EmployeeHomeController
   @FXML ListView<Room> roomListView;
 
   @FXML TextField filteringEmployee;
+  @FXML TextField filteringCustomer;
 
   private Region root;
   private ViewHandler viewHandler;
@@ -161,5 +162,11 @@ public class EmployeeHomeController
   {
     String x = filteringEmployee.getText();
     viewModel.filterEmployee(x);
+  }
+
+  @FXML void filterCustomer() throws RemoteException
+  {
+    String x = filteringCustomer.getText();
+    viewModel.filterCustomer(x);
   }
 }

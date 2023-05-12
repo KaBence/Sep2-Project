@@ -13,6 +13,7 @@ public interface CustomerData
   String editCustomer(String username, String firstName,
       String lastName, String phoneNO, String paymentInfo);
   ArrayList<Customer> getAllCustomers();
+  ArrayList<Customer> filterCustomers(String customer);
   ArrayList<Customer> getAllCustomersByUsername(String txt);
   ArrayList<Customer> getAllCustomersByFirstName();
 
