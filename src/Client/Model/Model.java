@@ -25,7 +25,9 @@ public interface Model
       boolean balcony) throws RemoteException;
   String updateCustomer(String username, String firstName, String lastName, String phoneNumber, String payment) throws RemoteException;
 
+  String updateEmployee( String firstName, String lastName, String position, String phoneNo) throws RemoteException;
   String deleteRoom(int roomNumber) throws RemoteException;
+  String deleteEmployee(String userID) throws RemoteException;
 
   void saveSelectedRoom(Room room);
 
@@ -33,6 +35,9 @@ public interface Model
 
   void saveSelectedCustomer(Customer customer);
   String deleteSelectedCustomer(String username) throws RemoteException;
+  void saveSelectedEmployee(Employee employee);
+  Employee getSelectedEmployee();
+
   Customer getSelectedCustomer();
 
   void addPropertyChangeListener(PropertyChangeListener listener);

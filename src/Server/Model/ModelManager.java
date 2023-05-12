@@ -9,6 +9,7 @@ import Server.Utility.DataBase.Room.RoomDataImplementation;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class ModelManager implements Model
@@ -51,6 +52,13 @@ public class ModelManager implements Model
     return customerData.editCustomer(username,firstName, lastName, phoneNumber,payment);
   }
 
+  @Override public String updateEmployee( String firstName,
+      String lastName, String position, String phoneNo)
+      throws RemoteException
+  {
+    return employeeData.editEmployee(firstName, lastName,position,phoneNo);
+  }
+
   @Override public String deleteRoom(int roomNumber)
   {
     return roomData.deleteRoom(roomNumber);
@@ -61,6 +69,10 @@ public class ModelManager implements Model
     return customerData.deleteCustomer(username);
   }
 
+  @Override public String deleteEmployee(String userID)
+  {
+    return employeeData.deleteEmployee(userID);
+  }
   @Override public ArrayList<Room> getAllRooms()
   {
     return roomData.getAllRooms();

@@ -128,13 +128,14 @@ public class EmployeeHomeController
       viewHandler.openView(SceneNames.EditCustomer);
   }
 
-  @FXML void tableClickEmployee(MouseEvent event){
-    viewModel.saveCustomer(customerListView.getSelectionModel().getSelectedItem());
-    if (event.getClickCount()==2)
+  @FXML void tableClickEmployee(MouseEvent event)
+  {
+    viewModel.saveEmployee(employeeListView.getSelectionModel().getSelectedItem());
+    if(event.getClickCount()==2)
+    {
       viewHandler.openView(SceneNames.EditEmployee);
+    }
   }
-
-
   @FXML void checkIn(){
 
   }

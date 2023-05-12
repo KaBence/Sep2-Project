@@ -30,5 +30,8 @@ public interface SharedInterface extends Remote
   String deleteRoom(int roomNumber) throws RemoteException;
   String deleteSelectedCustomer(String username) throws RemoteException;
 
+  String updateEmployee(String firstName, String lastName, String position, String phoneNo) throws RemoteException;
+
+  String deleteEmployee(String userID) throws RemoteException;
 
 }

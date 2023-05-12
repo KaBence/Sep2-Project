@@ -96,6 +96,10 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     model.saveSelectedCustomer(customer);
   }
 
+  public void saveEmployee(Employee employee){
+    model.saveSelectedEmployee(employee);
+  }
+
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     Platform.runLater(() -> {
