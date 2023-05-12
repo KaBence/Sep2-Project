@@ -163,7 +163,7 @@ public class ViewFactory
 
   private Region loadEditEmployee(){
     FXMLLoader loader=new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/EditEmployee.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/EditEmployees.fxml"));
     try
     {
       Region root = loader.load();

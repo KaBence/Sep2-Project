@@ -57,7 +57,7 @@
                <children>
                   <Button fx:id="back" layoutX="40.0" layoutY="324.0" mnemonicParsing="false" onAction="#back" text="Back" />
                   <Button fx:id="edit" layoutX="512.0" layoutY="323.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="49.0" text="Edit" />
-                  <ListView fx:id="employeeListView" layoutX="40.0" layoutY="79.0" onMouseClicked="#tableDoubleClickEmployee" prefHeight="230.0" prefWidth="446.0" />
+                  <ListView fx:id="employeeListView" layoutX="40.0" layoutY="79.0" onMouseClicked="#tableClickEmployee" prefHeight="230.0" prefWidth="446.0" />
                </children></AnchorPane>
       </content>
     </Tab>
