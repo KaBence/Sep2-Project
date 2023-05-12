@@ -67,7 +67,6 @@
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Button fx:id="back" layoutX="40.0" layoutY="324.0" mnemonicParsing="false" onAction="#back" text="Back" />
-                  <Button fx:id="edit" layoutX="512.0" layoutY="323.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="49.0" text="Edit" />
                   <ListView fx:id="employeeListView" layoutX="11.0" layoutY="77.0" prefHeight="230.0" prefWidth="404.0" />
                   <Line endX="-100.0" endY="194.66665649414062" layoutX="523.0" layoutY="134.0" startX="-100.0" startY="-116.66666412353516" stroke="#00000063" />
                   <TextField layoutX="138.0" layoutY="40.0" promptText="Enter Employee info" />
@@ -84,7 +83,6 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Button fx:id="back" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#back" text="Back" />
-                  <Button fx:id="edit" layoutX="300.0" layoutY="316.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="49.0" text="Edit" />
                   <ListView fx:id="customerListView" layoutX="14.0" layoutY="83.0" onMouseClicked="#tableClickCustomer" prefHeight="218.0" prefWidth="348.0" />
                   <TextField layoutX="83.0" layoutY="28.0" promptText="Enter Customer Info" />
                   <TextField layoutX="396.0" layoutY="83.0" promptText="Username" />

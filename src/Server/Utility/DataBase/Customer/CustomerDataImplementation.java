@@ -78,8 +78,8 @@ public class CustomerDataImplementation implements CustomerData
     }
   }
 
-  @Override public String editCustomer(String username,
-      String firstName, String lastName, String phoneNO, String paymentInfo)
+  @Override public String editCustomer(String username, String firstName,
+      String lastName, String phoneNO, String paymentInfo)
   {
     try (Connection connection = getConnection())
     {
@@ -91,7 +91,6 @@ public class CustomerDataImplementation implements CustomerData
       psCustomer.setString(4, paymentInfo);
       psCustomer.setString(5, username);
       psCustomer.executeUpdate();
-
 
       return "success";
     }
@@ -131,4 +130,38 @@ public class CustomerDataImplementation implements CustomerData
 
     }
   }
+
+  @Override public ArrayList<Customer> getAllCustomersByUsername(String txt)
+  {
+   ArrayList<Customer> list =getAllCustomers();
+   ArrayList<Customer> filter= new ArrayList<>();
+    for (int i = 0; i < list.size(); i++)
+    {
+      if(list.get(i).getUsername().contains(txt)){
+        filter.add(list.get(i));
+      }
+    }
+    return filter;
+  }
+
+  @Override public ArrayList<Customer> getAllCustomersByFirstName()
+  {
+    return null;
+  }
+
+  @Override public ArrayList<Customer> getAllCustomersByLastName()
+  {
+    return null;
+  }
+
+  @Override public ArrayList<Customer> getAllCustomersByPhoneNumber()
+  {
+    return null;
+  }
+
+  @Override public ArrayList<Customer> getAllCustomersByPayment()
+  {
+    return null;
+  }
+
 }
