@@ -105,7 +105,6 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     employees.set(employeeObservableList);
     customers.set(customerObservableList);
     rooms.set(roomObservableList);
-    System.out.println("estsgdblkgjdhguidhgd");
   }
 
   public void saveRoom(Room room){
@@ -115,6 +114,38 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   public String deleteRoom(Room room) throws RemoteException
   {
     return model.deleteRoom(room.getRoomNo());
+  }
+
+  public void filterEmployee(String employee)
+      throws RemoteException
+  {
+    ArrayList<Employee> filterEmployee;
+    try
+    {
+      filterEmployee = model.filterEmployee(employee);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+    ObservableList<Employee> employeeObservableList=FXCollections.observableList(filterEmployee);
+    employees.set(employeeObservableList);
+  }
+
+  public void filterCustomer(String customer)
+      throws RemoteException
+  {
+    ArrayList<Customer> filterEmployee;
+    try
+    {
+      filterEmployee = model.filterCustomer(customer);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+    ObservableList<Customer> employeeObservableList=FXCollections.observableList(filterEmployee);
+    customers.set(employeeObservableList);
   }
 
   public void saveCustomer(Customer customer){
@@ -140,6 +171,10 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
       temp+= bedsFilter.getValue();
     ObservableList<Room> roomObservableList = FXCollections.observableList(model.getFilteredRoom(temp));
     rooms.set(roomObservableList);
+  }
+
+  public void saveEmployee(Employee employee){
+    model.saveSelectedEmployee(employee);
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

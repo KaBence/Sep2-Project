@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class EmployeeHomeController
 {
@@ -34,6 +35,8 @@ public class EmployeeHomeController
   @FXML ComboBox<Integer> priceFilter;
   @FXML TextField roomNoFilter,bedsFilter;
 
+  @FXML TextField filteringEmployee;
+  @FXML TextField filteringCustomer;
 
   private Region root;
   private ViewHandler viewHandler;
@@ -139,10 +142,13 @@ public class EmployeeHomeController
       viewHandler.openView(SceneNames.EditCustomer);
   }
 
-  @FXML void tableClickEmployee(MouseEvent event){
-    viewModel.saveCustomer(customerListView.getSelectionModel().getSelectedItem());
-    if (event.getClickCount()==2)
+  @FXML void tableClickEmployee(MouseEvent event)
+  {
+    viewModel.saveEmployee(employeeListView.getSelectionModel().getSelectedItem());
+    if(event.getClickCount()==2)
+    {
       viewHandler.openView(SceneNames.EditEmployee);
+    }
   }
 
   @FXML void filterRoom() throws RemoteException
@@ -169,5 +175,18 @@ public class EmployeeHomeController
     SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
     selectionModel.select(i);
     return selectionModel;
+  }
+
+
+   @FXML void filterEmployee() throws RemoteException
+  {
+    String x = filteringEmployee.getText();
+    viewModel.filterEmployee(x);
+  }
+
+  @FXML void filterCustomer() throws RemoteException
+  {
+    String x = filteringCustomer.getText();
+    viewModel.filterCustomer(x);
   }
 }

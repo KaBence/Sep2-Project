@@ -40,12 +40,13 @@ public class EmployeeDataImplementation implements EmployeeData
       PreparedStatement psEmpoyee = connection.prepareStatement(
           "INSERT INTO employee(username, password,firstName, lastName, String phoneNumber, String position");
       psEmpoyee.setString(1, username);
-      psEmpoyee.setString(2,password);
+      psEmpoyee.setString(2, password);
       psEmpoyee.setString(3, firstName);
       psEmpoyee.setString(4, lastName);
       psEmpoyee.setString(5, phoneNumber);
       psEmpoyee.setString(6, position);
-      return new Employee(username, password, firstName, lastName, phoneNumber, position);
+      return new Employee(username, password, firstName, lastName, phoneNumber,
+          position);
     }
     catch (SQLException e)
     {
@@ -53,18 +54,18 @@ public class EmployeeDataImplementation implements EmployeeData
     }
   }
 
-  @Override public String editEmployee(String username, String password,
-      String firstName, String lastName, String phoneNumber, String position)
+  @Override public String editEmployee(String firstName, String lastName,
+      String phoneNumber, String position)
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement ps = connection.prepareStatement(
-          "UPDATE employee SET password = ?, firsName=?, lastName =?, phoneNumber =?, position=? ");
-      ps.setString(1, password);
-      ps.setString(2, firstName);
-      ps.setString(3, lastName);
-      ps.setString(4, phoneNumber);
-      ps.setString(5, position);
+          "UPDATE employee SET firstName=?, lastName =?, phoneNo =?, position=? ");
+      //ps.setString(1, password);
+      ps.setString(1, firstName);
+      ps.setString(2, lastName);
+      ps.setString(3, phoneNumber);
+      ps.setString(4, position);
       ps.executeUpdate();
       return "success";
     }
@@ -97,20 +98,39 @@ public class EmployeeDataImplementation implements EmployeeData
     }
   }
 
+  @Override public ArrayList<Employee> filterEmployee(String employee)
+  {
+    ArrayList<Employee> list = getAllEmployees();
+    ArrayList<Employee> filter = new ArrayList<>();
+    for (int i = 0; i < list.size(); i++)
+    {
+      if (list.get(i).toString().toLowerCase().contains(employee.toLowerCase()))
+      {
+        filter.add(list.get(i));
+      }
+    }
+    return filter;
+  }
+
   @Override public ArrayList<Employee> getAllEmployees()
   {
-    ArrayList<Employee> list= new ArrayList<>();
-    try(Connection connection=getConnection()){
-      PreparedStatement ps= connection.prepareStatement("SELECT * from employee join \"user\" on employee.username = \"user\".username");
-      ResultSet rs= ps.executeQuery();
-      while (rs.next()){
-        String username= rs.getString("username");
-        String password=rs.getString("password");
-        String firstName= rs.getString("firstName");
-        String lastName= rs.getString("lastName");
-        String phoneNumber= rs.getString("phoneNo");
-        String position= rs.getString("position");
-        list.add(new Employee(username,firstName,lastName,position,phoneNumber,password));
+    ArrayList<Employee> list = new ArrayList<>();
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement ps = connection.prepareStatement(
+          "SELECT * from employee join \"user\" on employee.username = \"user\".username");
+      ResultSet rs = ps.executeQuery();
+      while (rs.next())
+      {
+        String username = rs.getString("username");
+        String password = rs.getString("password");
+        String firstName = rs.getString("firstName");
+        String lastName = rs.getString("lastName");
+        String phoneNumber = rs.getString("phoneNo");
+        String position = rs.getString("position");
+        list.add(
+            new Employee(username, firstName, lastName, position, phoneNumber,
+                password));
       }
     }
     catch (SQLException e)

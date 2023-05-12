@@ -21,6 +21,7 @@ public class ModelManager implements Model,PropertyChangeListener
   private Client client;
   private Room selectedRoom;
   private Customer selectedCustomer;
+  private Employee selectedEmployee;
 
   private PropertyChangeSupport support;
   public ModelManager() throws IOException, NotBoundException
@@ -54,9 +55,20 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.getAllCustomers();
   }
 
+  @Override public ArrayList<Customer> filterCustomer(String customer)
+      throws RemoteException
+  {
+    return client.filterCustomer(customer);
+  }
+
   @Override public ArrayList<Employee> getAllEmployees() throws RemoteException
   {
     return client.getAllEmployees();
+  }
+
+  @Override public ArrayList<Employee> filterEmployee(String employee) throws RemoteException
+  {
+    return client.filterEmployee(employee);
   }
 
   @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,
@@ -73,9 +85,21 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.updateCustomer(username,firstName,lastName,phoneNumber,payment);
   }
 
+  @Override public String updateEmployee( String firstName,
+      String lastName, String position, String phoneNo)
+      throws RemoteException
+  {
+    return client.updateEmployee(firstName, lastName,position,phoneNo);
+  }
+
   @Override public String deleteRoom(int roomNumber) throws RemoteException
   {
     return client.deleteRoom(roomNumber);
+  }
+
+  @Override public String deleteEmployee(String userID) throws RemoteException
+  {
+    return client.deleteEmployee(userID);
   }
 
   @Override public void saveSelectedRoom(Room room)
@@ -104,6 +128,15 @@ public class ModelManager implements Model,PropertyChangeListener
     return selectedCustomer;
   }
 
+  @Override public void saveSelectedEmployee(Employee employee)
+  {
+    this.selectedEmployee = employee;
+  }
+
+  @Override public Employee getSelectedEmployee()
+  {
+    return selectedEmployee;
+  }
   @Override public void addPropertyChangeListener(
       PropertyChangeListener listener)
   {

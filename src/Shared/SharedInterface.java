@@ -21,7 +21,10 @@ public interface SharedInterface extends Remote
   ArrayList<Room> getFilteredRoom(String room) throws RemoteException;
 
   ArrayList<Customer> getAllCustomers() throws RemoteException;
+  ArrayList<Customer> filterCustomer(String customer) throws RemoteException;
+
   ArrayList<Employee> getAllEmployees() throws RemoteException;
+  ArrayList<Employee> filterEmployee(String employee) throws RemoteException;
 
   String updateRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
@@ -31,5 +34,8 @@ public interface SharedInterface extends Remote
   String deleteRoom(int roomNumber) throws RemoteException;
   String deleteSelectedCustomer(String username) throws RemoteException;
 
+  String updateEmployee(String firstName, String lastName, String position, String phoneNo) throws RemoteException;
+
+  String deleteEmployee(String userID) throws RemoteException;
 
 }

@@ -54,10 +54,19 @@ public class Server extends UnicastRemoteObject implements SharedInterface
   {
     return model.getAllCustomers();
   }
+  @Override public ArrayList<Customer> filterCustomer(String customer) throws RemoteException
+  {
+    return model.filterCustomer(customer);
+  }
 
   @Override public ArrayList<Employee> getAllEmployees() throws RemoteException
   {
     return model.getAllEmployees();
+  }
+
+  @Override public ArrayList<Employee> filterEmployee(String employee) throws RemoteException
+  {
+    return model.filterEmployee(employee);
   }
 
   @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,
@@ -77,6 +86,14 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     return  model.updateCustomer(username,firstName,lastName,phoneNumber,payment);
   }
 
+  @Override public String updateEmployee(String firstName, String lastName,
+      String position, String phoneNo) throws RemoteException
+  {
+    support.firePropertyChange("update", null, "123");
+    return model.updateEmployee(firstName,lastName,position,phoneNo);
+  }
+
+
   @Override public String deleteRoom(int roomNumber) throws RemoteException
   {
     support.firePropertyChange("delete", null, "123");
@@ -89,5 +106,15 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     support.firePropertyChange("delete", null, "123");
     return model.deleteSelectedCustomer(username);
   }
+
+  @Override public String deleteEmployee(String userID) throws RemoteException
+  {
+    support.firePropertyChange("delete", null,"123");
+    return model.deleteEmployee(userID);
+  }
+
+
+
+
 
 }
