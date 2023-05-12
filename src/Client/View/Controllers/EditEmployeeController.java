@@ -49,6 +49,6 @@ public class EditEmployeeController
   }
 
   @FXML void cancel(){
-    viewHandler.openView(SceneNames.EmployeeHome);
+    viewHandler.openView(SceneNames.EmployeeHomeEmployee);
   }
 }

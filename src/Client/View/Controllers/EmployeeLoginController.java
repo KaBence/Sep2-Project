@@ -29,7 +29,7 @@ public class EmployeeLoginController
   }
 
   @FXML void login(){
-    viewHandler.openView(SceneNames.EmployeeHome);
+    viewHandler.openView(SceneNames.EmployeeHomeReservations);
   }
 
   @FXML void Back(){

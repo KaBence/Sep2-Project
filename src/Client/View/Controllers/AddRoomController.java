@@ -86,7 +86,7 @@ public class AddRoomController
       wrong.setTitle("Invalid data");
       wrong.setHeaderText("The room with room number "+roomNo.getText()+" already exist");
       wrong.showAndWait();
-      viewHandler.openView(SceneNames.EmployeeHome);
+      viewHandler.openView(SceneNames.EmployeeHomeRoom);
     }
     else
     {
@@ -110,14 +110,14 @@ public class AddRoomController
         success.setHeaderText(
             "The room has been successfully added to the system");
         success.showAndWait();
-        viewHandler.openView(SceneNames.EmployeeHome);
+        viewHandler.openView(SceneNames.EmployeeHomeRoom);
       }
     }
   }
 
   @FXML void Cancel()
   {
-    viewHandler.openView(SceneNames.EmployeeHome);
+    viewHandler.openView(SceneNames.EmployeeHomeRoom);
   }
 
 }

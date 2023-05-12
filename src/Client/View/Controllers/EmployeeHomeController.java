@@ -104,7 +104,7 @@ public class EmployeeHomeController
           error.setHeaderText("You cannot delete this room right now");
           error.showAndWait();
         }
-        viewHandler.openView(SceneNames.EmployeeHome);
+        viewHandler.openView(SceneNames.EmployeeHomeRoom);
       }
   }
 
@@ -136,5 +136,12 @@ public class EmployeeHomeController
   }
   @FXML void edit(){
 
+  }
+
+  public SingleSelectionModel<Tab> selection(int i)
+  {
+    SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+    selectionModel.select(i);
+    return selectionModel;
   }
 }

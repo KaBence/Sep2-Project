@@ -89,12 +89,12 @@ public class EditRoomController
       error.setHeaderText("You cannot edit this room right now");
       error.showAndWait();
     }
-    viewHandler.openView(SceneNames.EmployeeHome);
+    viewHandler.openView(SceneNames.EmployeeHomeRoom);
   }
 
   @FXML void Cancel()
   {
-    viewHandler.openView(SceneNames.EmployeeHome);
+    viewHandler.openView(SceneNames.EmployeeHomeRoom);
   }
 
   @FXML void delete() throws RemoteException
@@ -121,7 +121,7 @@ public class EditRoomController
         error.setHeaderText("You cannot delete this room right now");
         error.showAndWait();
       }
-      viewHandler.openView(SceneNames.EmployeeHome);
+      viewHandler.openView(SceneNames.EmployeeHomeRoom);
     }
   }
 }

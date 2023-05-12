@@ -79,7 +79,7 @@ public class ViewFactory
       return employeeSignIn.getRoot();
     }
 
-  private Region loadEmployeeHome(){
+  private Region loadEmployeeHome(int i){
     FXMLLoader loader=new FXMLLoader();
     loader.setLocation(getClass().getResource("Scenes/EmployeeHome.fxml"));
     try
@@ -92,6 +92,7 @@ public class ViewFactory
       throw new IOError(e);
     }
     employeeHomeController.reset();
+    employeeHomeController.selection(i);
     return employeeHomeController.getRoot();
   }
 
@@ -159,17 +160,37 @@ public class ViewFactory
     return editCustomerController.getRoot();
   }
 
+  private Region loadEditEmployee(){
+    FXMLLoader loader=new FXMLLoader();
+    loader.setLocation(getClass().getResource("Scenes/EditEmployee.fxml"));
+    try
+    {
+      Region root = loader.load();
+      editCustomerController=loader.getController();
+      editCustomerController.init(viewHandler,viewModelFactory.getEditCustomerViewModel(),root);
+    }
+    catch(IOException e){
+      throw new IOError(e);
+    }
+    editCustomerController.reset();
+    return editCustomerController.getRoot();
+  }
+
 
   public Region load(SceneNames id){
     return switch (id){
       case Home -> loadHomeView();
       case EmployeeLogin -> loadEmployeeLogin();
-      case EmployeeHome -> loadEmployeeHome();
+      case EmployeeHomeReservations -> loadEmployeeHome(0);
+      case EmployeeHomeRoom -> loadEmployeeHome(1);
+      case EmployeeHomeEmployee -> loadEmployeeHome(3);
+      case EmployeeHomeCustomer -> loadEmployeeHome(4);
       case CustomerHome -> loadCustomerHome();
       case AddRoom -> loadAddRoom();
       case EditRoom -> loadEditRoom();
       case EmployeeSignIn -> loadEmployeeSignIn();
       case EditCustomer -> loadEditCustomer();
+      case EditEmployee -> loadEditEmployee();
     };
   }
 }

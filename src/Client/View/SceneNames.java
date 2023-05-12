@@ -2,6 +2,6 @@ package Client.View;
 
 public enum SceneNames
 {
-  Home,EmployeeHome,EmployeeLogin,CustomerHome,AddRoom,EditRoom,EditCustomer, EmployeeSignIn
+  Home,EmployeeHomeReservations,EmployeeHomeRoom,EmployeeHomeEmployee,EmployeeHomeCustomer,EmployeeLogin,CustomerHome,AddRoom,EditRoom,EditCustomer,EditEmployee, EmployeeSignIn
 
 }

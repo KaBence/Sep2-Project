@@ -42,7 +42,7 @@ public class EditCustomerController
   }
 
   @FXML void cancel(){
-    viewHandler.openView(SceneNames.EmployeeHome);
+    viewHandler.openView(SceneNames.EmployeeHomeCustomer);
   }
 
   @FXML void delete(){
