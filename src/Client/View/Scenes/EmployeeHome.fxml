@@ -30,7 +30,6 @@
          <content>
             <AnchorPane prefHeight="298.0" prefWidth="483.0">
                <children>
-                  <ListView fx:id="roomListView" layoutX="11.0" layoutY="15.0" onMouseClicked="#tableClickRoom" prefHeight="316.0" prefWidth="573.0" />
                   <TextField layoutX="100.0" layoutY="38.0" promptText="Enter Room Info" />
                   <Line endX="33.5999755859375" endY="203.0" layoutX="305.0" layoutY="128.0" startX="33.5999755859375" startY="-112.99999237060547" stroke="#00000064" />
                   <CheckBox layoutX="384.0" layoutY="51.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="77.0" text="Balcony">
@@ -57,7 +56,7 @@
                   <TextField layoutX="380.0" layoutY="278.0" prefHeight="26.0" prefWidth="122.0" promptText="Nr of Beds" />
                   <Button layoutX="468.0" layoutY="338.0" mnemonicParsing="false" text="Add" />
                   <Button layoutX="96.0" layoutY="338.0" mnemonicParsing="false" text="Back" />
-                  <ListView layoutX="42.0" layoutY="74.0" prefHeight="243.0" prefWidth="265.0" />
+                  <ListView fx:id="roomListView" layoutX="10.0" layoutY="74.0" prefHeight="243.0" prefWidth="320.0" />
                   <ComboBox layoutX="380.0" layoutY="191.0" prefHeight="26.0" prefWidth="120.0" promptText="Price per night" />
                </children>
             </AnchorPane>
