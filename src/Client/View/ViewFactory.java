@@ -21,6 +21,7 @@ public class ViewFactory
   private EmployeeSignInController employeeSignIn;
   private EditRoomController editRoomController;
   private EditCustomerController editCustomerController;
+  private EditEmployeeController editEmployeeController;
 
   private ViewModelFactory viewModelFactory;
 
@@ -166,14 +167,14 @@ public class ViewFactory
     try
     {
       Region root = loader.load();
-      editCustomerController=loader.getController();
-      editCustomerController.init(viewHandler,viewModelFactory.getEditCustomerViewModel(),root);
+      editEmployeeController=loader.getController();
+      editEmployeeController.init(viewHandler,viewModelFactory.getEditEmployeeViewModel(),root);
     }
     catch(IOException e){
       throw new IOError(e);
     }
-    editCustomerController.reset();
-    return editCustomerController.getRoot();
+    editEmployeeController.reset();
+    return editEmployeeController.getRoot();
   }
 
 

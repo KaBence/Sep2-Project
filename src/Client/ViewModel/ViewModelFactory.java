@@ -14,8 +14,8 @@ public class ViewModelFactory
   private AddRoomViewModel addRoomViewModel;
   private EmployeeSignInViewModel employeeSignInViewModel;
   private EditRoomViewModel editRoomViewModel;
-
   private EditCustomerViewModel editCustomerViewModel;
+  private EditEmployeeViewModel editEmployeeViewModel;
 
   public ViewModelFactory(Model model)
   {
@@ -25,11 +25,13 @@ public class ViewModelFactory
     customerHomeViewModel = new CustomerHomeViewModel(model);
     addRoomViewModel = new AddRoomViewModel(model);
     employeeSignInViewModel = new EmployeeSignInViewModel(model);
-    editRoomViewModel=new EditRoomViewModel(model);
-    editCustomerViewModel=new EditCustomerViewModel(model);
+    editRoomViewModel = new EditRoomViewModel(model);
+    editCustomerViewModel = new EditCustomerViewModel(model);
+    editEmployeeViewModel = new EditEmployeeViewModel(model);
   }
 
-  public HomeViewModel getHomeViewModel(){
+  public HomeViewModel getHomeViewModel()
+  {
     return homeViewModel;
   }
 
@@ -66,5 +68,10 @@ public class ViewModelFactory
   public EditCustomerViewModel getEditCustomerViewModel()
   {
     return editCustomerViewModel;
+  }
+
+  public EditEmployeeViewModel getEditEmployeeViewModel()
+  {
+    return editEmployeeViewModel;
   }
 }
