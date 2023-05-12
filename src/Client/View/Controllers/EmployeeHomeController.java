@@ -29,6 +29,11 @@ public class EmployeeHomeController
   @FXML ListView<Customer> customerListView;
   @FXML ListView<Room> roomListView;
 
+  @FXML CheckBox bathroomFilter,kitchenFilter,balconyFilter,internetFilter;
+
+  @FXML ComboBox<Integer> priceFilter;
+  @FXML TextField roomNoFilter,bedsFilter;
+
 
   private Region root;
   private ViewHandler viewHandler;
@@ -43,6 +48,14 @@ public class EmployeeHomeController
     this.viewModel.bindCustomerList(customerListView.itemsProperty());
     this.viewModel.bindEmployeeList(employeeListView.itemsProperty());
     this.root = root;
+
+    viewModel.bindInternet(internetFilter.selectedProperty());
+    viewModel.bindRoomNo(roomNoFilter.textProperty());
+    viewModel.bindBeds(bedsFilter.textProperty());
+    viewModel.bindBalcony(balconyFilter.selectedProperty());
+    viewModel.bindBathroom(bathroomFilter.selectedProperty());
+    viewModel.bindKitchen(kitchenFilter.selectedProperty());
+    viewModel.bindPrice(priceFilter.valueProperty());
 
   }
 
@@ -130,6 +143,11 @@ public class EmployeeHomeController
     viewModel.saveCustomer(customerListView.getSelectionModel().getSelectedItem());
     if (event.getClickCount()==2)
       viewHandler.openView(SceneNames.EditEmployee);
+  }
+
+  @FXML void filterRoom() throws RemoteException
+  {
+    viewModel.filterRoom();
   }
 
 

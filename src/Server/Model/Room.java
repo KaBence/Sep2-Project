@@ -141,7 +141,7 @@ public class Room implements Serializable
   {
     if (balcony)
     {
-      return "balcony";
+      return "balcony, ";
     }
     return "";
   }

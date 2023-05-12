@@ -21,6 +21,8 @@ public interface Model
 
   ArrayList<Room> getAllRooms();
 
+  ArrayList<Room> getFilteredRooms(String room);
+
   ArrayList<Customer> getAllCustomers();
   ArrayList<Employee> getAllEmployees();
 }

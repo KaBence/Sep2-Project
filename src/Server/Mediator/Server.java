@@ -44,6 +44,12 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     return model.getAllRooms();
   }
 
+  @Override public ArrayList<Room> getFilteredRoom(String room)
+      throws RemoteException
+  {
+    return model.getFilteredRooms(room);
+  }
+
   @Override public ArrayList<Customer> getAllCustomers() throws RemoteException
   {
     return model.getAllCustomers();

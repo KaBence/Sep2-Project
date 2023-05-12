@@ -101,6 +101,8 @@ public class RoomDataImplementation implements RoomData
   {
     ArrayList<Room> list = getAllRooms();
     ArrayList<Room> filter = new ArrayList<>();
+    if (room.equals(""))
+      return list;
     for (int i = 0; i < list.size(); i++)
     {
       if (list.get(i).roomInfo().contains(room))

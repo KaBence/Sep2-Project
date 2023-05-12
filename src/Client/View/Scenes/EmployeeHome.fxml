@@ -30,34 +30,40 @@
          <content>
             <AnchorPane prefHeight="298.0" prefWidth="483.0">
                <children>
-                  <TextField layoutX="100.0" layoutY="38.0" promptText="Enter Room Info" />
-                  <Line endX="33.5999755859375" endY="203.0" layoutX="305.0" layoutY="128.0" startX="33.5999755859375" startY="-112.99999237060547" stroke="#00000064" />
-                  <CheckBox layoutX="384.0" layoutY="51.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="77.0" text="Balcony">
+                  <TextField layoutX="98.0" layoutY="22.0" promptText="Enter Room Info" />
+                  <Line endX="33.5999755859375" endY="203.0" layoutX="385.0" layoutY="123.0" startX="33.5999755859375" startY="-112.99999237060547" stroke="#00000064" />
+                  <CheckBox fx:id="balconyFilter" layoutX="449.0" layoutY="47.0" mnemonicParsing="false" onAction="#filterRoom" prefHeight="18.0" prefWidth="77.0" text="Balcony">
                      <font>
                         <Font name="Century Gothic" size="13.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="384.0" layoutY="85.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="103.0" text="kitchen">
+                  <CheckBox fx:id="kitchenFilter" layoutX="449.0" layoutY="81.0" mnemonicParsing="false" onAction="#filterRoom" prefHeight="21.0" prefWidth="103.0" text="kitchen">
                      <font>
                         <Font name="Century Gothic" size="13.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="383.0" layoutY="122.0" mnemonicParsing="false" text="Internet">
+                  <CheckBox fx:id="internetFilter" layoutX="448.0" layoutY="118.0" mnemonicParsing="false" onAction="#filterRoom" text="Internet">
                      <font>
                         <Font name="Century Gothic" size="13.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="384.0" layoutY="153.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="87.0" text="Bathroom">
+                  <CheckBox fx:id="bathroomFilter" layoutX="449.0" layoutY="149.0" mnemonicParsing="false" onAction="#filterRoom" prefHeight="19.0" prefWidth="87.0" text="Bathroom">
                      <font>
                         <Font name="Century Gothic" size="13.0" />
                      </font>
                   </CheckBox>
-                  <TextField layoutX="381.0" layoutY="236.0" prefHeight="26.0" prefWidth="118.0" promptText="Room Nr" />
-                  <TextField layoutX="380.0" layoutY="278.0" prefHeight="26.0" prefWidth="122.0" promptText="Nr of Beds" />
-                  <Button layoutX="468.0" layoutY="338.0" mnemonicParsing="false" text="Add" />
-                  <Button layoutX="96.0" layoutY="338.0" mnemonicParsing="false" text="Back" />
-                  <ListView fx:id="roomListView" layoutX="10.0" layoutY="74.0" prefHeight="243.0" prefWidth="320.0" />
-                  <ComboBox layoutX="380.0" layoutY="191.0" prefHeight="26.0" prefWidth="120.0" promptText="Price per night" />
+                  <TextField fx:id="roomNoFilter" layoutX="446.0" layoutY="232.0" onAction="#filterRoom" prefHeight="26.0" prefWidth="118.0" promptText="Room Nr" />
+                  <TextField fx:id="bedsFilter" layoutX="445.0" layoutY="274.0" onAction="#filterRoom" prefHeight="26.0" prefWidth="122.0" promptText="Nr of Beds" />
+                  <Button layoutX="477.0" layoutY="319.0" mnemonicParsing="false" onAction="#addRoom" text="Add">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button layoutX="71.0" layoutY="319.0" mnemonicParsing="false" onAction="#Home" text="Home">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <ListView fx:id="roomListView" layoutX="14.0" layoutY="64.0" onMouseClicked="#tableClickRoom" prefHeight="243.0" prefWidth="387.0" />
+                  <ComboBox fx:id="priceFilter" layoutX="445.0" layoutY="187.0" onAction="#filterRoom" prefHeight="26.0" prefWidth="120.0" promptText="Price per night" />
                </children>
             </AnchorPane>
          </content>

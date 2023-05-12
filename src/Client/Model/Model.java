@@ -15,6 +15,8 @@ public interface Model
       boolean balcony) throws RemoteException;
   ArrayList<Room> getAllRooms() throws RemoteException;
 
+  ArrayList<Room> getFilteredRoom(String room) throws RemoteException;
+
   ArrayList<Customer> getAllCustomers() throws RemoteException;
 
   ArrayList<Employee> getAllEmployees() throws RemoteException;
