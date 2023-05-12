@@ -88,10 +88,9 @@
                   <ListView fx:id="customerListView" layoutX="14.0" layoutY="83.0" onMouseClicked="#tableClickCustomer" prefHeight="218.0" prefWidth="348.0" />
                   <TextField layoutX="83.0" layoutY="28.0" promptText="Enter Customer Info" />
                   <TextField layoutX="396.0" layoutY="83.0" promptText="Username" />
-                  <TextField layoutX="396.0" layoutY="123.0" promptText="Password" />
-                  <TextField layoutX="396.0" layoutY="166.0" promptText="First Name" />
-                  <TextField layoutX="396.0" layoutY="204.0" promptText="Last Name" />
-                  <TextField layoutX="396.0" layoutY="244.0" promptText="Phone Number" />
+                  <TextField layoutX="396.0" layoutY="138.0" promptText="First Name" />
+                  <TextField layoutX="396.0" layoutY="186.0" promptText="Last Name" />
+                  <TextField layoutX="396.0" layoutY="239.0" promptText="Phone Number" />
                   <TextField layoutX="396.0" layoutY="288.0" promptText="Payment Info" />
                   <Line endX="25.20001220703125" endY="330.20001220703125" layoutX="353.0" layoutY="41.0" startX="25.20001220703125" startY="-40.99999237060547" stroke="#00000064" />
                </children>
