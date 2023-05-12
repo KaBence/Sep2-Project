@@ -23,4 +23,5 @@ public interface Model
 
   ArrayList<Customer> getAllCustomers();
   ArrayList<Employee> getAllEmployees();
+  ArrayList<Employee> filterEmployee(String employee);
 }

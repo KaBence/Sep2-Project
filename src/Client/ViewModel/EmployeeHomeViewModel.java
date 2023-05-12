@@ -76,6 +76,22 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     return model.deleteRoom(room.getRoomNo());
   }
 
+  public void filterEmployee(String employee)
+      throws RemoteException
+  {
+    ArrayList<Employee> filterEmployee;
+    try
+    {
+      filterEmployee = model.filterEmployee(employee);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+    ObservableList<Employee> employeeObservableList=FXCollections.observableList(filterEmployee);
+    employees.set(employeeObservableList);
+  }
+
   public void saveCustomer(Customer customer){
     model.saveSelectedCustomer(customer);
   }

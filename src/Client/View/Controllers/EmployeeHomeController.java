@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class EmployeeHomeController
 {
@@ -29,6 +30,7 @@ public class EmployeeHomeController
   @FXML ListView<Customer> customerListView;
   @FXML ListView<Room> roomListView;
 
+  @FXML TextField filteringEmployee;
 
   private Region root;
   private ViewHandler viewHandler;
@@ -151,5 +153,12 @@ public class EmployeeHomeController
     SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
     selectionModel.select(i);
     return selectionModel;
+  }
+
+
+   @FXML void filterEmployee() throws RemoteException
+  {
+    String x = filteringEmployee.getText();
+    viewModel.filterEmployee(x);
   }
 }

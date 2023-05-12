@@ -54,6 +54,11 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.getAllEmployees();
   }
 
+  @Override public ArrayList<Employee> filterEmployee(String employee) throws RemoteException
+  {
+    return client.filterEmployee(employee);
+  }
+
   @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony) throws RemoteException

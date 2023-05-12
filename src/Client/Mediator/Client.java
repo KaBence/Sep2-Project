@@ -52,6 +52,11 @@ public class Client extends UnicastRemoteObject implements
     return sharedInterface.getAllEmployees();
   }
 
+  public ArrayList<Employee> filterEmployee(String employee) throws RemoteException
+  {
+    return sharedInterface.filterEmployee(employee);
+  }
+
   public String updateRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException

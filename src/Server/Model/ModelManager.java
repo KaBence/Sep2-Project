@@ -75,4 +75,9 @@ public class ModelManager implements Model
   {
     return employeeData.getAllEmployees();
   }
+
+  @Override public ArrayList<Employee> filterEmployee(String employee)
+  {
+    return employeeData.filterEmployee(employee);
+  }
 }

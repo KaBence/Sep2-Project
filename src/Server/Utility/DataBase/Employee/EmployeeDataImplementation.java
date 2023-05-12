@@ -97,6 +97,20 @@ public class EmployeeDataImplementation implements EmployeeData
     }
   }
 
+  @Override public ArrayList<Employee> filterEmployee(String employee)
+  {
+    ArrayList<Employee> list = getAllEmployees();
+    ArrayList<Employee> filter = new ArrayList<>();
+    for (int i = 0; i < list.size(); i++)
+    {
+      if (list.get(i).toString().toLowerCase().contains(employee.toLowerCase()))
+      {
+        filter.add(list.get(i));
+      }
+    }
+    return filter;
+  }
+
   @Override public ArrayList<Employee> getAllEmployees()
   {
     ArrayList<Employee> list= new ArrayList<>();
