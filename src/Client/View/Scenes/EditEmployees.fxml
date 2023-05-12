@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root prefHeight="400.0" prefWidth="600.0" type="AnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Controllers.EditEmployeeController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Controllers.EditEmployeeController">
    <children>
       <Text layoutX="176.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Employee's Info">
          <font>
@@ -61,4 +61,4 @@
          </font>
       </Button>
    </children>
-</fx:root>
+</AnchorPane>
