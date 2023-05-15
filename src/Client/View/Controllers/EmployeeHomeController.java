@@ -112,59 +112,6 @@ public class EmployeeHomeController
     viewHandler.openView(SceneNames.AddRoom);
   }
 
-  @FXML void editRoom()
-  {
-    if (roomListView.getSelectionModel().getSelectedItem() == null)
-    {
-      Alert alert = new Alert(Alert.AlertType.ERROR, "Select a room first",
-          ButtonType.OK);
-      alert.setTitle("Error");
-      alert.setHeaderText(null);
-      alert.showAndWait();
-      return;
-    }
-    viewHandler.openView(SceneNames.EditRoom);
-  }
-
-  @FXML void deleteRoom() throws RemoteException
-  {
-    if (roomListView.getSelectionModel().getSelectedItem() == null)
-    {
-      Alert alert = new Alert(Alert.AlertType.ERROR, "Select a room first",
-          ButtonType.OK);
-      alert.setTitle("Error");
-      alert.setHeaderText(null);
-      alert.showAndWait();
-      return;
-    }
-    Alert alert = new Alert(Alert.AlertType.WARNING,
-        "Do you really want to delete this room?", ButtonType.NO,
-        ButtonType.YES);
-    alert.setTitle("Error");
-    alert.setHeaderText(null);
-    alert.showAndWait();
-    if (alert.getResult() == ButtonType.YES)
-      if (alert.getResult() == ButtonType.YES)
-      {
-        if (viewModel.deleteRoom(
-                roomListView.getSelectionModel().getSelectedItem())
-            .equals("success"))
-        {
-          Alert success = new Alert(Alert.AlertType.INFORMATION);
-          success.setHeaderText("Success");
-          success.setHeaderText("The room has been successfully removed");
-          success.showAndWait();
-        }
-        else
-        {
-          Alert error = new Alert(Alert.AlertType.ERROR);
-          error.setHeaderText("Error");
-          error.setHeaderText("You cannot delete this room right now");
-          error.showAndWait();
-        }
-        viewHandler.openView(SceneNames.EmployeeHomeRoom);
-      }
-  }
 
   @FXML void Home()
   {
@@ -287,29 +234,22 @@ viewHandler.openView(SceneNames.Home);
     if (toggleCustomerfilter){
       toggleCustomerfilter=false;
       toggleCustomerButton.setText("Simple");
-
-      bedsFilter.setDisable(true);
-      roomNoFilter.setDisable(true);
-      bathroomFilter.setDisable(true);
-      priceFilter.setDisable(true);
-      internetFilter.setDisable(true);
-      bathroomFilter.setDisable(true);
-      balconyFilter.setDisable(true);
-      kitchenFilter.setDisable(true);
-      filteringRoom.setDisable(false);
+      username.setDisable(true);
+      firstName.setDisable(true);
+      lastName.setDisable(true);
+      phoneNo.setDisable(true);
+      paymentInfo.setDisable(true);
+      filteringCustomer.setDisable(false);
     }
     else {
       toggleCustomerfilter=true;
       toggleCustomerButton.setText("Advanced");
-      bedsFilter.setDisable(false);
-      roomNoFilter.setDisable(false);
-      bathroomFilter.setDisable(false);
-      priceFilter.setDisable(false);
-      internetFilter.setDisable(false);
-      bathroomFilter.setDisable(false);
-      balconyFilter.setDisable(false);
-      kitchenFilter.setDisable(false);
-      filteringRoom.setDisable(true);
+      username.setDisable(false);
+      firstName.setDisable(false);
+      lastName.setDisable(false);
+      phoneNo.setDisable(false);
+      paymentInfo.setDisable(false);
+      filteringCustomer.setDisable(true);
     }
   }
 

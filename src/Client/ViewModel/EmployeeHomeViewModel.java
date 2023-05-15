@@ -176,6 +176,15 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     bathroomFilter.set(false);
     kitchenFilter.set(false);
     internetFilter.set(false);
+    priceFilter.set(0);
+    filteringRoom.set("");
+
+    employeeUsernameFilter.set("");
+    employeeFirstNameFilter.set("");
+    employeeLastNameFilter.set("");
+    employeePhoneNumberFilter.set("");
+    employeePosition.set("");
+
     roomNoFilter.set("");
     bedsFilter.set("");
     usernameFilter.set("");
@@ -183,8 +192,6 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     lastNameFilter.set("");
     phoneNumberFilter.set("");
     paymentInfoFilter.set("");
-    priceFilter.set(0);
-    filteringRoom.set("");
     ArrayList<Room> allRooms;
     ArrayList<Employee> allEmployee;
     ArrayList<Customer> allCustomer;
