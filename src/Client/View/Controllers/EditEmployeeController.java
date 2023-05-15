@@ -3,6 +3,8 @@ package Client.View.Controllers;
 import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.EditEmployeeViewModel;
+import Server.Utility.DataBase.Customer.CustomerData;
+import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -54,8 +56,7 @@ public class EditEmployeeController
   @FXML void save() throws RemoteException
   {
     String temp = viewModel.edit();
-    System.out.println(temp);
-    if (temp.equals("success"))
+    if (temp.equals(DatabaseConnection.SUCCESS))
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful",
           ButtonType.OK);
@@ -63,7 +64,7 @@ public class EditEmployeeController
       alert.setTitle("Success");
       alert.showAndWait();
     }
-    else if(temp.equals("mandatory"))
+    else if(temp.equals(DatabaseConnection.MANDATORY))
     {
       Alert mandatory = new Alert(Alert.AlertType.ERROR);
       mandatory.setHeaderText("Error");
@@ -83,18 +84,18 @@ public class EditEmployeeController
   @FXML void delete() throws RemoteException
   {
     Alert alert = new Alert(Alert.AlertType.WARNING,
-        "Do you really want to delete this customer from the system?",
+        "Do you really want to delete this employee from the system?",
         ButtonType.NO, ButtonType.YES);
     alert.setTitle("Warning");
     alert.setHeaderText(null);
     alert.showAndWait();
     if (alert.getResult() == ButtonType.YES)
     {
-      if (viewModel.delete().equals("success"))
+      if (viewModel.delete().equals(DatabaseConnection.SUCCESS))
       {
         Alert success = new Alert(Alert.AlertType.INFORMATION);
         success.setHeaderText("Success");
-        success.setHeaderText("The customer has been successfully removed");
+        success.setHeaderText("The employee has been successfully removed");
         success.showAndWait();
       }
       else
@@ -104,7 +105,7 @@ public class EditEmployeeController
         error.setHeaderText("You cannot delete this employee right now");
         error.showAndWait();
       }
-      viewHandler.openView(SceneNames.EmployeeHomeRoom);
+      viewHandler.openView(SceneNames.EmployeeHomeEmployee);
     }
   }
   @FXML void cancel(){

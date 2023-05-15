@@ -2,6 +2,7 @@ package Server.Utility.DataBase.Customer;
 
 import Server.Model.Customer;
 import Server.Model.Employee;
+import Server.Utility.DataBase.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -52,7 +53,6 @@ public class CustomerDataImplementation implements CustomerData
     }
     catch (SQLException e)
     {
-      //throw new RuntimeException(e);
       return null;
     }
   }
@@ -70,12 +70,11 @@ public class CustomerDataImplementation implements CustomerData
           "DELETE FORM \"user\" WHERE username = ?");
       psUser.setString(1, username);
       psUser.executeUpdate();
-      return "success";
+      return DatabaseConnection.SUCCESS;
     }
     catch (SQLException e)
     {
-      //throw new RuntimeException(e);
-      return "error";
+      return DatabaseConnection.ERROR;
     }
   }
 
@@ -93,12 +92,11 @@ public class CustomerDataImplementation implements CustomerData
       psCustomer.setString(5, username);
       psCustomer.executeUpdate();
 
-      return "success";
+      return DatabaseConnection.SUCCESS;
     }
     catch (SQLException e)
     {
-      //throw new RuntimeException(e);
-      return "error";
+      return DatabaseConnection.ERROR;
     }
   }
 
@@ -126,9 +124,7 @@ public class CustomerDataImplementation implements CustomerData
     }
     catch (SQLException e)
     {
-      System.err.println(e.getMessage());
       return null;
-
     }
   }
 

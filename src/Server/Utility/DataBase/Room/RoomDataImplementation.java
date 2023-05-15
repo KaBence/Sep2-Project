@@ -65,7 +65,6 @@ public class RoomDataImplementation implements RoomData
     }
     catch (SQLException ex)
     {
-      System.err.println(ex.getMessage());
       return ERROR;
     }
   }
@@ -92,7 +91,6 @@ public class RoomDataImplementation implements RoomData
     }
     catch (SQLException ex)
     {
-      System.err.println(ex.getMessage());
       return ERROR;
     }
   }
@@ -149,7 +147,7 @@ public class RoomDataImplementation implements RoomData
     }
     catch (SQLException e)
     {
-      System.err.println(e.getMessage());
+      return null;
     }
     return list;
   }
