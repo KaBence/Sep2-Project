@@ -3,11 +3,9 @@ package Client.View.Controllers;
 import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.EditEmployeeViewModel;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 
 import java.rmi.RemoteException;
@@ -20,6 +18,7 @@ public class EditEmployeeController
 
   @FXML TextField firstName, lastName, phoneNo;
   @FXML ChoiceBox<String> position;
+  @FXML Label username;
 
   public void init(ViewHandler viewHandler, EditEmployeeViewModel viewModel, Region root)
   {
@@ -30,8 +29,9 @@ public class EditEmployeeController
 
     this.viewModel.bindFirstName(firstName.textProperty());
     this.viewModel.bindLastName(lastName.textProperty());
-    this.viewModel.bindPosition(position.valueProperty());
     this.viewModel.bindPhoneNo(phoneNo.textProperty());
+    this.viewModel.bindPosition(position.valueProperty());
+    this.viewModel.bindUsername(username.textProperty());
   }
 
   public void initialize()
@@ -39,7 +39,7 @@ public class EditEmployeeController
     position.getItems().add("Manager");
     position.getItems().add("Cleaner");
     position.getItems().add("Handyman");
-    position.getItems().add("Receptionists");
+    position.getItems().add("Receptionist");
 
   }
   public Region getRoot(){
@@ -54,6 +54,7 @@ public class EditEmployeeController
   @FXML void save() throws RemoteException
   {
     String temp = viewModel.edit();
+    System.out.println(temp);
     if (temp.equals("success"))
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful",

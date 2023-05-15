@@ -28,7 +28,7 @@ public interface Model
       boolean balcony) throws RemoteException;
   String updateCustomer(String username, String firstName, String lastName, String phoneNumber, String payment) throws RemoteException;
 
-  String updateEmployee( String firstName, String lastName, String position, String phoneNo) throws RemoteException;
+  String updateEmployee( String username, String firstName, String lastName, String position, String phoneNo) throws RemoteException;
   String deleteRoom(int roomNumber) throws RemoteException;
   String deleteEmployee(String userID) throws RemoteException;
 

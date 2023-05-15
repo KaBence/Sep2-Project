@@ -52,11 +52,11 @@ public class ModelManager implements Model
     return customerData.editCustomer(username,firstName, lastName, phoneNumber,payment);
   }
 
-  @Override public String updateEmployee( String firstName,
+  @Override public String updateEmployee(String username, String firstName,
       String lastName, String position, String phoneNo)
       throws RemoteException
   {
-    return employeeData.editEmployee(firstName, lastName,position,phoneNo);
+    return employeeData.editEmployee(username, firstName, lastName,position,phoneNo);
   }
 
   @Override public String deleteRoom(int roomNumber)

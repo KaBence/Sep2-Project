@@ -54,18 +54,19 @@ public class EmployeeDataImplementation implements EmployeeData
     }
   }
 
-  @Override public String editEmployee(String firstName, String lastName,
-      String phoneNumber, String position)
+  @Override public String editEmployee(String username, String firstName,
+      String lastName, String phoneNumber, String position)
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement ps = connection.prepareStatement(
-          "UPDATE employee SET firstName=?, lastName =?, phoneNo =?, position=? ");
+          "UPDATE employee SET firstName=?, lastName =?, phoneNo =?, position=? WHERE username = ? ");
       //ps.setString(1, password);
       ps.setString(1, firstName);
       ps.setString(2, lastName);
-      ps.setString(3, phoneNumber);
-      ps.setString(4, position);
+      ps.setString(4, phoneNumber);
+      ps.setString(3, position);
+      ps.setString(5, username);
       ps.executeUpdate();
       return "success";
     }

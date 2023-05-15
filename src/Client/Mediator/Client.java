@@ -76,10 +76,10 @@ public class Client extends UnicastRemoteObject implements
   public String updateCustomer(String username,String firstName, String lastName, String phoneNumber, String payment) throws RemoteException{
     return sharedInterface.updateCustomer(username,firstName,lastName,phoneNumber,payment);
   }
-  public String updateEmployee( String firstName, String lastName, String position, String phoneNo)
+  public String updateEmployee( String username, String firstName, String lastName, String position, String phoneNo)
       throws RemoteException
   {
-    return sharedInterface.updateEmployee(firstName,lastName,position,phoneNo);
+    return sharedInterface.updateEmployee(username, firstName,lastName,position,phoneNo);
   }
 
   public String deleteRoom(int roomNumber) throws RemoteException

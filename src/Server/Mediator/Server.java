@@ -86,11 +86,11 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     return  model.updateCustomer(username,firstName,lastName,phoneNumber,payment);
   }
 
-  @Override public String updateEmployee(String firstName, String lastName,
+  @Override public String updateEmployee(String username, String firstName, String lastName,
       String position, String phoneNo) throws RemoteException
   {
     support.firePropertyChange("update", null, "123");
-    return model.updateEmployee(firstName,lastName,position,phoneNo);
+    return model.updateEmployee(username, firstName,lastName,position,phoneNo);
   }
 
 

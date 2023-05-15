@@ -93,11 +93,11 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.updateCustomer(username,firstName,lastName,phoneNumber,payment);
   }
 
-  @Override public String updateEmployee( String firstName,
+  @Override public String updateEmployee(String username, String firstName,
       String lastName, String position, String phoneNo)
       throws RemoteException
   {
-    return client.updateEmployee(firstName, lastName,position,phoneNo);
+    return client.updateEmployee(username, firstName, lastName,position,phoneNo);
   }
 
   @Override public String deleteRoom(int roomNumber) throws RemoteException

@@ -29,10 +29,12 @@ public class EditEmployeeViewModel
   public void fill()
   {
     Employee temp = model.getSelectedEmployee();
+    username.set(temp.getUsername());
     firstName.set(temp.getFirstName());
     lastName.set(temp.getLastName());
     phoneNo.set(temp.getPhoneNo());
     position.set(temp.getPosition());
+
   }
 
   //String userID, String firstName, String lastName, String position, String phoneNo,String password
@@ -40,7 +42,7 @@ public class EditEmployeeViewModel
   {
     try
     {
-      return model.updateEmployee(firstName.getValue(), lastName.getValue(),
+      return model.updateEmployee(username.getValue(),firstName.getValue(), lastName.getValue(),
           position.getValue(), phoneNo.getValue());
     }
     catch (Exception e)
