@@ -148,7 +148,7 @@ public class Room implements Serializable
 
   public String roomInfo()
   {
-    return toString()+" "+hasInternet()+hasBathroom()+hasKichenet()+hasBalcony();
+    return toString()+" "+hasInternet()+hasBathroom()+hasKichenet()+hasBalcony()+" Price, "+price;
   }
 
   public String toString()

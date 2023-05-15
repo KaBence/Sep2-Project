@@ -7,6 +7,7 @@ import Client.ViewModel.HomeViewModel;
 import Server.Model.Customer;
 import Server.Model.Employee;
 import Server.Model.Room;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -60,6 +61,16 @@ public class EmployeeHomeController
     viewModel.bindKitchen(kitchenFilter.selectedProperty());
     viewModel.bindPrice(priceFilter.valueProperty());
 
+  }
+
+  public void initialize(){
+    ArrayList<Integer> prices=new ArrayList<>();
+    prices.add(0);
+    prices.add(200);
+    prices.add(270);
+    prices.add(300);
+    prices.add(500);
+    priceFilter.setItems(FXCollections.observableList(prices));
   }
 
 

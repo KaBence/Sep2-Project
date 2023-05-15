@@ -89,6 +89,13 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   }
 
   public void update(){
+    balconyFilter.set(false);
+    bathroomFilter.set(false);
+    kitchenFilter.set(false);
+    internetFilter.set(false);
+    roomNoFilter.set("");
+    bedsFilter.set("");
+    priceFilter.set(0);
     ArrayList<Room> allRooms;
     ArrayList<Employee> allEmployee;
     ArrayList<Customer> allCustomer;
@@ -157,7 +164,6 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
 
   public void filterRoom() throws RemoteException
   {
-    rooms.set(null);
     String[] temp=new String[7];
     int counter=0;
     if (balconyFilter.getValue()){
@@ -177,8 +183,11 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
       counter++;
     }
 
-    //if (priceFilter.getValue()!=null)
-      //temp+=priceFilter.getValue();
+    if (priceFilter.getValue()!=0){
+      temp[counter]="Price, "+priceFilter.getValue();
+      counter++;
+    }
+
     if (!roomNoFilter.getValue().equals("")){
       temp[counter]="RoomNo: "+roomNoFilter.getValue()+", ";
       counter++;
