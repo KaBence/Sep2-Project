@@ -39,9 +39,15 @@ public class EmployeeHomeController
   @FXML TextField filteringEmployee;
   @FXML TextField filteringCustomer;
 
+  @FXML TextField filteringRoom;
+
+  @FXML ToggleButton toggleButton;
+
   private Region root;
   private ViewHandler viewHandler;
   private EmployeeHomeViewModel viewModel;
+
+  private boolean togglefilter=false;
 
   public void init(ViewHandler viewHandler, EmployeeHomeViewModel viewModel,
       Region root)
@@ -51,6 +57,7 @@ public class EmployeeHomeController
     this.viewModel.bindRoomList(roomListView.itemsProperty());
     this.viewModel.bindCustomerList(customerListView.itemsProperty());
     this.viewModel.bindEmployeeList(employeeListView.itemsProperty());
+    this.viewModel.bindFilteringRoom(filteringRoom.textProperty());
     this.root = root;
 
     viewModel.bindInternet(internetFilter.selectedProperty());
@@ -82,7 +89,7 @@ public class EmployeeHomeController
 
   public void reset()
   {
-    viewModel.update();
+    Toggle();
   }
 
   @FXML void addRoom()
@@ -181,6 +188,36 @@ public class EmployeeHomeController
 
   }
 
+  @FXML void Toggle(){
+    viewModel.update();
+    if (togglefilter){
+      togglefilter=false;
+      toggleButton.setText("Simple");
+      bedsFilter.setDisable(true);
+      roomNoFilter.setDisable(true);
+      bathroomFilter.setDisable(true);
+      priceFilter.setDisable(true);
+      internetFilter.setDisable(true);
+      bathroomFilter.setDisable(true);
+      balconyFilter.setDisable(true);
+      kitchenFilter.setDisable(true);
+      filteringRoom.setDisable(false);
+    }
+    else {
+      togglefilter=true;
+      toggleButton.setText("Advanced");
+      bedsFilter.setDisable(false);
+      roomNoFilter.setDisable(false);
+      bathroomFilter.setDisable(false);
+      priceFilter.setDisable(false);
+      internetFilter.setDisable(false);
+      bathroomFilter.setDisable(false);
+      balconyFilter.setDisable(false);
+      kitchenFilter.setDisable(false);
+      filteringRoom.setDisable(true);
+    }
+  }
+
   public SingleSelectionModel<Tab> selection(int i)
   {
     SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
@@ -199,5 +236,10 @@ public class EmployeeHomeController
   {
     String x = filteringCustomer.getText();
     viewModel.filterCustomer(x);
+  }
+
+  @FXML void simpleFilterRoom() throws RemoteException
+  {
+    viewModel.simpleRoomFilter();
   }
 }

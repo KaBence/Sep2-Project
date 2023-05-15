@@ -43,6 +43,11 @@ public class Client extends UnicastRemoteObject implements
     return sharedInterface.getAllRooms();
   }
 
+  public ArrayList<Room> getSimpleFilteredRoom(String room) throws RemoteException
+  {
+    return sharedInterface.getSimpleFilteredRoom(room);
+  }
+
   public ArrayList<Room> getFilteredRooms(String... attr) throws RemoteException
   {
     return sharedInterface.getFilteredRoom(attr);

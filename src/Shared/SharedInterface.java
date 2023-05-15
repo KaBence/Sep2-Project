@@ -18,6 +18,8 @@ public interface SharedInterface extends Remote
 
   ArrayList<Room> getAllRooms() throws RemoteException;
 
+  ArrayList<Room> getSimpleFilteredRoom(String room) throws RemoteException;
+
   ArrayList<Room> getFilteredRoom(String... attr) throws RemoteException;
 
   ArrayList<Customer> getAllCustomers() throws RemoteException;

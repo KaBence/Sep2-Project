@@ -39,7 +39,7 @@ public class EditRoomController
     viewModel.bindSize(size.textProperty());
 
     viewModel.bindOrientation(orientation.valueProperty());
-    roomNo.setEditable(false);
+    roomNo.setDisable(true);
   }
 
   public void initialize()
@@ -69,7 +69,7 @@ public class EditRoomController
   @FXML void Save() throws RemoteException
   {
     String x = viewModel.edit();
-    if (x.equals(RoomData.SUCCESS))
+    if (x.equals(DatabaseConnection.SUCCESS))
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful",
           ButtonType.OK);
@@ -77,7 +77,7 @@ public class EditRoomController
       alert.setTitle("Success");
       alert.showAndWait();
     }
-    else if (x.equals(RoomData.MANDATORY))
+    else if (x.equals(DatabaseConnection.MANDATORY))
     {
       Alert mandatory = new Alert(Alert.AlertType.ERROR);
       mandatory.setHeaderText("Error");

@@ -25,7 +25,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private SimpleBooleanProperty bathroomFilter,kitchenFilter,internetFilter,balconyFilter;
   private SimpleObjectProperty<Integer> priceFilter;
 
-  private SimpleStringProperty roomNoFilter,bedsFilter;
+  private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom;
 
   public EmployeeHomeViewModel(Model model)
   {
@@ -43,6 +43,8 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     roomNoFilter=new SimpleStringProperty();
     bedsFilter=new SimpleStringProperty();
 
+    filteringRoom=new SimpleStringProperty();
+
     bedsFilter.set("");
     roomNoFilter.set("");
   }
@@ -58,6 +60,10 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
 
   public void bindEmployeeList(ObjectProperty<ObservableList<Employee>> property){
     property.bindBidirectional(employees);
+  }
+
+  public void bindFilteringRoom(StringProperty property){
+    property.bindBidirectional(filteringRoom);
   }
 
   public void bindInternet(BooleanProperty property){
@@ -96,6 +102,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     roomNoFilter.set("");
     bedsFilter.set("");
     priceFilter.set(0);
+    filteringRoom.set("");
     ArrayList<Room> allRooms;
     ArrayList<Employee> allEmployee;
     ArrayList<Customer> allCustomer;
@@ -198,6 +205,12 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     }
 
     ObservableList<Room> roomObservableList = FXCollections.observableList(model.getFilteredRoom(temp));
+    rooms.set(roomObservableList);
+  }
+
+  public void simpleRoomFilter() throws RemoteException
+  {
+    ObservableList<Room> roomObservableList=FXCollections.observableList(model.getSimpleFilteredRoom(filteringRoom.getValue()));
     rooms.set(roomObservableList);
   }
 

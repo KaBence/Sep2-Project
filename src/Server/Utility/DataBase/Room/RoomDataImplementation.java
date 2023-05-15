@@ -96,6 +96,20 @@ public class RoomDataImplementation implements RoomData
     }
   }
 
+  @Override public ArrayList<Room> filterRoom(String room)
+  {
+    ArrayList<Room> list = filter((String) null);
+    ArrayList<Room> filter = new ArrayList<>();
+    for (Room item : list)
+    {
+      if (item.toString().contains(room))
+      {
+        filter.add(item);
+      }
+    }
+    return filter;
+  }
+
   @Override public ArrayList<Room> filter(String... attr)
   {
     ArrayList<Room> list = getAllRooms();
