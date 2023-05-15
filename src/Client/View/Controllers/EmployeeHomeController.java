@@ -1,6 +1,7 @@
 package Client.View.Controllers;
 
 import Client.View.SceneNames;
+import Client.View.ViewFactory;
 import Client.View.ViewHandler;
 import Client.ViewModel.EmployeeHomeViewModel;
 import Client.ViewModel.HomeViewModel;
@@ -209,7 +210,7 @@ public class EmployeeHomeController
 
   @FXML void back()
   {
-
+viewHandler.openView(SceneNames.Home);
   }
 
   @FXML void edit()
