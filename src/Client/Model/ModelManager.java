@@ -24,6 +24,14 @@ public class ModelManager implements Model,PropertyChangeListener
   private Employee selectedEmployee;
 
   private PropertyChangeSupport support;
+
+  public ModelManager(SharedInterface sharedInterface) throws IOException, NotBoundException
+  {
+    client=new Client(sharedInterface);
+    client.addPropertyChangeListener(this);
+    support=new PropertyChangeSupport(this);
+  }
+
   public ModelManager() throws IOException, NotBoundException
   {
     Registry registry= LocateRegistry.getRegistry(1337);
@@ -45,9 +53,9 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.getAllRooms();
   }
 
-  @Override public ArrayList<Room> getFilteredRoom(String room) throws RemoteException
+  @Override public ArrayList<Room> getFilteredRoom(String... attr) throws RemoteException
   {
-    return client.getFilteredRooms(room);
+    return client.getFilteredRooms(attr);
   }
 
   @Override public ArrayList<Customer> getAllCustomers() throws RemoteException

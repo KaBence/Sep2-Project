@@ -42,6 +42,9 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     priceFilter=new SimpleObjectProperty<>();
     roomNoFilter=new SimpleStringProperty();
     bedsFilter=new SimpleStringProperty();
+
+    bedsFilter.set("");
+    roomNoFilter.set("");
   }
 
   public void bindRoomList(ObjectProperty<ObservableList<Room>> property)
@@ -154,21 +157,37 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
 
   public void filterRoom() throws RemoteException
   {
-    String temp="";
-    if (balconyFilter.getValue())
-      temp+="balcony, ";
-    if (kitchenFilter.getValue())
-      temp+="kichenet, ";
-    if (internetFilter.getValue())
-      temp+="internet, ";
-    if (bathroomFilter.getValue())
-      temp+="bathroom, ";
+    rooms.set(null);
+    String[] temp=new String[7];
+    int counter=0;
+    if (balconyFilter.getValue()){
+      temp[counter]="balcony, ";
+      counter++;
+    }
+    if (kitchenFilter.getValue()){
+      temp[counter]="kichenet, ";
+      counter++;
+    }
+    if (internetFilter.getValue()){
+      temp[counter]="internet, ";
+      counter++;
+    }
+    if (bathroomFilter.getValue()){
+      temp[counter]="bathroom, ";
+      counter++;
+    }
+
     //if (priceFilter.getValue()!=null)
       //temp+=priceFilter.getValue();
-    if (roomNoFilter.getValue()!=null)
-      temp+=roomNoFilter.getValue();
-    if (bedsFilter.getValue()!=null)
-      temp+= bedsFilter.getValue();
+    if (!roomNoFilter.getValue().equals("")){
+      temp[counter]="RoomNo: "+roomNoFilter.getValue()+", ";
+      counter++;
+    }
+
+    if (!bedsFilter.getValue().equals("")){
+      temp[counter]= "NoBeds: "+bedsFilter.getValue()+", ";
+    }
+
     ObservableList<Room> roomObservableList = FXCollections.observableList(model.getFilteredRoom(temp));
     rooms.set(roomObservableList);
   }

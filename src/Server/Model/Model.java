@@ -25,7 +25,7 @@ public interface Model
 
   ArrayList<Room> getAllRooms();
 
-  ArrayList<Room> getFilteredRooms(String room);
+  ArrayList<Room> getFilteredRooms(String... attr);
 
   ArrayList<Customer> getAllCustomers();
   ArrayList<Customer> filterCustomer(String customer);

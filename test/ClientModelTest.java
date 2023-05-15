@@ -28,7 +28,7 @@ public class ClientModelTest
   {
     sharedInterface=Mockito.mock(Server.class);
     client=new Client(sharedInterface);
-    model=new ModelManager();
+    model=new ModelManager(sharedInterface);
   }
 
   @Test

@@ -43,9 +43,9 @@ public class Client extends UnicastRemoteObject implements
     return sharedInterface.getAllRooms();
   }
 
-  public ArrayList<Room> getFilteredRooms(String room) throws RemoteException
+  public ArrayList<Room> getFilteredRooms(String... attr) throws RemoteException
   {
-    return sharedInterface.getFilteredRoom(room);
+    return sharedInterface.getFilteredRoom(attr);
   }
 
   public ArrayList<Customer> getAllCustomers()throws RemoteException{

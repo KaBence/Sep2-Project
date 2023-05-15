@@ -2,6 +2,7 @@ package Client.ViewModel;
 
 import Client.Model.Model;
 import Server.Model.Room;
+import Server.Utility.DataBase.Room.RoomData;
 import javafx.beans.property.*;
 
 import java.rmi.RemoteException;
@@ -36,7 +37,7 @@ public class EditRoomViewModel
     }
     catch (Exception e)
     {
-      return "mandatory";
+      return RoomData.MANDATORY;
     }
   }
 

@@ -3,6 +3,7 @@ package Client.View.Controllers;
 import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.EditRoomViewModel;
+import Server.Utility.DataBase.Room.RoomData;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
@@ -67,7 +68,7 @@ public class EditRoomController
   @FXML void Save() throws RemoteException
   {
     String x = viewModel.edit();
-    if (x.equals("success"))
+    if (x.equals(RoomData.SUCCESS))
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful",
           ButtonType.OK);
@@ -75,7 +76,7 @@ public class EditRoomController
       alert.setTitle("Success");
       alert.showAndWait();
     }
-    else if (x.equals("mandatory"))
+    else if (x.equals(RoomData.MANDATORY))
     {
       Alert mandatory = new Alert(Alert.AlertType.ERROR);
       mandatory.setHeaderText("Error");

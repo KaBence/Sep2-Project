@@ -61,12 +61,12 @@ public class RoomDataImplementation implements RoomData
           "DELETE FROM room WHERE roomNo = ?");
       ps.setInt(1, roomNumber);
       ps.executeUpdate();
-      return "success";
+      return SUCCESS;
     }
     catch (SQLException ex)
     {
       System.err.println(ex.getMessage());
-      return "error";
+      return ERROR;
     }
   }
 
@@ -88,27 +88,36 @@ public class RoomDataImplementation implements RoomData
       ps.setBoolean(8, balcony);
       ps.setInt(9, roomNumber);
       ps.executeUpdate();
-      return "success";
+      return SUCCESS;
     }
     catch (SQLException ex)
     {
       System.err.println(ex.getMessage());
-      return "error";
+      return ERROR;
     }
   }
 
-  @Override public ArrayList<Room> filter(String room)
+  @Override public ArrayList<Room> filter(String... attr)
   {
     ArrayList<Room> list = getAllRooms();
     ArrayList<Room> filter = new ArrayList<>();
-    if (room.equals(""))
+
+    if (attr[0]==null)
       return list;
-    for (int i = 0; i < list.size(); i++)
+    for (Room room : list)
     {
-      if (list.get(i).roomInfo().contains(room))
+      boolean temp=true;
+      for (String s : attr)
       {
-        filter.add(list.get(i));
+        if (s==null)
+          break;
+        if (!room.roomInfo().contains(s)){
+          temp=false;
+          break;
+        }
       }
+      if (temp)
+        filter.add(room);
     }
     return filter;
   }

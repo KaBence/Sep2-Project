@@ -78,9 +78,9 @@ public class ModelManager implements Model
     return roomData.getAllRooms();
   }
 
-  @Override public ArrayList<Room> getFilteredRooms(String room)
+  @Override public ArrayList<Room> getFilteredRooms(String... attr)
   {
-    return roomData.filter(room);
+    return roomData.filter(attr);
   }
 
   @Override public ArrayList<Customer> getAllCustomers()
