@@ -3,6 +3,7 @@ package Client.View.Controllers;
 import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.EditRoomViewModel;
+import Server.Utility.DataBase.DatabaseConnection;
 import Server.Utility.DataBase.Room.RoomData;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -108,7 +109,7 @@ public class EditRoomController
     alert.showAndWait();
     if (alert.getResult() == ButtonType.YES)
     {
-      if (viewModel.delete().equals("success"))
+      if (viewModel.delete().equals(DatabaseConnection.SUCCESS))
       {
         Alert success = new Alert(Alert.AlertType.INFORMATION);
         success.setHeaderText("Success");

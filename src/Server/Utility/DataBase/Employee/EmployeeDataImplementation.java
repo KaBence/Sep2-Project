@@ -1,6 +1,7 @@
 package Server.Utility.DataBase.Employee;
 
 import Server.Model.Employee;
+import Server.Utility.DataBase.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -68,12 +69,11 @@ public class EmployeeDataImplementation implements EmployeeData
       ps.setString(3, position);
       ps.setString(5, username);
       ps.executeUpdate();
-      return "success";
+      return DatabaseConnection.SUCCESS;
     }
     catch (SQLException e)
     {
-      System.out.println(e.getMessage());
-      return "error";
+      return DatabaseConnection.ERROR;
     }
   }
 
@@ -90,12 +90,11 @@ public class EmployeeDataImplementation implements EmployeeData
           "DELETE FROM \"user\" WHERE username=?");
       preparedStatement.setString(1, username);
       preparedStatement.executeUpdate();
-      return "success";
+      return DatabaseConnection.SUCCESS;
     }
     catch (SQLException e)
     {
-      System.out.println(e.getMessage());
-      return "error";
+      return DatabaseConnection.ERROR;
     }
   }
 
@@ -136,7 +135,7 @@ public class EmployeeDataImplementation implements EmployeeData
     }
     catch (SQLException e)
     {
-      System.out.println(e.getMessage());
+      return null;
     }
     return list;
   }

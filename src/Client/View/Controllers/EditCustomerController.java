@@ -3,6 +3,7 @@ package Client.View.Controllers;
 import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.EditCustomerViewModel;
+import Server.Utility.DataBase.DatabaseConnection;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -48,7 +49,7 @@ public class EditCustomerController
   @FXML void save() throws RemoteException
   {
     String x = viewModel.save();
-    if (x.equals("success"))
+    if (x.equals(DatabaseConnection.SUCCESS))
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful",
           ButtonType.OK);
@@ -56,7 +57,7 @@ public class EditCustomerController
       alert.setTitle("Success");
       alert.showAndWait();
     }
-    else if (x.equals("mandatory"))
+    else if (x.equals(DatabaseConnection.MANDATORY))
     {
       Alert mandatory = new Alert(Alert.AlertType.ERROR);
       mandatory.setHeaderText("Error");
@@ -88,7 +89,7 @@ public class EditCustomerController
     alert.showAndWait();
     if (alert.getResult() == ButtonType.YES)
     {
-      if (viewModel.delete().equals("success"))
+      if (viewModel.delete().equals(DatabaseConnection.SUCCESS))
       {
         Alert success = new Alert(Alert.AlertType.INFORMATION);
         success.setHeaderText("Success");
