@@ -142,38 +142,34 @@ public class CustomerDataImplementation implements CustomerData
     return filter;
   }
 
-  @Override public ArrayList<Customer> getAllCustomersByUsername(String txt)
+  @Override public ArrayList<Customer> filter(String... attr)
   {
     ArrayList<Customer> list = getAllCustomers();
     ArrayList<Customer> filter = new ArrayList<>();
-    for (int i = 0; i < list.size(); i++)
+    if (attr[0] == null)
     {
-      if (list.get(i).getUsername().contains(txt))
-      {
-        filter.add(list.get(i));
-      }
+      return list;
     }
-    return filter;
-  }
+    for (Customer customer : list)
+    {
+      System.out.println(customer);
+      boolean temp = true;
+      for (String s : attr)
+      {
+        if (s == null)
+        {
+          break;
+        }
+        if(!customer.customerInfo().contains(s)){
+          temp=false;
+          break;
+        }
+      }
+      if(temp){
+        filter.add(customer);
+      }
 
-  @Override public ArrayList<Customer> getAllCustomersByFirstName()
-  {
-    return null;
-  }
-
-  @Override public ArrayList<Customer> getAllCustomersByLastName()
-  {
-    return null;
-  }
-
-  @Override public ArrayList<Customer> getAllCustomersByPhoneNumber()
-  {
-    return null;
-  }
-
-  @Override public ArrayList<Customer> getAllCustomersByPayment()
-  {
-    return null;
+    }return filter;
   }
 
 }

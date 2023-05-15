@@ -44,4 +44,8 @@ public abstract class Person implements Serializable
   public String toString(){
     return username+" -> "+firstName+" "+lastName+" | "+phoneNo+" | ";
   }
+
+  public String info(){
+    return username+" -> , FirstName "+ firstName+", LastName "+lastName+", PhoneNumber "+phoneNo;
+  }
 }

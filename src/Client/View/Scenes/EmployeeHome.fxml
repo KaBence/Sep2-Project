@@ -93,11 +93,11 @@
                   <Button fx:id="back" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#back" text="Back" />
                   <ListView fx:id="customerListView" layoutX="14.0" layoutY="83.0" onMouseClicked="#tableClickCustomer" prefHeight="218.0" prefWidth="348.0" />
                   <TextField fx:id="filteringCustomer" layoutX="83.0" layoutY="28.0" onKeyReleased="#filterCustomer" promptText="Enter Customer Info" />
-                  <TextField layoutX="396.0" layoutY="83.0" promptText="Username" />
-                  <TextField layoutX="396.0" layoutY="138.0" promptText="First Name" />
-                  <TextField layoutX="396.0" layoutY="186.0" promptText="Last Name" />
-                  <TextField layoutX="396.0" layoutY="239.0" promptText="Phone Number" />
-                  <TextField layoutX="396.0" layoutY="288.0" promptText="Payment Info" />
+                  <TextField fx:id="username" layoutX="396.0" layoutY="83.0" onAction="#onFilter" promptText="Username" />
+                  <TextField fx:id="firstName" layoutX="396.0" layoutY="138.0" onAction="#onFilter" promptText="First Name" />
+                  <TextField fx:id="lastName" layoutX="396.0" layoutY="186.0" onAction="#onFilter" promptText="Last Name" />
+                  <TextField fx:id="phoneNo" layoutX="396.0" layoutY="239.0" onAction="#onFilter" promptText="Phone Number" />
+                  <TextField fx:id="paymentInfo" layoutX="396.0" layoutY="288.0" onAction="#onFilter" promptText="Payment Info" />
                   <Line endX="25.20001220703125" endY="330.20001220703125" layoutX="353.0" layoutY="41.0" startX="25.20001220703125" startY="-40.99999237060547" stroke="#00000064" />
                </children>
             </AnchorPane>

@@ -21,6 +21,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private SimpleObjectProperty<ObservableList<Room>> rooms;
   private SimpleObjectProperty<ObservableList<Customer>> customers;
   private SimpleObjectProperty<ObservableList<Employee>> employees;
+  private SimpleStringProperty usernameFilter, firstNameFilter, lastNameFilter, phoneNumberFilter, paymentInfoFilter;
 
   private SimpleBooleanProperty bathroomFilter,kitchenFilter,internetFilter,balconyFilter;
   private SimpleObjectProperty<Integer> priceFilter;
@@ -42,6 +43,16 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     priceFilter=new SimpleObjectProperty<>();
     roomNoFilter=new SimpleStringProperty();
     bedsFilter=new SimpleStringProperty();
+    usernameFilter = new SimpleStringProperty();
+    firstNameFilter = new SimpleStringProperty();
+    lastNameFilter = new SimpleStringProperty();
+    phoneNumberFilter = new SimpleStringProperty();
+    paymentInfoFilter = new SimpleStringProperty();
+    usernameFilter.set("");
+    firstNameFilter.set(" ");
+    lastNameFilter.set("");
+    phoneNumberFilter.set("");
+    paymentInfoFilter.set(" ");
 
     filteringRoom=new SimpleStringProperty();
 
@@ -66,7 +77,8 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     property.bindBidirectional(filteringRoom);
   }
 
-  public void bindInternet(BooleanProperty property){
+  public void bindInternet(BooleanProperty property)
+  {
     property.bindBidirectional(internetFilter);
   }
 
@@ -94,13 +106,44 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     property.bindBidirectional(roomNoFilter);
   }
 
-  public void update(){
+  public void bindUsername(StringProperty property)
+  {
+    property.bindBidirectional(usernameFilter);
+  }
+
+  public void bindFirstName(StringProperty property)
+  {
+    property.bindBidirectional(firstNameFilter);
+  }
+
+  public void bindLastName(StringProperty property)
+  {
+    property.bindBidirectional(lastNameFilter);
+  }
+
+  public void bindPhoneNo(StringProperty property)
+  {
+    property.bindBidirectional(phoneNumberFilter);
+  }
+
+  public void bindPaymentInfo(StringProperty property)
+  {
+    property.bindBidirectional(paymentInfoFilter);
+  }
+
+  public void update()
+  {
     balconyFilter.set(false);
     bathroomFilter.set(false);
     kitchenFilter.set(false);
     internetFilter.set(false);
     roomNoFilter.set("");
     bedsFilter.set("");
+    usernameFilter.set("");
+    firstNameFilter.set("");
+    lastNameFilter.set("");
+    phoneNumberFilter.set("");
+    paymentInfoFilter.set("");
     priceFilter.set(0);
     filteringRoom.set("");
     ArrayList<Room> allRooms;
@@ -165,7 +208,42 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     customers.set(employeeObservableList);
   }
 
-  public void saveCustomer(Customer customer){
+  public void filterFilterCustomer() throws RemoteException
+  {
+    String[] temp = new String[5];
+    int counter = 0;
+    if (!usernameFilter.getValue().equals(""))
+    {
+      temp[counter] = usernameFilter.getValue();
+      counter++;
+    }
+    if (!firstNameFilter.getValue().equals(""))
+    {
+      temp[counter] = " -> , FirstName " + firstNameFilter.getValue();
+      counter++;
+    }
+    if (!lastNameFilter.getValue().equals(""))
+    {
+      temp[counter] = ", LastName " + lastNameFilter.getValue();
+      counter++;
+    }
+    if (!phoneNumberFilter.getValue().equals(""))
+    {
+      temp[counter] = ", PhoneNumber " + phoneNumberFilter.getValue();
+      counter++;
+    }
+    if (!paymentInfoFilter.getValue().equals(""))
+    {
+      temp[counter] = ", PaymentInfo " + paymentInfoFilter.getValue();
+      System.out.println(temp[counter]);
+    }
+    ObservableList<Customer> customerObservableList = FXCollections.observableList(
+        model.getFilteredCustomers(temp));
+    customers.set(customerObservableList);
+  }
+
+  public void saveCustomer(Customer customer)
+  {
     model.saveSelectedCustomer(customer);
   }
 

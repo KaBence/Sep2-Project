@@ -31,13 +31,14 @@ public class EmployeeHomeController
   @FXML ListView<Customer> customerListView;
   @FXML ListView<Room> roomListView;
 
-  @FXML CheckBox bathroomFilter,kitchenFilter,balconyFilter,internetFilter;
+  @FXML CheckBox bathroomFilter, kitchenFilter, balconyFilter, internetFilter;
 
   @FXML ComboBox<Integer> priceFilter;
-  @FXML TextField roomNoFilter,bedsFilter;
+  @FXML TextField roomNoFilter, bedsFilter;
 
   @FXML TextField filteringEmployee;
   @FXML TextField filteringCustomer;
+  @FXML TextField username, firstName, lastName, phoneNo, paymentInfo;
 
   @FXML TextField filteringRoom;
 
@@ -67,11 +68,17 @@ public class EmployeeHomeController
     viewModel.bindBathroom(bathroomFilter.selectedProperty());
     viewModel.bindKitchen(kitchenFilter.selectedProperty());
     viewModel.bindPrice(priceFilter.valueProperty());
+    viewModel.bindUsername(username.textProperty());
+    viewModel.bindFirstName(firstName.textProperty());
+    viewModel.bindLastName(lastName.textProperty());
+    viewModel.bindPhoneNo(phoneNo.textProperty());
+    viewModel.bindPaymentInfo(paymentInfo.textProperty());
 
   }
 
-  public void initialize(){
-    ArrayList<Integer> prices=new ArrayList<>();
+  public void initialize()
+  {
+    ArrayList<Integer> prices = new ArrayList<>();
     prices.add(0);
     prices.add(200);
     prices.add(270);
@@ -79,7 +86,6 @@ public class EmployeeHomeController
     prices.add(500);
     priceFilter.setItems(FXCollections.observableList(prices));
   }
-
 
   public Region getRoot()
   {
@@ -97,9 +103,12 @@ public class EmployeeHomeController
     viewHandler.openView(SceneNames.AddRoom);
   }
 
-  @FXML void editRoom(){
-    if (roomListView.getSelectionModel().getSelectedItem()==null){
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Select a room first",ButtonType.OK);
+  @FXML void editRoom()
+  {
+    if (roomListView.getSelectionModel().getSelectedItem() == null)
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR, "Select a room first",
+          ButtonType.OK);
       alert.setTitle("Error");
       alert.setHeaderText(null);
       alert.showAndWait();
@@ -110,21 +119,27 @@ public class EmployeeHomeController
 
   @FXML void deleteRoom() throws RemoteException
   {
-    if (roomListView.getSelectionModel().getSelectedItem()==null){
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Select a room first",ButtonType.OK);
+    if (roomListView.getSelectionModel().getSelectedItem() == null)
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR, "Select a room first",
+          ButtonType.OK);
       alert.setTitle("Error");
       alert.setHeaderText(null);
       alert.showAndWait();
       return;
     }
-    Alert alert=new Alert(Alert.AlertType.WARNING,"Do you really want to delete this room?",ButtonType.NO,ButtonType.YES);
+    Alert alert = new Alert(Alert.AlertType.WARNING,
+        "Do you really want to delete this room?", ButtonType.NO,
+        ButtonType.YES);
     alert.setTitle("Error");
     alert.setHeaderText(null);
     alert.showAndWait();
-    if (alert.getResult()==ButtonType.YES)
+    if (alert.getResult() == ButtonType.YES)
       if (alert.getResult() == ButtonType.YES)
       {
-        if (viewModel.deleteRoom(roomListView.getSelectionModel().getSelectedItem()).equals("success"))
+        if (viewModel.deleteRoom(
+                roomListView.getSelectionModel().getSelectedItem())
+            .equals("success"))
         {
           Alert success = new Alert(Alert.AlertType.INFORMATION);
           success.setHeaderText("Success");
@@ -154,16 +169,19 @@ public class EmployeeHomeController
       viewHandler.openView(SceneNames.EditRoom);
   }
 
-  @FXML void tableClickCustomer(MouseEvent event){
-    viewModel.saveCustomer(customerListView.getSelectionModel().getSelectedItem());
-    if (event.getClickCount()==2)
+  @FXML void tableClickCustomer(MouseEvent event)
+  {
+    viewModel.saveCustomer(
+        customerListView.getSelectionModel().getSelectedItem());
+    if (event.getClickCount() == 2)
       viewHandler.openView(SceneNames.EditCustomer);
   }
 
   @FXML void tableClickEmployee(MouseEvent event)
   {
-    viewModel.saveEmployee(employeeListView.getSelectionModel().getSelectedItem());
-    if(event.getClickCount()==2)
+    viewModel.saveEmployee(
+        employeeListView.getSelectionModel().getSelectedItem());
+    if (event.getClickCount() == 2)
     {
       viewHandler.openView(SceneNames.EditEmployee);
     }
@@ -174,17 +192,28 @@ public class EmployeeHomeController
     viewModel.filterRoom();
   }
 
+  @FXML void onFilter() throws RemoteException
+  {
+    viewModel.filterFilterCustomer();
+  }
 
-  @FXML void checkIn(){
+  @FXML void checkIn()
+  {
 
   }
-  @FXML void checkOut(){
+
+  @FXML void checkOut()
+  {
 
   }
-  @FXML void back(){
+
+  @FXML void back()
+  {
 
   }
-  @FXML void edit(){
+
+  @FXML void edit()
+  {
 
   }
 
@@ -225,8 +254,7 @@ public class EmployeeHomeController
     return selectionModel;
   }
 
-
-   @FXML void filterEmployee() throws RemoteException
+  @FXML void filterEmployee() throws RemoteException
   {
     String x = filteringEmployee.getText();
     viewModel.filterEmployee(x);

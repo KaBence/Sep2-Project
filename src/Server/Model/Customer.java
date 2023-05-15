@@ -46,4 +46,9 @@ public class Customer extends Person implements Serializable
   public String toString(){
     return super.toString()+paymentInfo;
   }
+
+  public String customerInfo(){
+    return super.info()+", PaymentInfo "+ paymentInfo;
+  }
+
 }

@@ -14,11 +14,6 @@ public interface CustomerData
       String lastName, String phoneNO, String paymentInfo);
   ArrayList<Customer> getAllCustomers();
   ArrayList<Customer> filterCustomers(String customer);
-  ArrayList<Customer> getAllCustomersByUsername(String txt);
-  ArrayList<Customer> getAllCustomersByFirstName();
-
-  ArrayList<Customer> getAllCustomersByLastName();
-  ArrayList<Customer> getAllCustomersByPhoneNumber();
-  ArrayList<Customer> getAllCustomersByPayment();
+ArrayList<Customer> filter(String...attr);
 
 }

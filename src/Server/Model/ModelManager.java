@@ -88,6 +88,11 @@ public class ModelManager implements Model
     return roomData.filter(attr);
   }
 
+  @Override public ArrayList<Customer> getFilteredCustomers(String... attr)
+  {
+    return customerData.filter(attr);
+  }
+
   @Override public ArrayList<Customer> getAllCustomers()
   {
     return customerData.getAllCustomers();
