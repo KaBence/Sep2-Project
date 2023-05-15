@@ -1,6 +1,7 @@
 package Server.Utility.DataBase.Room;
 
 import Server.Model.Room;
+import Server.Utility.DataBase.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -61,11 +62,11 @@ public class RoomDataImplementation implements RoomData
           "DELETE FROM room WHERE roomNo = ?");
       ps.setInt(1, roomNumber);
       ps.executeUpdate();
-      return SUCCESS;
+      return DatabaseConnection.SUCCESS;
     }
     catch (SQLException ex)
     {
-      return ERROR;
+      return DatabaseConnection.ERROR;
     }
   }
 
@@ -87,11 +88,11 @@ public class RoomDataImplementation implements RoomData
       ps.setBoolean(8, balcony);
       ps.setInt(9, roomNumber);
       ps.executeUpdate();
-      return SUCCESS;
+      return DatabaseConnection.SUCCESS;
     }
     catch (SQLException ex)
     {
-      return ERROR;
+      return DatabaseConnection.ERROR;
     }
   }
 

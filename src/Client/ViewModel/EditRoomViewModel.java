@@ -2,6 +2,7 @@ package Client.ViewModel;
 
 import Client.Model.Model;
 import Server.Model.Room;
+import Server.Utility.DataBase.DatabaseConnection;
 import Server.Utility.DataBase.Room.RoomData;
 import javafx.beans.property.*;
 
@@ -37,7 +38,7 @@ public class EditRoomViewModel
     }
     catch (Exception e)
     {
-      return RoomData.MANDATORY;
+      return DatabaseConnection.MANDATORY;
     }
   }
 

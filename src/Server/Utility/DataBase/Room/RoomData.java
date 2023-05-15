@@ -5,7 +5,7 @@ import Server.Utility.DataBase.DatabaseConnection;
 
 import java.util.ArrayList;
 
-public interface RoomData extends DatabaseConnection
+public interface RoomData
 {
   Room addNewRoom(int roomNumber,int numberOfBeds, int size,int price, String orientation,boolean internet,boolean bathroom,boolean kitchen,boolean balcony);
   String deleteRoom(int roomNumber);
