@@ -3,7 +3,6 @@ package Client.View.Controllers;
 import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.EmployeeHomeViewModel;
-import Client.ViewModel.HomeViewModel;
 import Server.Model.Customer;
 import Server.Model.Employee;
 import Server.Model.Room;
@@ -31,10 +30,10 @@ public class EmployeeHomeController
   @FXML ListView<Customer> customerListView;
   @FXML ListView<Room> roomListView;
 
-  @FXML CheckBox bathroomFilter,kitchenFilter,balconyFilter,internetFilter;
+  @FXML CheckBox bathroomFilter, kitchenFilter, balconyFilter, internetFilter;
 
   @FXML ComboBox<Integer> priceFilter;
-  @FXML TextField roomNoFilter,bedsFilter;
+  @FXML TextField roomNoFilter, bedsFilter;
 
   @FXML TextField filteringEmployee;
 
@@ -95,7 +94,6 @@ public class EmployeeHomeController
     priceFilter.setItems(FXCollections.observableList(prices));
   }
 
-
   public Region getRoot()
   {
     root.setUserData("Employee Home Page");
@@ -114,9 +112,12 @@ public class EmployeeHomeController
     viewHandler.openView(SceneNames.AddRoom);
   }
 
-  @FXML void editRoom(){
-    if (roomListView.getSelectionModel().getSelectedItem()==null){
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Select a room first",ButtonType.OK);
+  @FXML void editRoom()
+  {
+    if (roomListView.getSelectionModel().getSelectedItem() == null)
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR, "Select a room first",
+          ButtonType.OK);
       alert.setTitle("Error");
       alert.setHeaderText(null);
       alert.showAndWait();
@@ -127,21 +128,27 @@ public class EmployeeHomeController
 
   @FXML void deleteRoom() throws RemoteException
   {
-    if (roomListView.getSelectionModel().getSelectedItem()==null){
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Select a room first",ButtonType.OK);
+    if (roomListView.getSelectionModel().getSelectedItem() == null)
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR, "Select a room first",
+          ButtonType.OK);
       alert.setTitle("Error");
       alert.setHeaderText(null);
       alert.showAndWait();
       return;
     }
-    Alert alert=new Alert(Alert.AlertType.WARNING,"Do you really want to delete this room?",ButtonType.NO,ButtonType.YES);
+    Alert alert = new Alert(Alert.AlertType.WARNING,
+        "Do you really want to delete this room?", ButtonType.NO,
+        ButtonType.YES);
     alert.setTitle("Error");
     alert.setHeaderText(null);
     alert.showAndWait();
-    if (alert.getResult()==ButtonType.YES)
+    if (alert.getResult() == ButtonType.YES)
       if (alert.getResult() == ButtonType.YES)
       {
-        if (viewModel.deleteRoom(roomListView.getSelectionModel().getSelectedItem()).equals("success"))
+        if (viewModel.deleteRoom(
+                roomListView.getSelectionModel().getSelectedItem())
+            .equals("success"))
         {
           Alert success = new Alert(Alert.AlertType.INFORMATION);
           success.setHeaderText("Success");
@@ -171,16 +178,19 @@ public class EmployeeHomeController
       viewHandler.openView(SceneNames.EditRoom);
   }
 
-  @FXML void tableClickCustomer(MouseEvent event){
-    viewModel.saveCustomer(customerListView.getSelectionModel().getSelectedItem());
-    if (event.getClickCount()==2)
+  @FXML void tableClickCustomer(MouseEvent event)
+  {
+    viewModel.saveCustomer(
+        customerListView.getSelectionModel().getSelectedItem());
+    if (event.getClickCount() == 2)
       viewHandler.openView(SceneNames.EditCustomer);
   }
 
   @FXML void tableClickEmployee(MouseEvent event)
   {
-    viewModel.saveEmployee(employeeListView.getSelectionModel().getSelectedItem());
-    if(event.getClickCount()==2)
+    viewModel.saveEmployee(
+        employeeListView.getSelectionModel().getSelectedItem());
+    if (event.getClickCount() == 2)
     {
       viewHandler.openView(SceneNames.EditEmployee);
     }
@@ -206,12 +216,15 @@ public class EmployeeHomeController
   }
 
 
-  @FXML void checkOut(){
 
+  @FXML void checkOut()
+  {
   }
-  @FXML void back(){
+  @FXML void back()
+  {
+viewHandler.openView(SceneNames.Home);
+  }
 
-  }
   @FXML void edit()
   {
   }
