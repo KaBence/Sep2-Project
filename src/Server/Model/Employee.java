@@ -5,12 +5,13 @@ import java.io.Serializable;
 public class Employee extends Person implements Serializable
 {
   private String position;
-  public Employee(String userID, String firstName, String lastName, String position, String phoneNo,String password)
+
+  public Employee(String userID, String firstName, String lastName, String position, String phoneNo,
+      String password)
   {
-    super(firstName,lastName,password,phoneNo,userID);
+    super(firstName, lastName, password, phoneNo, userID);
     this.position = position;
   }
-
 
   public String getUsername()
   {
@@ -44,6 +45,12 @@ public class Employee extends Person implements Serializable
 
   public String toString()
   {
-    return super.toString()+position;
+    return super.toString() + position;
+  }
+
+  public String employeeInfo()
+  {
+    return super.info()+", Position "+position;
   }
 }
+

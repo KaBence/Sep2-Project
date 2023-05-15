@@ -1,6 +1,7 @@
 package Server.Utility.DataBase.Employee;
 
 import Server.Model.Employee;
+import Server.Model.Room;
 import Server.Utility.DataBase.DatabaseConnection;
 
 import java.sql.*;
@@ -96,6 +97,31 @@ public class EmployeeDataImplementation implements EmployeeData
     {
       return DatabaseConnection.ERROR;
     }
+  }
+
+  @Override public ArrayList<Employee> filter(String... attr)
+  {
+    ArrayList<Employee> list = getAllEmployees();
+    ArrayList<Employee> filter = new ArrayList<>();
+
+    if (attr[0]==null)
+      return list;
+    for (Employee employee : list)
+    {
+      boolean temp=true;
+      for (String s : attr)
+      {
+        if (s==null)
+          break;
+        if (!employee.employeeInfo().contains(s)){
+          temp=false;
+          break;
+        }
+      }
+      if (temp)
+        filter.add(employee);
+    }
+    return filter;
   }
 
   @Override public ArrayList<Employee> filterEmployee(String employee)

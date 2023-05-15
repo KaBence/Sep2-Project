@@ -31,24 +31,26 @@ public class EmployeeHomeController
   @FXML ListView<Customer> customerListView;
   @FXML ListView<Room> roomListView;
 
-  @FXML CheckBox bathroomFilter, kitchenFilter, balconyFilter, internetFilter;
+  @FXML CheckBox bathroomFilter,kitchenFilter,balconyFilter,internetFilter;
 
   @FXML ComboBox<Integer> priceFilter;
-  @FXML TextField roomNoFilter, bedsFilter;
+  @FXML TextField roomNoFilter,bedsFilter;
 
   @FXML TextField filteringEmployee;
+
+  @FXML TextField employeeUsernameFilter,employeeFirstNameFilter,employeeLastNameFilter,employeePositionFilter,employeePhoneNumberFilter;
   @FXML TextField filteringCustomer;
   @FXML TextField username, firstName, lastName, phoneNo, paymentInfo;
 
   @FXML TextField filteringRoom;
 
-  @FXML ToggleButton toggleButton;
+  @FXML ToggleButton toggleRoomButton,toggleEmployeeButton,toggleCustomerButton;
 
   private Region root;
   private ViewHandler viewHandler;
   private EmployeeHomeViewModel viewModel;
 
-  private boolean togglefilter=false;
+  private boolean toggleRoomfilter=false, toggleEmployeefilter = false, toggleCustomerfilter = false;
 
   public void init(ViewHandler viewHandler, EmployeeHomeViewModel viewModel,
       Region root)
@@ -68,17 +70,23 @@ public class EmployeeHomeController
     viewModel.bindBathroom(bathroomFilter.selectedProperty());
     viewModel.bindKitchen(kitchenFilter.selectedProperty());
     viewModel.bindPrice(priceFilter.valueProperty());
+
     viewModel.bindUsername(username.textProperty());
     viewModel.bindFirstName(firstName.textProperty());
     viewModel.bindLastName(lastName.textProperty());
     viewModel.bindPhoneNo(phoneNo.textProperty());
     viewModel.bindPaymentInfo(paymentInfo.textProperty());
 
+    viewModel.bindEmployeeUsername(employeeUsernameFilter.textProperty());
+    viewModel.bindEmployeeFirstName(employeeFirstNameFilter.textProperty());
+    viewModel.bindEmployeeLastName(employeeLastNameFilter.textProperty());
+    viewModel.bindEmployeePosition(employeePositionFilter.textProperty());
+    viewModel.bindEmployeePhoneNo(employeePhoneNumberFilter.textProperty());
+
   }
 
-  public void initialize()
-  {
-    ArrayList<Integer> prices = new ArrayList<>();
+  public void initialize(){
+    ArrayList<Integer> prices=new ArrayList<>();
     prices.add(0);
     prices.add(200);
     prices.add(270);
@@ -86,6 +94,7 @@ public class EmployeeHomeController
     prices.add(500);
     priceFilter.setItems(FXCollections.observableList(prices));
   }
+
 
   public Region getRoot()
   {
@@ -95,7 +104,9 @@ public class EmployeeHomeController
 
   public void reset()
   {
-    Toggle();
+    ToggleRoom();
+    ToggleCustomer();
+    ToggleEmployee();
   }
 
   @FXML void addRoom()
@@ -103,12 +114,9 @@ public class EmployeeHomeController
     viewHandler.openView(SceneNames.AddRoom);
   }
 
-  @FXML void editRoom()
-  {
-    if (roomListView.getSelectionModel().getSelectedItem() == null)
-    {
-      Alert alert = new Alert(Alert.AlertType.ERROR, "Select a room first",
-          ButtonType.OK);
+  @FXML void editRoom(){
+    if (roomListView.getSelectionModel().getSelectedItem()==null){
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Select a room first",ButtonType.OK);
       alert.setTitle("Error");
       alert.setHeaderText(null);
       alert.showAndWait();
@@ -119,27 +127,21 @@ public class EmployeeHomeController
 
   @FXML void deleteRoom() throws RemoteException
   {
-    if (roomListView.getSelectionModel().getSelectedItem() == null)
-    {
-      Alert alert = new Alert(Alert.AlertType.ERROR, "Select a room first",
-          ButtonType.OK);
+    if (roomListView.getSelectionModel().getSelectedItem()==null){
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Select a room first",ButtonType.OK);
       alert.setTitle("Error");
       alert.setHeaderText(null);
       alert.showAndWait();
       return;
     }
-    Alert alert = new Alert(Alert.AlertType.WARNING,
-        "Do you really want to delete this room?", ButtonType.NO,
-        ButtonType.YES);
+    Alert alert=new Alert(Alert.AlertType.WARNING,"Do you really want to delete this room?",ButtonType.NO,ButtonType.YES);
     alert.setTitle("Error");
     alert.setHeaderText(null);
     alert.showAndWait();
-    if (alert.getResult() == ButtonType.YES)
+    if (alert.getResult()==ButtonType.YES)
       if (alert.getResult() == ButtonType.YES)
       {
-        if (viewModel.deleteRoom(
-                roomListView.getSelectionModel().getSelectedItem())
-            .equals("success"))
+        if (viewModel.deleteRoom(roomListView.getSelectionModel().getSelectedItem()).equals("success"))
         {
           Alert success = new Alert(Alert.AlertType.INFORMATION);
           success.setHeaderText("Success");
@@ -169,19 +171,16 @@ public class EmployeeHomeController
       viewHandler.openView(SceneNames.EditRoom);
   }
 
-  @FXML void tableClickCustomer(MouseEvent event)
-  {
-    viewModel.saveCustomer(
-        customerListView.getSelectionModel().getSelectedItem());
-    if (event.getClickCount() == 2)
+  @FXML void tableClickCustomer(MouseEvent event){
+    viewModel.saveCustomer(customerListView.getSelectionModel().getSelectedItem());
+    if (event.getClickCount()==2)
       viewHandler.openView(SceneNames.EditCustomer);
   }
 
   @FXML void tableClickEmployee(MouseEvent event)
   {
-    viewModel.saveEmployee(
-        employeeListView.getSelectionModel().getSelectedItem());
-    if (event.getClickCount() == 2)
+    viewModel.saveEmployee(employeeListView.getSelectionModel().getSelectedItem());
+    if(event.getClickCount()==2)
     {
       viewHandler.openView(SceneNames.EditEmployee);
     }
@@ -201,27 +200,26 @@ public class EmployeeHomeController
   {
 
   }
-
-  @FXML void checkOut()
+  @FXML void filterEmployee() throws RemoteException
   {
-
+    viewModel.filterEmployee();
   }
 
-  @FXML void back()
-  {
+
+  @FXML void checkOut(){
 
   }
+  @FXML void back(){
 
+  }
   @FXML void edit()
   {
-
   }
-
-  @FXML void Toggle(){
+  @FXML void ToggleRoom(){
     viewModel.update();
-    if (togglefilter){
-      togglefilter=false;
-      toggleButton.setText("Simple");
+    if (toggleRoomfilter){
+      toggleRoomfilter=false;
+      toggleRoomButton.setText("Simple");
       bedsFilter.setDisable(true);
       roomNoFilter.setDisable(true);
       bathroomFilter.setDisable(true);
@@ -233,8 +231,63 @@ public class EmployeeHomeController
       filteringRoom.setDisable(false);
     }
     else {
-      togglefilter=true;
-      toggleButton.setText("Advanced");
+      toggleRoomfilter=true;
+      toggleRoomButton.setText("Advanced");
+      bedsFilter.setDisable(false);
+      roomNoFilter.setDisable(false);
+      bathroomFilter.setDisable(false);
+      priceFilter.setDisable(false);
+      internetFilter.setDisable(false);
+      bathroomFilter.setDisable(false);
+      balconyFilter.setDisable(false);
+      kitchenFilter.setDisable(false);
+      filteringRoom.setDisable(true);
+    }
+  }
+
+  @FXML void ToggleEmployee(){
+    viewModel.update();
+    if (toggleEmployeefilter){
+      toggleEmployeefilter=false;
+      toggleEmployeeButton.setText("Simple");
+      employeeUsernameFilter.setDisable(true);
+      employeeFirstNameFilter.setDisable(true);
+      employeeLastNameFilter.setDisable(true);
+      employeePhoneNumberFilter.setDisable(true);
+      employeePositionFilter.setDisable(true);
+      filteringEmployee.setDisable(false);
+    }
+    else {
+      toggleEmployeefilter=true;
+      toggleEmployeeButton.setText("Advanced");
+      employeeUsernameFilter.setDisable(false);
+      employeeFirstNameFilter.setDisable(false);
+      employeeLastNameFilter.setDisable(false);
+      employeePhoneNumberFilter.setDisable(false);
+      employeePositionFilter.setDisable(false);
+      filteringEmployee.setDisable(true);
+    }
+  }
+
+  @FXML void ToggleCustomer(){
+    viewModel.update();
+    if (toggleCustomerfilter){
+      toggleCustomerfilter=false;
+      toggleCustomerButton.setText("Simple");
+
+      bedsFilter.setDisable(true);
+      roomNoFilter.setDisable(true);
+      bathroomFilter.setDisable(true);
+      priceFilter.setDisable(true);
+      internetFilter.setDisable(true);
+      bathroomFilter.setDisable(true);
+      balconyFilter.setDisable(true);
+      kitchenFilter.setDisable(true);
+      filteringRoom.setDisable(false);
+    }
+    else {
+      toggleCustomerfilter=true;
+      toggleCustomerButton.setText("Advanced");
       bedsFilter.setDisable(false);
       roomNoFilter.setDisable(false);
       bathroomFilter.setDisable(false);
@@ -254,10 +307,11 @@ public class EmployeeHomeController
     return selectionModel;
   }
 
-  @FXML void filterEmployee() throws RemoteException
+
+   @FXML void simpleFilterEmployee() throws RemoteException
   {
     String x = filteringEmployee.getText();
-    viewModel.filterEmployee(x);
+    viewModel.simpleFilterEmployee(x);
   }
 
   @FXML void filterCustomer() throws RemoteException

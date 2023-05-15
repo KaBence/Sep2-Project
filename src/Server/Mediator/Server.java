@@ -81,6 +81,12 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     return model.filterEmployee(employee);
   }
 
+  @Override public ArrayList<Employee> getFilteredEmployee(String... attr)
+      throws RemoteException
+  {
+    return model.getFilteredEmployee(attr);
+  }
+
   @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony) throws RemoteException

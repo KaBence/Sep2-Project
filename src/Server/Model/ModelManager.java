@@ -112,4 +112,9 @@ public class ModelManager implements Model
   {
     return employeeData.filterEmployee(employee);
   }
+
+  @Override public ArrayList<Employee> getFilteredEmployee(String... attr)
+  {
+    return employeeData.filter(attr);
+  }
 }

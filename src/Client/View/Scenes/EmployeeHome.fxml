@@ -65,7 +65,7 @@
                      </font></Button>
                   <ListView fx:id="roomListView" layoutX="14.0" layoutY="64.0" onMouseClicked="#tableClickRoom" prefHeight="243.0" prefWidth="387.0" />
                   <ComboBox fx:id="priceFilter" layoutX="445.0" layoutY="187.0" onAction="#filterRoom" prefHeight="26.0" prefWidth="120.0" promptText="Price per night" />
-                  <ToggleButton fx:id="toggleButton" layoutX="300.0" layoutY="22.0" mnemonicParsing="false" onAction="#Toggle" text="ToggleButton" />
+                  <ToggleButton fx:id="toggleRoomButton" layoutX="312.0" layoutY="22.0" mnemonicParsing="false" onAction="#ToggleRoom" text="ToggleButton" />
                </children>
             </AnchorPane>
          </content>
@@ -77,12 +77,13 @@
                   <Button fx:id="back" layoutX="40.0" layoutY="324.0" mnemonicParsing="false" onAction="#back" text="Back" />
                   <ListView fx:id="employeeListView" layoutX="11.0" layoutY="77.0" onMouseClicked="#tableClickEmployee" prefHeight="230.0" prefWidth="404.0" />
                   <Line endX="-100.0" endY="194.66665649414062" layoutX="523.0" layoutY="134.0" startX="-100.0" startY="-116.66666412353516" stroke="#00000063" />
-                  <TextField fx:id="filteringEmployee" layoutX="138.0" layoutY="40.0" onKeyReleased="#filterEmployee" promptText="Enter Employee info" />
-                  <TextField layoutX="438.0" layoutY="77.0" promptText="Username" />
-                  <TextField layoutX="437.0" layoutY="179.0" promptText="Last Name" />
-                  <TextField layoutX="438.0" layoutY="281.0" promptText="Phone number" />
-                  <TextField layoutX="438.0" layoutY="128.0" promptText="First Name" />
-                  <TextField layoutX="438.0" layoutY="233.0" promptText="Position" />
+                  <TextField fx:id="filteringEmployee" layoutX="138.0" layoutY="40.0" onKeyReleased="#simpleFilterEmployee" promptText="Enter Employee info" />
+                  <TextField fx:id="employeeUsernameFilter" layoutX="438.0" layoutY="77.0" onAction="#filterEmployee" promptText="Username" />
+                  <TextField fx:id="employeeLastNameFilter" layoutX="437.0" layoutY="179.0" onAction="#filterEmployee" promptText="Last Name" />
+                  <TextField fx:id="employeePhoneNumberFilter" layoutX="438.0" layoutY="281.0" onAction="#filterEmployee" promptText="Phone number" />
+                  <TextField fx:id="employeeFirstNameFilter" layoutX="438.0" layoutY="128.0" onAction="#filterEmployee" promptText="First Name" />
+                  <TextField fx:id="employeePositionFilter" layoutX="438.0" layoutY="233.0" onAction="#filterEmployee" promptText="Position" />
+                  <ToggleButton fx:id="toggleEmployeeButton" layoutX="326.0" layoutY="40.0" mnemonicParsing="false" onAction="#ToggleEmployee" text="ToggleButton" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -99,6 +100,7 @@
                   <TextField fx:id="phoneNo" layoutX="396.0" layoutY="239.0" onAction="#onFilter" promptText="Phone Number" />
                   <TextField fx:id="paymentInfo" layoutX="396.0" layoutY="288.0" onAction="#onFilter" promptText="Payment Info" />
                   <Line endX="25.20001220703125" endY="330.20001220703125" layoutX="353.0" layoutY="41.0" startX="25.20001220703125" startY="-40.99999237060547" stroke="#00000064" />
+                  <ToggleButton fx:id="toggleCustomerButton" layoutX="273.0" layoutY="28.0" mnemonicParsing="false" onAction="#ToggleCustomer" text="ToggleButton" />
                </children>
             </AnchorPane>
         </content>

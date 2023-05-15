@@ -22,8 +22,9 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private SimpleObjectProperty<ObservableList<Customer>> customers;
   private SimpleObjectProperty<ObservableList<Employee>> employees;
   private SimpleStringProperty usernameFilter, firstNameFilter, lastNameFilter, phoneNumberFilter, paymentInfoFilter;
+  private SimpleStringProperty employeeUsernameFilter, employeeFirstNameFilter, employeeLastNameFilter, employeePhoneNumberFilter, employeePosition;
 
-  private SimpleBooleanProperty bathroomFilter,kitchenFilter,internetFilter,balconyFilter;
+  private SimpleBooleanProperty bathroomFilter, kitchenFilter, internetFilter, balconyFilter;
   private SimpleObjectProperty<Integer> priceFilter;
 
   private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom;
@@ -43,21 +44,34 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     priceFilter=new SimpleObjectProperty<>();
     roomNoFilter=new SimpleStringProperty();
     bedsFilter=new SimpleStringProperty();
+
     usernameFilter = new SimpleStringProperty();
     firstNameFilter = new SimpleStringProperty();
     lastNameFilter = new SimpleStringProperty();
     phoneNumberFilter = new SimpleStringProperty();
     paymentInfoFilter = new SimpleStringProperty();
     usernameFilter.set("");
-    firstNameFilter.set(" ");
+    firstNameFilter.set("");
     lastNameFilter.set("");
     phoneNumberFilter.set("");
-    paymentInfoFilter.set(" ");
+    paymentInfoFilter.set("");
+
+    employeeUsernameFilter = new SimpleStringProperty();
+    employeeFirstNameFilter = new SimpleStringProperty();
+    employeeLastNameFilter = new SimpleStringProperty();
+    employeePosition = new SimpleStringProperty();
+    employeePhoneNumberFilter = new SimpleStringProperty();
+    employeeUsernameFilter.set("");
+    employeeFirstNameFilter.set("");
+    employeeLastNameFilter.set("");
+    employeePhoneNumberFilter.set("");
+    employeePosition.set("");
 
     filteringRoom=new SimpleStringProperty();
 
     bedsFilter.set("");
     roomNoFilter.set("");
+
   }
 
   public void bindRoomList(ObjectProperty<ObservableList<Room>> property)
@@ -104,6 +118,31 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
 
   public void bindRoomNo(StringProperty property){
     property.bindBidirectional(roomNoFilter);
+  }
+
+  public void bindEmployeeUsername(StringProperty property)
+  {
+    property.bindBidirectional(employeeUsernameFilter);
+  }
+
+  public void bindEmployeeFirstName(StringProperty property)
+  {
+    property.bindBidirectional(employeeFirstNameFilter);
+  }
+
+  public void bindEmployeeLastName(StringProperty property)
+  {
+    property.bindBidirectional(employeeLastNameFilter);
+  }
+
+  public void bindEmployeePhoneNo(StringProperty property)
+  {
+    property.bindBidirectional(employeePhoneNumberFilter);
+  }
+
+  public void bindEmployeePosition(StringProperty property)
+  {
+    property.bindBidirectional(employeePosition);
   }
 
   public void bindUsername(StringProperty property)
@@ -176,8 +215,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     return model.deleteRoom(room.getRoomNo());
   }
 
-  public void filterEmployee(String employee)
-      throws RemoteException
+  public void simpleFilterEmployee(String employee) throws RemoteException
   {
     ArrayList<Employee> filterEmployee;
     try
@@ -207,6 +245,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     ObservableList<Customer> employeeObservableList=FXCollections.observableList(filterEmployee);
     customers.set(employeeObservableList);
   }
+
 
   public void filterFilterCustomer() throws RemoteException
   {
@@ -294,6 +333,40 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
 
   public void saveEmployee(Employee employee){
     model.saveSelectedEmployee(employee);
+  }
+
+  public void filterEmployee() throws RemoteException
+  {
+    String[] temp = new String[5];
+    int counter = 0;
+    if (!employeeUsernameFilter.getValue().equals(""))
+    {
+      temp[counter] = employeeUsernameFilter.getValue();
+      counter++;
+    }
+    if (!employeeFirstNameFilter.getValue().equals(""))
+    {
+      temp[counter] = " -> , FirstName " + employeeFirstNameFilter.getValue();
+      counter++;
+    }
+    if (!employeeLastNameFilter.getValue().equals(""))
+    {
+      temp[counter] = ", LastName " + employeeLastNameFilter.getValue();
+      counter++;
+    }
+    if (!employeePhoneNumberFilter.getValue().equals(""))
+    {
+      temp[counter] = ", PhoneNumber " + employeePhoneNumberFilter.getValue();
+      counter++;
+    }
+    if (!employeePosition.getValue().equals(""))
+    {
+      temp[counter] = ", Position " + employeePosition.getValue();
+      System.out.println(temp[counter]);
+    }
+    ObservableList<Employee> customerObservableList = FXCollections.observableList(
+        model.getFilteredEmployee(temp));
+    employees.set(customerObservableList);
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)
