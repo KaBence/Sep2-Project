@@ -1,16 +1,17 @@
 package Client.View.Controllers;
 
+import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.CustomerHomeViewModel;
 import Client.ViewModel.HomeViewModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
-import java.awt.*;
-import java.awt.Button;
-import java.awt.TextField;
 
 public class CustomerHomeController
 {
@@ -40,5 +41,22 @@ public class CustomerHomeController
 
   public void reset(){
 
+  }
+
+  @FXML void simpleFilterRoom()
+  {
+  }
+
+  @FXML void Home()
+  {
+    viewHandler.openView(SceneNames.Home);
+  }
+
+  @FXML void tableClickRoom()
+  {
+  }
+
+  @FXML void filterRoom()
+  {
   }
 }
