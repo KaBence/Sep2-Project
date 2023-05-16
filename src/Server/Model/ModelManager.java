@@ -127,4 +127,10 @@ public class ModelManager implements Model
   {
     return reservationData.getAllReservations();
   }
+
+  @Override public String updateReservation(int roomNumber, String username,
+      MyDate fromDate, MyDate toDate)
+  {
+    return reservationData.updateReservation(roomNumber, username, fromDate, toDate);
+  }
 }

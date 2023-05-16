@@ -1,9 +1,6 @@
 package Client.Mediator;
 
-import Server.Model.Customer;
-import Server.Model.Employee;
-import Server.Model.Reservation;
-import Server.Model.Room;
+import Server.Model.*;
 import Shared.SharedInterface;
 import dk.via.remote.observer.RemotePropertyChangeEvent;
 import dk.via.remote.observer.RemotePropertyChangeListener;
@@ -113,6 +110,12 @@ public class Client extends UnicastRemoteObject implements
   public ArrayList<Reservation> getAllReservations() throws RemoteException
   {
     return sharedInterface.getAllReservations();
+  }
+
+  public String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate)
+      throws RemoteException
+  {
+    return sharedInterface.updateReservation(roomNumber, username, fromDate, toDate);
   }
 
   public void addPropertyChangeListener(PropertyChangeListener listener){

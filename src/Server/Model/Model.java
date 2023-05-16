@@ -37,4 +37,6 @@ public interface Model
   ArrayList<Employee> getFilteredEmployee(String... attr);
 
   ArrayList<Reservation> getAllReservations();
+
+  String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate);
 }

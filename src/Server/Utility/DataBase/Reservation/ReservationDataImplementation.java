@@ -78,17 +78,19 @@ public class ReservationDataImplementation implements ReservationData
 
 
   @Override public String updateReservation(int roomNumber, String username,
-      MyDate fromDate, MyDate toDate, boolean CheckedIn)
+      MyDate fromDate, MyDate toDate)
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement ps = connection.prepareStatement(
-          "UPDATE ReservedBy SET roomNo =?, username=?, fromDate=?, toDate=?, checkedIn=? WHERE roomNo=? and username=? and fromDate=?");
+          "UPDATE ReservedBy SET roomNo =?, username=?, fromDate=?, toDate=? WHERE roomNo=? and username=? and fromDate=?");
       ps.setInt(1, roomNumber );
       ps.setString(2,username);
       ps.setString(3, String.valueOf(fromDate));
       ps.setString(4, String.valueOf(toDate));
-      ps.setBoolean(5, CheckedIn);
+      ps.setInt(5, roomNumber);
+      ps.setString(6,username);
+      ps.setString(7,String.valueOf(fromDate));
       ps.executeUpdate();
       return DatabaseConnection.SUCCESS;
     }

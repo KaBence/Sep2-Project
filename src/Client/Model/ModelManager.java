@@ -1,10 +1,7 @@
 package Client.Model;
 
 import Client.Mediator.Client;
-import Server.Model.Customer;
-import Server.Model.Employee;
-import Server.Model.Reservation;
-import Server.Model.Room;
+import Server.Model.*;
 import Shared.SharedInterface;
 
 import java.beans.PropertyChangeEvent;
@@ -123,6 +120,12 @@ public class ModelManager implements Model,PropertyChangeListener
       throws RemoteException
   {
     return client.updateEmployee(username, firstName, lastName,position,phoneNo);
+  }
+
+  @Override public String updateReservation(int roomNumber, String username,
+      MyDate fromDate, MyDate toDate) throws RemoteException
+  {
+    return client.updateReservation(roomNumber, username, fromDate, toDate);
   }
 
   @Override public String deleteRoom(int roomNumber) throws RemoteException

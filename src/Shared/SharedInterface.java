@@ -1,9 +1,6 @@
 package Shared;
 
-import Server.Model.Customer;
-import Server.Model.Employee;
-import Server.Model.Reservation;
-import Server.Model.Room;
+import Server.Model.*;
 import dk.via.remote.observer.RemotePropertyChangeListener;
 
 import java.rmi.Remote;
@@ -44,5 +41,5 @@ public interface SharedInterface extends Remote
   String deleteEmployee(String userID) throws RemoteException;
 
   ArrayList<Reservation> getAllReservations() throws RemoteException;
-
+  String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate) throws RemoteException;
 }
