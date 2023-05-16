@@ -1,5 +1,10 @@
 package Server.Utility.DataBase.Reservation;
 
-public class ReservationData
+import Server.Model.Reservation;
+
+public interface ReservationData
 {
+  Reservation addNewReservation(int roomNumber, String username, );
+  String deleteReservation()
+
 }
