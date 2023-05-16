@@ -37,7 +37,7 @@ public class MyDate implements Serializable
    * @return A new MyDate object with the given parameters.
    */
   public static MyDate stringToDate(String date) {
-    String[] temp = date.split("/");
+    String[] temp = date.split("-");
     int tempDate = Integer.valueOf(temp[0]);
     int tempMonth = Integer.valueOf(temp[1]);
     int tempyear = Integer.valueOf(temp[2]);
