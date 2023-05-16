@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class Room implements Serializable
 {
   private int roomNo,noOfBeds,size,price;
-  private String orientation;
+  private String orientation,status;
   private boolean internet,bathroom,kitchenet,balcony;
 
   public Room(int roomNo, int noOfBeds, int size, int price, String orientation,
-      boolean internet, boolean bathroom, boolean kitchenet, boolean balcony)
+      boolean internet, boolean bathroom, boolean kitchenet, boolean balcony,String status)
   {
     this.price=price;
     this.roomNo = roomNo;
@@ -20,6 +20,7 @@ public class Room implements Serializable
     this.bathroom = bathroom;
     this.kitchenet = kitchenet;
     this.balcony = balcony;
+    this.status=status;
   }
 
   public int getRoomNo()
@@ -112,6 +113,11 @@ public class Room implements Serializable
     this.price = price;
   }
 
+  public String getStatus()
+  {
+    return status;
+  }
+
   public String hasInternet()
   {
     if (internet)
@@ -148,7 +154,7 @@ public class Room implements Serializable
 
   public String roomInfo()
   {
-    return toString()+" "+hasInternet()+hasBathroom()+hasKichenet()+hasBalcony()+" Price, "+price;
+    return toString()+" "+hasInternet()+hasBathroom()+hasKichenet()+hasBalcony()+" Price, "+price+"Status: "+status;
   }
 
   public String toString()
