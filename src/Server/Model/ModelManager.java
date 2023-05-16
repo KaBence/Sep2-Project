@@ -36,7 +36,7 @@ public class ModelManager implements Model
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony)
   {
-   return roomData.addNewRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony);
+   return roomData.addNewRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony,"Free");
   }
 
   @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,

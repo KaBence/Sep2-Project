@@ -28,12 +28,12 @@ public class RoomDataImplementation implements RoomData
 
   @Override public Room addNewRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
-      boolean balcony)
+      boolean balcony,String status)
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement ps = connection.prepareStatement(
-          "INSERT INTO room(roomNo, noBeds, size,price, orientation, internet, bathroom, kitchen, balcony) VALUES(?,?,?,?,?,?,?,?,?)");
+          "INSERT INTO room(roomNo, noBeds, size,price, orientation, internet, bathroom, kitchen, balcony,status) VALUES(?,?,?,?,?,?,?,?,?,?)");
       ps.setInt(1, roomNumber);
       ps.setInt(2, numberOfBeds);
       ps.setInt(3, size);
@@ -43,6 +43,7 @@ public class RoomDataImplementation implements RoomData
       ps.setBoolean(7, bathroom);
       ps.setBoolean(8, kitchen);
       ps.setBoolean(9, balcony);
+      ps.setString(10,status);
 
       ps.executeUpdate();
     }
@@ -51,7 +52,7 @@ public class RoomDataImplementation implements RoomData
       return null;
     }
     return new Room(roomNumber, numberOfBeds, size,price, orientation, internet,
-        bathroom, kitchen, balcony);
+        bathroom, kitchen, balcony,status);
   }
 
   @Override public String deleteRoom(int roomNumber)
@@ -155,9 +156,10 @@ public class RoomDataImplementation implements RoomData
         boolean bathroom = rs.getBoolean("bathroom");
         boolean kitchen = rs.getBoolean("kitchen");
         boolean balcony = rs.getBoolean("balcony");
+        String status=rs.getString("status");
 
         list.add(new Room(roomNumber, numberOfBeds, size, price, orientation, internet,
-            bathroom, kitchen, balcony));
+            bathroom, kitchen, balcony,status));
       }
     }
     catch (SQLException e)
