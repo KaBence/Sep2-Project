@@ -354,6 +354,10 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     model.saveSelectedEmployee(employee);
   }
 
+  public void saveReservation(Reservation reservation){
+    model.saveSelectedReservation(reservation);
+  }
+
   public void filterEmployee() throws RemoteException
   {
     String[] temp = new String[5];

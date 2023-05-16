@@ -24,7 +24,7 @@
                <children>
                   <Button fx:id="checkIn" layoutX="61.0" layoutY="324.0" mnemonicParsing="false" onAction="#checkIn" text="Check In" />
                   <Button fx:id="checkOut" layoutX="142.0" layoutY="324.0" mnemonicParsing="false" onAction="#checkOut" text="Check out" />
-                  <ListView fx:id="reservationListView" layoutX="32.0" layoutY="29.0" prefHeight="278.0" prefWidth="358.0" />
+                  <ListView fx:id="reservationListView" layoutX="32.0" layoutY="29.0" onMouseClicked="#tableClickBooking" prefHeight="278.0" prefWidth="358.0" />
                   <Button layoutX="233.0" layoutY="324.0" mnemonicParsing="false" onAction="#Home" text="Home" />
                   <Button layoutX="310.0" layoutY="324.0" mnemonicParsing="false" onAction="#editReservation" text="Edit" />
                   <RadioButton layoutX="412.0" layoutY="29.0" mnemonicParsing="false" onAction="#filterReservation" selected="true" text="All Reservations/Bookings">

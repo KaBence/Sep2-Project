@@ -38,10 +38,10 @@ public class MyDate implements Serializable
    */
   public static MyDate stringToDate(String date) {
     String[] temp = date.split("-");
-    int tempDate = Integer.valueOf(temp[0]);
+    int tempYear = Integer.valueOf(temp[0]);
     int tempMonth = Integer.valueOf(temp[1]);
-    int tempyear = Integer.valueOf(temp[2]);
-    return new MyDate(tempDate, tempMonth, tempyear);
+    int tempDay = Integer.valueOf(temp[2]);
+    return new MyDate(tempDay, tempMonth, tempYear);
   }
 
 
@@ -125,8 +125,7 @@ public class MyDate implements Serializable
    * @return The method is returning a LocalDate object.
    */
   public  LocalDate convertToLocalDate(){
-    LocalDate temp=LocalDate.of(year,month,day);
-    return temp;
+    return LocalDate.of(year,month,day);
   }
 
 

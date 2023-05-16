@@ -44,6 +44,10 @@ public interface Model
 
   Room getSelectedRoom();
 
+  void saveSelectedReservation(Reservation reservation);
+
+  Reservation getSelectedReservation();
+
   void saveSelectedCustomer(Customer customer);
   String deleteSelectedCustomer(String username) throws RemoteException;
   void saveSelectedEmployee(Employee employee);

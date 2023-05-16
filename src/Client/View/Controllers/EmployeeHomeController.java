@@ -161,6 +161,12 @@ public class EmployeeHomeController
     }
   }
 
+  @FXML void tableClickBooking(MouseEvent event){
+    viewModel.saveReservation(reservationListView.getSelectionModel().getSelectedItem());
+    if (event.getClickCount()==2)
+      viewHandler.openView(SceneNames.EditReservation);
+  }
+
   @FXML void filterRoom() throws RemoteException
   {
     viewModel.filterRoom();
@@ -188,6 +194,14 @@ public class EmployeeHomeController
   }
 
   @FXML void editReservation(){
+    if (reservationListView.getSelectionModel().getSelectedItem()==null){
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Select a reservation first",ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return;
+    }
+    viewModel.saveReservation(reservationListView.getSelectionModel().getSelectedItem());
     viewHandler.openView(SceneNames.EditReservation);
   }
 

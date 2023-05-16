@@ -20,6 +20,7 @@ public class ModelManager implements Model,PropertyChangeListener
   private Room selectedRoom;
   private Customer selectedCustomer;
   private Employee selectedEmployee;
+  private Reservation selectedReservation;
 
   private PropertyChangeSupport support;
 
@@ -146,6 +147,16 @@ public class ModelManager implements Model,PropertyChangeListener
   @Override public Room getSelectedRoom()
   {
     return selectedRoom;
+  }
+
+  @Override public void saveSelectedReservation(Reservation reservation)
+  {
+    selectedReservation=reservation;
+  }
+
+  @Override public Reservation getSelectedReservation()
+  {
+    return selectedReservation;
   }
 
   @Override public void saveSelectedCustomer(Customer customer)
