@@ -98,7 +98,7 @@ public class ReservationDataImplementation implements ReservationData
     }
   }
 
-  @Override public ArrayList<Reservation> getAllRooms()
+  @Override public ArrayList<Reservation> getAllReservations()
   {
     ArrayList<Reservation> list=new ArrayList<>();
     try(Connection connection=getConnection())
