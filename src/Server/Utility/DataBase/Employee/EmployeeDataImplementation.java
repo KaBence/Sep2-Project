@@ -40,7 +40,7 @@ public class EmployeeDataImplementation implements EmployeeData
       psUser.executeUpdate();
 
       PreparedStatement psEmpoyee = connection.prepareStatement(
-          "INSERT INTO employee(username, password,firstName, lastName, String phoneNumber, String position");
+          "INSERT INTO employee(username, password,firstName, lastName, String phoneNumber, String position) values(?,?,?,?,?,?)");
       psEmpoyee.setString(1, username);
       psEmpoyee.setString(2, password);
       psEmpoyee.setString(3, firstName);
