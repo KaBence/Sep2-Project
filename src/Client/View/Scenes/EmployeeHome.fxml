@@ -67,8 +67,8 @@
                   <ListView fx:id="roomListView1" layoutX="14.0" layoutY="55.0" onMouseClicked="#tableClickRoom" prefHeight="243.0" prefWidth="387.0" />
                   <VBox layoutX="436.0" layoutY="29.0" prefHeight="320.0" prefWidth="157.0" spacing="15.0">
                      <children>
-                        <DatePicker />
-                        <DatePicker />
+                        <DatePicker promptText="From date" />
+                        <DatePicker promptText="Finish date" />
                         <CheckBox fx:id="balconyFilter1" mnemonicParsing="false" onAction="#filterRoom" prefHeight="18.0" prefWidth="77.0" text="Balcony">
                            <font>
                               <Font name="Century Gothic" size="13.0" />
@@ -95,6 +95,24 @@
                      </children>
                   </VBox>
                </children></AnchorPane>
+        </content>
+      </Tab>
+      <Tab fx:id="customerInfo" text="Customer info">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="back" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#back" text="Back" />
+                  <ListView fx:id="customerListView" layoutX="14.0" layoutY="83.0" onMouseClicked="#tableClickCustomer" prefHeight="218.0" prefWidth="348.0" />
+                  <TextField fx:id="filteringCustomer" layoutX="83.0" layoutY="28.0" onKeyReleased="#filterCustomer" promptText="Enter Customer Info" />
+                  <TextField fx:id="username" layoutX="396.0" layoutY="83.0" onAction="#onFilter" promptText="Username" />
+                  <TextField fx:id="firstName" layoutX="396.0" layoutY="138.0" onAction="#onFilter" promptText="First Name" />
+                  <TextField fx:id="lastName" layoutX="396.0" layoutY="186.0" onAction="#onFilter" promptText="Last Name" />
+                  <TextField fx:id="phoneNo" layoutX="396.0" layoutY="239.0" onAction="#onFilter" promptText="Phone Number" />
+                  <TextField fx:id="paymentInfo" layoutX="396.0" layoutY="288.0" onAction="#onFilter" promptText="Payment Info" />
+                  <Line endX="25.20001220703125" endY="330.20001220703125" layoutX="353.0" layoutY="41.0" startX="25.20001220703125" startY="-40.99999237060547" stroke="#00000064" />
+                  <ToggleButton fx:id="toggleCustomerButton" layoutX="273.0" layoutY="28.0" mnemonicParsing="false" onAction="#ToggleCustomer" text="ToggleButton" />
+               </children>
+            </AnchorPane>
         </content>
       </Tab>
     <Tab fx:id="room" text="Rooms">
@@ -144,23 +162,5 @@
             </AnchorPane>
          </content>
     </Tab>
-      <Tab fx:id="customerInfo" text="Customer info">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="back" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#back" text="Back" />
-                  <ListView fx:id="customerListView" layoutX="14.0" layoutY="83.0" onMouseClicked="#tableClickCustomer" prefHeight="218.0" prefWidth="348.0" />
-                  <TextField fx:id="filteringCustomer" layoutX="83.0" layoutY="28.0" onKeyReleased="#filterCustomer" promptText="Enter Customer Info" />
-                  <TextField fx:id="username" layoutX="396.0" layoutY="83.0" onAction="#onFilter" promptText="Username" />
-                  <TextField fx:id="firstName" layoutX="396.0" layoutY="138.0" onAction="#onFilter" promptText="First Name" />
-                  <TextField fx:id="lastName" layoutX="396.0" layoutY="186.0" onAction="#onFilter" promptText="Last Name" />
-                  <TextField fx:id="phoneNo" layoutX="396.0" layoutY="239.0" onAction="#onFilter" promptText="Phone Number" />
-                  <TextField fx:id="paymentInfo" layoutX="396.0" layoutY="288.0" onAction="#onFilter" promptText="Payment Info" />
-                  <Line endX="25.20001220703125" endY="330.20001220703125" layoutX="353.0" layoutY="41.0" startX="25.20001220703125" startY="-40.99999237060547" stroke="#00000064" />
-                  <ToggleButton fx:id="toggleCustomerButton" layoutX="273.0" layoutY="28.0" mnemonicParsing="false" onAction="#ToggleCustomer" text="ToggleButton" />
-               </children>
-            </AnchorPane>
-        </content>
-      </Tab>
   </tabs>
 </TabPane>
