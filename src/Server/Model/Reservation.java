@@ -70,7 +70,10 @@ public class Reservation implements Serializable
     CheckedIn = checkedIn;
   }
 
-  public String toString(){
+  public String reservationInfo(){
     return "RoomNo: " + roomNumber +", Username: " + username +", FromDate: " +fromDate+", ToDate: "+ toDate;
+  }
+  public String toString(){
+    return roomNumber +", " + username +", " +fromDate+", "+ toDate;
   }
 }
