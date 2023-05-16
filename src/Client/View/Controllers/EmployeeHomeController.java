@@ -5,6 +5,7 @@ import Client.View.ViewHandler;
 import Client.ViewModel.EmployeeHomeViewModel;
 import Server.Model.Customer;
 import Server.Model.Employee;
+import Server.Model.Reservation;
 import Server.Model.Room;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -29,6 +30,8 @@ public class EmployeeHomeController
   @FXML ListView<Employee> employeeListView;
   @FXML ListView<Customer> customerListView;
   @FXML ListView<Room> roomListView;
+
+  @FXML ListView<Reservation> reservationListView;
 
   @FXML CheckBox bathroomFilter, kitchenFilter, balconyFilter, internetFilter;
 
@@ -73,6 +76,7 @@ public class EmployeeHomeController
     this.viewModel.bindRoomList(roomListView.itemsProperty());
     this.viewModel.bindCustomerList(customerListView.itemsProperty());
     this.viewModel.bindEmployeeList(employeeListView.itemsProperty());
+    this.viewModel.bindReservationList(reservationListView.itemsProperty());
     this.viewModel.bindFilteringRoom(filteringRoom.textProperty());
     this.root = root;
 
@@ -167,28 +171,27 @@ public class EmployeeHomeController
     viewModel.filterFilterCustomer();
   }
 
-  @FXML void checkIn()
-  {
 
-  }
   @FXML void filterEmployee() throws RemoteException
   {
     viewModel.filterEmployee();
   }
 
-
+  @FXML void checkIn()
+  {
+    viewModel.checkIn();
+  }
 
   @FXML void checkOut()
   {
-  }
-  @FXML void back()
-  {
-    viewHandler.openView(SceneNames.Home);
+    viewModel.checkOut();
   }
 
-  @FXML void edit()
-  {
+  @FXML void editReservation(){
+    viewModel.editReservation();
   }
+
+
   @FXML void ToggleRoom(){
     viewModel.update();
     if (toggleRoomfilter){
@@ -291,6 +294,8 @@ public class EmployeeHomeController
   {
     viewModel.simpleRoomFilter();
   }
+
+
 
 
 }

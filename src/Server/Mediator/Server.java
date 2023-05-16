@@ -1,9 +1,6 @@
 package Server.Mediator;
 
-import Server.Model.Customer;
-import Server.Model.Employee;
-import Server.Model.Model;
-import Server.Model.Room;
+import Server.Model.*;
 import Shared.SharedInterface;
 import dk.via.remote.observer.RemotePropertyChangeListener;
 import dk.via.remote.observer.RemotePropertyChangeSupport;
@@ -131,8 +128,10 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     return model.deleteEmployee(userID);
   }
 
-
-
-
+  @Override public ArrayList<Reservation> getAllReservations()
+      throws RemoteException
+  {
+    return model.getAllReservations();
+  }
 
 }

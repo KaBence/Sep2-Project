@@ -2,6 +2,7 @@ package Client.Mediator;
 
 import Server.Model.Customer;
 import Server.Model.Employee;
+import Server.Model.Reservation;
 import Server.Model.Room;
 import Shared.SharedInterface;
 import dk.via.remote.observer.RemotePropertyChangeEvent;
@@ -108,6 +109,12 @@ public class Client extends UnicastRemoteObject implements
   {
     return sharedInterface.deleteEmployee(userID);
   }
+
+  public ArrayList<Reservation> getAllReservations() throws RemoteException
+  {
+    return sharedInterface.getAllReservations();
+  }
+
   public void addPropertyChangeListener(PropertyChangeListener listener){
     support.addPropertyChangeListener(listener);
   }

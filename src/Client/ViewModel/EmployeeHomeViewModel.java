@@ -3,6 +3,7 @@ package Client.ViewModel;
 import Client.Model.Model;
 import Server.Model.Customer;
 import Server.Model.Employee;
+import Server.Model.Reservation;
 import Server.Model.Room;
 import javafx.application.Platform;
 import javafx.beans.property.*;
@@ -21,6 +22,8 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private SimpleObjectProperty<ObservableList<Room>> rooms;
   private SimpleObjectProperty<ObservableList<Customer>> customers;
   private SimpleObjectProperty<ObservableList<Employee>> employees;
+
+  private SimpleObjectProperty<ObservableList<Reservation>> reservations;
   private SimpleStringProperty usernameFilter, firstNameFilter, lastNameFilter, phoneNumberFilter, paymentInfoFilter;
   private SimpleStringProperty employeeUsernameFilter, employeeFirstNameFilter, employeeLastNameFilter, employeePhoneNumberFilter, employeePosition;
 
@@ -36,6 +39,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     this.rooms = new SimpleObjectProperty<>();
     customers=new SimpleObjectProperty<>();
     employees=new SimpleObjectProperty<>();
+    reservations=new SimpleObjectProperty<>();
 
     balconyFilter=new SimpleBooleanProperty();
     kitchenFilter=new SimpleBooleanProperty();
@@ -85,6 +89,10 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
 
   public void bindEmployeeList(ObjectProperty<ObservableList<Employee>> property){
     property.bindBidirectional(employees);
+  }
+
+  public void bindReservationList(ObjectProperty<ObservableList<Reservation>> property){
+    property.bindBidirectional(reservations);
   }
 
   public void bindFilteringRoom(StringProperty property){
@@ -195,11 +203,13 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     ArrayList<Room> allRooms;
     ArrayList<Employee> allEmployee;
     ArrayList<Customer> allCustomer;
+    ArrayList<Reservation> allReservations;
     try
     {
       allRooms = model.getAllRooms();
       allCustomer=model.getAllCustomers();
       allEmployee=model.getAllEmployees();
+      allReservations=model.getAllReservations();
     }
     catch (RemoteException e)
     {
@@ -208,6 +218,8 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     ObservableList<Room> roomObservableList = FXCollections.observableList(allRooms);
     ObservableList<Customer> customerObservableList= FXCollections.observableList(allCustomer);
     ObservableList<Employee> employeeObservableList=FXCollections.observableList(allEmployee);
+    ObservableList<Reservation> reservationObservableList=FXCollections.observableList(allReservations);
+    reservations.set(reservationObservableList);
     employees.set(employeeObservableList);
     customers.set(customerObservableList);
     rooms.set(roomObservableList);
@@ -374,6 +386,18 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     ObservableList<Employee> customerObservableList = FXCollections.observableList(
         model.getFilteredEmployee(temp));
     employees.set(customerObservableList);
+  }
+
+  public void checkIn(){
+
+  }
+
+  public void checkOut(){
+
+  }
+
+  public void editReservation(){
+
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

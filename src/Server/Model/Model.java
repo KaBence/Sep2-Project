@@ -35,4 +35,6 @@ public interface Model
   ArrayList<Employee> getAllEmployees();
   ArrayList<Employee> filterEmployee(String employee);
   ArrayList<Employee> getFilteredEmployee(String... attr);
+
+  ArrayList<Reservation> getAllReservations();
 }
