@@ -3,6 +3,7 @@ package Client.ViewModel;
 import Client.Model.Model;
 import Client.View.ViewHandler;
 import Server.Model.Employee;
+import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -37,7 +38,6 @@ public class EditEmployeeViewModel
 
   }
 
-  //String userID, String firstName, String lastName, String position, String phoneNo,String password
   public String edit() throws RemoteException
   {
     try
@@ -47,7 +47,7 @@ public class EditEmployeeViewModel
     }
     catch (Exception e)
     {
-      return "mandatory";
+      return DatabaseConnection.MANDATORY;
     }
   }
 
