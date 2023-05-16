@@ -52,9 +52,9 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="filteringRoom1" layoutX="36.0" layoutY="18.0" onKeyReleased="#simpleFilterRoom" promptText="Enter Room Info" />
+                  <TextField layoutX="36.0" layoutY="18.0" onKeyReleased="#simpleFilterRoom" promptText="Enter Room Info" />
                   <Line endX="33.5999755859375" endY="203.0" layoutX="388.0" layoutY="144.0" startX="33.5999755859375" startY="-112.99999237060547" stroke="#00000064" />
-                  <Button layoutX="329.0" layoutY="320.0" mnemonicParsing="false" onAction="#addRoom" text="Add">
+                  <Button layoutX="329.0" layoutY="320.0" mnemonicParsing="false" text="Add">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -64,12 +64,12 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <ListView fx:id="roomListView1" layoutX="14.0" layoutY="55.0" onMouseClicked="#tableClickRoom" prefHeight="243.0" prefWidth="387.0" />
+                  <ListView layoutX="14.0" layoutY="55.0" onMouseClicked="#tableClickRoom" prefHeight="243.0" prefWidth="387.0" />
                   <VBox layoutX="436.0" layoutY="29.0" prefHeight="320.0" prefWidth="157.0" spacing="15.0">
                      <children>
                         <DatePicker promptText="From date" />
                         <DatePicker promptText="Finish date" />
-                        <CheckBox fx:id="balconyFilter1" mnemonicParsing="false" onAction="#filterRoom" prefHeight="18.0" prefWidth="77.0" text="Balcony">
+                        <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="77.0" text="Balcony">
                            <font>
                               <Font name="Century Gothic" size="13.0" />
                            </font>
@@ -89,9 +89,9 @@
                               <Font name="Century Gothic" size="13.0" />
                            </font>
                         </CheckBox>
-                        <ComboBox fx:id="priceFilter1" onAction="#filterRoom" prefHeight="26.0" prefWidth="120.0" promptText="Price per night" />
-                        <TextField fx:id="bedsFilter1" onAction="#filterRoom" prefHeight="26.0" prefWidth="122.0" promptText="Nr of Beds" />
-                        <TextField fx:id="roomNoFilter1" onAction="#filterRoom" prefHeight="26.0" prefWidth="118.0" promptText="Room Nr" />
+                        <ComboBox prefHeight="26.0" prefWidth="120.0" promptText="Price per night" />
+                        <TextField prefHeight="26.0" prefWidth="122.0" promptText="Nr of Beds" />
+                        <TextField prefHeight="26.0" prefWidth="118.0" promptText="Room Nr" />
                      </children>
                   </VBox>
                </children></AnchorPane>
