@@ -188,7 +188,11 @@ public class EmployeeHomeController
   }
 
   @FXML void editReservation(){
-    viewModel.editReservation();
+    viewHandler.openView(SceneNames.EditReservation);
+  }
+
+  @FXML void filterReservations(){
+
   }
 
 
