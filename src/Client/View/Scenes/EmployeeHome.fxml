@@ -25,8 +25,8 @@
                   <Button fx:id="checkOut" layoutX="142.0" layoutY="324.0" mnemonicParsing="false" onAction="#checkOut" text="Check out" />
                   <Text layoutX="425.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="filtering need to be added" />
                   <ListView fx:id="reservationListView" layoutX="32.0" layoutY="29.0" prefHeight="278.0" prefWidth="358.0" />
-                  <Button layoutX="233.0" layoutY="324.0" mnemonicParsing="false" text="Cancel" />
-                  <Button layoutX="310.0" layoutY="324.0" mnemonicParsing="false" text="Edit" />
+                  <Button layoutX="233.0" layoutY="324.0" mnemonicParsing="false" onAction="#Home" text="Home" />
+                  <Button layoutX="310.0" layoutY="324.0" mnemonicParsing="false" onAction="#editReservation" text="Edit" />
                </children>
             </AnchorPane>
         </content>
@@ -35,7 +35,10 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="back" layoutX="40.0" layoutY="324.0" mnemonicParsing="false" onAction="#back" text="Back" />
+                  <Button layoutX="35.0" layoutY="318.0" mnemonicParsing="false" onAction="#Home" text="Home">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
                   <ListView fx:id="employeeListView" layoutX="11.0" layoutY="77.0" onMouseClicked="#tableClickEmployee" prefHeight="230.0" prefWidth="404.0" />
                   <Line endX="-100.0" endY="194.66665649414062" layoutX="523.0" layoutY="134.0" startX="-100.0" startY="-116.66666412353516" stroke="#00000063" />
                   <TextField fx:id="filteringEmployee" layoutX="138.0" layoutY="40.0" onKeyReleased="#simpleFilterEmployee" promptText="Enter Employee info" />
@@ -101,7 +104,10 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="back" layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#back" text="Back" />
+                  <Button layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#Home" text="Home">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
                   <ListView fx:id="customerListView" layoutX="14.0" layoutY="83.0" onMouseClicked="#tableClickCustomer" prefHeight="218.0" prefWidth="348.0" />
                   <TextField fx:id="filteringCustomer" layoutX="83.0" layoutY="28.0" onKeyReleased="#filterCustomer" promptText="Enter Customer Info" />
                   <TextField fx:id="username" layoutX="396.0" layoutY="83.0" onAction="#onFilter" promptText="Username" />

@@ -2,6 +2,7 @@ package Client.Model;
 
 import Server.Model.Customer;
 import Server.Model.Employee;
+import Server.Model.Reservation;
 import Server.Model.Room;
 
 import java.beans.PropertyChangeListener;
@@ -26,6 +27,8 @@ public interface Model
   ArrayList<Employee> getAllEmployees() throws RemoteException;
   ArrayList<Employee> filterEmployee(String employee) throws RemoteException;
   ArrayList<Employee> getFilteredEmployee(String... attr) throws RemoteException;
+
+  ArrayList<Reservation> getAllReservations() throws RemoteException;
 
   String updateRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,

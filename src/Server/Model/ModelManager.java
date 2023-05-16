@@ -4,6 +4,8 @@ import Server.Utility.DataBase.Customer.CustomerData;
 import Server.Utility.DataBase.Customer.CustomerDataImplementation;
 import Server.Utility.DataBase.Employee.EmployeeData;
 import Server.Utility.DataBase.Employee.EmployeeDataImplementation;
+import Server.Utility.DataBase.Reservation.ReservationData;
+import Server.Utility.DataBase.Reservation.ReservationDataImplementation;
 import Server.Utility.DataBase.Room.RoomData;
 import Server.Utility.DataBase.Room.RoomDataImplementation;
 
@@ -18,11 +20,14 @@ public class ModelManager implements Model
   private CustomerData customerData;
 
   private EmployeeData employeeData;
+
+  private ReservationData reservationData;
   private PropertyChangeSupport support;
 
   public ModelManager(){
     roomData=new RoomDataImplementation();
     customerData=new CustomerDataImplementation();
+    reservationData=new ReservationDataImplementation();
     employeeData=new EmployeeDataImplementation();
     support=new PropertyChangeSupport(this);
   }
@@ -116,5 +121,10 @@ public class ModelManager implements Model
   @Override public ArrayList<Employee> getFilteredEmployee(String... attr)
   {
     return employeeData.filter(attr);
+  }
+
+  @Override public ArrayList<Reservation> getAllReservations()
+  {
+    return reservationData.getAllReservations();
   }
 }
