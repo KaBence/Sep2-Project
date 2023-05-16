@@ -34,10 +34,9 @@ public class MyDate implements Serializable
   /**
    * It takes a date and time in the form of a string, and returns a MyDate object
    * @param date The date in the format dd/mm/yyyy
-   * @param time The time of the day.
    * @return A new MyDate object with the given parameters.
    */
-  public static MyDate stringToDate(String date, String time) {
+  public static MyDate stringToDate(String date) {
     String[] temp = date.split("/");
     int tempDate = Integer.valueOf(temp[0]);
     int tempMonth = Integer.valueOf(temp[1]);
