@@ -3,6 +3,7 @@ package Server.Utility.DataBase.Reservation;
 import Server.Model.MyDate;
 import Server.Model.Reservation;
 import Server.Utility.DataBase.DatabaseConnection;
+import org.mockito.internal.matchers.GreaterThan;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -52,8 +53,29 @@ public class ReservationDataImplementation implements ReservationData
 
   @Override public ArrayList<Reservation> getMyReservation(String username)
   {
-    return null;
+    ArrayList<Reservation> list=new ArrayList<>();
+    try(Connection connection=getConnection())
+    {
+      PreparedStatement ps = connection.prepareStatement(
+          "SELECT * from ReservedBy WHERE username= ?"
+      );
+      ResultSet rs=ps.executeQuery();
+      while (rs.next()){
+        int roomNumber= rs.getInt("roomNo");
+         username= rs.getString("username");
+        MyDate fromDate= MyDate.stringToDate(rs.getString("fromDate"));
+        MyDate toDate= MyDate.stringToDate(rs.getString("toDate"));
+        Boolean CheckedIn= rs.getBoolean("checkedIn");
+        list.add(new Reservation(roomNumber,username,fromDate,toDate,CheckedIn));
+      }
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+    return list;
   }
+
 
   @Override public String updateReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, boolean CheckedIn)
@@ -88,12 +110,16 @@ public class ReservationDataImplementation implements ReservationData
       while (rs.next()){
         int roomNumber= rs.getInt("roomNo");
         String username= rs.getString("username");
-        MyDate fromDate= MyDate.stringToDate()
+        MyDate fromDate= MyDate.stringToDate(rs.getString("fromDate"));
+        MyDate toDate= MyDate.stringToDate(rs.getString("toDate"));
+        Boolean CheckedIn= rs.getBoolean("checkedIn");
+        list.add(new Reservation(roomNumber,username,fromDate,toDate,CheckedIn));
       }
     }
     catch (SQLException e)
     {
       throw new RuntimeException(e);
     }
+    return list;
   }
 }
