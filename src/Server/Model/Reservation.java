@@ -17,6 +17,7 @@ public class Reservation implements Serializable
     this.username = username;
     this.fromDate = fromDate;
     this.toDate = toDate;
+    this.CheckedIn=CheckedIn;
   }
 
   public int getRoomNumber()
