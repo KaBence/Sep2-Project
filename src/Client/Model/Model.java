@@ -1,6 +1,10 @@
 package Client.Model;
 
 import Server.Model.*;
+import Server.Model.Hotel.Users.Customer;
+import Server.Model.Hotel.Users.Employee;
+import Server.Model.Hotel.Reservation;
+import Server.Model.Hotel.Room;
 
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;

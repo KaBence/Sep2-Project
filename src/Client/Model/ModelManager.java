@@ -2,6 +2,10 @@ package Client.Model;
 
 import Client.Mediator.Client;
 import Server.Model.*;
+import Server.Model.Hotel.Users.Customer;
+import Server.Model.Hotel.Users.Employee;
+import Server.Model.Hotel.Reservation;
+import Server.Model.Hotel.Room;
 import Shared.SharedInterface;
 
 import java.beans.PropertyChangeEvent;

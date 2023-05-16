@@ -1,5 +1,9 @@
 package Server.Model;
 
+import Server.Model.Hotel.Users.Customer;
+import Server.Model.Hotel.Users.Employee;
+import Server.Model.Hotel.Reservation;
+import Server.Model.Hotel.Room;
 import Server.Utility.DataBase.Customer.CustomerData;
 import Server.Utility.DataBase.Customer.CustomerDataImplementation;
 import Server.Utility.DataBase.Employee.EmployeeData;

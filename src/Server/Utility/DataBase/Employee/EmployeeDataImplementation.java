@@ -1,7 +1,6 @@
 package Server.Utility.DataBase.Employee;
 
-import Server.Model.Employee;
-import Server.Model.Room;
+import Server.Model.Hotel.Users.Employee;
 import Server.Utility.DataBase.DatabaseConnection;
 
 import java.sql.*;
@@ -28,9 +27,11 @@ public class EmployeeDataImplementation implements EmployeeData
         "postgres", "password");
   }
 
-  @Override public Employee AddEmployee(String username, String password,
+  @Override public Employee AddEmployee(String password,
       String firstName, String lastName, String phoneNumber, String position)
   {
+    Employee newEmployee = new Employee(firstName,lastName,position,phoneNumber,password);
+    String username = newEmployee.getUsername();
     try (Connection connection = getConnection())
     {
       PreparedStatement psUser = connection.prepareStatement(
@@ -47,8 +48,7 @@ public class EmployeeDataImplementation implements EmployeeData
       psEmpoyee.setString(4, lastName);
       psEmpoyee.setString(5, phoneNumber);
       psEmpoyee.setString(6, position);
-      return new Employee(username, password, firstName, lastName, phoneNumber,
-          position);
+      return newEmployee;
     }
     catch (SQLException e)
     {
@@ -69,8 +69,15 @@ public class EmployeeDataImplementation implements EmployeeData
       ps.setString(4, phoneNumber);
       ps.setString(3, position);
       ps.setString(5, username);
-      ps.executeUpdate();
-      return DatabaseConnection.SUCCESS;
+      if (username.equals("")||firstName.equals("")||lastName.equals("")||phoneNumber.equals("")||position.equals(""))
+      {
+        return DatabaseConnection.MANDATORY;
+      }
+      else
+      {
+        ps.executeUpdate();
+        return DatabaseConnection.SUCCESS;
+      }
     }
     catch (SQLException e)
     {

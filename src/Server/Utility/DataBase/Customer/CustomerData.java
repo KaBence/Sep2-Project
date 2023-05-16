@@ -1,8 +1,7 @@
 package Server.Utility.DataBase.Customer;
 
-import Server.Model.Customer;
+import Server.Model.Hotel.Users.Customer;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public interface CustomerData

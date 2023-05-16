@@ -2,7 +2,7 @@ package Client.ViewModel;
 
 import Client.Model.Model;
 import Server.Model.MyDate;
-import Server.Model.Reservation;
+import Server.Model.Hotel.Reservation;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

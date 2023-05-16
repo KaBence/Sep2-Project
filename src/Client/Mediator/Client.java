@@ -1,6 +1,10 @@
 package Client.Mediator;
 
 import Server.Model.*;
+import Server.Model.Hotel.Users.Customer;
+import Server.Model.Hotel.Users.Employee;
+import Server.Model.Hotel.Reservation;
+import Server.Model.Hotel.Room;
 import Shared.SharedInterface;
 import dk.via.remote.observer.RemotePropertyChangeEvent;
 import dk.via.remote.observer.RemotePropertyChangeListener;

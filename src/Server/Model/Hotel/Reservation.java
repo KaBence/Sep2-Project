@@ -1,4 +1,6 @@
-package Server.Model;
+package Server.Model.Hotel;
+
+import Server.Model.MyDate;
 
 import java.io.Serializable;
 

@@ -56,6 +56,7 @@ public class EditCustomerController
       alert.setHeaderText(null);
       alert.setTitle("Success");
       alert.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeCustomer);
     }
     else if (x.equals(DatabaseConnection.MANDATORY))
     {
@@ -70,8 +71,8 @@ public class EditCustomerController
       error.setHeaderText("Error");
       error.setHeaderText("You cannot edit this room right now");
       error.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeCustomer);
     }
-    viewHandler.openView(SceneNames.EmployeeHomeCustomer);
   }
 
   @FXML void cancel()

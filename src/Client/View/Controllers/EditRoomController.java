@@ -76,6 +76,7 @@ public class EditRoomController
       alert.setHeaderText(null);
       alert.setTitle("Success");
       alert.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeRoom);
     }
     else if (x.equals(DatabaseConnection.MANDATORY))
     {
@@ -90,8 +91,8 @@ public class EditRoomController
       error.setHeaderText("Error");
       error.setHeaderText("You cannot edit this room right now");
       error.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeRoom);
     }
-    viewHandler.openView(SceneNames.EmployeeHomeRoom);
   }
 
   @FXML void Cancel()

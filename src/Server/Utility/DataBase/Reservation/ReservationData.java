@@ -1,7 +1,7 @@
 package Server.Utility.DataBase.Reservation;
 
 import Server.Model.MyDate;
-import Server.Model.Reservation;
+import Server.Model.Hotel.Reservation;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package Client.ViewModel;
 
 import Client.Model.Model;
-import Server.Model.Customer;
+import Server.Model.Hotel.Users.Customer;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

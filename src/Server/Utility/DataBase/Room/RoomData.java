@@ -1,7 +1,6 @@
 package Server.Utility.DataBase.Room;
 
-import Server.Model.Room;
-import Server.Utility.DataBase.DatabaseConnection;
+import Server.Model.Hotel.Room;
 
 import java.util.ArrayList;
 
