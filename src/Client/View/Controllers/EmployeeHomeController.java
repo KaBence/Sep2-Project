@@ -45,6 +45,20 @@ public class EmployeeHomeController
 
   @FXML ToggleButton toggleRoomButton,toggleEmployeeButton,toggleCustomerButton;
 
+  // employee new reservations
+  @FXML TextField reserveInfo;
+
+  @FXML DatePicker reserveFromDate;
+  @FXML DatePicker reserveFinishDate;
+  @FXML CheckBox reserveBalcony;
+  @FXML CheckBox reserveKitchen;
+  @FXML CheckBox reserveInternet;
+  @FXML CheckBox reserveBathroom;
+  @FXML ComboBox reservePricePerNight;
+  @FXML TextField reserveNrOfBeds;
+  @FXML TextField reserveRoomNr;
+
+
   private Region root;
   private ViewHandler viewHandler;
   private EmployeeHomeViewModel viewModel;
@@ -277,4 +291,6 @@ public class EmployeeHomeController
   {
     viewModel.simpleRoomFilter();
   }
+
+
 }
