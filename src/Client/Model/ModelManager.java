@@ -112,6 +112,12 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.getAllReservations();
   }
 
+  @Override public ArrayList<Reservation> getFilteredReservation(String state,
+      MyDate fromDate, MyDate toDate) throws RemoteException
+  {
+    return client.getFilteredReservation(state, fromDate, toDate);
+  }
+
   @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony) throws RemoteException
@@ -147,6 +153,12 @@ public class ModelManager implements Model,PropertyChangeListener
   @Override public String deleteEmployee(String userID) throws RemoteException
   {
     return client.deleteEmployee(userID);
+  }
+
+  @Override public String deleteReservation(int roomNo, String username,
+      MyDate fromDate) throws RemoteException
+  {
+    return client.deleteReservation(roomNo, username, fromDate);
   }
 
   @Override public void saveSelectedRoom(Room room)

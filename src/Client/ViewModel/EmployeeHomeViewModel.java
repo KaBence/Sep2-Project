@@ -10,6 +10,8 @@ import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -25,6 +27,8 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private SimpleObjectProperty<ObservableList<Employee>> employees;
 
   private SimpleObjectProperty<ObservableList<Reservation>> reservations;
+  private SimpleBooleanProperty reservationFilter,allBookingFilter,bookingFilter;
+  private SimpleObjectProperty<LocalDate> fromDateReservation,toDateReservation;
   private SimpleStringProperty usernameFilter, firstNameFilter, lastNameFilter, phoneNumberFilter, paymentInfoFilter;
   private SimpleStringProperty employeeUsernameFilter, employeeFirstNameFilter, employeeLastNameFilter, employeePhoneNumberFilter, employeePosition;
 
@@ -42,6 +46,12 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     customers=new SimpleObjectProperty<>();
     employees=new SimpleObjectProperty<>();
     reservations=new SimpleObjectProperty<>();
+
+    allBookingFilter=new SimpleBooleanProperty();
+    reservationFilter=new SimpleBooleanProperty();
+    bookingFilter=new SimpleBooleanProperty();
+    fromDateReservation=new SimpleObjectProperty<>();
+    toDateReservation=new SimpleObjectProperty<>();
 
     balconyFilter=new SimpleBooleanProperty();
     kitchenFilter=new SimpleBooleanProperty();
@@ -99,6 +109,26 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
 
   public void bindReservationList(ObjectProperty<ObservableList<Reservation>> property){
     property.bindBidirectional(reservations);
+  }
+
+  public void bindAllBookings(BooleanProperty property){
+    property.bindBidirectional(allBookingFilter);
+  }
+
+  public void bindReservationFilter(BooleanProperty property){
+    property.bindBidirectional(reservationFilter);
+  }
+
+  public void bindBookingFilter(BooleanProperty property){
+    property.bindBidirectional(bookingFilter);
+  }
+
+  public void bindFromDateReservation(ObjectProperty<LocalDate> property){
+    property.bindBidirectional(fromDateReservation);
+  }
+
+  public void bindToDateReservation(ObjectProperty<LocalDate> property){
+    property.bindBidirectional(toDateReservation);
   }
 
   public void bindFilteringRoom(StringProperty property){
@@ -209,6 +239,10 @@ public void bindHiddenText(StringProperty property){
     lastNameFilter.set("");
     phoneNumberFilter.set("");
     paymentInfoFilter.set("");
+
+    allBookingFilter.set(true);
+
+
     ArrayList<Room> allRooms;
     ArrayList<Employee> allEmployee;
     ArrayList<Customer> allCustomer;
@@ -241,6 +275,27 @@ public void bindHiddenText(StringProperty property){
   public String deleteRoom(Room room) throws RemoteException
   {
     return model.deleteRoom(room.getRoomNo());
+  }
+
+  public void filterReservation() throws RemoteException
+  {
+    String state="";
+    if (allBookingFilter.getValue())
+      state="all";
+    if (reservationFilter.getValue())
+      state="Reserved";
+    if (bookingFilter.getValue())
+      state="Booked";
+    if (fromDateReservation.getValue()==null){
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Please select both dates", ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return;
+    }
+    ArrayList<Reservation> filtered=model.getFilteredReservation(state,MyDate.LocalDateToMyDate(fromDateReservation.getValue()),MyDate.LocalDateToMyDate(toDateReservation.getValue()));
+    ObservableList<Reservation> reservationObservableList=FXCollections.observableList(filtered);
+    reservations.set(reservationObservableList);
   }
 
   public void simpleFilterEmployee(String employee) throws RemoteException
@@ -411,11 +466,42 @@ public void bindHiddenText(StringProperty property){
   }
 
   public void checkIn(){
+    Reservation reservation = model.getSelectedReservation();
 
+    if(!reservation.isCheckedIn())//jeśli Is checked in jest false to można iść dalej
+    {
+      reservation.setCheckedIn(true);
+    }
+    else
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"This customer is already checked in",
+          ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+    }
   }
 
   public void checkOut(){
+    Reservation reservation = model.getSelectedReservation();
+    if(reservation.isCheckedIn()) //jeśli jest w checked in
+    {
+      //reservation.setCheckedIn(null);
+    }
+    else if(!reservation.isCheckedIn())
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"This customer has never checked in",
+          ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+    }
+  }
 
+  public String deleteReservation(int roomNo, String username,
+      MyDate fromDate) throws RemoteException
+  {
+    return model.deleteReservation(roomNo, username, fromDate);
   }
 
   public void editReservation(){

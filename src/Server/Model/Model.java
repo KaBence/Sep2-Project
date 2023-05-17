@@ -27,6 +27,8 @@ public interface Model
   String deleteRoom(int roomNumber);
   String deleteSelectedCustomer(String username);
   String deleteEmployee(String userID);
+  String deleteCustomer(int roomNo, String username,
+      MyDate fromDate);
 
   ArrayList<Room> getAllRooms();
 
@@ -42,6 +44,7 @@ public interface Model
   ArrayList<Employee> getFilteredEmployee(String... attr);
 
   ArrayList<Reservation> getAllReservations();
+  ArrayList<Reservation> getFilteredReservations(String state,MyDate fromDate,MyDate toDate);
 
   String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate);
 }

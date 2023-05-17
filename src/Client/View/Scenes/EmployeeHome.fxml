@@ -13,6 +13,9 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
@@ -22,20 +25,21 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="checkIn" layoutX="61.0" layoutY="324.0" mnemonicParsing="false" onAction="#checkIn" text="Check In" />
-                  <Button fx:id="checkOut" layoutX="142.0" layoutY="324.0" mnemonicParsing="false" onAction="#checkOut" text="Check out" />
+                  <Button fx:id="checkIn" layoutX="275.0" layoutY="324.0" mnemonicParsing="false" onAction="#checkIn" text="Check In" />
+                  <Button fx:id="checkOut" layoutX="363.0" layoutY="324.0" mnemonicParsing="false" onAction="#checkOut" text="Check out" />
                   <ListView fx:id="reservationListView" layoutX="32.0" layoutY="29.0" onMouseClicked="#tableClickBooking" prefHeight="278.0" prefWidth="358.0" />
-                  <Button layoutX="233.0" layoutY="324.0" mnemonicParsing="false" onAction="#Home" text="Home" />
-                  <Button layoutX="310.0" layoutY="324.0" mnemonicParsing="false" onAction="#editReservation" text="Edit" />
-                  <RadioButton layoutX="412.0" layoutY="29.0" mnemonicParsing="false" onAction="#filterReservation" selected="true" text="All Reservations/Bookings">
+                  <Button layoutX="32.0" layoutY="324.0" mnemonicParsing="false" onAction="#Home" text="Home" />
+                  <Button layoutX="534.0" layoutY="324.0" mnemonicParsing="false" onAction="#editReservation" text="Edit" />
+                  <RadioButton fx:id="allFilter" layoutX="412.0" layoutY="29.0" mnemonicParsing="false" onAction="#filterReservation" selected="true" text="All Reservations/Bookings">
                      <toggleGroup>
                         <ToggleGroup fx:id="thingies" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton layoutX="412.0" layoutY="82.0" mnemonicParsing="false" onAction="#filterReservation" text="Bookings" toggleGroup="$thingies" />
-                  <RadioButton layoutX="412.0" layoutY="56.0" mnemonicParsing="false" onAction="#filterReservation" text="Reservations" toggleGroup="$thingies" />
-                  <DatePicker fx:id="FromDate" layoutX="413.0" layoutY="119.0" promptText="From" />
-                  <DatePicker fx:id="toDate" layoutX="413.0" layoutY="161.0" onAction="#filterReservation" promptText="To" />
+                  <RadioButton fx:id="bookingFilter" layoutX="412.0" layoutY="82.0" mnemonicParsing="false" onAction="#filterReservation" text="Bookings" toggleGroup="$thingies" />
+                  <RadioButton fx:id="reservationFilter" layoutX="412.0" layoutY="56.0" mnemonicParsing="false" onAction="#filterReservation" text="Reservations" toggleGroup="$thingies" />
+                  <DatePicker fx:id="fromDateReservation" layoutX="413.0" layoutY="119.0" promptText="From" />
+                  <DatePicker fx:id="toDateReservation" layoutX="413.0" layoutY="161.0" promptText="To" />
+                  <Button layoutX="457.0" layoutY="324.0" mnemonicParsing="false" onAction="#deleteReservation" text="Delete" />
                </children>
             </AnchorPane>
         </content>

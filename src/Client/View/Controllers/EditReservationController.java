@@ -4,7 +4,10 @@ import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.CustomerHomeViewModel;
 import Client.ViewModel.EditReservationViewModel;
+import Server.Utility.DataBase.DatabaseConnection;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
@@ -45,6 +48,18 @@ public class EditReservationController
 
   @FXML void save() throws RemoteException
   {
-    viewModel.save();
+    if (viewModel.save().equals(DatabaseConnection.SUCCESS)){
+      Alert alert=new Alert(Alert.AlertType.INFORMATION,"Edit Reservation was successful", ButtonType.OK);
+      alert.setTitle("Success");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    }
+    if (viewModel.save().equals(DatabaseConnection.ERROR)){
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Edit Reservation has caused an error", ButtonType.OK);
+      alert.setTitle("Error");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+    }
   }
 }
