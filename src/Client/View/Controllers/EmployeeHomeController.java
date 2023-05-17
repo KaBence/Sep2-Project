@@ -30,6 +30,7 @@ public class EmployeeHomeController
   @FXML ListView<Employee> employeeListView;
   @FXML ListView<Customer> customerListView;
   @FXML ListView<Room> roomListView;
+  @FXML ListView<Room> roomListViewNewReservation;
 
   @FXML ListView<Reservation> reservationListView;
 
@@ -62,6 +63,9 @@ public class EmployeeHomeController
   @FXML TextField reserveRoomNr;
 
 
+
+
+
   private Region root;
   private ViewHandler viewHandler;
   private EmployeeHomeViewModel viewModel;
@@ -74,6 +78,7 @@ public class EmployeeHomeController
     this.viewHandler = viewHandler;
     this.viewModel = viewModel;
     this.viewModel.bindRoomList(roomListView.itemsProperty());
+    this.viewModel.bindRoomList(roomListViewNewReservation.itemsProperty());
     this.viewModel.bindCustomerList(customerListView.itemsProperty());
     this.viewModel.bindEmployeeList(employeeListView.itemsProperty());
     this.viewModel.bindReservationList(reservationListView.itemsProperty());
@@ -193,6 +198,9 @@ public class EmployeeHomeController
 
   @FXML void filterReservation(){
 
+  }
+  @FXML void createNewReservation(){
+    viewModel.
   }
 
 
