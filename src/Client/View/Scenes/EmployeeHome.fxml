@@ -30,7 +30,7 @@
                   <ListView fx:id="reservationListView" layoutX="32.0" layoutY="29.0" onMouseClicked="#tableClickBooking" prefHeight="278.0" prefWidth="358.0" />
                   <Button layoutX="32.0" layoutY="324.0" mnemonicParsing="false" onAction="#Home" text="Home" />
                   <Button layoutX="534.0" layoutY="324.0" mnemonicParsing="false" onAction="#editReservation" text="Edit" />
-                  <RadioButton layoutX="412.0" layoutY="29.0" mnemonicParsing="false" onAction="#filterReservation" selected="true" text="All Reservations/Bookings">
+                  <RadioButton fx:id="allFilter" layoutX="412.0" layoutY="29.0" mnemonicParsing="false" onAction="#filterReservation" selected="true" text="All Reservations/Bookings">
                      <toggleGroup>
                         <ToggleGroup fx:id="thingies" />
                      </toggleGroup>
@@ -39,6 +39,7 @@
                   <RadioButton fx:id="reservationFilter" layoutX="412.0" layoutY="56.0" mnemonicParsing="false" onAction="#filterReservation" text="Reservations" toggleGroup="$thingies" />
                   <DatePicker fx:id="fromDateReservation" layoutX="413.0" layoutY="119.0" promptText="From" />
                   <DatePicker fx:id="toDateReservation" layoutX="413.0" layoutY="161.0" promptText="To" />
+                  <Button layoutX="457.0" layoutY="324.0" mnemonicParsing="false" onAction="#deleteReservation" text="Delete" />
                </children>
             </AnchorPane>
         </content>
