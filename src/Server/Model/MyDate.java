@@ -44,6 +44,10 @@ public class MyDate implements Serializable
     return new MyDate(tempDay, tempMonth, tempYear);
   }
 
+  public static MyDate LocalDateToMyDate(LocalDate date){
+    return new MyDate(date.getDayOfMonth(),date.getMonthValue(), date.getYear());
+  }
+
 
   /**
    * This function sets the day of the month to the value of the parameter day.
@@ -108,7 +112,7 @@ public class MyDate implements Serializable
    * @return The date and time in the string format.
    */
   public String toString() {
-    return day + "/" + month + "/" + year ;
+    return day + "-" + month + "-" + year ;
   }
 
   /**

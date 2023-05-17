@@ -5,6 +5,8 @@ import Server.Model.Hotel.Reservation;
 import Server.Utility.DataBase.DatabaseConnection;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ReservationDataImplementation implements ReservationData
@@ -81,22 +83,35 @@ public class ReservationDataImplementation implements ReservationData
   {
     try (Connection connection = getConnection())
     {
+
       PreparedStatement ps = connection.prepareStatement(
           "UPDATE ReservedBy SET roomNo =?, username=?, fromDate=?, toDate=? WHERE roomNo=? and username=? and fromDate=?");
       ps.setInt(1, roomNumber );
       ps.setString(2,username);
-      ps.setString(3, String.valueOf(fromDate));
-      ps.setString(4, String.valueOf(toDate));
+      ps.setDate(3,convertToSQLDate(fromDate.toString()));
+      ps.setDate(4, convertToSQLDate(toDate.toString()));
       ps.setInt(5, roomNumber);
       ps.setString(6,username);
-      ps.setString(7,String.valueOf(fromDate));
+      ps.setDate(7,convertToSQLDate(fromDate.toString()));
       ps.executeUpdate();
       return DatabaseConnection.SUCCESS;
     }
     catch (SQLException e)
     {
+      System.out.println(e.getMessage());
       return DatabaseConnection.ERROR;
     }
+    catch (ParseException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  private Date convertToSQLDate(String date) throws ParseException
+  {
+    SimpleDateFormat sdf1=new SimpleDateFormat("dd-MM-yyyy");
+    java.util.Date date1=sdf1.parse(date);
+    return new Date(date1.getTime());
   }
 
   @Override public ArrayList<Reservation> getAllReservations()
@@ -123,4 +138,23 @@ public class ReservationDataImplementation implements ReservationData
     }
     return list;
   }
+
+  @Override public ArrayList<Reservation> getFilteredReservations(String state,
+      MyDate fromDate, MyDate toDate)
+  {
+    ArrayList<Reservation> all=getAllReservations();
+    ArrayList<Reservation> filtered=new ArrayList<>();
+    if (state.equals("all"))
+      return all;
+    for (Reservation item: all){
+      boolean temp=true;
+      if (!item.getState().equals(state))
+        temp=false;
+
+      if (temp)
+        filtered.add(item);
+    }
+    return filtered;
+  }
+
 }

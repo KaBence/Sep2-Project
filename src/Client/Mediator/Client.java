@@ -116,6 +116,11 @@ public class Client extends UnicastRemoteObject implements
     return sharedInterface.getAllReservations();
   }
 
+  public ArrayList<Reservation> getFilteredReservation(String state,MyDate fromDate,MyDate toDate) throws RemoteException
+  {
+    return sharedInterface.getFilteredReservation(state, fromDate, toDate);
+  }
+
   public String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate)
       throws RemoteException
   {

@@ -32,6 +32,9 @@ public class EmployeeHomeController
 
   @FXML ListView<Reservation> reservationListView;
 
+  @FXML RadioButton allFilter,reservationFilter,bookingFilter;
+  @FXML DatePicker fromDateReservation,toDateReservation;
+
   @FXML CheckBox bathroomFilter, kitchenFilter, balconyFilter, internetFilter;
 
   @FXML ComboBox<Integer> priceFilter;
@@ -99,6 +102,11 @@ public class EmployeeHomeController
     viewModel.bindEmployeePosition(employeePositionFilter.textProperty());
     viewModel.bindEmployeePhoneNo(employeePhoneNumberFilter.textProperty());
 
+    viewModel.bindAllBookings(allFilter.selectedProperty());
+    viewModel.bindBookingFilter(bookingFilter.selectedProperty());
+    viewModel.bindReservationFilter(reservationFilter.selectedProperty());
+    viewModel.bindFromDateReservation(fromDateReservation.valueProperty());
+    viewModel.bindToDateReservation(toDateReservation.valueProperty());
   }
 
   public void initialize(){
@@ -200,12 +208,14 @@ public class EmployeeHomeController
       alert.showAndWait();
       return;
     }
+
     viewModel.saveReservation(reservationListView.getSelectionModel().getSelectedItem());
     viewHandler.openView(SceneNames.EditReservation);
   }
 
-  @FXML void filterReservation(){
-
+  @FXML void filterReservation() throws RemoteException
+  {
+    viewModel.filterReservation();
   }
 
 

@@ -43,13 +43,13 @@ public class EditReservationViewModel
     property.bindBidirectional(roomNo);
   }
 
-  public void save() throws RemoteException
+  public String  save() throws RemoteException
   {
     LocalDate temp=fromDate.getValue();
     LocalDate temp2=toDate.getValue();
     MyDate from=new MyDate(temp.getDayOfMonth(), temp.getMonthValue(), temp.getYear());
     MyDate to=new MyDate(temp2.getDayOfMonth(), temp2.getMonthValue(), temp2.getYear());
-    model.updateReservation(Integer.parseInt(roomNo.getValue()), username.getValue(),from,to);
+    return model.updateReservation(Integer.parseInt(roomNo.getValue()), username.getValue(),from,to);
   }
 
   public void fill(){
