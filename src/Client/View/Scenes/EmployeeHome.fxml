@@ -35,12 +35,10 @@
                         <ToggleGroup fx:id="thingies" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton layoutX="412.0" layoutY="82.0" mnemonicParsing="false" onAction="#filterReservation" text="Bookings" toggleGroup="$thingies" />
-                  <RadioButton layoutX="412.0" layoutY="56.0" mnemonicParsing="false" onAction="#filterReservation" text="Reservations" toggleGroup="$thingies" />
-                  <DatePicker fx:id="FromDate" layoutX="413.0" layoutY="119.0" promptText="From" />
-                  <DatePicker fx:id="toDate" layoutX="413.0" layoutY="161.0" onAction="#filterReservation" promptText="To" />
-                  <Button layoutX="457.0" layoutY="324.0" mnemonicParsing="false" onAction="#deleteReservation" text="Delete" />
-                  <Line endX="-44.0" layoutX="132.0" layoutY="353.0" startX="-44.0" startY="-33.000030517578125" stroke="#00000063" />
+                  <RadioButton fx:id="bookingFilter" layoutX="412.0" layoutY="82.0" mnemonicParsing="false" onAction="#filterReservation" text="Bookings" toggleGroup="$thingies" />
+                  <RadioButton fx:id="reservationFilter" layoutX="412.0" layoutY="56.0" mnemonicParsing="false" onAction="#filterReservation" text="Reservations" toggleGroup="$thingies" />
+                  <DatePicker fx:id="fromDateReservation" layoutX="413.0" layoutY="119.0" promptText="From" />
+                  <DatePicker fx:id="toDateReservation" layoutX="413.0" layoutY="161.0" promptText="To" />
                </children>
             </AnchorPane>
         </content>

@@ -145,6 +145,12 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     return model.getAllReservations();
   }
 
+  @Override public ArrayList<Reservation> getFilteredReservation(String state,MyDate fromDate,MyDate toDate)
+      throws RemoteException
+  {
+    return model.getFilteredReservations(state,fromDate,toDate);
+  }
+
   @Override public String updateReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate) throws RemoteException
   {

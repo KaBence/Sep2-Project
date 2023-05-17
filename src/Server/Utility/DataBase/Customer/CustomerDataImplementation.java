@@ -158,7 +158,6 @@ public class CustomerDataImplementation implements CustomerData
     }
     for (Customer customer : list)
     {
-      System.out.println(customer);
       boolean temp = true;
       for (String s : attr)
       {

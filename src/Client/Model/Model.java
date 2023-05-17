@@ -32,6 +32,9 @@ public interface Model
 
   ArrayList<Reservation> getAllReservations() throws RemoteException;
 
+  ArrayList<Reservation> getFilteredReservation(String state,MyDate fromDate,MyDate toDate)
+      throws RemoteException;
+
 
   String updateRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
