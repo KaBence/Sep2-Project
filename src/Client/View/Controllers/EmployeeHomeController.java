@@ -3,14 +3,13 @@ package Client.View.Controllers;
 import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.EmployeeHomeViewModel;
-import Server.Model.Customer;
-import Server.Model.Employee;
-import Server.Model.Reservation;
-import Server.Model.Room;
+import Server.Model.Hotel.Users.Customer;
+import Server.Model.Hotel.Users.Employee;
+import Server.Model.Hotel.Reservation;
+import Server.Model.Hotel.Room;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 
@@ -166,6 +165,12 @@ public class EmployeeHomeController
     }
   }
 
+  @FXML void tableClickBooking(MouseEvent event){
+    viewModel.saveReservation(reservationListView.getSelectionModel().getSelectedItem());
+    if (event.getClickCount()==2)
+      viewHandler.openView(SceneNames.EditReservation);
+  }
+
   @FXML void filterRoom() throws RemoteException
   {
     viewModel.filterRoom();
@@ -193,6 +198,14 @@ public class EmployeeHomeController
   }
 
   @FXML void editReservation(){
+    if (reservationListView.getSelectionModel().getSelectedItem()==null){
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Select a reservation first",ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return;
+    }
+    viewModel.saveReservation(reservationListView.getSelectionModel().getSelectedItem());
     viewHandler.openView(SceneNames.EditReservation);
   }
 

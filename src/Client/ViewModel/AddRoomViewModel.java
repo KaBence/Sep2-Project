@@ -1,7 +1,7 @@
 package Client.ViewModel;
 
 import Client.Model.Model;
-import Server.Model.Room;
+import Server.Model.Hotel.Room;
 import javafx.beans.property.*;
 
 import java.rmi.RemoteException;

@@ -1,7 +1,6 @@
 package Server.Utility.DataBase.Customer;
 
-import Server.Model.Customer;
-import Server.Model.Employee;
+import Server.Model.Hotel.Users.Customer;
 import Server.Utility.DataBase.DatabaseConnection;
 
 import java.sql.*;
@@ -90,9 +89,16 @@ public class CustomerDataImplementation implements CustomerData
       psCustomer.setString(3, phoneNO);
       psCustomer.setString(4, paymentInfo);
       psCustomer.setString(5, username);
-      psCustomer.executeUpdate();
 
-      return DatabaseConnection.SUCCESS;
+      if (username.equals("")||firstName.equals("")||lastName.equals("")||phoneNO.equals("")||paymentInfo.equals(""))
+      {
+        return DatabaseConnection.MANDATORY;
+      }
+      else
+      {
+        psCustomer.executeUpdate();
+        return DatabaseConnection.SUCCESS;
+      }
     }
     catch (SQLException e)
     {

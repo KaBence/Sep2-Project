@@ -1,6 +1,10 @@
 package Shared;
 
 import Server.Model.*;
+import Server.Model.Hotel.Users.Customer;
+import Server.Model.Hotel.Users.Employee;
+import Server.Model.Hotel.Reservation;
+import Server.Model.Hotel.Room;
 import dk.via.remote.observer.RemotePropertyChangeListener;
 
 import java.rmi.Remote;

@@ -63,6 +63,7 @@ public class EditEmployeeController
       alert.setHeaderText(null);
       alert.setTitle("Success");
       alert.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeEmployee);
     }
     else if(temp.equals(DatabaseConnection.MANDATORY))
     {
@@ -77,8 +78,8 @@ public class EditEmployeeController
       error.setHeaderText("Error");
       error.setHeaderText("You cannot edit this employee's information right now");
       error.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeEmployee);
     }
-    viewHandler.openView(SceneNames.EmployeeHomeEmployee);
   }
 
   @FXML void delete() throws RemoteException

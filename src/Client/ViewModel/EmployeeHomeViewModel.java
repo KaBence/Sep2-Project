@@ -1,15 +1,14 @@
 package Client.ViewModel;
 
 import Client.Model.Model;
-import Server.Model.Customer;
-import Server.Model.Employee;
-import Server.Model.Reservation;
-import Server.Model.Room;
+import Server.Model.Hotel.Users.Customer;
+import Server.Model.Hotel.Users.Employee;
+import Server.Model.Hotel.Reservation;
+import Server.Model.Hotel.Room;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -352,6 +351,10 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
 
   public void saveEmployee(Employee employee){
     model.saveSelectedEmployee(employee);
+  }
+
+  public void saveReservation(Reservation reservation){
+    model.saveSelectedReservation(reservation);
   }
 
   public void filterEmployee() throws RemoteException

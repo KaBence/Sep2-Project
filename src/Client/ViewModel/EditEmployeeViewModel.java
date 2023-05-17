@@ -1,8 +1,7 @@
 package Client.ViewModel;
 
 import Client.Model.Model;
-import Client.View.ViewHandler;
-import Server.Model.Employee;
+import Server.Model.Hotel.Users.Employee;
 import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

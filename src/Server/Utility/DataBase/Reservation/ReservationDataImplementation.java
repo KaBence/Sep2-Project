@@ -1,9 +1,8 @@
 package Server.Utility.DataBase.Reservation;
 
 import Server.Model.MyDate;
-import Server.Model.Reservation;
+import Server.Model.Hotel.Reservation;
 import Server.Utility.DataBase.DatabaseConnection;
-import org.mockito.internal.matchers.GreaterThan;
 
 import java.sql.*;
 import java.util.ArrayList;

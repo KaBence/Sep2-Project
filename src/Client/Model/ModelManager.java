@@ -2,6 +2,10 @@ package Client.Model;
 
 import Client.Mediator.Client;
 import Server.Model.*;
+import Server.Model.Hotel.Users.Customer;
+import Server.Model.Hotel.Users.Employee;
+import Server.Model.Hotel.Reservation;
+import Server.Model.Hotel.Room;
 import Shared.SharedInterface;
 
 import java.beans.PropertyChangeEvent;
@@ -20,6 +24,7 @@ public class ModelManager implements Model,PropertyChangeListener
   private Room selectedRoom;
   private Customer selectedCustomer;
   private Employee selectedEmployee;
+  private Reservation selectedReservation;
 
   private PropertyChangeSupport support;
 
@@ -146,6 +151,16 @@ public class ModelManager implements Model,PropertyChangeListener
   @Override public Room getSelectedRoom()
   {
     return selectedRoom;
+  }
+
+  @Override public void saveSelectedReservation(Reservation reservation)
+  {
+    selectedReservation=reservation;
+  }
+
+  @Override public Reservation getSelectedReservation()
+  {
+    return selectedReservation;
   }
 
   @Override public void saveSelectedCustomer(Customer customer)

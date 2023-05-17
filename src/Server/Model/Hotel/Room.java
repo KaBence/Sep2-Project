@@ -1,4 +1,4 @@
-package Server.Model;
+package Server.Model.Hotel;
 
 import java.io.Serializable;
 

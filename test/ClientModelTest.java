@@ -2,7 +2,6 @@ import Client.Mediator.Client;
 import Client.Model.Model;
 import Client.Model.ModelManager;
 import Server.Mediator.Server;
-import Server.Model.Room;
 import Shared.SharedInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,11 +9,6 @@ import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 
 public class ClientModelTest
 {

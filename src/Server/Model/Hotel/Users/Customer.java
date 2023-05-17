@@ -1,4 +1,6 @@
-package Server.Model;
+package Server.Model.Hotel.Users;
+
+import Server.Model.Hotel.Users.Person;
 
 import java.io.Serializable;
 
