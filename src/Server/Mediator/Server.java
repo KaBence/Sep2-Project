@@ -40,6 +40,12 @@ public class Server extends UnicastRemoteObject implements SharedInterface
         internet, bathroom, kitchen, balcony);
   }
 
+  @Override public Reservation addReservation(int roomNumber, String username,
+      MyDate fromDate, MyDate toDate, boolean CheckedIn) throws RemoteException
+  {
+    return null;
+  }
+
   @Override public ArrayList<Room> getAllRooms()
   {
     return model.getAllRooms();

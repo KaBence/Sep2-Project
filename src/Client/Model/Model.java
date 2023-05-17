@@ -15,6 +15,7 @@ public interface Model
   Room addRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException;
+  Reservation addReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate, boolean CheckedIn) throws RemoteException;
   ArrayList<Room> getAllRooms() throws RemoteException;
 
   ArrayList<Room> getSimpleFilteredRoom(String room) throws RemoteException;

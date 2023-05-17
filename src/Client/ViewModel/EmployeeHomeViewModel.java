@@ -5,6 +5,7 @@ import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
+import Server.Model.MyDate;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -13,6 +14,7 @@ import javafx.collections.ObservableList;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class EmployeeHomeViewModel implements PropertyChangeListener
@@ -29,7 +31,8 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private SimpleBooleanProperty bathroomFilter, kitchenFilter, internetFilter, balconyFilter;
   private SimpleObjectProperty<Integer> priceFilter;
 
-  private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom;
+  private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom, hiddenFieldRoomNo;
+  private SimpleObjectProperty<LocalDate> reservedFromDate, reservedToDate;
 
   public EmployeeHomeViewModel(Model model)
   {
@@ -75,6 +78,10 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     bedsFilter.set("");
     roomNoFilter.set("");
 
+    hiddenFieldRoomNo=new SimpleStringProperty();
+    reservedFromDate=new SimpleObjectProperty<>();
+    reservedToDate=new SimpleObjectProperty<>();
+
   }
 
   public void bindRoomList(ObjectProperty<ObservableList<Room>> property)
@@ -97,7 +104,9 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   public void bindFilteringRoom(StringProperty property){
     property.bindBidirectional(filteringRoom);
   }
-
+public void bindHiddenText(StringProperty property){
+    property.bindBidirectional(hiddenFieldRoomNo);
+}
   public void bindInternet(BooleanProperty property)
   {
     property.bindBidirectional(internetFilter);
@@ -185,6 +194,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     internetFilter.set(false);
     priceFilter.set(0);
     filteringRoom.set("");
+    hiddenFieldRoomNo.set("");
 
     employeeUsernameFilter.set("");
     employeeFirstNameFilter.set("");
@@ -353,8 +363,17 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     model.saveSelectedEmployee(employee);
   }
 
+  public void fillHiddenField(){
+    Room room=model.getSelectedRoom();
+    hiddenFieldRoomNo.set(String.valueOf(room.getRoomNo()));
+  }
   public void saveReservation(Reservation reservation){
     model.saveSelectedReservation(reservation);
+  }
+ public Reservation addReservation() throws RemoteException{
+    try{
+      return model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()),"username", )
+    }
   }
 
   public void filterEmployee() throws RemoteException
