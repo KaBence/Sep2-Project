@@ -99,6 +99,27 @@ public class ReservationDataImplementation implements ReservationData
     }
   }
 
+  @Override public String deleteReservation(int roomNumber,String username,
+      MyDate fromDate)
+  {
+    try(Connection connection = getConnection())
+    {
+      PreparedStatement ps = connection.prepareStatement(
+          "DELETE FROM ReservedBy WHERE roomNo = ? AND username = ? AND fromDate = ?");
+      ps.setInt(1, roomNumber);
+      ps.setString(2,username);
+      Date x = new Date(fromDate.getYear(), fromDate.getMonth(), fromDate.getDay());
+      ps.setDate(3,x);
+      ps.executeUpdate();
+     return DatabaseConnection.SUCCESS;
+    }
+    catch (SQLException e)
+    {
+      System.out.println(e.getMessage());
+      return DatabaseConnection.ERROR;
+    }
+  }
+
   @Override public ArrayList<Reservation> getAllReservations()
   {
     ArrayList<Reservation> list=new ArrayList<>();

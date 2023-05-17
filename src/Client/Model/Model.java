@@ -9,6 +9,7 @@ import Server.Model.Hotel.Room;
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public interface Model
 {
@@ -43,6 +44,7 @@ public interface Model
       throws RemoteException;
   String deleteRoom(int roomNumber) throws RemoteException;
   String deleteEmployee(String userID) throws RemoteException;
+  String deleteReservation(int roomNo,String username, MyDate fromDate)throws RemoteException;
 
   void saveSelectedRoom(Room room);
 

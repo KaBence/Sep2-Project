@@ -7,6 +7,7 @@ import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
+import Server.Utility.DataBase.DatabaseConnection;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -190,6 +191,33 @@ public class EmployeeHomeController
   @FXML void checkOut()
   {
     viewModel.checkOut();
+  }
+  @FXML void deleteReservation() throws RemoteException
+  {
+    Reservation x = reservationListView.getSelectionModel().getSelectedItem();
+    if (x == null)
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Select a reservation first",ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+    }
+    else
+    {
+      if (viewModel.deleteReservation(x.getRoomNumber(),x.getUsername(),x.getFromDate()).equals(
+          DatabaseConnection.SUCCESS))
+      {
+        Alert good = new Alert(Alert.AlertType.INFORMATION);
+        good.setHeaderText("The reservation has been canceled.");
+        good.showAndWait();
+      }
+      else
+      {
+        Alert bad = new Alert(Alert.AlertType.ERROR);
+        bad.setHeaderText("You cannot cancel this reservation");
+        bad.showAndWait();
+      }
+    }
   }
 
   @FXML void editReservation(){

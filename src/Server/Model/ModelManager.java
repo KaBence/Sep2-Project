@@ -82,6 +82,13 @@ public class ModelManager implements Model
   {
     return employeeData.deleteEmployee(userID);
   }
+
+  @Override public String deleteCustomer(int roomNo, String username,
+      MyDate fromDate)
+  {
+    return reservationData.deleteReservation(roomNo, username,fromDate);
+  }
+
   @Override public ArrayList<Room> getAllRooms()
   {
     return roomData.getAllRooms();

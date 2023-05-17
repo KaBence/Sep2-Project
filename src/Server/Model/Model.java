@@ -27,6 +27,8 @@ public interface Model
   String deleteRoom(int roomNumber);
   String deleteSelectedCustomer(String username);
   String deleteEmployee(String userID);
+  String deleteCustomer(int roomNo, String username,
+      MyDate fromDate);
 
   ArrayList<Room> getAllRooms();
 

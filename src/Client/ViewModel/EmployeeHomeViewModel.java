@@ -5,6 +5,7 @@ import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
+import Server.Model.MyDate;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -397,6 +398,12 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
 
   public void checkOut(){
 
+  }
+
+  public String deleteReservation(int roomNo, String username,
+      MyDate fromDate) throws RemoteException
+  {
+    return model.deleteReservation(roomNo, username, fromDate);
   }
 
   public void editReservation(){

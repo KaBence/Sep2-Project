@@ -143,6 +143,12 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.deleteEmployee(userID);
   }
 
+  @Override public String deleteReservation(int roomNo, String username,
+      MyDate fromDate) throws RemoteException
+  {
+    return client.deleteReservation(roomNo, username, fromDate);
+  }
+
   @Override public void saveSelectedRoom(Room room)
   {
     selectedRoom=room;

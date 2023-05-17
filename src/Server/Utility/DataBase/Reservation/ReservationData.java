@@ -11,6 +11,8 @@ public interface ReservationData
   ArrayList<Reservation> getMyReservation(String username);
 
   String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate);
+  String deleteReservation(int roomNumber,String username,
+      MyDate fromDate);
   ArrayList<Reservation> getAllReservations();
 
 }
