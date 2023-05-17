@@ -132,10 +132,23 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     return model.deleteEmployee(userID);
   }
 
+  @Override public String deleteReservation(int roomNo, String username,
+      MyDate fromDate) throws RemoteException
+  {
+    support.firePropertyChange("delete",null,"123");
+    return model.deleteCustomer(roomNo,username,fromDate);
+  }
+
   @Override public ArrayList<Reservation> getAllReservations()
       throws RemoteException
   {
     return model.getAllReservations();
+  }
+
+  @Override public ArrayList<Reservation> getFilteredReservation(String state,MyDate fromDate,MyDate toDate)
+      throws RemoteException
+  {
+    return model.getFilteredReservations(state,fromDate,toDate);
   }
 
   @Override public String updateReservation(int roomNumber, String username,

@@ -72,6 +72,12 @@ public class Reservation implements Serializable
     CheckedIn = checkedIn;
   }
 
+  public String getState(){
+    if (CheckedIn)
+      return "Booked";
+    return "Reserved";
+  }
+
   public String reservationInfo(){
     return "RoomNo: " + roomNumber +", Username: " + username +", FromDate: " +fromDate+", ToDate: "+ toDate;
   }

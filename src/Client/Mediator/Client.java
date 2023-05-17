@@ -105,6 +105,11 @@ public class Client extends UnicastRemoteObject implements
   public String deleteSelectedCustomer(String username) throws RemoteException{
     return sharedInterface.deleteSelectedCustomer(username);
   }
+  public String deleteReservation(int roomNo, String username,
+      MyDate fromDate) throws RemoteException
+  {
+    return sharedInterface.deleteReservation(roomNo,username,fromDate);
+  }
 
   public String deleteEmployee(String userID) throws RemoteException
   {
@@ -114,6 +119,11 @@ public class Client extends UnicastRemoteObject implements
   public ArrayList<Reservation> getAllReservations() throws RemoteException
   {
     return sharedInterface.getAllReservations();
+  }
+
+  public ArrayList<Reservation> getFilteredReservation(String state,MyDate fromDate,MyDate toDate) throws RemoteException
+  {
+    return sharedInterface.getFilteredReservation(state, fromDate, toDate);
   }
 
   public String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate)

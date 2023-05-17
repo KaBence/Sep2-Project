@@ -82,6 +82,13 @@ public class ModelManager implements Model
   {
     return employeeData.deleteEmployee(userID);
   }
+
+  @Override public String deleteCustomer(int roomNo, String username,
+      MyDate fromDate)
+  {
+    return reservationData.deleteReservation(roomNo, username,fromDate);
+  }
+
   @Override public ArrayList<Room> getAllRooms()
   {
     return roomData.getAllRooms();
@@ -130,6 +137,12 @@ public class ModelManager implements Model
   @Override public ArrayList<Reservation> getAllReservations()
   {
     return reservationData.getAllReservations();
+  }
+
+  @Override public ArrayList<Reservation> getFilteredReservations(String state,
+      MyDate fromDate, MyDate toDate)
+  {
+    return reservationData.getFilteredReservations(state, fromDate, toDate);
   }
 
   @Override public String updateReservation(int roomNumber, String username,

@@ -43,7 +43,10 @@ public interface SharedInterface extends Remote
   String updateEmployee(String username, String firstName, String lastName, String position, String phoneNo) throws RemoteException;
 
   String deleteEmployee(String userID) throws RemoteException;
+  String deleteReservation(int roomNo, String username,
+      MyDate fromDate) throws RemoteException;
 
   ArrayList<Reservation> getAllReservations() throws RemoteException;
+  ArrayList<Reservation> getFilteredReservation(String state,MyDate fromDate,MyDate toDate) throws RemoteException;
   String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate) throws RemoteException;
 }
