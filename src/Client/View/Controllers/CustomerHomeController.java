@@ -31,7 +31,7 @@ public class CustomerHomeController
     this.viewHandler=viewHandler;
     this.viewModel=viewModel;
     this.root=root;
-
+    loggingIn.setOpacity(0.0);
   }
 
   public Region getRoot(){

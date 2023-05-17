@@ -9,6 +9,8 @@ import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -392,11 +394,36 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   }
 
   public void checkIn(){
+    Reservation reservation = model.getSelectedReservation();
 
+    if(!reservation.isCheckedIn())//jeśli Is checked in jest false to można iść dalej
+    {
+      reservation.setCheckedIn(true);
+    }
+    else
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"This customer is already checked in",
+          ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+    }
   }
 
   public void checkOut(){
-
+    Reservation reservation = model.getSelectedReservation();
+    if(reservation.isCheckedIn()) //jeśli jest w checked in
+    {
+      //reservation.setCheckedIn(null);
+    }
+    else if(!reservation.isCheckedIn())
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"This customer has never checked in",
+          ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+    }
   }
 
   public void editReservation(){
