@@ -37,8 +37,8 @@
                   </RadioButton>
                   <RadioButton fx:id="bookingFilter" layoutX="412.0" layoutY="82.0" mnemonicParsing="false" onAction="#filterReservation" text="Bookings" toggleGroup="$thingies" />
                   <RadioButton fx:id="reservationFilter" layoutX="412.0" layoutY="56.0" mnemonicParsing="false" onAction="#filterReservation" text="Reservations" toggleGroup="$thingies" />
-                  <DatePicker fx:id="fromDateReservation" layoutX="413.0" layoutY="119.0" promptText="From" />
-                  <DatePicker fx:id="toDateReservation" layoutX="413.0" layoutY="161.0" promptText="To" />
+                  <DatePicker fx:id="fromDateReservation" layoutX="413.0" layoutY="119.0" onAction="#filterReservation" promptText="From" />
+                  <DatePicker fx:id="toDateReservation" layoutX="413.0" layoutY="161.0" onAction="#filterReservation" promptText="To" />
                   <Button layoutX="457.0" layoutY="324.0" mnemonicParsing="false" onAction="#deleteReservation" text="Delete" />
                </children>
             </AnchorPane>

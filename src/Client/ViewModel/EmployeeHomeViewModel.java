@@ -278,14 +278,12 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
       state="Reserved";
     if (bookingFilter.getValue())
       state="Booked";
-    if (fromDateReservation.getValue()==null){
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Please select both dates", ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Error");
-      alert.showAndWait();
-      return;
+    ArrayList<Reservation> filtered;
+    if (fromDateReservation.getValue()==null||toDateReservation.getValue()==null){
+      filtered=model.getFilteredReservation(state,null,null);
     }
-    ArrayList<Reservation> filtered=model.getFilteredReservation(state,MyDate.LocalDateToMyDate(fromDateReservation.getValue()),MyDate.LocalDateToMyDate(toDateReservation.getValue()));
+    else
+      filtered=model.getFilteredReservation(state,MyDate.LocalDateToMyDate(fromDateReservation.getValue()),MyDate.LocalDateToMyDate(toDateReservation.getValue()));
     ObservableList<Reservation> reservationObservableList=FXCollections.observableList(filtered);
     reservations.set(reservationObservableList);
   }
