@@ -129,9 +129,9 @@ public class ReservationDataImplementation implements ReservationData
       ps.setString(2,username);
       ps.setDate(3,convertToSQLDate(fromDate.toString()));
       ps.setDate(4, convertToSQLDate(toDate.toString()));
-      ps.setInt(5, roomNumber);
-      ps.setString(6,username);
-      ps.setDate(7,convertToSQLDate(fromDate.toString()));
+      ps.setInt(5, 10);
+      ps.setString(6,"john@hotmail.com");
+      ps.setDate(7,convertToSQLDate("10-04-2023"));
       ps.executeUpdate();
       return DatabaseConnection.SUCCESS;
     }
