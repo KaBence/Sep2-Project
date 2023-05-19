@@ -6,6 +6,7 @@ import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
+import Server.Model.Hotel.Users.Person;
 import Shared.SharedInterface;
 
 import java.beans.PropertyChangeEvent;
@@ -25,6 +26,7 @@ public class ModelManager implements Model,PropertyChangeListener
   private Customer selectedCustomer;
   private Employee selectedEmployee;
   private Reservation selectedReservation;
+  private Person current;
 
   private PropertyChangeSupport support;
 
@@ -42,6 +44,22 @@ public class ModelManager implements Model,PropertyChangeListener
     client=new Client(sharedInterface);
     client.addPropertyChangeListener(this);
     support=new PropertyChangeSupport(this);
+  }
+
+  @Override public Person getPerson()
+  {
+    return current;
+  }
+
+  @Override public Person logIn(Person user) throws RemoteException
+  {
+    current = client.logIn(user);
+    return current;
+  }
+
+  @Override public Person logOut(Person user) throws RemoteException
+  {
+    return client.logOut(user);
   }
 
   @Override public Room addRoom(int roomNumber, int numberOfBeds, int size,int price,

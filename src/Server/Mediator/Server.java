@@ -5,6 +5,7 @@ import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
+import Server.Model.Hotel.Users.Person;
 import Shared.SharedInterface;
 import dk.via.remote.observer.RemotePropertyChangeListener;
 import dk.via.remote.observer.RemotePropertyChangeSupport;
@@ -23,6 +24,18 @@ public class Server extends UnicastRemoteObject implements SharedInterface
   {
     this.model = model;
     support = new RemotePropertyChangeSupport();
+  }
+
+  @Override public Person logIn(Person user) throws RemoteException
+  {
+    support.firePropertyChange("logIn",null,"123");
+    return model.logIn(user);
+  }
+
+  @Override public Person logOut(Person user) throws RemoteException
+  {
+    support.firePropertyChange("logOut",null,"123");
+    return model.logOut(user);
   }
 
   @Override public void addPropertyChangeListener(

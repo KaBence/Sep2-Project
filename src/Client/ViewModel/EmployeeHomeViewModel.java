@@ -5,6 +5,7 @@ import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
+import Server.Model.Hotel.Users.Person;
 import Server.Model.MyDate;
 import Server.Utility.DataBase.DatabaseConnection;
 import Server.Utility.IllegalDateException;
@@ -230,6 +231,11 @@ public void bindReserveInfo(StringProperty property){
 
   public void bindToDateNewReservation(ObjectProperty<LocalDate> property){
     property.bindBidirectional(toDateNewReservation);
+  }
+
+  public Person getPerson()
+  {
+    return model.getPerson();
   }
 
   public void update()

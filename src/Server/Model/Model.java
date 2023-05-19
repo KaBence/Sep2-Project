@@ -4,6 +4,7 @@ import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
+import Server.Model.Hotel.Users.Person;
 
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
@@ -12,6 +13,9 @@ import java.util.ArrayList;
 public interface Model
 {
   void addListener(PropertyChangeListener listener);
+  Person logIn(Person user);
+  Person logOut(Person user);
+  ArrayList<Person> getAllRegisteredUsers();
 
   Room addRoom(int roomNumber, int numberOfBeds, int size, int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,

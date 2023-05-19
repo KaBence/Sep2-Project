@@ -1,6 +1,8 @@
 package Client.View;
 
 import Client.ViewModel.ViewModelFactory;
+import Server.Model.Hotel.Users.Guest;
+import Server.Model.Hotel.Users.Person;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
@@ -34,5 +36,18 @@ public class ViewHandler
     primaryStage.sizeToScene();
     primaryStage.getIcons().add(new Image("Icon.png"));
     primaryStage.show();
+  }
+  public Person openView(SceneNames id,Person person){
+    Region root =viewFactory.load(id);
+    currentScene.setRoot(root);
+    if (root.getUserData()==null){
+      primaryStage.setTitle("");
+    }
+    else primaryStage.setTitle(root.getUserData().toString());
+    primaryStage.setScene(currentScene);
+    primaryStage.sizeToScene();
+    primaryStage.getIcons().add(new Image("Icon.png"));
+    primaryStage.show();
+    return person;
   }
 }

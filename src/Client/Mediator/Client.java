@@ -5,6 +5,7 @@ import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
+import Server.Model.Hotel.Users.Person;
 import Shared.SharedInterface;
 import dk.via.remote.observer.RemotePropertyChangeEvent;
 import dk.via.remote.observer.RemotePropertyChangeListener;
@@ -31,6 +32,16 @@ public class Client extends UnicastRemoteObject implements
       throws RemoteException
   {
     support.firePropertyChange("update",null,remotePropertyChangeEvent.getNewValue());
+  }
+
+  public Person logIn(Person user) throws RemoteException
+  {
+    return sharedInterface.logIn(user);
+  }
+
+  public Person logOut(Person user) throws RemoteException
+  {
+    return sharedInterface.logIn(user);
   }
 
   public Room addRoom(int roomNumber, int numberOfBeds, int size, int price,

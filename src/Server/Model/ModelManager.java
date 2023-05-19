@@ -4,6 +4,7 @@ import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
+import Server.Model.Hotel.Users.Person;
 import Server.Utility.DataBase.Customer.CustomerData;
 import Server.Utility.DataBase.Customer.CustomerDataImplementation;
 import Server.Utility.DataBase.Employee.EmployeeData;
@@ -17,6 +18,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ModelManager implements Model
 {
@@ -39,6 +41,51 @@ public class ModelManager implements Model
   @Override public void addListener(PropertyChangeListener listener)
   {
     support.addPropertyChangeListener(listener);
+  }
+
+
+  @Override public Person logIn(Person user)
+  {
+    ArrayList<Person> list = getAllRegisteredUsers();
+    for (int i = 0; i < list.size(); i++)
+    {
+      if (user.equals(list.get(i)))
+      {
+        list.get(i).logIn();
+        return list.get(i);
+      }
+    }
+    return null;
+  }
+
+  @Override public Person logOut(Person user)
+  {
+    ArrayList<Person> list = getAllRegisteredUsers();
+    for (int i = 0; i < list.size(); i++)
+    {
+      if (user.equals(list.get(i)))
+      {
+        list.get(i).logOut();
+        return list.get(i);
+      }
+    }
+    return null;
+  }
+
+  @Override public ArrayList<Person> getAllRegisteredUsers()
+  {
+    ArrayList<Person> x = new ArrayList<>();
+    ArrayList<Employee> emp = getAllEmployees();
+    ArrayList<Customer> cus = getAllCustomers();
+    for (int i = 0; i < emp.size(); i++)
+    {
+      x.add(emp.get(i));
+    }
+    for (int i = 0; i < cus.size(); i++)
+    {
+      x.add(cus.get(i));
+    }
+    return x;
   }
 
   @Override public Room addRoom(int roomNumber, int numberOfBeds, int size,int price,

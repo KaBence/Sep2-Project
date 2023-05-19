@@ -5,6 +5,7 @@ import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
+import Server.Model.Hotel.Users.Person;
 
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
@@ -13,6 +14,9 @@ import java.util.Date;
 
 public interface Model
 {
+  Person getPerson();
+  Person logIn(Person user) throws RemoteException;
+  Person logOut(Person user) throws RemoteException;
   Room addRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException;
