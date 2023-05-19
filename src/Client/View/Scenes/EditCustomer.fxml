@@ -58,10 +58,5 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Button layoutX="240.0" layoutY="336.0" mnemonicParsing="false" onAction="#cancel" text="Edit">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>
