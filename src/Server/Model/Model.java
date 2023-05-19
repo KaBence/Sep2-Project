@@ -16,6 +16,8 @@ public interface Model
   Room addRoom(int roomNumber, int numberOfBeds, int size, int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony);
+  Reservation addReservation(int roomNumber, String username,
+      MyDate fromDate, MyDate toDate, boolean CheckedIn);
 
   String updateRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,

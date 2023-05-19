@@ -35,7 +35,8 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private SimpleBooleanProperty bathroomFilter, kitchenFilter, internetFilter, balconyFilter;
   private SimpleObjectProperty<Integer> priceFilter;
 
-  private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom;
+  private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom, hiddenFieldRoomNo;
+ // private SimpleObjectProperty<MyDate> reservedFromDate, reservedToDate;
 
   public EmployeeHomeViewModel(Model model)
   {
@@ -87,6 +88,10 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     bedsFilter.set("");
     roomNoFilter.set("");
 
+    hiddenFieldRoomNo=new SimpleStringProperty();
+   // reservedFromDate=new SimpleObjectProperty<>();
+    //reservedToDate=new SimpleObjectProperty<>();
+
   }
 
   public void bindRoomList(ObjectProperty<ObservableList<Room>> property)
@@ -129,7 +134,9 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   public void bindFilteringRoom(StringProperty property){
     property.bindBidirectional(filteringRoom);
   }
-
+public void bindHiddenText(StringProperty property){
+    property.bindBidirectional(hiddenFieldRoomNo);
+}
   public void bindInternet(BooleanProperty property)
   {
     property.bindBidirectional(internetFilter);
@@ -217,6 +224,9 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     internetFilter.set(false);
     priceFilter.set(0);
     filteringRoom.set("");
+    hiddenFieldRoomNo.set("");
+    toDateReservation.set(null);
+    fromDateReservation.set(null);
 
     employeeUsernameFilter.set("");
     employeeFirstNameFilter.set("");
@@ -408,8 +418,23 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     model.saveSelectedEmployee(employee);
   }
 
+  public void fillHiddenField(){
+    Room room=model.getSelectedRoom();
+    hiddenFieldRoomNo.set(String.valueOf(room.getRoomNo()));
+  }
   public void saveReservation(Reservation reservation){
     model.saveSelectedReservation(reservation);
+  }
+ public Reservation addReservation() throws RemoteException{
+
+    try{
+      return model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()),"john@hotmail.com",MyDate.LocalDateToMyDate(fromDateReservation.getValue()), MyDate.LocalDateToMyDate(toDateReservation.getValue()), false);
+    }
+    catch (NumberFormatException e){
+      throw new NumberFormatException();
+    }
+
+
   }
 
   public void filterEmployee() throws RemoteException

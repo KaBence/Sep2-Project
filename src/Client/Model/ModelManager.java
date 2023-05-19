@@ -51,6 +51,12 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.addRoom(roomNumber, numberOfBeds, size,price, orientation, internet, bathroom, kitchen, balcony);
   }
 
+  @Override public Reservation addReservation(int roomNumber, String username,
+      MyDate fromDate, MyDate toDate, boolean CheckedIn) throws RemoteException
+  {
+    return client.addReservation(roomNumber, username, fromDate, toDate, CheckedIn);
+  }
+
   @Override public ArrayList<Room> getAllRooms() throws RemoteException
   {
     return client.getAllRooms();
