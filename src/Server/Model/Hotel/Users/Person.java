@@ -5,6 +5,7 @@ import java.io.Serializable;
 public abstract class Person implements Serializable
 {
   private String firstName,lastName,password,phoneNo,username;
+  private States state;
 
   public Person(String firstName, String lastName, String password,
       String phoneNo,String username)
@@ -14,8 +15,22 @@ public abstract class Person implements Serializable
     this.password = password;
     this.phoneNo = phoneNo;
     this.username= username;
+    this.state = new LogOut();
   }
 
+  public void logIn()
+  {
+    state.logIn(username);
+  }
+  public void logOut()
+  {
+    state.logOut(username);
+  }
+
+  public String getState()
+  {
+    return state.getState();
+  }
   public void setUsername(String username)
   {
     this.username = username;

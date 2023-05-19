@@ -5,6 +5,7 @@ import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
+import Server.Model.Hotel.Users.Person;
 import dk.via.remote.observer.RemotePropertyChangeListener;
 
 import java.rmi.Remote;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 
 public interface SharedInterface extends Remote
 {
+  Person logIn(Person user) throws RemoteException;
+  Person logOut(Person user) throws RemoteException;
   void addPropertyChangeListener(RemotePropertyChangeListener listener) throws RemoteException;
   String addRoom(int roomNumber, int numberOfBeds, int size, int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
