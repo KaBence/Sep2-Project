@@ -55,8 +55,8 @@ public class EmployeeHomeController
   // employee new reservations
   @FXML TextField reserveInfo;
 
-  // @FXML DatePicker reserveFromDate;
-  //@FXML DatePicker reserveFinishDate;
+  @FXML DatePicker toDateNewReservation;
+  @FXML DatePicker fromDateNewReservation;
   @FXML CheckBox reserveBalcony;
   @FXML CheckBox reserveKitchen;
   @FXML CheckBox reserveInternet;
@@ -85,6 +85,10 @@ public class EmployeeHomeController
     this.viewModel.bindFilteringRoom(filteringRoom.textProperty());
     this.root = root;
     viewModel.bindHiddenText(hiddenFieldRoomNo.textProperty());
+    viewModel.bindToDateNewReservation(toDateNewReservation.valueProperty());
+    viewModel.bindFromDateNewReservation(fromDateNewReservation.valueProperty());
+
+
     viewModel.bindInternet(internetFilter.selectedProperty());
     viewModel.bindRoomNo(roomNoFilter.textProperty());
     viewModel.bindBeds(bedsFilter.textProperty());

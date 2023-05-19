@@ -129,10 +129,10 @@ public class Client extends UnicastRemoteObject implements
     return sharedInterface.getFilteredReservation(state, fromDate, toDate);
   }
 
-  public String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate)
+  public String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate)
       throws RemoteException
   {
-    return sharedInterface.updateReservation(roomNumber, username, fromDate, toDate);
+    return sharedInterface.updateReservation(roomNumber, username, fromDate, toDate,oldRoomNo,oldUsername,oldFromDate);
   }
 
   public void addPropertyChangeListener(PropertyChangeListener listener){

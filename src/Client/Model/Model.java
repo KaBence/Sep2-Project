@@ -44,8 +44,7 @@ public interface Model
 
   String updateEmployee( String username, String firstName, String lastName, String position, String phoneNo) throws RemoteException;
 
-  String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate)
-      throws RemoteException;
+  String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate) throws RemoteException;
   String deleteRoom(int roomNumber) throws RemoteException;
   String deleteEmployee(String userID) throws RemoteException;
   String deleteReservation(int roomNo,String username, MyDate fromDate)throws RemoteException;

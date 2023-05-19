@@ -48,5 +48,5 @@ public interface Model
   ArrayList<Reservation> getAllReservations();
   ArrayList<Reservation> getFilteredReservations(String state,MyDate fromDate,MyDate toDate);
 
-  String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate);
+  String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate);
 }

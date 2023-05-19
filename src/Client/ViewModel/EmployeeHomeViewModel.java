@@ -37,7 +37,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private SimpleObjectProperty<Integer> priceFilter;
 
   private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom, hiddenFieldRoomNo;
- // private SimpleObjectProperty<MyDate> reservedFromDate, reservedToDate;
+  private SimpleObjectProperty<LocalDate> fromDateNewReservation, toDateNewReservation;
 
   public EmployeeHomeViewModel(Model model)
   {
@@ -90,8 +90,8 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     roomNoFilter.set("");
 
     hiddenFieldRoomNo=new SimpleStringProperty();
-   // reservedFromDate=new SimpleObjectProperty<>();
-    //reservedToDate=new SimpleObjectProperty<>();
+    fromDateNewReservation=new SimpleObjectProperty<>();
+    toDateNewReservation=new SimpleObjectProperty<>();
 
   }
 
@@ -215,6 +215,14 @@ public void bindHiddenText(StringProperty property){
   public void bindPaymentInfo(StringProperty property)
   {
     property.bindBidirectional(paymentInfoFilter);
+  }
+
+  public void bindFromDateNewReservation(ObjectProperty<LocalDate> property){
+    property.bindBidirectional(fromDateNewReservation);
+  }
+
+  public void bindToDateNewReservation(ObjectProperty<LocalDate> property){
+    property.bindBidirectional(toDateNewReservation);
   }
 
   public void update()
@@ -429,7 +437,7 @@ public void bindHiddenText(StringProperty property){
  public Reservation addReservation() throws RemoteException{
 
     try{
-      return model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()),"john@hotmail.com",MyDate.LocalDateToMyDate(fromDateReservation.getValue()), MyDate.LocalDateToMyDate(toDateReservation.getValue()), false);
+      return model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()),"john@hotmail.com",MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
     }
     catch (NumberFormatException e){
       throw new NumberFormatException();
