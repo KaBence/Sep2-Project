@@ -146,6 +146,8 @@ public class MyDate implements Serializable
    * @return A boolean value.
    */
   public boolean isBefore(MyDate date2) {
+    if (equals(date2))
+      return true;
     if (year < date2.year) {
       return true;
     } else if (year == date2.year && month < date2.month) {

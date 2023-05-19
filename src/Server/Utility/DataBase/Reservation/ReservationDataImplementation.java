@@ -165,13 +165,23 @@ public class ReservationDataImplementation implements ReservationData
   {
     ArrayList<Reservation> all=getAllReservations();
     ArrayList<Reservation> filtered=new ArrayList<>();
+    boolean flag=true;
     if (state.equals("all"))
       return all;
+    if (fromDate==null&&toDate==null)
+      flag=false;
     for (Reservation item: all){
       boolean temp=true;
-      if (!item.getState().equals(state))
+      if (!item.getState().equals(state)){
         temp=false;
-
+        break;
+      }
+      if (flag){
+        if (!(item.getFromDate().isBefore(fromDate)&& toDate.isBefore(item.getToDate()))){
+          temp=false;
+          break;
+        }
+      }
       if (temp)
         filtered.add(item);
     }
