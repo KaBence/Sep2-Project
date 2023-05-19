@@ -161,8 +161,7 @@ public class ReservationDataImplementation implements ReservationData
           "DELETE FROM ReservedBy WHERE roomNo = ? AND username = ? AND fromDate = ?");
       ps.setInt(1, roomNumber);
       ps.setString(2,username);
-      Date x = new Date(fromDate.getYear(), fromDate.getMonth(), fromDate.getDay());
-      ps.setDate(3,x);
+      ps.setDate(3,convertToSQLDate(fromDate.toString()));
       ps.executeUpdate();
      return DatabaseConnection.SUCCESS;
     }
@@ -170,6 +169,10 @@ public class ReservationDataImplementation implements ReservationData
     {
       System.out.println(e.getMessage());
       return DatabaseConnection.ERROR;
+    }
+    catch (ParseException e)
+    {
+      throw new RuntimeException(e);
     }
   }
 
