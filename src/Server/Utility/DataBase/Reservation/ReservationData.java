@@ -10,7 +10,7 @@ public interface ReservationData
   Reservation addNewReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate, boolean CheckedIn);
   ArrayList<Reservation> getMyReservation(String username);
 
-  String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate);
+  String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate);
   String deleteReservation(int roomNumber,String username,
       MyDate fromDate);
   ArrayList<Reservation> getAllReservations();

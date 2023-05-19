@@ -37,7 +37,8 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private SimpleBooleanProperty bathroomFilter, kitchenFilter, internetFilter, balconyFilter;
   private SimpleObjectProperty<Integer> priceFilter;
 
-  private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom, hiddenFieldRoomNo, reserveInfo;
+  private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom, hiddenFieldRoomNo,reserveInfo;
+  private SimpleObjectProperty<LocalDate> fromDateNewReservation, toDateNewReservation;
 
   public EmployeeHomeViewModel(Model model)
   {
@@ -90,6 +91,8 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     roomNoFilter.set("");
 
     hiddenFieldRoomNo=new SimpleStringProperty();
+    fromDateNewReservation=new SimpleObjectProperty<>();
+    toDateNewReservation=new SimpleObjectProperty<>();
     reserveInfo=new SimpleStringProperty();
 
   }
@@ -219,6 +222,14 @@ public void bindReserveInfo(StringProperty property){
   public void bindPaymentInfo(StringProperty property)
   {
     property.bindBidirectional(paymentInfoFilter);
+  }
+
+  public void bindFromDateNewReservation(ObjectProperty<LocalDate> property){
+    property.bindBidirectional(fromDateNewReservation);
+  }
+
+  public void bindToDateNewReservation(ObjectProperty<LocalDate> property){
+    property.bindBidirectional(toDateNewReservation);
   }
 
   public void update()
@@ -458,7 +469,6 @@ public void bindReserveInfo(StringProperty property){
 
   public Reservation addReservation() throws RemoteException
   {
-
     try
     {
       return model.addReservation(

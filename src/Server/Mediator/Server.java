@@ -160,9 +160,9 @@ public class Server extends UnicastRemoteObject implements SharedInterface
   }
 
   @Override public String updateReservation(int roomNumber, String username,
-      MyDate fromDate, MyDate toDate) throws RemoteException
+      MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate) throws RemoteException
   {
-    return model.updateReservation(roomNumber, username, fromDate, toDate);
+    return model.updateReservation(roomNumber, username, fromDate, toDate,oldRoomNo,oldUsername,oldFromDate);
   }
 
   @Override public String checkIn(int roomNumber, String username, MyDate fromDate)

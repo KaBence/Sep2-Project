@@ -60,8 +60,8 @@
                   <ListView fx:id="roomListViewNewReservation" layoutX="14.0" layoutY="55.0" onMouseClicked="#tableClickNewResevation" prefHeight="243.0" prefWidth="387.0" />
                   <VBox layoutX="436.0" layoutY="29.0" prefHeight="320.0" prefWidth="157.0" spacing="15.0">
                      <children>
-                        <DatePicker fx:id="fromDateReservation" promptText="From date" />
-                        <DatePicker fx:id="toDateReservation" promptText="Finish date" />
+                        <DatePicker fx:id="fromDateNewReservation" promptText="From date" />
+                        <DatePicker fx:id="toDateNewReservation" promptText="Finish date" />
                         <CheckBox fx:id="reserveBalcony" mnemonicParsing="false" prefHeight="18.0" prefWidth="77.0" text="Balcony">
                            <font>
                               <Font name="Century Gothic" size="13.0" />

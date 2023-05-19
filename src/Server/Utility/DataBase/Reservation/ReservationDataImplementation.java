@@ -69,12 +69,14 @@ public class ReservationDataImplementation implements ReservationData
         specific.add(item);
     }
     for (Reservation item:specific){
+      //dates are the same
+      if (from.equals(item.getFromDate())&&to.equals(item.getToDate())) {
+        System.out.println("WTF");
+        throw new IllegalDateException(2);
+      }
       //the dates are outside a reservation
       if (from.isBefore(item.getFromDate())&&item.getToDate().isBefore(to))
         throw new IllegalDateException(1);
-      //dates are the same
-      if (from.equals(item.getFromDate())&&to.equals(item.getToDate()))
-        throw new IllegalDateException(2);
       //either dates are the same
       if (from.equals(item.getFromDate())||to.equals(item.getToDate()))
         throw new IllegalDateException(3);
@@ -119,8 +121,10 @@ public class ReservationDataImplementation implements ReservationData
   }
 
 
-  @Override public String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate)
+  @Override public String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate)
   {
+    if (username.equals("")||fromDate==null||toDate==null)
+      return DatabaseConnection.MANDATORY;
     try (Connection connection = getConnection())
     {
 
@@ -130,9 +134,9 @@ public class ReservationDataImplementation implements ReservationData
       ps.setString(2,username);
       ps.setDate(3,convertToSQLDate(fromDate.toString()));
       ps.setDate(4, convertToSQLDate(toDate.toString()));
-      ps.setInt(5, 10);
-      ps.setString(6,"john@hotmail.com");
-      ps.setDate(7,convertToSQLDate("10-04-2023"));
+      ps.setInt(5, oldRoomNo);
+      ps.setString(6,oldUsername);
+      ps.setDate(7,convertToSQLDate(oldFromDate.toString()));
       ps.executeUpdate();
       return DatabaseConnection.SUCCESS;
     }
@@ -192,10 +196,9 @@ public class ReservationDataImplementation implements ReservationData
         MyDate fromDate= MyDate.stringToDate(rs.getString("fromDate"));
         MyDate toDate= MyDate.stringToDate(rs.getString("toDate"));
         Boolean CheckedIn = rs.getBoolean("checkedIn");
-        if (!CheckedIn.equals(null))
-        {
+
           list.add(new Reservation(roomNumber,username,fromDate,toDate,CheckedIn));
-        }
+
       }
     }
     catch (SQLException e)
@@ -226,21 +229,21 @@ public class ReservationDataImplementation implements ReservationData
   {
     ArrayList<Reservation> all=getAllReservations();
     ArrayList<Reservation> filtered=new ArrayList<>();
-    boolean flag=true;
+    boolean flag=true;/*
     if (state.equals("all"))
-      return all;
+      return all;*/
     if (fromDate==null&&toDate==null)
       flag=false;
     for (Reservation item: all){
       boolean temp=true;
-      if (!item.getState().equals(state)){
-        temp=false;
-        break;
+      if (!state.equals("all")){
+        if (!item.getState().equals(state)){
+          temp=false;
+        }
       }
       if (flag){
         if (!(item.getFromDate().isBefore(fromDate)&& toDate.isBefore(item.getToDate()))){
           temp=false;
-          break;
         }
       }
       if (temp)

@@ -48,18 +48,7 @@ public class EditReservationController
 
   @FXML void save() throws RemoteException
   {
-    if (viewModel.save().equals(DatabaseConnection.SUCCESS)){
-      Alert alert=new Alert(Alert.AlertType.INFORMATION,"Edit Reservation was successful", ButtonType.OK);
-      alert.setTitle("Success");
-      alert.setHeaderText(null);
-      alert.showAndWait();
+    if (viewModel.save())
       viewHandler.openView(SceneNames.EmployeeHomeReservations);
-    }
-    if (viewModel.save().equals(DatabaseConnection.ERROR)){
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Edit Reservation has caused an error", ButtonType.OK);
-      alert.setTitle("Error");
-      alert.setHeaderText(null);
-      alert.showAndWait();
-    }
   }
 }

@@ -155,9 +155,9 @@ public class ModelManager implements Model
   }
 
   @Override public String updateReservation(int roomNumber, String username,
-      MyDate fromDate, MyDate toDate)
+      MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate)
   {
-    return reservationData.updateReservation(roomNumber, username, fromDate, toDate);
+    return reservationData.updateReservation(roomNumber, username, fromDate, toDate,oldRoomNo,oldUsername,oldFromDate);
   }
 
 
