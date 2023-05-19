@@ -138,4 +138,17 @@ public class Client extends UnicastRemoteObject implements
   public void addPropertyChangeListener(PropertyChangeListener listener){
     support.addPropertyChangeListener(listener);
   }
+
+
+  public String checkIn(int roomNumber, String username,
+      MyDate fromDate) throws RemoteException
+  {
+    System.out.println("Client");
+    return sharedInterface.checkIn(roomNumber,username,fromDate);
+  }
+  public String checkOut(int roomNumber, String username,
+      MyDate fromDate) throws RemoteException
+  {
+    return sharedInterface.checkOut(roomNumber,username,fromDate);
+  }
 }

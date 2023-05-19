@@ -100,10 +100,13 @@ public class ModelManager implements Model
     return roomData.getAllRooms();
   }
 
+
+  //toto
   @Override public ArrayList<Room> getSimpleFilteredRooms(String room)
   {
     return roomData.filterRoom(room);
   }
+
 
   @Override public ArrayList<Room> getFilteredRooms(String... attr)
   {
@@ -155,5 +158,19 @@ public class ModelManager implements Model
       MyDate fromDate, MyDate toDate)
   {
     return reservationData.updateReservation(roomNumber, username, fromDate, toDate);
+  }
+
+
+  @Override public String checkIn(int roomNumber, String username,
+      MyDate fromDate)
+  {
+    System.out.println("manager");
+    return reservationData.checkIn(roomNumber, username, fromDate);
+  }
+
+  @Override public String checkOut(int roomNumber, String username,
+      MyDate fromDate)
+  {
+    return reservationData.checkOut(roomNumber, username, fromDate);
   }
 }

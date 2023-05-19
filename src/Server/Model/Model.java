@@ -36,6 +36,8 @@ public interface Model
 
   ArrayList<Room> getSimpleFilteredRooms(String room);
 
+ // ArrayList<Reservation> getSimpleFilteredReservation(String reservation);
+
   ArrayList<Room> getFilteredRooms(String... attr);
   ArrayList<Customer> getFilteredCustomers(String...attr);
 
@@ -49,4 +51,8 @@ public interface Model
   ArrayList<Reservation> getFilteredReservations(String state,MyDate fromDate,MyDate toDate);
 
   String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate);
+
+
+  String checkIn(int roomNumber, String username, MyDate fromDate);
+  String checkOut(int roomNumber, String username, MyDate fromDate);
 }

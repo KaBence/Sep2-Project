@@ -110,6 +110,7 @@ public class EmployeeHomeController
     viewModel.bindReservationFilter(reservationFilter.selectedProperty());
     viewModel.bindFromDateReservation(fromDateReservation.valueProperty());
     viewModel.bindToDateReservation(toDateReservation.valueProperty());
+    viewModel.bindReserveInfo(reserveInfo.textProperty());
   }
 
   public void initialize()
@@ -194,14 +195,66 @@ public class EmployeeHomeController
     viewModel.filterEmployee();
   }
 
-  @FXML void checkIn()
+  @FXML void checkIn() throws RemoteException
   {
+    String x = viewModel.checkIn();
     viewModel.checkIn();
+    if (x.equals(DatabaseConnection.SUCCESS))
+    {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION, "Check In successful",
+          ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Success");
+      alert.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    }
+    else if (x.equals(DatabaseConnection.MANDATORY))
+    {
+      Alert error = new Alert(Alert.AlertType.ERROR);
+      error.setHeaderText("Error");
+      error.setHeaderText("Select a reservation");
+      error.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    }
+    else
+    {
+      Alert error = new Alert(Alert.AlertType.ERROR);
+      error.setHeaderText("Error");
+      error.setHeaderText("The customer is already checked in");
+      error.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    }
   }
 
-  @FXML void checkOut()
+  @FXML void checkOut() throws RemoteException
   {
+    String x = viewModel.checkOut();
     viewModel.checkOut();
+    if (x.equals(DatabaseConnection.SUCCESS))
+    {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION, "Check Out successful",
+          ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Success");
+      alert.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    }
+    else if (x.equals(DatabaseConnection.MANDATORY))
+    {
+      Alert error = new Alert(Alert.AlertType.ERROR);
+      error.setHeaderText("Error");
+      error.setHeaderText("Select a reservation");
+      error.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    }
+    else
+    {
+      Alert error = new Alert(Alert.AlertType.ERROR);
+      error.setHeaderText("Error");
+      error.setHeaderText("The customer has never checked in");
+      error.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    }
   }
 
   @FXML void deleteReservation() throws RemoteException
@@ -248,11 +301,6 @@ public class EmployeeHomeController
     viewModel.saveReservation(
         reservationListView.getSelectionModel().getSelectedItem());
     viewHandler.openView(SceneNames.EditReservation);
-  }
-
-  @FXML void filterReservation() throws RemoteException
-  {
-    viewModel.filterReservation();
   }
 
   @FXML void tableClickNewResevation() throws RemoteException
@@ -400,6 +448,11 @@ public class EmployeeHomeController
     viewModel.simpleFilterEmployee(x);
   }
 
+  @FXML void simpleFilterNewReservation() throws RemoteException
+  {
+    viewModel.simpleRoomNewReservationFilter();
+  }
+
   @FXML void filterCustomer() throws RemoteException
   {
     String x = filteringCustomer.getText();
@@ -410,5 +463,6 @@ public class EmployeeHomeController
   {
     viewModel.simpleRoomFilter();
   }
+  @FXML void filterReservation(){}
 
 }

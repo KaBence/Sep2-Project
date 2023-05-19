@@ -2,6 +2,7 @@ package Client.ViewModel;
 
 import Client.Model.Model;
 import Server.Model.Hotel.Users.Customer;
+import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -61,7 +62,7 @@ public class EditCustomerViewModel
           lastName.getValue(), phoneNo.getValue(), payment.getValue());
     }
     catch (Exception e){
-      return "mandatory";
+      return DatabaseConnection.MANDATORY;
     }
   }
 }
