@@ -332,39 +332,8 @@ public class EmployeeHomeController
 
   @FXML void createNewReservation() throws RemoteException
   {
-    boolean flag = true;
-    if (viewModel.addReservation() == null)
-    {
-      Alert wrong = new Alert(Alert.AlertType.ERROR);
-      wrong.setTitle("Invalid data");
-      wrong.setHeaderText("something is wrong");
-      wrong.showAndWait();
-    }
-    else
-    {
-      try
-      {
-        System.out.println(viewModel.addReservation());
-      }
-      catch (RuntimeException e)
-      {
-        Alert empty = new Alert(Alert.AlertType.WARNING);
-        empty.setTitle("Invalid data");
-        empty.setHeaderText(
-            "You need to fill up mandatory fields: \n from date and to date");
-        empty.showAndWait();
-        flag = false;
-      }
-      if (flag)
-      {
-        Alert success = new Alert(Alert.AlertType.INFORMATION);
-        success.setTitle("Success");
-        success.setHeaderText(
-            "The room has been successfully added to the system");
-        success.showAndWait();
-        viewHandler.openView(SceneNames.EmployeeHomeReservations);
-      }
-    }
+    if (viewModel.addReservation())
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
   }
 
   @FXML void ToggleRoom()

@@ -467,18 +467,32 @@ public void bindReserveInfo(StringProperty property){
     model.saveSelectedReservation(reservation);
   }
 
-  public Reservation addReservation() throws RemoteException
+  public boolean addReservation() throws RemoteException
   {
     try
     {
-      return model.addReservation(
-          Integer.parseInt(hiddenFieldRoomNo.getValue()), "john@hotmail.com",
-          MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),
-          MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
+      String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), "john@hotmail.com", MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
+      if (state.equals(DatabaseConnection.SUCCESS)){
+        Alert alert=new Alert(Alert.AlertType.INFORMATION,"Successfully added a new reservation",ButtonType.OK);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+        return true;
+      }
+      if (state.equals(DatabaseConnection.ERROR)){
+        Alert alert=new Alert(Alert.AlertType.ERROR,"Error occoured",ButtonType.OK);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+        return false;
+      }
     }
     catch (NumberFormatException e)
     {
-      throw new NumberFormatException();
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Please select a room to reserve",ButtonType.OK);
+      alert.setTitle("Error");
+      alert.setHeaderText(null);
+      alert.showAndWait();
     }
     catch (IllegalDateException e)
     {
@@ -488,7 +502,7 @@ public void bindReserveInfo(StringProperty property){
       alert.setHeaderText(null);
       alert.showAndWait();
     }
-    return null;
+    return false;
   }
 
   public void filterEmployee() throws RemoteException

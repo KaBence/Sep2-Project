@@ -18,7 +18,7 @@ public class StartServer
     Model model=new ModelManager();
     ConsoleView consoleView=new ConsoleView(model);
 
-    Registry registry= LocateRegistry.createRegistry(1337);
+    Registry registry= LocateRegistry.createRegistry(1377);
     Server server=new Server(model);
     registry.bind("HotelServer",server);
     System.out.println("server started");

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public interface ReservationData
 {
-  Reservation addNewReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate, boolean CheckedIn);
+  String  addNewReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate, boolean CheckedIn);
   ArrayList<Reservation> getMyReservation(String username);
 
   String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate);
