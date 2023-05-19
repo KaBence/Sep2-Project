@@ -35,8 +35,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private SimpleBooleanProperty bathroomFilter, kitchenFilter, internetFilter, balconyFilter;
   private SimpleObjectProperty<Integer> priceFilter;
 
-  private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom, hiddenFieldRoomNo;
- // private SimpleObjectProperty<MyDate> reservedFromDate, reservedToDate;
+  private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom, hiddenFieldRoomNo, reserveInfo;
 
   public EmployeeHomeViewModel(Model model)
   {
@@ -89,8 +88,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     roomNoFilter.set("");
 
     hiddenFieldRoomNo=new SimpleStringProperty();
-   // reservedFromDate=new SimpleObjectProperty<>();
-    //reservedToDate=new SimpleObjectProperty<>();
+    reserveInfo=new SimpleStringProperty();
 
   }
 
@@ -136,6 +134,9 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   }
 public void bindHiddenText(StringProperty property){
     property.bindBidirectional(hiddenFieldRoomNo);
+}
+public void bindReserveInfo(StringProperty property){
+    property.bindBidirectional(reserveInfo);
 }
   public void bindInternet(BooleanProperty property)
   {
@@ -411,6 +412,12 @@ public void bindHiddenText(StringProperty property){
   public void simpleRoomFilter() throws RemoteException
   {
     ObservableList<Room> roomObservableList=FXCollections.observableList(model.getSimpleFilteredRoom(filteringRoom.getValue()));
+    rooms.set(roomObservableList);
+  }
+
+  public void simpleRoomNewReservationFilter() throws RemoteException
+  {
+    ObservableList<Room> roomObservableList=FXCollections.observableList(model.getSimpleFilteredRoom(reserveInfo.getValue()));
     rooms.set(roomObservableList);
   }
 

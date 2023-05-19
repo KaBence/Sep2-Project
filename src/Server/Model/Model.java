@@ -36,6 +36,8 @@ public interface Model
 
   ArrayList<Room> getSimpleFilteredRooms(String room);
 
+ // ArrayList<Reservation> getSimpleFilteredReservation(String reservation);
+
   ArrayList<Room> getFilteredRooms(String... attr);
   ArrayList<Customer> getFilteredCustomers(String...attr);
 
