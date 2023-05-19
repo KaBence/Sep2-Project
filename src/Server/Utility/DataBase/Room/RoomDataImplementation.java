@@ -26,10 +26,12 @@ public class RoomDataImplementation implements RoomData
         "postgres", "password");
   }
 
-  @Override public Room addNewRoom(int roomNumber, int numberOfBeds, int size,int price,
+  @Override public String  addNewRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony,String status)
   {
+    if (orientation==null)
+      return DatabaseConnection.MANDATORY;
     try (Connection connection = getConnection())
     {
       PreparedStatement ps = connection.prepareStatement(
@@ -49,10 +51,9 @@ public class RoomDataImplementation implements RoomData
     }
     catch (SQLException ex)
     {
-      return null;
+      return DatabaseConnection.ERROR;
     }
-    return new Room(roomNumber, numberOfBeds, size,price, orientation, internet,
-        bathroom, kitchen, balcony,status);
+    return DatabaseConnection.SUCCESS;
   }
 
   @Override public String deleteRoom(int roomNumber)
@@ -75,6 +76,8 @@ public class RoomDataImplementation implements RoomData
       int size,int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony)
   {
+    if (numberOfBeds<1||size<1)
+      return DatabaseConnection.MANDATORY;
     try (Connection connection = getConnection())
     {
       PreparedStatement ps = connection.prepareStatement(

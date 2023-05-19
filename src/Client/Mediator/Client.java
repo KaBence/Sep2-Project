@@ -33,7 +33,7 @@ public class Client extends UnicastRemoteObject implements
     support.firePropertyChange("update",null,remotePropertyChangeEvent.getNewValue());
   }
 
-  public Room addRoom(int roomNumber, int numberOfBeds, int size, int price,
+  public String addRoom(int roomNumber, int numberOfBeds, int size, int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException
   {

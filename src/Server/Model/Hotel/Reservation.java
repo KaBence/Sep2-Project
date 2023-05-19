@@ -73,6 +73,8 @@ public class Reservation implements Serializable
   }
 
   public String getState(){
+    if (CheckedIn==null)
+      return "In The Past";
     if (CheckedIn)
       return "Booked";
     return "Reserved";

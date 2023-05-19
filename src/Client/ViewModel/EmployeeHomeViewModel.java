@@ -473,8 +473,8 @@ public void bindReserveInfo(StringProperty property){
     {
       return model.addReservation(
           Integer.parseInt(hiddenFieldRoomNo.getValue()), "john@hotmail.com",
-          MyDate.LocalDateToMyDate(fromDateReservation.getValue()),
-          MyDate.LocalDateToMyDate(toDateReservation.getValue()), false);
+          MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),
+          MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
     }
     catch (NumberFormatException e)
     {
@@ -497,27 +497,27 @@ public void bindReserveInfo(StringProperty property){
     int counter = 0;
     if (!employeeUsernameFilter.getValue().equals(""))
     {
-      temp[counter] = employeeUsernameFilter.getValue();
+      temp[counter] = employeeUsernameFilter.getValue().toLowerCase();
       counter++;
     }
     if (!employeeFirstNameFilter.getValue().equals(""))
     {
-      temp[counter] = " -> , FirstName " + employeeFirstNameFilter.getValue();
+      temp[counter] = " -> , firstname " + employeeFirstNameFilter.getValue().toLowerCase();
       counter++;
     }
     if (!employeeLastNameFilter.getValue().equals(""))
     {
-      temp[counter] = ", LastName " + employeeLastNameFilter.getValue();
+      temp[counter] = ", lastname " + employeeLastNameFilter.getValue().toLowerCase();
       counter++;
     }
     if (!employeePhoneNumberFilter.getValue().equals(""))
     {
-      temp[counter] = ", PhoneNumber " + employeePhoneNumberFilter.getValue();
+      temp[counter] = ", phonenumber " + employeePhoneNumberFilter.getValue().toLowerCase();
       counter++;
     }
     if (!employeePosition.getValue().equals(""))
     {
-      temp[counter] = ", Position " + employeePosition.getValue();
+      temp[counter] = ", position " + employeePosition.getValue().toLowerCase();
       System.out.println(temp[counter]);
     }
     ObservableList<Employee> customerObservableList = FXCollections.observableList(

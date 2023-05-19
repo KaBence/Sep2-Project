@@ -201,7 +201,16 @@ public class EmployeeHomeController
 
   @FXML void checkIn() throws RemoteException
   {
-    String x = viewModel.checkIn();
+    Alert conf=new Alert(Alert.AlertType.CONFIRMATION,"Do you really want to check in this reservation?",ButtonType.YES,ButtonType.NO);
+    conf.setTitle("Confirmation");
+    conf.setHeaderText(null);
+    conf.showAndWait();
+    String x="";
+    if (conf.getResult().equals(ButtonType.YES)){
+      x = viewModel.checkIn();
+    }
+    else
+      return;
     if (x.equals(DatabaseConnection.SUCCESS))
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION, "Check In successful",
@@ -231,8 +240,16 @@ public class EmployeeHomeController
 
   @FXML void checkOut() throws RemoteException
   {
-    String x = viewModel.checkOut();
-    viewModel.checkOut();
+    Alert conf=new Alert(Alert.AlertType.CONFIRMATION,"Do you really want to check in this reservation?",ButtonType.YES,ButtonType.NO);
+    conf.setTitle("Confirmation");
+    conf.setHeaderText(null);
+    conf.showAndWait();
+    String x="";
+    if (conf.getResult().equals(ButtonType.YES)){
+       x = viewModel.checkOut();
+    }
+    else
+      return;
     if (x.equals(DatabaseConnection.SUCCESS))
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION, "Check Out successful",
@@ -322,7 +339,6 @@ public class EmployeeHomeController
       wrong.setTitle("Invalid data");
       wrong.setHeaderText("something is wrong");
       wrong.showAndWait();
-      //viewHandler.openView(SceneNames.EmployeeHomeRoom);
     }
     else
     {
@@ -346,7 +362,7 @@ public class EmployeeHomeController
         success.setHeaderText(
             "The room has been successfully added to the system");
         success.showAndWait();
-        viewHandler.openView(SceneNames.EmployeeHomeRoom);
+        viewHandler.openView(SceneNames.EmployeeHomeReservations);
       }
     }
   }

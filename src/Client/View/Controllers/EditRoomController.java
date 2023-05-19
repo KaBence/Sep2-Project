@@ -68,31 +68,8 @@ public class EditRoomController
 
   @FXML void Save() throws RemoteException
   {
-    String x = viewModel.edit();
-    if (x.equals(DatabaseConnection.SUCCESS))
-    {
-      Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful",
-          ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Success");
-      alert.showAndWait();
+    if (viewModel.edit())
       viewHandler.openView(SceneNames.EmployeeHomeRoom);
-    }
-    else if (x.equals(DatabaseConnection.MANDATORY))
-    {
-      Alert mandatory = new Alert(Alert.AlertType.ERROR);
-      mandatory.setHeaderText("Error");
-      mandatory.setHeaderText("Mandatory fields can not be empty");
-      mandatory.showAndWait();
-    }
-    else
-    {
-      Alert error = new Alert(Alert.AlertType.ERROR);
-      error.setHeaderText("Error");
-      error.setHeaderText("You cannot edit this room right now");
-      error.showAndWait();
-      viewHandler.openView(SceneNames.EmployeeHomeRoom);
-    }
   }
 
   @FXML void Cancel()

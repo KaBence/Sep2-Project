@@ -2,7 +2,10 @@ package Client.ViewModel;
 
 import Client.Model.Model;
 import Server.Model.Hotel.Room;
+import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import java.rmi.RemoteException;
 
@@ -74,19 +77,44 @@ public class AddRoomViewModel
     property.bindBidirectional(orientation);
   }
 
-  public Room addRoom() throws RemoteException
+  public boolean addRoom() throws RemoteException
   {
     try
     {
-      return model.addRoom(Integer.parseInt(roomNumber.getValue()),
+      String state = model.addRoom(Integer.parseInt(roomNumber.getValue()),
           Integer.parseInt(numberOfBeds.getValue()),
           Integer.parseInt(size.getValue()), price.getValue(),
           orientation.getValue(), internet.getValue(), bathroom.getValue(),
           kitchen.getValue(), balcony.getValue());
+      if (state.equals(DatabaseConnection.SUCCESS)){
+        Alert alert=new Alert(Alert.AlertType.INFORMATION,"Adding a room is successful", ButtonType.OK);
+        alert.setHeaderText(null);
+        alert.setTitle("Success");
+        alert.showAndWait();
+        return true;
+      }
+      if (state.equals(DatabaseConnection.ERROR)){
+        Alert alert=new Alert(Alert.AlertType.ERROR,"Some Error occurred", ButtonType.OK);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.showAndWait();
+        return false;
+      }
+      if (state.equals(DatabaseConnection.MANDATORY)){
+        Alert alert=new Alert(Alert.AlertType.ERROR,"Please fill up every field", ButtonType.OK);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.showAndWait();
+        return false;
+      }
     }
-    catch (NumberFormatException e)
+    catch (NumberFormatException | NullPointerException e)
     {
-      throw new NumberFormatException();
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Please fill up the every field", ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
     }
+    return false;
   }
 }
