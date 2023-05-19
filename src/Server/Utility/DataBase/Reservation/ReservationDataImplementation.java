@@ -3,6 +3,7 @@ package Server.Utility.DataBase.Reservation;
 import Server.Model.MyDate;
 import Server.Model.Hotel.Reservation;
 import Server.Utility.DataBase.DatabaseConnection;
+import Server.Utility.IllegalDateException;
 
 import java.sql.*;
 import java.text.ParseException;
@@ -34,6 +35,8 @@ public class ReservationDataImplementation implements ReservationData
   @Override public Reservation addNewReservation(int roomNumber,
       String username, MyDate fromDate, MyDate toDate, boolean CheckedIn)
   {
+    dateChecker(roomNumber,fromDate,toDate);
+
     try (Connection connection = getConnection())
     {
       PreparedStatement ps = connection.prepareStatement(
@@ -50,6 +53,38 @@ public class ReservationDataImplementation implements ReservationData
       return null;
     }
     return new Reservation(roomNumber, username, fromDate, toDate, CheckedIn);
+  }
+
+  private void dateChecker(int roomNumber,MyDate from,MyDate to){
+    ArrayList<Reservation> all=getAllReservations();
+    ArrayList<Reservation> specific=new ArrayList<>();
+    for (Reservation item:all){
+      if (item.getRoomNumber()==roomNumber)
+        specific.add(item);
+    }
+    for (Reservation item:specific){
+      //the dates are outside a reservation
+      if (from.isBefore(item.getFromDate())&&item.getToDate().isBefore(to))
+        throw new IllegalDateException(1);
+      //dates are the same
+      if (from.equals(item.getFromDate())&&to.equals(item.getToDate()))
+        throw new IllegalDateException(2);
+      //either dates are the same
+      if (from.equals(item.getFromDate())||to.equals(item.getToDate()))
+        throw new IllegalDateException(3);
+      //from date in between and to date is after
+      if (item.getFromDate().isBefore(from)&&item.getToDate().isBefore(to)&& from.isBefore(item.getToDate()))
+        throw new IllegalDateException(4);
+      //Both between
+      if (item.getFromDate().isBefore(from)&& to.isBefore(item.getToDate()))
+        throw new IllegalDateException(5);
+      //from is before and return in between
+      if (from.isBefore(item.getFromDate())&& to.isBefore(item.getToDate())&&!to.isBefore(item.getFromDate()))
+        throw new IllegalDateException(6);
+      //from is before and to is equals
+      if (from.isBefore(item.getFromDate())&&to.equals(item.getToDate()))
+        throw new IllegalDateException(7);
+    }
   }
 
   @Override public ArrayList<Reservation> getMyReservation(String username)
@@ -78,8 +113,7 @@ public class ReservationDataImplementation implements ReservationData
   }
 
 
-  @Override public String updateReservation(int roomNumber, String username,
-      MyDate fromDate, MyDate toDate)
+  @Override public String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate)
   {
     try (Connection connection = getConnection())
     {
@@ -114,8 +148,7 @@ public class ReservationDataImplementation implements ReservationData
     return new Date(date1.getTime());
   }
 
-  @Override public String deleteReservation(int roomNumber,String username,
-      MyDate fromDate)
+  @Override public String deleteReservation(int roomNumber,String username, MyDate fromDate)
   {
     try(Connection connection = getConnection())
     {
