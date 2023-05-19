@@ -13,7 +13,7 @@ public interface Model
 {
   void addListener(PropertyChangeListener listener);
 
-  Room addRoom(int roomNumber, int numberOfBeds, int size, int price,
+  String addRoom(int roomNumber, int numberOfBeds, int size, int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony);
   Reservation addReservation(int roomNumber, String username,

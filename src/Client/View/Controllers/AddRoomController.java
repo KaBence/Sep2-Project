@@ -79,40 +79,8 @@ public class AddRoomController
 
   @FXML void Add() throws RemoteException
   {
-    boolean flag = true;
-    if (viewModel.addRoom() == null)
-    {
-      Alert wrong = new Alert(Alert.AlertType.ERROR);
-      wrong.setTitle("Invalid data");
-      wrong.setHeaderText("The room with room number "+roomNo.getText()+" already exist");
-      wrong.showAndWait();
+    if (viewModel.addRoom())
       viewHandler.openView(SceneNames.EmployeeHomeRoom);
-    }
-    else
-    {
-      try
-      {
-        viewModel.addRoom();
-      }
-      catch (RuntimeException e)
-      {
-        Alert empty = new Alert(Alert.AlertType.WARNING);
-        empty.setTitle("Invalid data");
-        empty.setHeaderText(
-            "You need to fill up mandatory fields: \nRoom number, Number of beds and Size of the room as a number,\nOrientation and Price per night");
-        empty.showAndWait();
-        flag = false;
-      }
-      if (flag)
-      {
-        Alert success = new Alert(Alert.AlertType.INFORMATION);
-        success.setTitle("Success");
-        success.setHeaderText(
-            "The room has been successfully added to the system");
-        success.showAndWait();
-        viewHandler.openView(SceneNames.EmployeeHomeRoom);
-      }
-    }
   }
 
   @FXML void Cancel()
