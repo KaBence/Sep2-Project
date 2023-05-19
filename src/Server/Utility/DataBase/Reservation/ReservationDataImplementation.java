@@ -40,14 +40,19 @@ public class ReservationDataImplementation implements ReservationData
           "INSERT INTO ReservedBy(roomNo, username, fromDate, toDate, checkedIn) VALUES(?,?,?,?,?)");
       ps.setInt(1, roomNumber);
       ps.setString(2, username);
-      ps.setString(3, String.valueOf(fromDate));
-      ps.setString(4, String.valueOf(toDate));
+      ps.setDate(3, convertToSQLDate(fromDate.toString()));
+      ps.setDate(4, convertToSQLDate(toDate.toString()));
       ps.setBoolean(5, CheckedIn);
       ps.executeUpdate();
     }
     catch (SQLException ex)
     {
+      System.err.println(ex.getMessage());
       return null;
+    }
+    catch (ParseException e)
+    {
+      throw new RuntimeException(e);
     }
     return new Reservation(roomNumber, username, fromDate, toDate, CheckedIn);
   }

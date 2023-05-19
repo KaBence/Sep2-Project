@@ -34,8 +34,8 @@ public class EmployeeHomeController
 
   @FXML ListView<Reservation> reservationListView;
 
-  @FXML RadioButton allFilter,reservationFilter,bookingFilter;
-  @FXML DatePicker fromDateReservation,toDateReservation;
+  @FXML RadioButton allFilter, reservationFilter, bookingFilter;
+  @FXML DatePicker fromDateReservation, toDateReservation;
 
   @FXML CheckBox bathroomFilter, kitchenFilter, balconyFilter, internetFilter;
 
@@ -55,8 +55,8 @@ public class EmployeeHomeController
   // employee new reservations
   @FXML TextField reserveInfo;
 
-  @FXML DatePicker reserveFromDate;
-  @FXML DatePicker reserveFinishDate;
+  // @FXML DatePicker reserveFromDate;
+  //@FXML DatePicker reserveFinishDate;
   @FXML CheckBox reserveBalcony;
   @FXML CheckBox reserveKitchen;
   @FXML CheckBox reserveInternet;
@@ -161,7 +161,6 @@ public class EmployeeHomeController
       viewHandler.openView(SceneNames.EditCustomer);
   }
 
-
   @FXML void tableClickEmployee(MouseEvent event)
   {
     viewModel.saveEmployee(
@@ -204,20 +203,22 @@ public class EmployeeHomeController
   {
     viewModel.checkOut();
   }
+
   @FXML void deleteReservation() throws RemoteException
   {
     Reservation x = reservationListView.getSelectionModel().getSelectedItem();
     if (x == null)
     {
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Select a reservation first",ButtonType.OK);
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "Select a reservation first", ButtonType.OK);
       alert.setHeaderText(null);
       alert.setTitle("Error");
       alert.showAndWait();
     }
     else
     {
-      if (viewModel.deleteReservation(x.getRoomNumber(),x.getUsername(),x.getFromDate()).equals(
-          DatabaseConnection.SUCCESS))
+      if (viewModel.deleteReservation(x.getRoomNumber(), x.getUsername(),
+          x.getFromDate()).equals(DatabaseConnection.SUCCESS))
       {
         Alert good = new Alert(Alert.AlertType.INFORMATION);
         good.setHeaderText("The reservation has been canceled.");
@@ -244,7 +245,8 @@ public class EmployeeHomeController
       return;
     }
 
-    viewModel.saveReservation(reservationListView.getSelectionModel().getSelectedItem());
+    viewModel.saveReservation(
+        reservationListView.getSelectionModel().getSelectedItem());
     viewHandler.openView(SceneNames.EditReservation);
   }
 
@@ -255,12 +257,47 @@ public class EmployeeHomeController
 
   @FXML void tableClickNewResevation() throws RemoteException
   {
-    viewModel.saveRoom(roomListViewNewReservation.getSelectionModel().getSelectedItem());
+    viewModel.saveRoom(
+        roomListViewNewReservation.getSelectionModel().getSelectedItem());
     viewModel.fillHiddenField();
   }
+
   @FXML void createNewReservation() throws RemoteException
   {
-    viewModel.
+    boolean flag = true;
+    if (viewModel.addReservation() == null)
+    {
+      Alert wrong = new Alert(Alert.AlertType.ERROR);
+      wrong.setTitle("Invalid data");
+      wrong.setHeaderText("something is wrong");
+      wrong.showAndWait();
+      //viewHandler.openView(SceneNames.EmployeeHomeRoom);
+    }
+    else
+    {
+      try
+      {
+        System.out.println(viewModel.addReservation());
+      }
+      catch (RuntimeException e)
+      {
+        Alert empty = new Alert(Alert.AlertType.WARNING);
+        empty.setTitle("Invalid data");
+        empty.setHeaderText(
+            "You need to fill up mandatory fields: \n from date and to date");
+        empty.showAndWait();
+        flag = false;
+      }
+      if (flag)
+      {
+        Alert success = new Alert(Alert.AlertType.INFORMATION);
+        success.setTitle("Success");
+        success.setHeaderText(
+            "The room has been successfully added to the system");
+        success.showAndWait();
+        viewHandler.openView(SceneNames.EmployeeHomeRoom);
+      }
+    }
   }
 
   @FXML void ToggleRoom()
@@ -373,8 +410,5 @@ public class EmployeeHomeController
   {
     viewModel.simpleRoomFilter();
   }
-
-
-
 
 }
