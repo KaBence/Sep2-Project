@@ -88,7 +88,7 @@ public class ModelManager implements Model
     return x;
   }
 
-  @Override public Room addRoom(int roomNumber, int numberOfBeds, int size,int price,
+
   @Override public String addRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony)

@@ -17,7 +17,6 @@ public interface Model
   Person getPerson();
   Person logIn(Person user) throws RemoteException;
   Person logOut(Person user) throws RemoteException;
-  Room addRoom(int roomNumber, int numberOfBeds, int size,int price,
   String addRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException;

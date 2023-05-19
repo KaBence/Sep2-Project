@@ -62,7 +62,6 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.logOut(user);
   }
 
-  @Override public Room addRoom(int roomNumber, int numberOfBeds, int size,int price,
   @Override public String addRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException
