@@ -3,10 +3,13 @@ package Client.ViewModel;
 import Client.Model.Model;
 import Server.Model.MyDate;
 import Server.Model.Hotel.Reservation;
+import Server.Utility.IllegalDateException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
@@ -43,13 +46,23 @@ public class EditReservationViewModel
     property.bindBidirectional(roomNo);
   }
 
-  public String  save() throws RemoteException
+  public String save() throws RemoteException
   {
     LocalDate temp=fromDate.getValue();
     LocalDate temp2=toDate.getValue();
     MyDate from=new MyDate(temp.getDayOfMonth(), temp.getMonthValue(), temp.getYear());
     MyDate to=new MyDate(temp2.getDayOfMonth(), temp2.getMonthValue(), temp2.getYear());
-    return model.updateReservation(Integer.parseInt(roomNo.getValue()), username.getValue(),from,to);
+    try
+    {
+      return model.updateReservation(Integer.parseInt(roomNo.getValue()), username.getValue(),from,to);
+    }
+    catch (IllegalDateException e){
+      Alert alert=new Alert(Alert.AlertType.ERROR,e.message(), ButtonType.OK);
+      alert.setTitle("Error");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+    }
+    return null;
   }
 
   public void fill(){
