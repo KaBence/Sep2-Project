@@ -6,6 +6,7 @@ import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
 import Server.Model.MyDate;
+import Server.Utility.DataBase.DatabaseConnection;
 import Server.Utility.IllegalDateException;
 import javafx.application.Platform;
 import javafx.beans.property.*;
@@ -526,12 +527,12 @@ public void bindReserveInfo(StringProperty property){
       }
       else
       {
-        return "alreadyCheckedIn";
+        return DatabaseConnection.ALREADY;
       }
     }
     catch (Exception e)
     {
-      return "mandatory";
+      return DatabaseConnection.MANDATORY;
     }
   }
 
@@ -547,12 +548,12 @@ public void bindReserveInfo(StringProperty property){
       }
       else
       {
-        return "neverCheckedIn";
+        return DatabaseConnection.ALREADY;
       }
     }
     catch (Exception e)
     {
-      return "mandatory";
+      return DatabaseConnection.MANDATORY;
     }
   }
 
