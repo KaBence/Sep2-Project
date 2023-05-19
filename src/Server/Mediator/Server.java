@@ -144,7 +144,7 @@ public class Server extends UnicastRemoteObject implements SharedInterface
       MyDate fromDate) throws RemoteException
   {
     support.firePropertyChange("delete",null,"123");
-    return model.deleteCustomer(roomNo,username,fromDate);
+    return model.deleteReservation(roomNo,username,fromDate);
   }
 
   @Override public ArrayList<Reservation> getAllReservations()
