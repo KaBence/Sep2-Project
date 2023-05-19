@@ -200,8 +200,8 @@ public class ViewFactory
       case Home -> loadHomeView();
       case EmployeeLogin -> loadEmployeeLogin();
       case EmployeeHomeReservations -> loadEmployeeHome(0);
-      case EmployeeHomeEmployee -> loadEmployeeHome(1);
-      case EmployeeHomeAddReservations -> loadEmployeeHome(2);
+      case EmployeeHomeAddReservations -> loadEmployeeHome(1);
+      case EmployeeHomeEmployee -> loadEmployeeHome(2);
       case EmployeeHomeCustomer -> loadEmployeeHome(3);
       case EmployeeHomeRoom -> loadEmployeeHome(4);
       case CustomerHome -> loadCustomerHome();
