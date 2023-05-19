@@ -1,5 +1,6 @@
 package Server.Utility.DataBase.Reservation;
 
+import Server.Model.Hotel.Users.Employee;
 import Server.Model.MyDate;
 import Server.Model.Hotel.Reservation;
 import Server.Utility.DataBase.DatabaseConnection;
@@ -194,8 +195,11 @@ public class ReservationDataImplementation implements ReservationData
         String username= rs.getString("username");
         MyDate fromDate= MyDate.stringToDate(rs.getString("fromDate"));
         MyDate toDate= MyDate.stringToDate(rs.getString("toDate"));
-        Boolean CheckedIn= rs.getBoolean("checkedIn");
-        list.add(new Reservation(roomNumber,username,fromDate,toDate,CheckedIn));
+        Boolean CheckedIn = rs.getBoolean("checkedIn");
+        if (!CheckedIn.equals(null))
+        {
+          list.add(new Reservation(roomNumber,username,fromDate,toDate,CheckedIn));
+        }
       }
     }
     catch (SQLException e)
@@ -204,6 +208,22 @@ public class ReservationDataImplementation implements ReservationData
     }
     return list;
   }
+
+  @Override public ArrayList<Reservation> filterReservation(String reservation)
+  {
+    ArrayList<Reservation> list = getAllReservations();
+    ArrayList<Reservation> filter = new ArrayList<>();
+    for (int i = 0; i < list.size(); i++)
+    {
+      if (list.get(i).toString().toLowerCase().contains(reservation.toLowerCase()))
+      {
+        filter.add(list.get(i));
+      }
+    }
+    return filter;
+  }
+
+
 
   @Override public ArrayList<Reservation> getFilteredReservations(String state,
       MyDate fromDate, MyDate toDate)
@@ -233,6 +253,55 @@ public class ReservationDataImplementation implements ReservationData
         filtered.add(item);
     }
     return filtered;
+  }
+
+
+  @Override public String checkIn(int roomNumber, String username, MyDate fromDate)
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement ps = connection.prepareStatement("UPDATE ReservedBy SET checkedin = ? WHERE roomNo=? and username=? and fromDate=?");
+
+      ps.setBoolean(1, true );
+      ps.setInt(2, roomNumber);
+      ps.setString(3,username);
+      ps.setDate(4,convertToSQLDate(fromDate.toString()));
+      ps.executeUpdate();
+      return DatabaseConnection.SUCCESS;
+    }
+    catch (SQLException e)
+    {
+      System.out.println(e.getMessage());
+      return DatabaseConnection.ERROR;
+    }
+    catch (ParseException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public String checkOut(int roomNumber, String username, MyDate fromDate)
+  {
+    try (Connection connection = getConnection())
+    {
+
+      PreparedStatement ps = connection.prepareStatement("UPDATE ReservedBy SET checkedin = ? WHERE roomNo=? and username=? and fromDate=?");
+      ps.setObject(1,null);
+      ps.setInt(2, roomNumber );
+      ps.setString(3,username);
+      ps.setDate(4,convertToSQLDate(fromDate.toString()));
+      ps.executeUpdate();
+      return DatabaseConnection.SUCCESS;
+    }
+    catch (SQLException e)
+    {
+      System.out.println(e.getMessage());
+      return DatabaseConnection.ERROR;
+    }
+    catch (ParseException e)
+    {
+      throw new RuntimeException(e);
+    }
   }
 
 }

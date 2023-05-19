@@ -45,7 +45,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="reserveInfo" layoutX="36.0" layoutY="18.0" onKeyReleased="#simpleFilterRoom" promptText="Enter Room Info" />
+                  <TextField fx:id="reserveInfo" layoutX="36.0" layoutY="18.0" onKeyReleased="#simpleFilterNewReservation" promptText="Enter Room Info" />
                   <Line endX="33.5999755859375" endY="203.0" layoutX="388.0" layoutY="144.0" startX="33.5999755859375" startY="-112.99999237060547" stroke="#00000064" />
                   <Button layoutX="325.0" layoutY="320.0" mnemonicParsing="false" onAction="#createNewReservation" text="Create">
                      <font>

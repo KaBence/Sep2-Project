@@ -10,10 +10,10 @@ public class Reservation implements Serializable
   private String username;
   private MyDate fromDate;
   private MyDate toDate;
-  private boolean CheckedIn;
+  private Boolean CheckedIn;
 
   public Reservation(int roomNumber, String username, MyDate fromDate,
-      MyDate toDate, boolean CheckedIn)
+      MyDate toDate, Boolean CheckedIn)
   {
     this.roomNumber = roomNumber;
     this.username = username;
@@ -62,12 +62,12 @@ public class Reservation implements Serializable
     this.toDate = toDate;
   }
 
-  public boolean isCheckedIn()
+  public Boolean isCheckedIn()
   {
     return CheckedIn;
   }
 
-  public void setCheckedIn(boolean checkedIn)
+  public void setCheckedIn(Boolean checkedIn)
   {
     CheckedIn = checkedIn;
   }
