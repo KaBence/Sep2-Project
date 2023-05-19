@@ -61,18 +61,19 @@ public class CustomerDataImplementation implements CustomerData
     try (Connection connection = getConnection())
     {
       PreparedStatement psCustomer = connection.prepareStatement(
-          "DELETE FORM customer WHERE username = ?");
+          "DELETE FROM customer WHERE username = ?");
       psCustomer.setString(1, username);
       psCustomer.executeUpdate();
 
       PreparedStatement psUser = connection.prepareStatement(
-          "DELETE FORM \"user\" WHERE username = ?");
+          "DELETE FROM \"user\" WHERE username = ?");
       psUser.setString(1, username);
       psUser.executeUpdate();
       return DatabaseConnection.SUCCESS;
     }
     catch (SQLException e)
     {
+      System.out.println(e.getMessage());
       return DatabaseConnection.ERROR;
     }
   }

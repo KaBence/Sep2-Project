@@ -66,6 +66,7 @@ public abstract class Person implements Serializable
   }
 
   public String info(){
-    return username+" -> , FirstName "+ firstName+", LastName "+lastName+", PhoneNumber "+phoneNo;
+    String temp=username+" -> , FirstName "+ firstName+", LastName "+lastName+", PhoneNumber "+phoneNo;
+    return temp.toLowerCase();
   }
 }

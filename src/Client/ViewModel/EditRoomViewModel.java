@@ -4,6 +4,8 @@ import Client.Model.Model;
 import Server.Model.Hotel.Room;
 import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import java.rmi.RemoteException;
 
@@ -29,16 +31,41 @@ public class EditRoomViewModel
     orientation= new SimpleObjectProperty();
   }
 
-  public String edit() throws RemoteException
+  public boolean edit() throws RemoteException
   {
     try
     {
-      return model.updateRoom(Integer.parseInt(roomNumber.getValue()),Integer.parseInt(numberOfBeds.getValue()),Integer.parseInt(size.getValue()),price.getValue(),orientation.getValue(),internet.getValue(),bathroom.getValue(),kitchen.getValue(),balcony.getValue());
+      String state= model.updateRoom(Integer.parseInt(roomNumber.getValue()),Integer.parseInt(numberOfBeds.getValue()),Integer.parseInt(size.getValue()),price.getValue(),orientation.getValue(),internet.getValue(),bathroom.getValue(),kitchen.getValue(),balcony.getValue());
+      if (state.equals(DatabaseConnection.SUCCESS)){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful", ButtonType.OK);
+        alert.setHeaderText(null);
+        alert.setTitle("Success");
+        alert.showAndWait();
+        return true;
+      }
+      if (state.equals(DatabaseConnection.ERROR)){
+        Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred", ButtonType.OK);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.showAndWait();
+        return false;
+      }
+      if (state.equals(DatabaseConnection.MANDATORY)){
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Please fill up the fields with the correct information", ButtonType.OK);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.showAndWait();
+        return false;
+      }
     }
-    catch (Exception e)
+    catch (NumberFormatException e)
     {
-      return DatabaseConnection.MANDATORY;
+      Alert alert = new Alert(Alert.AlertType.ERROR, "Please fill up the fields with the correct information", ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
     }
+    return false;
   }
 
   public String delete() throws RemoteException

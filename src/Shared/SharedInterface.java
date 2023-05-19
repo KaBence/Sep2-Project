@@ -17,11 +17,13 @@ public interface SharedInterface extends Remote
   Person logIn(Person user) throws RemoteException;
   Person logOut(Person user) throws RemoteException;
   void addPropertyChangeListener(RemotePropertyChangeListener listener) throws RemoteException;
-  Room addRoom(int roomNumber, int numberOfBeds, int size, int price,
+  String addRoom(int roomNumber, int numberOfBeds, int size, int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException;
 
   Reservation addReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate, boolean CheckedIn) throws RemoteException;
+  Employee addEmployee(String firstName, String lastName, String position,
+      String phoneNo, String password) throws RemoteException;
   ArrayList<Room> getAllRooms() throws RemoteException;
 
   ArrayList<Room> getSimpleFilteredRoom(String room) throws RemoteException;

@@ -45,6 +45,7 @@ public class Client extends UnicastRemoteObject implements
   }
 
   public Room addRoom(int roomNumber, int numberOfBeds, int size, int price,
+  public String addRoom(int roomNumber, int numberOfBeds, int size, int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException
   {
@@ -53,7 +54,11 @@ public class Client extends UnicastRemoteObject implements
   public Reservation addReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate, boolean CheckedIn) throws RemoteException{
     return sharedInterface.addReservation(roomNumber, username, fromDate, toDate, CheckedIn);
   }
-
+public Employee addEmployee(String firstName, String lastName, String position,
+    String phoneNo, String password) throws RemoteException
+{
+    return sharedInterface.addEmployee(firstName, lastName, position,phoneNo,password);
+}
   public ArrayList<Room> getAllRooms() throws RemoteException
   {
     return sharedInterface.getAllRooms();

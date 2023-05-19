@@ -44,7 +44,7 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     support.addPropertyChangeListener(listener);
   }
 
-  @Override public Room addRoom(int roomNumber, int numberOfBeds, int size,
+  @Override public String addRoom(int roomNumber, int numberOfBeds, int size,
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony) throws RemoteException
   {
@@ -59,6 +59,13 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     support.firePropertyChange("addReservation", null, "123");
     return  model.addReservation(roomNumber,username,fromDate,toDate,CheckedIn);
 
+  }
+
+  @Override public Employee addEmployee(String firstName, String lastName,
+      String position, String phoneNo, String password) throws RemoteException
+  {
+    support.firePropertyChange("addEmployee", null, "123");
+    return model.addEmployee(firstName,lastName,position,phoneNo,password);
   }
 
   @Override public ArrayList<Room> getAllRooms()

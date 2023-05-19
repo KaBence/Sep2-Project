@@ -1,5 +1,7 @@
 package Server.Utility;
 
+import java.io.IOException;
+
 public class IllegalDateException extends RuntimeException
 {
   private int check;
@@ -19,5 +21,10 @@ public class IllegalDateException extends RuntimeException
       case 7-> "From is before and to is equals";
       default -> throw new IllegalStateException("Unexpected value: " + check);
     };
+  }
+
+  public int getCheck()
+  {
+    return check;
   }
 }

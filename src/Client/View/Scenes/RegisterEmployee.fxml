@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Controllers.EmployeeSignInController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Controllers.RegistrateEmployeeController">
    <children>
       <Label layoutX="167.0" layoutY="26.0" text="Adding a New Employee">
          <font>
@@ -45,13 +45,13 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="roomNo" layoutX="128.0" layoutY="91.0" />
-      <TextField fx:id="roomNo1" layoutX="431.0" layoutY="91.0" />
-      <TextField fx:id="roomNo11" layoutX="127.0" layoutY="174.0" />
-      <ChoiceBox fx:id="price" layoutX="430.0" layoutY="174.0" prefWidth="150.0" />
-      <TextField fx:id="roomNo2" layoutX="127.0" layoutY="250.0" />
-      <TextField fx:id="roomNo3" layoutX="430.0" layoutY="250.0" />
-      <Button layoutX="325.0" layoutY="319.0" mnemonicParsing="false" onAction="#Add" text="Register">
+      <TextField fx:id="firstNameAddNewEmployee" layoutX="128.0" layoutY="91.0" />
+      <TextField fx:id="lastNameAddEmployee" layoutX="431.0" layoutY="91.0" />
+      <TextField fx:id="phoneAddEmployee" layoutX="127.0" layoutY="174.0" />
+      <ChoiceBox fx:id="positionAddNewEmployee" layoutX="430.0" layoutY="174.0" prefWidth="150.0" />
+      <TextField layoutX="127.0" layoutY="250.0" />
+      <TextField layoutX="430.0" layoutY="250.0" />
+      <Button layoutX="325.0" layoutY="319.0" mnemonicParsing="false" onAction="#register" text="Register">
          <font>
             <Font size="17.0" />
          </font>
@@ -63,5 +63,7 @@
             <Font size="17.0" />
          </font>
       </Button>
+      <TextField fx:id="password" layoutX="128.0" layoutY="287.0" />
+      <TextField fx:id="repeatPassword" layoutX="431.0" layoutY="287.0" />
    </children>
 </AnchorPane>

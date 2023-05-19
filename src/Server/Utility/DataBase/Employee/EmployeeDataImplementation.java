@@ -35,23 +35,24 @@ public class EmployeeDataImplementation implements EmployeeData
     try (Connection connection = getConnection())
     {
       PreparedStatement psUser = connection.prepareStatement(
-          "INSERT INTO user(username, password) VALUES(?,?)");
+          "INSERT INTO \"user\"(username, password) VALUES(?,?)");
       psUser.setString(1, username);
       psUser.setString(2, password);
       psUser.executeUpdate();
 
       PreparedStatement psEmpoyee = connection.prepareStatement(
-          "INSERT INTO employee(username, password,firstName, lastName, String phoneNumber, String position) values(?,?,?,?,?,?)");
+          "INSERT INTO employee(username,firstName, lastName, phoneno,position) values(?,?,?,?,?)");
       psEmpoyee.setString(1, username);
-      psEmpoyee.setString(2, password);
-      psEmpoyee.setString(3, firstName);
-      psEmpoyee.setString(4, lastName);
-      psEmpoyee.setString(5, phoneNumber);
-      psEmpoyee.setString(6, position);
+      psEmpoyee.setString(2, firstName);
+      psEmpoyee.setString(3, lastName);
+      psEmpoyee.setString(4, phoneNumber);
+      psEmpoyee.setString(5, position);
+      psEmpoyee.executeUpdate();
       return newEmployee;
     }
     catch (SQLException e)
     {
+      System.out.println(e.getMessage());
       return null;
     }
   }

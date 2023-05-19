@@ -63,6 +63,7 @@ public class ModelManager implements Model,PropertyChangeListener
   }
 
   @Override public Room addRoom(int roomNumber, int numberOfBeds, int size,int price,
+  @Override public String addRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException
   {
@@ -73,6 +74,13 @@ public class ModelManager implements Model,PropertyChangeListener
       MyDate fromDate, MyDate toDate, boolean CheckedIn) throws RemoteException
   {
     return client.addReservation(roomNumber, username, fromDate, toDate, CheckedIn);
+  }
+
+  @Override public Employee addEmployee( String firstName,
+      String lastName, String position, String phoneNo, String password)
+      throws RemoteException
+  {
+    return client.addEmployee(firstName,lastName,position,phoneNo,password);
   }
 
   @Override public ArrayList<Room> getAllRooms() throws RemoteException

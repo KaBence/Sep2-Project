@@ -1,7 +1,6 @@
 package Client.View;
 
 import Client.View.Controllers.*;
-import Client.ViewModel.EditRoomViewModel;
 import Client.ViewModel.ViewModelFactory;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Region;
@@ -18,7 +17,7 @@ public class ViewFactory
   private EmployeeHomeController employeeHomeController;
   private CustomerHomeController customerHomeController;
   private AddRoomController addRoomController;
-  private EmployeeSignInController employeeSignIn;
+  private RegistrateEmployeeController registrateEmployeeController;
   private EditRoomController editRoomController;
   private EditCustomerController editCustomerController;
   private EditEmployeeController editEmployeeController;
@@ -65,20 +64,21 @@ public class ViewFactory
     return employeeLoginController.getRoot();
   }
 
-  private Region loadEmployeeSignIn(){
+  private Region loadRegisterEmployee(){
     FXMLLoader loader=new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/EmployeeSignIn.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/RegisterEmployee.fxml"));
     try
     {
       Region root = loader.load();
-      employeeSignIn = loader.getController();
-      employeeSignIn.init(viewHandler,viewModelFactory.getEmployeeSignInViewModel(),root);
+      registrateEmployeeController = loader.getController();
+      registrateEmployeeController.init(viewHandler,viewModelFactory.getRegisterEmployeeViewModel(),root);
     }
     catch (IOException e){
+      throw new IOError(e);
     }
 
-    employeeSignIn.reset();
-      return employeeSignIn.getRoot();
+    registrateEmployeeController.reset();
+      return registrateEmployeeController.getRoot();
     }
 
   private Region loadEmployeeHome(int i){
@@ -200,14 +200,14 @@ public class ViewFactory
       case Home -> loadHomeView();
       case EmployeeLogin -> loadEmployeeLogin();
       case EmployeeHomeReservations -> loadEmployeeHome(0);
-      case EmployeeHomeEmployee -> loadEmployeeHome(1);
-      case EmployeeHomeAddReservations -> loadEmployeeHome(2);
+      case EmployeeHomeAddReservations -> loadEmployeeHome(1);
+      case EmployeeHomeEmployee -> loadEmployeeHome(2);
       case EmployeeHomeCustomer -> loadEmployeeHome(3);
       case EmployeeHomeRoom -> loadEmployeeHome(4);
       case CustomerHome -> loadCustomerHome();
       case AddRoom -> loadAddRoom();
       case EditRoom -> loadEditRoom();
-      case EmployeeSignIn -> loadEmployeeSignIn();
+      case EmployeeSignIn -> loadRegisterEmployee();
       case EditCustomer -> loadEditCustomer();
       case EditEmployee -> loadEditEmployee();
       case EditReservation -> loadEditReservation();

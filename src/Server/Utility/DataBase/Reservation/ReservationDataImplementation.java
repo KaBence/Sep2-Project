@@ -33,45 +33,67 @@ public class ReservationDataImplementation implements ReservationData
         "postgres", "password");
   }
 
-  @Override public Reservation addNewReservation(int roomNumber,
+  @Override public synchronized Reservation addNewReservation(int roomNumber,
       String username, MyDate fromDate, MyDate toDate, boolean CheckedIn)
   {
-    dateChecker(roomNumber,fromDate,toDate);
-
-    try (Connection connection = getConnection())
+    try
     {
-      PreparedStatement ps = connection.prepareStatement(
-          "INSERT INTO ReservedBy(roomNo, username, fromDate, toDate, checkedIn) VALUES(?,?,?,?,?)");
-      ps.setInt(1, roomNumber);
-      ps.setString(2, username);
-      ps.setDate(3, convertToSQLDate(fromDate.toString()));
-      ps.setDate(4, convertToSQLDate(toDate.toString()));
-      ps.setBoolean(5, CheckedIn);
-      ps.executeUpdate();
+      dateChecker(roomNumber,fromDate,toDate);
+      try (Connection connection = getConnection())
+      {
+          PreparedStatement ps = connection.prepareStatement(
+              "INSERT INTO ReservedBy(roomNo, username, fromDate, toDate, checkedIn) VALUES(?,?,?,?,?)");
+          ps.setInt(1, roomNumber);
+          ps.setString(2, username);
+          ps.setDate(3, convertToSQLDate(fromDate.toString()));
+          ps.setDate(4, convertToSQLDate(toDate.toString()));
+          ps.setBoolean(5, CheckedIn);
+          ps.executeUpdate();
+      }
+      catch (SQLException ex)
+      {
+        System.err.println(ex.getMessage());
+        return null;
+      }
+      catch (ParseException e)
+      {
+        throw new RuntimeException(e);
+      }
+      return new Reservation(roomNumber, username, fromDate, toDate, CheckedIn);
     }
-    catch (SQLException ex)
+    catch (IllegalDateException e)
     {
-      System.err.println(ex.getMessage());
-      return null;
+      throw new IllegalDateException(e.getCheck());
     }
-    catch (ParseException e)
-    {
-      throw new RuntimeException(e);
-    }
-    return new Reservation(roomNumber, username, fromDate, toDate, CheckedIn);
   }
 
-  private void dateChecker(int roomNumber,MyDate from,MyDate to){
+  private synchronized boolean dateChecker(int roomNumber,MyDate from,MyDate to){
     ArrayList<Reservation> all=getAllReservations();
+    System.out.println("All Rooms 1");
+    for (int i = 0; i < all.size(); i++)
+    {
+      System.out.println(all.get(i));
+    }
     ArrayList<Reservation> specific=new ArrayList<>();
+    System.out.println();
+    System.out.println();
+    System.out.println("All rooms 2");
+    System.out.println();
     for (Reservation item:all){
+      System.out.println(item);
       if (item.getRoomNumber()==roomNumber)
         specific.add(item);
     }
     for (Reservation item:specific){
       //dates are the same
       if (from.equals(item.getFromDate())&&to.equals(item.getToDate())) {
+        System.out.println(from);
+        System.out.println(to);
+        System.out.println();
+        System.out.println(item.getFromDate());
+        System.out.println(item.getToDate());
         System.out.println("WTF");
+        //return false;
         throw new IllegalDateException(2);
       }
       //the dates are outside a reservation
@@ -92,7 +114,9 @@ public class ReservationDataImplementation implements ReservationData
       //from is before and to is equals
       if (from.isBefore(item.getFromDate())&&to.equals(item.getToDate()))
         throw new IllegalDateException(7);
+
     }
+    return true;
   }
 
   @Override public ArrayList<Reservation> getMyReservation(String username)
@@ -181,7 +205,7 @@ public class ReservationDataImplementation implements ReservationData
     }
   }
 
-  @Override public ArrayList<Reservation> getAllReservations()
+  @Override public synchronized ArrayList<Reservation> getAllReservations()
   {
     ArrayList<Reservation> list=new ArrayList<>();
     try(Connection connection=getConnection())
@@ -229,15 +253,13 @@ public class ReservationDataImplementation implements ReservationData
   {
     ArrayList<Reservation> all=getAllReservations();
     ArrayList<Reservation> filtered=new ArrayList<>();
-    boolean flag=true;/*
-    if (state.equals("all"))
-      return all;*/
+    boolean flag=true;
     if (fromDate==null&&toDate==null)
       flag=false;
     for (Reservation item: all){
       boolean temp=true;
       if (!state.equals("all")){
-        if (!item.getState().equals(state)){
+        if (!item.getState().equals(state)||item.getState().equals("In The Past")){
           temp=false;
         }
       }
