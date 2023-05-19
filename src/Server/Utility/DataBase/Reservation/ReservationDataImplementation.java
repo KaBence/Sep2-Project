@@ -190,8 +190,11 @@ public class ReservationDataImplementation implements ReservationData
         String username= rs.getString("username");
         MyDate fromDate= MyDate.stringToDate(rs.getString("fromDate"));
         MyDate toDate= MyDate.stringToDate(rs.getString("toDate"));
-        Boolean CheckedIn= rs.getBoolean("checkedIn");
-        list.add(new Reservation(roomNumber,username,fromDate,toDate,CheckedIn));
+        Boolean CheckedIn = rs.getBoolean("checkedIn");
+        if (!CheckedIn.equals(null))
+        {
+          list.add(new Reservation(roomNumber,username,fromDate,toDate,CheckedIn));
+        }
       }
     }
     catch (SQLException e)
