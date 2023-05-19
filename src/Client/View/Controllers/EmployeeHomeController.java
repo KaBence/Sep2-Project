@@ -110,6 +110,7 @@ public class EmployeeHomeController
     viewModel.bindReservationFilter(reservationFilter.selectedProperty());
     viewModel.bindFromDateReservation(fromDateReservation.valueProperty());
     viewModel.bindToDateReservation(toDateReservation.valueProperty());
+    viewModel.bindReserveInfo(reserveInfo.textProperty());
   }
 
   public void initialize()
@@ -302,11 +303,6 @@ public class EmployeeHomeController
     viewHandler.openView(SceneNames.EditReservation);
   }
 
-  @FXML void filterReservation() throws RemoteException
-  {
-    viewModel.filterReservation();
-  }
-
   @FXML void tableClickNewResevation() throws RemoteException
   {
     viewModel.saveRoom(
@@ -452,6 +448,11 @@ public class EmployeeHomeController
     viewModel.simpleFilterEmployee(x);
   }
 
+  @FXML void simpleFilterNewReservation() throws RemoteException
+  {
+    viewModel.simpleRoomNewReservationFilter();
+  }
+
   @FXML void filterCustomer() throws RemoteException
   {
     String x = filteringCustomer.getText();
@@ -462,5 +463,6 @@ public class EmployeeHomeController
   {
     viewModel.simpleRoomFilter();
   }
+  @FXML void filterReservation(){}
 
 }

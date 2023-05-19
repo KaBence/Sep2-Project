@@ -36,8 +36,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private SimpleBooleanProperty bathroomFilter, kitchenFilter, internetFilter, balconyFilter;
   private SimpleObjectProperty<Integer> priceFilter;
 
-  private SimpleStringProperty roomNoFilter, bedsFilter, filteringRoom, hiddenFieldRoomNo;
-  // private SimpleObjectProperty<MyDate> reservedFromDate, reservedToDate;
+  private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom, hiddenFieldRoomNo, reserveInfo;
 
   public EmployeeHomeViewModel(Model model)
   {
@@ -89,9 +88,8 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     bedsFilter.set("");
     roomNoFilter.set("");
 
-    hiddenFieldRoomNo = new SimpleStringProperty();
-    // reservedFromDate=new SimpleObjectProperty<>();
-    //reservedToDate=new SimpleObjectProperty<>();
+    hiddenFieldRoomNo=new SimpleStringProperty();
+    reserveInfo=new SimpleStringProperty();
 
   }
 
@@ -106,85 +104,69 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     property.bindBidirectional(customers);
   }
 
-  public void bindEmployeeList(
-      ObjectProperty<ObservableList<Employee>> property)
-  {
+  public void bindEmployeeList(ObjectProperty<ObservableList<Employee>> property){
     property.bindBidirectional(employees);
   }
 
-  public void bindReservationList(
-      ObjectProperty<ObservableList<Reservation>> property)
-  {
+  public void bindReservationList(ObjectProperty<ObservableList<Reservation>> property){
     property.bindBidirectional(reservations);
   }
 
-  public void bindAllBookings(BooleanProperty property)
-  {
+  public void bindAllBookings(BooleanProperty property){
     property.bindBidirectional(allBookingFilter);
   }
 
-  public void bindReservationFilter(BooleanProperty property)
-  {
+  public void bindReservationFilter(BooleanProperty property){
     property.bindBidirectional(reservationFilter);
   }
 
-  public void bindBookingFilter(BooleanProperty property)
-  {
+  public void bindBookingFilter(BooleanProperty property){
     property.bindBidirectional(bookingFilter);
   }
 
-  public void bindFromDateReservation(ObjectProperty<LocalDate> property)
-  {
+  public void bindFromDateReservation(ObjectProperty<LocalDate> property){
     property.bindBidirectional(fromDateReservation);
   }
 
-  public void bindToDateReservation(ObjectProperty<LocalDate> property)
-  {
+  public void bindToDateReservation(ObjectProperty<LocalDate> property){
     property.bindBidirectional(toDateReservation);
   }
 
-  public void bindFilteringRoom(StringProperty property)
-  {
+  public void bindFilteringRoom(StringProperty property){
     property.bindBidirectional(filteringRoom);
   }
-
-  public void bindHiddenText(StringProperty property)
-  {
+public void bindHiddenText(StringProperty property){
     property.bindBidirectional(hiddenFieldRoomNo);
-  }
-
+}
+public void bindReserveInfo(StringProperty property){
+    property.bindBidirectional(reserveInfo);
+}
   public void bindInternet(BooleanProperty property)
   {
     property.bindBidirectional(internetFilter);
   }
 
-  public void bindKitchen(BooleanProperty property)
-  {
+  public void bindKitchen(BooleanProperty property){
     property.bindBidirectional(kitchenFilter);
   }
 
-  public void bindBathroom(BooleanProperty property)
-  {
+  public void bindBathroom(BooleanProperty property){
     property.bindBidirectional(bathroomFilter);
   }
 
-  public void bindBalcony(BooleanProperty property)
-  {
+  public void bindBalcony(BooleanProperty property){
     property.bindBidirectional(balconyFilter);
   }
 
-  public void bindPrice(ObjectProperty<Integer> property)
-  {
+  public void bindPrice(ObjectProperty<Integer> property){
     property.bindBidirectional(priceFilter);
   }
 
-  public void bindBeds(StringProperty property)
-  {
+  public void bindBeds(StringProperty property){
     property.bindBidirectional(bedsFilter);
   }
 
-  public void bindRoomNo(StringProperty property)
-  {
+  public void bindRoomNo(StringProperty property){
     property.bindBidirectional(roomNoFilter);
   }
 
@@ -266,6 +248,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
 
     allBookingFilter.set(true);
 
+
     ArrayList<Room> allRooms;
     ArrayList<Employee> allEmployee;
     ArrayList<Customer> allCustomer;
@@ -321,11 +304,8 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
       filtered = model.getFilteredReservation(state, null, null);
     }
     else
-      filtered = model.getFilteredReservation(state,
-          MyDate.LocalDateToMyDate(fromDateReservation.getValue()),
-          MyDate.LocalDateToMyDate(toDateReservation.getValue()));
-    ObservableList<Reservation> reservationObservableList = FXCollections.observableList(
-        filtered);
+      filtered=model.getFilteredReservation(state,MyDate.LocalDateToMyDate(fromDateReservation.getValue()),MyDate.LocalDateToMyDate(toDateReservation.getValue()));
+    ObservableList<Reservation> reservationObservableList=FXCollections.observableList(filtered);
     reservations.set(reservationObservableList);
   }
 
@@ -340,8 +320,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     {
       throw new RuntimeException(e);
     }
-    ObservableList<Employee> employeeObservableList = FXCollections.observableList(
-        filterEmployee);
+    ObservableList<Employee> employeeObservableList=FXCollections.observableList(filterEmployee);
     employees.set(employeeObservableList);
   }
 
@@ -356,10 +335,10 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     {
       throw new RuntimeException(e);
     }
-    ObservableList<Customer> employeeObservableList = FXCollections.observableList(
-        filterEmployee);
+    ObservableList<Customer> employeeObservableList=FXCollections.observableList(filterEmployee);
     customers.set(employeeObservableList);
   }
+
 
   public void filterFilterCustomer() throws RemoteException
   {
@@ -451,6 +430,12 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   {
     ObservableList<Room> roomObservableList = FXCollections.observableList(
         model.getSimpleFilteredRoom(filteringRoom.getValue()));
+    rooms.set(roomObservableList);
+  }
+
+  public void simpleRoomNewReservationFilter() throws RemoteException
+  {
+    ObservableList<Room> roomObservableList=FXCollections.observableList(model.getSimpleFilteredRoom(reserveInfo.getValue()));
     rooms.set(roomObservableList);
   }
 

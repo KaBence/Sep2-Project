@@ -1,5 +1,6 @@
 package Server.Utility.DataBase.Reservation;
 
+import Server.Model.Hotel.Users.Employee;
 import Server.Model.MyDate;
 import Server.Model.Hotel.Reservation;
 import Server.Utility.DataBase.DatabaseConnection;
@@ -200,6 +201,22 @@ public class ReservationDataImplementation implements ReservationData
     }
     return list;
   }
+
+  @Override public ArrayList<Reservation> filterReservation(String reservation)
+  {
+    ArrayList<Reservation> list = getAllReservations();
+    ArrayList<Reservation> filter = new ArrayList<>();
+    for (int i = 0; i < list.size(); i++)
+    {
+      if (list.get(i).toString().toLowerCase().contains(reservation.toLowerCase()))
+      {
+        filter.add(list.get(i));
+      }
+    }
+    return filter;
+  }
+
+
 
   @Override public ArrayList<Reservation> getFilteredReservations(String state,
       MyDate fromDate, MyDate toDate)
