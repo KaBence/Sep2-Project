@@ -196,10 +196,9 @@ public class ReservationDataImplementation implements ReservationData
         MyDate fromDate= MyDate.stringToDate(rs.getString("fromDate"));
         MyDate toDate= MyDate.stringToDate(rs.getString("toDate"));
         Boolean CheckedIn = rs.getBoolean("checkedIn");
-        if (!CheckedIn.equals(null))
-        {
+
           list.add(new Reservation(roomNumber,username,fromDate,toDate,CheckedIn));
-        }
+
       }
     }
     catch (SQLException e)
@@ -240,13 +239,11 @@ public class ReservationDataImplementation implements ReservationData
       if (!state.equals("all")){
         if (!item.getState().equals(state)){
           temp=false;
-          break;
         }
       }
       if (flag){
         if (!(item.getFromDate().isBefore(fromDate)&& toDate.isBefore(item.getToDate()))){
           temp=false;
-          break;
         }
       }
       if (temp)

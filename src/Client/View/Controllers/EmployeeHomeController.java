@@ -202,7 +202,6 @@ public class EmployeeHomeController
   @FXML void checkIn() throws RemoteException
   {
     String x = viewModel.checkIn();
-    viewModel.checkIn();
     if (x.equals(DatabaseConnection.SUCCESS))
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION, "Check In successful",
@@ -467,6 +466,9 @@ public class EmployeeHomeController
   {
     viewModel.simpleRoomFilter();
   }
-  @FXML void filterReservation(){}
+  @FXML void filterReservation() throws RemoteException
+  {
+    viewModel.filterReservation();
+  }
 
 }
