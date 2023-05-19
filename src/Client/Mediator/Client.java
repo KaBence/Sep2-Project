@@ -139,7 +139,7 @@ public class Client extends UnicastRemoteObject implements
     support.addPropertyChangeListener(listener);
   }
 
-  ///////////////////
+
   public String checkIn(int roomNumber, String username,
       MyDate fromDate) throws RemoteException
   {

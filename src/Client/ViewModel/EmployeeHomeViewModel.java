@@ -28,39 +28,39 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private SimpleObjectProperty<ObservableList<Employee>> employees;
 
   private SimpleObjectProperty<ObservableList<Reservation>> reservations;
-  private SimpleBooleanProperty reservationFilter,allBookingFilter,bookingFilter;
-  private SimpleObjectProperty<LocalDate> fromDateReservation,toDateReservation;
+  private SimpleBooleanProperty reservationFilter, allBookingFilter, bookingFilter;
+  private SimpleObjectProperty<LocalDate> fromDateReservation, toDateReservation;
   private SimpleStringProperty usernameFilter, firstNameFilter, lastNameFilter, phoneNumberFilter, paymentInfoFilter;
   private SimpleStringProperty employeeUsernameFilter, employeeFirstNameFilter, employeeLastNameFilter, employeePhoneNumberFilter, employeePosition;
 
   private SimpleBooleanProperty bathroomFilter, kitchenFilter, internetFilter, balconyFilter;
   private SimpleObjectProperty<Integer> priceFilter;
 
-  private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom, hiddenFieldRoomNo;
- // private SimpleObjectProperty<MyDate> reservedFromDate, reservedToDate;
+  private SimpleStringProperty roomNoFilter, bedsFilter, filteringRoom, hiddenFieldRoomNo;
+  // private SimpleObjectProperty<MyDate> reservedFromDate, reservedToDate;
 
   public EmployeeHomeViewModel(Model model)
   {
     this.model = model;
     model.addPropertyChangeListener(this);
     this.rooms = new SimpleObjectProperty<>();
-    customers=new SimpleObjectProperty<>();
-    employees=new SimpleObjectProperty<>();
-    reservations=new SimpleObjectProperty<>();
+    customers = new SimpleObjectProperty<>();
+    employees = new SimpleObjectProperty<>();
+    reservations = new SimpleObjectProperty<>();
 
-    allBookingFilter=new SimpleBooleanProperty();
-    reservationFilter=new SimpleBooleanProperty();
-    bookingFilter=new SimpleBooleanProperty();
-    fromDateReservation=new SimpleObjectProperty<>();
-    toDateReservation=new SimpleObjectProperty<>();
+    allBookingFilter = new SimpleBooleanProperty();
+    reservationFilter = new SimpleBooleanProperty();
+    bookingFilter = new SimpleBooleanProperty();
+    fromDateReservation = new SimpleObjectProperty<>();
+    toDateReservation = new SimpleObjectProperty<>();
 
-    balconyFilter=new SimpleBooleanProperty();
-    kitchenFilter=new SimpleBooleanProperty();
-    internetFilter=new SimpleBooleanProperty();
-    bathroomFilter=new SimpleBooleanProperty();
-    priceFilter=new SimpleObjectProperty<>();
-    roomNoFilter=new SimpleStringProperty();
-    bedsFilter=new SimpleStringProperty();
+    balconyFilter = new SimpleBooleanProperty();
+    kitchenFilter = new SimpleBooleanProperty();
+    internetFilter = new SimpleBooleanProperty();
+    bathroomFilter = new SimpleBooleanProperty();
+    priceFilter = new SimpleObjectProperty<>();
+    roomNoFilter = new SimpleStringProperty();
+    bedsFilter = new SimpleStringProperty();
 
     usernameFilter = new SimpleStringProperty();
     firstNameFilter = new SimpleStringProperty();
@@ -84,13 +84,13 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     employeePhoneNumberFilter.set("");
     employeePosition.set("");
 
-    filteringRoom=new SimpleStringProperty();
+    filteringRoom = new SimpleStringProperty();
 
     bedsFilter.set("");
     roomNoFilter.set("");
 
-    hiddenFieldRoomNo=new SimpleStringProperty();
-   // reservedFromDate=new SimpleObjectProperty<>();
+    hiddenFieldRoomNo = new SimpleStringProperty();
+    // reservedFromDate=new SimpleObjectProperty<>();
     //reservedToDate=new SimpleObjectProperty<>();
 
   }
@@ -100,70 +100,91 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     property.bindBidirectional(rooms);
   }
 
-  public void bindCustomerList(ObjectProperty<ObservableList<Customer>> property){
+  public void bindCustomerList(
+      ObjectProperty<ObservableList<Customer>> property)
+  {
     property.bindBidirectional(customers);
   }
 
-  public void bindEmployeeList(ObjectProperty<ObservableList<Employee>> property){
+  public void bindEmployeeList(
+      ObjectProperty<ObservableList<Employee>> property)
+  {
     property.bindBidirectional(employees);
   }
 
-  public void bindReservationList(ObjectProperty<ObservableList<Reservation>> property){
+  public void bindReservationList(
+      ObjectProperty<ObservableList<Reservation>> property)
+  {
     property.bindBidirectional(reservations);
   }
 
-  public void bindAllBookings(BooleanProperty property){
+  public void bindAllBookings(BooleanProperty property)
+  {
     property.bindBidirectional(allBookingFilter);
   }
 
-  public void bindReservationFilter(BooleanProperty property){
+  public void bindReservationFilter(BooleanProperty property)
+  {
     property.bindBidirectional(reservationFilter);
   }
 
-  public void bindBookingFilter(BooleanProperty property){
+  public void bindBookingFilter(BooleanProperty property)
+  {
     property.bindBidirectional(bookingFilter);
   }
 
-  public void bindFromDateReservation(ObjectProperty<LocalDate> property){
+  public void bindFromDateReservation(ObjectProperty<LocalDate> property)
+  {
     property.bindBidirectional(fromDateReservation);
   }
 
-  public void bindToDateReservation(ObjectProperty<LocalDate> property){
+  public void bindToDateReservation(ObjectProperty<LocalDate> property)
+  {
     property.bindBidirectional(toDateReservation);
   }
 
-  public void bindFilteringRoom(StringProperty property){
+  public void bindFilteringRoom(StringProperty property)
+  {
     property.bindBidirectional(filteringRoom);
   }
-public void bindHiddenText(StringProperty property){
+
+  public void bindHiddenText(StringProperty property)
+  {
     property.bindBidirectional(hiddenFieldRoomNo);
-}
+  }
+
   public void bindInternet(BooleanProperty property)
   {
     property.bindBidirectional(internetFilter);
   }
 
-  public void bindKitchen(BooleanProperty property){
+  public void bindKitchen(BooleanProperty property)
+  {
     property.bindBidirectional(kitchenFilter);
   }
 
-  public void bindBathroom(BooleanProperty property){
+  public void bindBathroom(BooleanProperty property)
+  {
     property.bindBidirectional(bathroomFilter);
   }
 
-  public void bindBalcony(BooleanProperty property){
+  public void bindBalcony(BooleanProperty property)
+  {
     property.bindBidirectional(balconyFilter);
   }
 
-  public void bindPrice(ObjectProperty<Integer> property){
+  public void bindPrice(ObjectProperty<Integer> property)
+  {
     property.bindBidirectional(priceFilter);
   }
 
-  public void bindBeds(StringProperty property){
+  public void bindBeds(StringProperty property)
+  {
     property.bindBidirectional(bedsFilter);
   }
 
-  public void bindRoomNo(StringProperty property){
+  public void bindRoomNo(StringProperty property)
+  {
     property.bindBidirectional(roomNoFilter);
   }
 
@@ -245,7 +266,6 @@ public void bindHiddenText(StringProperty property){
 
     allBookingFilter.set(true);
 
-
     ArrayList<Room> allRooms;
     ArrayList<Employee> allEmployee;
     ArrayList<Customer> allCustomer;
@@ -253,25 +273,30 @@ public void bindHiddenText(StringProperty property){
     try
     {
       allRooms = model.getAllRooms();
-      allCustomer=model.getAllCustomers();
-      allEmployee=model.getAllEmployees();
-      allReservations=model.getAllReservations();
+      allCustomer = model.getAllCustomers();
+      allEmployee = model.getAllEmployees();
+      allReservations = model.getAllReservations();
     }
     catch (RemoteException e)
     {
       throw new RuntimeException(e);
     }
-    ObservableList<Room> roomObservableList = FXCollections.observableList(allRooms);
-    ObservableList<Customer> customerObservableList= FXCollections.observableList(allCustomer);
-    ObservableList<Employee> employeeObservableList=FXCollections.observableList(allEmployee);
-    ObservableList<Reservation> reservationObservableList=FXCollections.observableList(allReservations);
+    ObservableList<Room> roomObservableList = FXCollections.observableList(
+        allRooms);
+    ObservableList<Customer> customerObservableList = FXCollections.observableList(
+        allCustomer);
+    ObservableList<Employee> employeeObservableList = FXCollections.observableList(
+        allEmployee);
+    ObservableList<Reservation> reservationObservableList = FXCollections.observableList(
+        allReservations);
     reservations.set(reservationObservableList);
     employees.set(employeeObservableList);
     customers.set(customerObservableList);
     rooms.set(roomObservableList);
   }
 
-  public void saveRoom(Room room){
+  public void saveRoom(Room room)
+  {
     model.saveSelectedRoom(room);
   }
 
@@ -282,20 +307,25 @@ public void bindHiddenText(StringProperty property){
 
   public void filterReservation() throws RemoteException
   {
-    String state="";
+    String state = "";
     if (allBookingFilter.getValue())
-      state="all";
+      state = "all";
     if (reservationFilter.getValue())
-      state="Reserved";
+      state = "Reserved";
     if (bookingFilter.getValue())
-      state="Booked";
+      state = "Booked";
     ArrayList<Reservation> filtered;
-    if (fromDateReservation.getValue()==null||toDateReservation.getValue()==null){
-      filtered=model.getFilteredReservation(state,null,null);
+    if (fromDateReservation.getValue() == null
+        || toDateReservation.getValue() == null)
+    {
+      filtered = model.getFilteredReservation(state, null, null);
     }
     else
-      filtered=model.getFilteredReservation(state,MyDate.LocalDateToMyDate(fromDateReservation.getValue()),MyDate.LocalDateToMyDate(toDateReservation.getValue()));
-    ObservableList<Reservation> reservationObservableList=FXCollections.observableList(filtered);
+      filtered = model.getFilteredReservation(state,
+          MyDate.LocalDateToMyDate(fromDateReservation.getValue()),
+          MyDate.LocalDateToMyDate(toDateReservation.getValue()));
+    ObservableList<Reservation> reservationObservableList = FXCollections.observableList(
+        filtered);
     reservations.set(reservationObservableList);
   }
 
@@ -310,12 +340,12 @@ public void bindHiddenText(StringProperty property){
     {
       throw new RuntimeException(e);
     }
-    ObservableList<Employee> employeeObservableList=FXCollections.observableList(filterEmployee);
+    ObservableList<Employee> employeeObservableList = FXCollections.observableList(
+        filterEmployee);
     employees.set(employeeObservableList);
   }
 
-  public void filterCustomer(String customer)
-      throws RemoteException
+  public void filterCustomer(String customer) throws RemoteException
   {
     ArrayList<Customer> filterEmployee;
     try
@@ -326,10 +356,10 @@ public void bindHiddenText(StringProperty property){
     {
       throw new RuntimeException(e);
     }
-    ObservableList<Customer> employeeObservableList=FXCollections.observableList(filterEmployee);
+    ObservableList<Customer> employeeObservableList = FXCollections.observableList(
+        filterEmployee);
     customers.set(employeeObservableList);
   }
-
 
   public void filterFilterCustomer() throws RemoteException
   {
@@ -372,70 +402,92 @@ public void bindHiddenText(StringProperty property){
 
   public void filterRoom() throws RemoteException
   {
-    String[] temp=new String[7];
-    int counter=0;
-    if (balconyFilter.getValue()){
-      temp[counter]="balcony, ";
+    String[] temp = new String[7];
+    int counter = 0;
+    if (balconyFilter.getValue())
+    {
+      temp[counter] = "balcony, ";
       counter++;
     }
-    if (kitchenFilter.getValue()){
-      temp[counter]="kichenet, ";
+    if (kitchenFilter.getValue())
+    {
+      temp[counter] = "kichenet, ";
       counter++;
     }
-    if (internetFilter.getValue()){
-      temp[counter]="internet, ";
+    if (internetFilter.getValue())
+    {
+      temp[counter] = "internet, ";
       counter++;
     }
-    if (bathroomFilter.getValue()){
-      temp[counter]="bathroom, ";
-      counter++;
-    }
-
-    if (priceFilter.getValue()!=0){
-      temp[counter]="Price, "+priceFilter.getValue();
-      counter++;
-    }
-
-    if (!roomNoFilter.getValue().equals("")){
-      temp[counter]="RoomNo: "+roomNoFilter.getValue()+", ";
+    if (bathroomFilter.getValue())
+    {
+      temp[counter] = "bathroom, ";
       counter++;
     }
 
-    if (!bedsFilter.getValue().equals("")){
-      temp[counter]= "NoBeds: "+bedsFilter.getValue()+", ";
+    if (priceFilter.getValue() != 0)
+    {
+      temp[counter] = "Price, " + priceFilter.getValue();
+      counter++;
     }
 
-    ObservableList<Room> roomObservableList = FXCollections.observableList(model.getFilteredRoom(temp));
+    if (!roomNoFilter.getValue().equals(""))
+    {
+      temp[counter] = "RoomNo: " + roomNoFilter.getValue() + ", ";
+      counter++;
+    }
+
+    if (!bedsFilter.getValue().equals(""))
+    {
+      temp[counter] = "NoBeds: " + bedsFilter.getValue() + ", ";
+    }
+
+    ObservableList<Room> roomObservableList = FXCollections.observableList(
+        model.getFilteredRoom(temp));
     rooms.set(roomObservableList);
   }
 
   public void simpleRoomFilter() throws RemoteException
   {
-    ObservableList<Room> roomObservableList=FXCollections.observableList(model.getSimpleFilteredRoom(filteringRoom.getValue()));
+    ObservableList<Room> roomObservableList = FXCollections.observableList(
+        model.getSimpleFilteredRoom(filteringRoom.getValue()));
     rooms.set(roomObservableList);
   }
 
-  public void saveEmployee(Employee employee){
+  public void saveEmployee(Employee employee)
+  {
     model.saveSelectedEmployee(employee);
   }
 
-  public void fillHiddenField(){
-    Room room=model.getSelectedRoom();
+  public void fillHiddenField()
+  {
+    Room room = model.getSelectedRoom();
     hiddenFieldRoomNo.set(String.valueOf(room.getRoomNo()));
   }
-  public void saveReservation(Reservation reservation){
+
+  public void saveReservation(Reservation reservation)
+  {
     model.saveSelectedReservation(reservation);
   }
- public Reservation addReservation() throws RemoteException{
 
-    try{
-      return model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()),"john@hotmail.com",MyDate.LocalDateToMyDate(fromDateReservation.getValue()), MyDate.LocalDateToMyDate(toDateReservation.getValue()), false);
+  public Reservation addReservation() throws RemoteException
+  {
+
+    try
+    {
+      return model.addReservation(
+          Integer.parseInt(hiddenFieldRoomNo.getValue()), "john@hotmail.com",
+          MyDate.LocalDateToMyDate(fromDateReservation.getValue()),
+          MyDate.LocalDateToMyDate(toDateReservation.getValue()), false);
     }
-    catch (NumberFormatException e){
+    catch (NumberFormatException e)
+    {
       throw new NumberFormatException();
     }
-    catch (IllegalDateException e){
-      Alert alert=new Alert(Alert.AlertType.ERROR,e.message(),ButtonType.OK);
+    catch (IllegalDateException e)
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR, e.message(),
+          ButtonType.OK);
       alert.setTitle("Error");
       alert.setHeaderText(null);
       alert.showAndWait();
@@ -477,43 +529,50 @@ public void bindHiddenText(StringProperty property){
     employees.set(customerObservableList);
   }
 
-  public void checkIn() throws RemoteException
+  public String checkIn() throws RemoteException
   {
-    Reservation reservation = model.getSelectedReservation();
-
-    if(!reservation.isCheckedIn())
+    try
     {
-      model.checkIn(reservation.getRoomNumber(),reservation.getUsername(),reservation.getFromDate());
+      Reservation reservation = model.getSelectedReservation();
+      if (!reservation.isCheckedIn())
+      {
+        return model.checkIn(reservation.getRoomNumber(),
+            reservation.getUsername(), reservation.getFromDate());
+      }
+      else
+      {
+        return "alreadyCheckedIn";
+      }
     }
-    else
+    catch (Exception e)
     {
-      Alert alert=new Alert(Alert.AlertType.ERROR,"This customer is already checked in",
-          ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Error");
-      alert.showAndWait();
+      return "mandatory";
     }
   }
 
-  public void checkOut() throws RemoteException
+  public String checkOut() throws RemoteException
   {
-    Reservation reservation = model.getSelectedReservation();
-    if(reservation.isCheckedIn()) //jeśli jest w checked in
+    try
     {
-      model.checkOut(reservation.getRoomNumber(),reservation.getUsername(),reservation.getFromDate());
+      Reservation reservation = model.getSelectedReservation();
+      if (reservation.isCheckedIn())
+      {
+        return model.checkOut(reservation.getRoomNumber(),
+            reservation.getUsername(), reservation.getFromDate());
+      }
+      else
+      {
+        return "neverCheckedIn";
+      }
     }
-    else if(!reservation.isCheckedIn())
+    catch (Exception e)
     {
-      Alert alert=new Alert(Alert.AlertType.ERROR,"This customer has never checked in",
-          ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Error");
-      alert.showAndWait();
+      return "mandatory";
     }
   }
 
-  public String deleteReservation(int roomNo, String username,
-      MyDate fromDate) throws RemoteException
+  public String deleteReservation(int roomNo, String username, MyDate fromDate)
+      throws RemoteException
   {
     return model.deleteReservation(roomNo, username, fromDate);
   }

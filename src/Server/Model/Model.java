@@ -51,7 +51,6 @@ public interface Model
   String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate);
 
 
-  ////////////////////////////////////
   String checkIn(int roomNumber, String username, MyDate fromDate);
   String checkOut(int roomNumber, String username, MyDate fromDate);
 }

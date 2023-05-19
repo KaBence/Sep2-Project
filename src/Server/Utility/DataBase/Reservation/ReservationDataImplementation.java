@@ -229,7 +229,7 @@ public class ReservationDataImplementation implements ReservationData
     return filtered;
   }
 
-  /////////////////////////////////////////////////////
+
   @Override public String checkIn(int roomNumber, String username, MyDate fromDate)
   {
     try (Connection connection = getConnection())

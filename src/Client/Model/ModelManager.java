@@ -212,11 +212,9 @@ public class ModelManager implements Model,PropertyChangeListener
     support.addPropertyChangeListener(listener);
   }
 
-  ////////////////////////////
   @Override public String checkIn(int roomNumber, String username,
       MyDate fromDate) throws RemoteException
   {
-    System.out.println("modelmanager");
     return client.checkIn(roomNumber,username,fromDate);
   }
 

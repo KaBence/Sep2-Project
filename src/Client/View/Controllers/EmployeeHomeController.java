@@ -196,12 +196,64 @@ public class EmployeeHomeController
 
   @FXML void checkIn() throws RemoteException
   {
+    String x = viewModel.checkIn();
     viewModel.checkIn();
+    if (x.equals(DatabaseConnection.SUCCESS))
+    {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION, "Check In successful",
+          ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Success");
+      alert.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    }
+    else if (x.equals(DatabaseConnection.MANDATORY))
+    {
+      Alert error = new Alert(Alert.AlertType.ERROR);
+      error.setHeaderText("Error");
+      error.setHeaderText("Select a reservation");
+      error.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    }
+    else
+    {
+      Alert error = new Alert(Alert.AlertType.ERROR);
+      error.setHeaderText("Error");
+      error.setHeaderText("The customer is already checked in");
+      error.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    }
   }
 
   @FXML void checkOut() throws RemoteException
   {
+    String x = viewModel.checkOut();
     viewModel.checkOut();
+    if (x.equals(DatabaseConnection.SUCCESS))
+    {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION, "Check Out successful",
+          ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Success");
+      alert.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    }
+    else if (x.equals(DatabaseConnection.MANDATORY))
+    {
+      Alert error = new Alert(Alert.AlertType.ERROR);
+      error.setHeaderText("Error");
+      error.setHeaderText("Select a reservation");
+      error.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    }
+    else
+    {
+      Alert error = new Alert(Alert.AlertType.ERROR);
+      error.setHeaderText("Error");
+      error.setHeaderText("The customer has never checked in");
+      error.showAndWait();
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    }
   }
 
   @FXML void deleteReservation() throws RemoteException
