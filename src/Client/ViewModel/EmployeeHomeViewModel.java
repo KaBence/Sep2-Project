@@ -6,6 +6,7 @@ import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
 import Server.Model.MyDate;
+import Server.Utility.IllegalDateException;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -440,8 +441,13 @@ public void bindReserveInfo(StringProperty property){
     catch (NumberFormatException e){
       throw new NumberFormatException();
     }
-
-
+    catch (IllegalDateException e){
+      Alert alert=new Alert(Alert.AlertType.ERROR,e.message(),ButtonType.OK);
+      alert.setTitle("Error");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+    }
+    return null;
   }
 
   public void filterEmployee() throws RemoteException
@@ -515,10 +521,6 @@ public void bindReserveInfo(StringProperty property){
       MyDate fromDate) throws RemoteException
   {
     return model.deleteReservation(roomNo, username, fromDate);
-  }
-
-  public void editReservation(){
-
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)
