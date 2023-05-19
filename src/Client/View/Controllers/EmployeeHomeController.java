@@ -194,12 +194,12 @@ public class EmployeeHomeController
     viewModel.filterEmployee();
   }
 
-  @FXML void checkIn()
+  @FXML void checkIn() throws RemoteException
   {
     viewModel.checkIn();
   }
 
-  @FXML void checkOut()
+  @FXML void checkOut() throws RemoteException
   {
     viewModel.checkOut();
   }

@@ -471,12 +471,13 @@ public void bindHiddenText(StringProperty property){
     employees.set(customerObservableList);
   }
 
-  public void checkIn(){
+  public void checkIn() throws RemoteException
+  {
     Reservation reservation = model.getSelectedReservation();
 
-    if(!reservation.isCheckedIn())//jeśli Is checked in jest false to można iść dalej
+    if(!reservation.isCheckedIn())
     {
-      reservation.setCheckedIn(true);
+      model.checkIn(reservation.getRoomNumber(),reservation.getUsername(),reservation.getFromDate());
     }
     else
     {
@@ -488,11 +489,12 @@ public void bindHiddenText(StringProperty property){
     }
   }
 
-  public void checkOut(){
+  public void checkOut() throws RemoteException
+  {
     Reservation reservation = model.getSelectedReservation();
     if(reservation.isCheckedIn()) //jeśli jest w checked in
     {
-      //reservation.setCheckedIn(null);
+      model.checkOut(reservation.getRoomNumber(),reservation.getUsername(),reservation.getFromDate());
     }
     else if(!reservation.isCheckedIn())
     {

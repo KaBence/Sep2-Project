@@ -67,4 +67,9 @@ public interface Model
 
   void addPropertyChangeListener(PropertyChangeListener listener);
 
+  String checkIn(int roomNumber, String username,
+      MyDate fromDate) throws RemoteException;
+  String checkOut(int roomNumber, String username,
+      MyDate fromDate) throws RemoteException;
+
 }

@@ -212,6 +212,20 @@ public class ModelManager implements Model,PropertyChangeListener
     support.addPropertyChangeListener(listener);
   }
 
+  ////////////////////////////
+  @Override public String checkIn(int roomNumber, String username,
+      MyDate fromDate) throws RemoteException
+  {
+    System.out.println("modelmanager");
+    return client.checkIn(roomNumber,username,fromDate);
+  }
+
+  @Override public String checkOut(int roomNumber, String username,
+      MyDate fromDate) throws RemoteException
+  {
+    return client.checkOut(roomNumber,username,fromDate);
+  }
+
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     support.firePropertyChange("update",null,evt.getNewValue());

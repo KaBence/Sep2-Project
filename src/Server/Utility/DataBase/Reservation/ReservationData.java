@@ -15,4 +15,9 @@ public interface ReservationData
       MyDate fromDate);
   ArrayList<Reservation> getAllReservations();
   ArrayList<Reservation> getFilteredReservations(String state,MyDate fromDate,MyDate toDate);
+
+
+  ////////////////
+  String checkIn(int roomNumber, String username, MyDate fromDate);
+  String checkOut(int roomNumber, String username, MyDate fromDate);
 }

@@ -50,4 +50,10 @@ public interface SharedInterface extends Remote
   ArrayList<Reservation> getAllReservations() throws RemoteException;
   ArrayList<Reservation> getFilteredReservation(String state,MyDate fromDate,MyDate toDate) throws RemoteException;
   String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate) throws RemoteException;
+
+  /////////////////////////////////////////////////////////////////////////////////
+  String checkIn(int roomNumber, String username, MyDate fromDate)
+      throws RemoteException;
+  String checkOut(int roomNumber, String username, MyDate fromDate)
+      throws RemoteException;
 }
