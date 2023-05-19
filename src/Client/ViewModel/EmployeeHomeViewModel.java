@@ -473,8 +473,8 @@ public void bindReserveInfo(StringProperty property){
     {
       return model.addReservation(
           Integer.parseInt(hiddenFieldRoomNo.getValue()), "john@hotmail.com",
-          MyDate.LocalDateToMyDate(fromDateReservation.getValue()),
-          MyDate.LocalDateToMyDate(toDateReservation.getValue()), false);
+          MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),
+          MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
     }
     catch (NumberFormatException e)
     {

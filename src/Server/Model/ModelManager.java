@@ -54,6 +54,12 @@ public class ModelManager implements Model
     return reservationData.addNewReservation(roomNumber,username,fromDate,toDate,CheckedIn);
   }
 
+  @Override public Employee addEmployee(String firstName, String lastName,
+      String position, String phoneNo, String password)
+  {
+    return employeeData.AddEmployee(password,firstName,lastName,phoneNo,position);
+  }
+
   @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony)
@@ -101,7 +107,7 @@ public class ModelManager implements Model
   }
 
 
-  //toto
+
   @Override public ArrayList<Room> getSimpleFilteredRooms(String room)
   {
     return roomData.filterRoom(room);

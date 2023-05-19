@@ -19,6 +19,8 @@ public interface SharedInterface extends Remote
       boolean balcony) throws RemoteException;
 
   Reservation addReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate, boolean CheckedIn) throws RemoteException;
+  Employee addEmployee(String firstName, String lastName, String position,
+      String phoneNo, String password) throws RemoteException;
   ArrayList<Room> getAllRooms() throws RemoteException;
 
   ArrayList<Room> getSimpleFilteredRoom(String room) throws RemoteException;

@@ -57,6 +57,13 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.addReservation(roomNumber, username, fromDate, toDate, CheckedIn);
   }
 
+  @Override public Employee addEmployee( String firstName,
+      String lastName, String position, String phoneNo, String password)
+      throws RemoteException
+  {
+    return client.addEmployee(firstName,lastName,position,phoneNo,password);
+  }
+
   @Override public ArrayList<Room> getAllRooms() throws RemoteException
   {
     return client.getAllRooms();

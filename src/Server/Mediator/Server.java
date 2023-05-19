@@ -48,6 +48,13 @@ public class Server extends UnicastRemoteObject implements SharedInterface
 
   }
 
+  @Override public Employee addEmployee(String firstName, String lastName,
+      String position, String phoneNo, String password) throws RemoteException
+  {
+    support.firePropertyChange("addEmployee", null, "123");
+    return model.addEmployee(firstName,lastName,position,phoneNo,password);
+  }
+
   @Override public ArrayList<Room> getAllRooms()
   {
     return model.getAllRooms();

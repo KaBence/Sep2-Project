@@ -18,6 +18,8 @@ public interface Model
       boolean balcony);
   Reservation addReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, boolean CheckedIn);
+  Employee addEmployee(String firstName, String lastName,
+      String position, String phoneNo, String password);
 
   String updateRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
@@ -36,7 +38,7 @@ public interface Model
 
   ArrayList<Room> getSimpleFilteredRooms(String room);
 
- // ArrayList<Reservation> getSimpleFilteredReservation(String reservation);
+
 
   ArrayList<Room> getFilteredRooms(String... attr);
   ArrayList<Customer> getFilteredCustomers(String...attr);
