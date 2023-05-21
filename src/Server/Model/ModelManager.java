@@ -1,5 +1,6 @@
 package Server.Model;
 
+
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
 import Server.Model.Hotel.Users.Customer;
@@ -164,9 +165,30 @@ public class ModelManager implements Model
     return roomData.filterRoom(room);
   }
 
-  @Override public ArrayList<Room> getFilteredRooms(String... attr)
+
+  @Override public ArrayList<Room> getFilteredRooms(MyDate from,MyDate to,String... attr)
   {
-    return roomData.filter(attr);
+    if (from==null&&to==null)
+      return roomData.filter(attr);
+    ArrayList<Reservation> occupied=reservationData.getFilteredWithDateChecker(from,to);
+    ArrayList<Room> filtered=roomData.filter(attr);
+    ArrayList<Room> finale=new ArrayList<>();
+    for (int i = 0; i < filtered.size(); i++)
+    {
+      if (occupied.isEmpty())
+        break;
+      boolean temp=false;
+      for (int j = 0; j < occupied.size(); j++)
+      {
+        if (filtered.get(i).getRoomNo()==occupied.get(j).getRoomNumber()){
+          temp=true;
+          break;
+        }
+      }
+      if (!temp)
+        finale.add(filtered.get(i));
+    }
+    return finale;
   }
 
   @Override public ArrayList<Customer> getFilteredCustomers(String... attr)
@@ -240,6 +262,7 @@ public class ModelManager implements Model
     return reservationData.updateReservation(roomNumber, username, fromDate,
         toDate, oldRoomNo, oldUsername, oldFromDate);
   }
+
 
   @Override public String checkIn(int roomNumber, String username,
       MyDate fromDate)
