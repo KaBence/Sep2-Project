@@ -1,9 +1,9 @@
 package Server.Model;
 
-import Server.Model.Hotel.Users.Customer;
-import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
+import Server.Model.Hotel.Users.Customer;
+import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Users.Person;
 import Server.Utility.DataBase.Customer.CustomerData;
 import Server.Utility.DataBase.Customer.CustomerDataImplementation;
@@ -18,31 +18,30 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ModelManager implements Model
 {
   private RoomData roomData;
   private CustomerData customerData;
-
   private EmployeeData employeeData;
-
   private ReservationData reservationData;
+  private ArrayList<Person> loggedInUsers;
   private PropertyChangeSupport support;
 
-  public ModelManager(){
-    roomData=new RoomDataImplementation();
-    customerData=new CustomerDataImplementation();
-    reservationData=new ReservationDataImplementation();
-    employeeData=new EmployeeDataImplementation();
-    support=new PropertyChangeSupport(this);
+  public ModelManager()
+  {
+    roomData = new RoomDataImplementation();
+    customerData = new CustomerDataImplementation();
+    reservationData = new ReservationDataImplementation();
+    employeeData = new EmployeeDataImplementation();
+    loggedInUsers = new ArrayList<>();
+    support = new PropertyChangeSupport(this);
   }
 
   @Override public void addListener(PropertyChangeListener listener)
   {
     support.addPropertyChangeListener(listener);
   }
-
 
   @Override public Person logIn(Person user)
   {
@@ -52,6 +51,7 @@ public class ModelManager implements Model
       if (user.equals(list.get(i)))
       {
         list.get(i).logIn();
+        loggedInUsers.add(list.get(i));
         return list.get(i);
       }
     }
@@ -66,6 +66,7 @@ public class ModelManager implements Model
       if (user.equals(list.get(i)))
       {
         list.get(i).logOut();
+        loggedInUsers.remove(user);
         return list.get(i);
       }
     }
@@ -88,44 +89,48 @@ public class ModelManager implements Model
     return x;
   }
 
-
-  @Override public String addRoom(int roomNumber, int numberOfBeds, int size,int price,
-      String orientation, boolean internet, boolean bathroom, boolean kitchen,
-      boolean balcony)
+  @Override public String addRoom(int roomNumber, int numberOfBeds, int size,
+      int price, String orientation, boolean internet, boolean bathroom,
+      boolean kitchen, boolean balcony)
   {
-   return roomData.addNewRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony,"Free");
+    return roomData.addNewRoom(roomNumber, numberOfBeds, size, price,
+        orientation, internet, bathroom, kitchen, balcony, "Free");
   }
 
   @Override public String addReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, boolean CheckedIn)
   {
-    return reservationData.addNewReservation(roomNumber,username,fromDate,toDate,CheckedIn);
+    return reservationData.addNewReservation(roomNumber, username, fromDate,
+        toDate, CheckedIn);
   }
 
   @Override public Employee addEmployee(String firstName, String lastName,
       String position, String phoneNo, String password)
   {
-    return employeeData.AddEmployee(password,firstName,lastName,phoneNo,position);
+    return employeeData.AddEmployee(password, firstName, lastName, phoneNo,
+        position);
   }
 
   @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony)
   {
-    return roomData.updateRoom(roomNumber,numberOfBeds,size,price,orientation,internet,bathroom,kitchen,balcony);
+    return roomData.updateRoom(roomNumber, numberOfBeds, size, price,
+        orientation, internet, bathroom, kitchen, balcony);
   }
 
   @Override public String updateCustomer(String username, String firstName,
       String lastName, String phoneNumber, String payment)
   {
-    return customerData.editCustomer(username,firstName, lastName, phoneNumber,payment);
+    return customerData.editCustomer(username, firstName, lastName, phoneNumber,
+        payment);
   }
 
   @Override public String updateEmployee(String username, String firstName,
-      String lastName, String position, String phoneNo)
-      throws RemoteException
+      String lastName, String position, String phoneNo) throws RemoteException
   {
-    return employeeData.editEmployee(username, firstName, lastName,position,phoneNo);
+    return employeeData.editEmployee(username, firstName, lastName, position,
+        phoneNo);
   }
 
   @Override public String deleteRoom(int roomNumber)
@@ -146,7 +151,7 @@ public class ModelManager implements Model
   @Override public String deleteReservation(int roomNo, String username,
       MyDate fromDate)
   {
-    return reservationData.deleteReservation(roomNo, username,fromDate);
+    return reservationData.deleteReservation(roomNo, username, fromDate);
   }
 
   @Override public ArrayList<Room> getAllRooms()
@@ -154,13 +159,10 @@ public class ModelManager implements Model
     return roomData.getAllRooms();
   }
 
-
-
   @Override public ArrayList<Room> getSimpleFilteredRooms(String room)
   {
     return roomData.filterRoom(room);
   }
-
 
   @Override public ArrayList<Room> getFilteredRooms(String... attr)
   {
@@ -182,9 +184,32 @@ public class ModelManager implements Model
     return customerData.filterCustomers(employee);
   }
 
-  @Override public ArrayList<Employee> getAllEmployees()
+  @Override public ArrayList<Employee> getEmployeesFromDatabase()
   {
     return employeeData.getAllEmployees();
+  }
+
+  public ArrayList<Employee> getAllEmployees()
+  {
+    ArrayList<Employee> all = getEmployeesFromDatabase();
+    ArrayList<Employee> updated = new ArrayList<>(all.size());
+    for (int i = 0; i < all.size(); i++)
+    {
+      boolean flag = true;
+      for (int j = 0; j < loggedInUsers.size(); j++)
+      {
+        if (all.get(i).equals(loggedInUsers.get(j)))
+        {
+          flag = false;
+          updated.add((Employee) loggedInUsers.get(j));
+        }
+      }
+      if (flag)
+      {
+        updated.add(all.get(i));
+      }
+    }
+    return updated;
   }
 
   @Override public ArrayList<Employee> filterEmployee(String employee)
@@ -209,16 +234,16 @@ public class ModelManager implements Model
   }
 
   @Override public String updateReservation(int roomNumber, String username,
-      MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate)
+      MyDate fromDate, MyDate toDate, int oldRoomNo, String oldUsername,
+      MyDate oldFromDate)
   {
-    return reservationData.updateReservation(roomNumber, username, fromDate, toDate,oldRoomNo,oldUsername,oldFromDate);
+    return reservationData.updateReservation(roomNumber, username, fromDate,
+        toDate, oldRoomNo, oldUsername, oldFromDate);
   }
-
 
   @Override public String checkIn(int roomNumber, String username,
       MyDate fromDate)
   {
-    System.out.println("manager");
     return reservationData.checkIn(roomNumber, username, fromDate);
   }
 

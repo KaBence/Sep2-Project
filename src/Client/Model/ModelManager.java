@@ -27,6 +27,7 @@ public class ModelManager implements Model,PropertyChangeListener
   private Employee selectedEmployee;
   private Reservation selectedReservation;
   private Person current;
+  private ArrayList<Person> loggedUsers;
 
   private PropertyChangeSupport support;
 
@@ -35,6 +36,7 @@ public class ModelManager implements Model,PropertyChangeListener
     client=new Client(sharedInterface);
     client.addPropertyChangeListener(this);
     support=new PropertyChangeSupport(this);
+    loggedUsers = new ArrayList<>();
   }
 
   public ModelManager() throws IOException, NotBoundException
@@ -44,22 +46,27 @@ public class ModelManager implements Model,PropertyChangeListener
     client=new Client(sharedInterface);
     client.addPropertyChangeListener(this);
     support=new PropertyChangeSupport(this);
+    loggedUsers = new ArrayList<>();
   }
 
-  @Override public Person getPerson()
+  @Override public boolean getCurrent()
   {
-    return current;
+    return current != null;
   }
 
   @Override public Person logIn(Person user) throws RemoteException
   {
     current = client.logIn(user);
+    loggedUsers.add(current);
     return current;
   }
 
-  @Override public Person logOut(Person user) throws RemoteException
+  @Override public Person logOut() throws RemoteException
   {
-    return client.logOut(user);
+    loggedUsers.remove(current);
+    Person x = current;
+    current = null;
+    return client.logOut(x);
   }
 
   @Override public String addRoom(int roomNumber, int numberOfBeds, int size,int price,

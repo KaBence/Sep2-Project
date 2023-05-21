@@ -41,15 +41,13 @@ public interface Model
   ArrayList<Room> getAllRooms();
 
   ArrayList<Room> getSimpleFilteredRooms(String room);
-
-
-
   ArrayList<Room> getFilteredRooms(String... attr);
   ArrayList<Customer> getFilteredCustomers(String...attr);
 
   ArrayList<Customer> getAllCustomers();
   ArrayList<Customer> filterCustomer(String customer);
   ArrayList<Employee> getAllEmployees();
+  ArrayList<Employee> getEmployeesFromDatabase();
   ArrayList<Employee> filterEmployee(String employee);
   ArrayList<Employee> getFilteredEmployee(String... attr);
 

@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class LogOut implements States, Serializable
 {
-  @Override public void logIn(String username)
+  @Override public void logIn(Person user)
   {
-    new LogIn();
+    user.setState(new LogIn());
   }
 
-  @Override public void logOut(String username)
+  @Override public void logOut(Person user)
   {
-    throw new RuntimeException(username+" is logged out");
+    throw new RuntimeException(user.getUsername()+" is logged out");
   }
 
   @Override public String getState()

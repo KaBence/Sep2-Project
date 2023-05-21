@@ -2,7 +2,7 @@ package Server.Model.Hotel.Users;
 
 public interface States
 {
-  void logIn(String username);
-  void logOut(String username);
+  void logIn(Person user);
+  void logOut(Person user);
   String getState();
 }

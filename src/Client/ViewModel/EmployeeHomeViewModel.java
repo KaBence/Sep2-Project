@@ -276,10 +276,6 @@ public void bindReserveInfo(StringProperty property){
     property.bindBidirectional(reserveNoBeds);
   }
 
-  public Person getPerson()
-  {
-    return model.getPerson();
-  }
 
   public void update()
   {
@@ -348,6 +344,10 @@ public void bindReserveInfo(StringProperty property){
     newReservations.set(roomObservableList);
   }
 
+  public Person logOut() throws RemoteException
+  {
+    return model.logOut();
+  }
   public void saveRoom(Room room)
   {
     model.saveSelectedRoom(room);
@@ -437,7 +437,6 @@ public void bindReserveInfo(StringProperty property){
     if (!paymentInfoFilter.getValue().equals(""))
     {
       temp[counter] = ", PaymentInfo " + paymentInfoFilter.getValue();
-      System.out.println(temp[counter]);
     }
     ObservableList<Customer> customerObservableList = FXCollections.observableList(
         model.getFilteredCustomers(temp));
