@@ -75,9 +75,7 @@ public class ReservationDataImplementation implements ReservationData
     {
       //dates are the same
       if (from.equals(item.getFromDate()) && to.equals(item.getToDate()))
-      {
         throw new IllegalDateException(2);
-      }
       //the dates are outside a reservation
       if (from.isBefore(item.getFromDate()) && item.getToDate().isBefore(to))
         throw new IllegalDateException(1);
@@ -218,20 +216,6 @@ public class ReservationDataImplementation implements ReservationData
     return list;
   }
 
-  @Override public ArrayList<Reservation> filterReservation(String reservation)
-  {
-    ArrayList<Reservation> list = getAllReservations();
-    ArrayList<Reservation> filter = new ArrayList<>();
-    for (int i = 0; i < list.size(); i++)
-    {
-      if (list.get(i).toString().toLowerCase()
-          .contains(reservation.toLowerCase()))
-      {
-        filter.add(list.get(i));
-      }
-    }
-    return filter;
-  }
 
   @Override public ArrayList<Reservation> getFilteredReservations(String state,
       MyDate fromDate, MyDate toDate)
@@ -246,21 +230,39 @@ public class ReservationDataImplementation implements ReservationData
       boolean temp = true;
       if (!state.equals("all"))
       {
-        if (!item.getState().equals(state) || item.getState()
-            .equals("In The Past"))
+        if (!item.getState().equals(state) || item.getState().equals("In The Past"))
         {
           temp = false;
         }
       }
       if (flag)
       {
-        if (!(item.getFromDate().isBefore(fromDate) && toDate.isBefore(
-            item.getToDate())))
+        if (!(item.getFromDate().isBefore(fromDate) && toDate.isBefore(item.getToDate())))
         {
           temp = false;
         }
       }
       if (temp)
+        filtered.add(item);
+    }
+    return filtered;
+  }
+
+  @Override public ArrayList<Reservation> getFilteredWithDateChecker(
+      MyDate from, MyDate to)
+  {
+    ArrayList<Reservation> all=getAllReservations();
+    ArrayList<Reservation> filtered=new ArrayList<>();
+    for (Reservation item:all){
+      boolean flag=false;
+      try
+      {
+        dateChecker(item.getRoomNumber(),from,to);
+      }
+      catch (IllegalDateException e){
+        flag=true;
+      }
+      if (flag)
         filtered.add(item);
     }
     return filtered;

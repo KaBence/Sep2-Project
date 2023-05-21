@@ -44,7 +44,7 @@ public interface Model
 
 
 
-  ArrayList<Room> getFilteredRooms(String... attr);
+  ArrayList<Room> getFilteredRooms(MyDate from,MyDate to,String... attr);
   ArrayList<Customer> getFilteredCustomers(String...attr);
 
   ArrayList<Customer> getAllCustomers();

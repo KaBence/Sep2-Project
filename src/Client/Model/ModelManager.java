@@ -93,9 +93,9 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.getSimpleFilteredRoom(room);
   }
 
-  @Override public ArrayList<Room> getFilteredRoom(String... attr) throws RemoteException
+  @Override public ArrayList<Room> getFilteredRoom(MyDate from,MyDate to,String... attr) throws RemoteException
   {
-    return client.getFilteredRooms(attr);
+    return client.getFilteredRooms(from,to,attr);
   }
 
   @Override public ArrayList<Customer> getFilteredCustomers(String... attr)

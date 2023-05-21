@@ -162,9 +162,29 @@ public class ModelManager implements Model
   }
 
 
-  @Override public ArrayList<Room> getFilteredRooms(String... attr)
+  @Override public ArrayList<Room> getFilteredRooms(MyDate from,MyDate to,String... attr)
   {
-    return roomData.filter(attr);
+    if (from==null&&to==null)
+      return roomData.filter(attr);
+    ArrayList<Reservation> occupied=reservationData.getFilteredWithDateChecker(from,to);
+    ArrayList<Room> filtered=roomData.filter(attr);
+    ArrayList<Room> finale=new ArrayList<>();
+    for (int i = 0; i < filtered.size(); i++)
+    {
+      if (occupied.isEmpty())
+        break;
+      boolean temp=false;
+      for (int j = 0; j < occupied.size(); j++)
+      {
+        if (filtered.get(i).getRoomNo()==occupied.get(j).getRoomNumber()){
+          temp=true;
+          break;
+        }
+      }
+      if (!temp)
+        finale.add(filtered.get(i));
+    }
+    return finale;
   }
 
   @Override public ArrayList<Customer> getFilteredCustomers(String... attr)

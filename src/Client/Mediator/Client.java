@@ -68,9 +68,9 @@ public Employee addEmployee(String firstName, String lastName, String position,
     return sharedInterface.getSimpleFilteredRoom(room);
   }
 
-  public ArrayList<Room> getFilteredRooms(String... attr) throws RemoteException
+  public ArrayList<Room> getFilteredRooms(MyDate from,MyDate to,String... attr) throws RemoteException
   {
-    return sharedInterface.getFilteredRoom(attr);
+    return sharedInterface.getFilteredRoom(from,to,attr);
   }
   public ArrayList<Customer> getFilteredCustomer(String... attr) throws RemoteException{
     return sharedInterface.getFilteredCustomer(attr);
