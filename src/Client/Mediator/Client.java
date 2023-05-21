@@ -1,6 +1,7 @@
 package Client.Mediator;
 
 import Server.Model.*;
+import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
@@ -58,6 +59,11 @@ public Employee addEmployee(String firstName, String lastName, String position,
 {
     return sharedInterface.addEmployee(firstName, lastName, position,phoneNo,password);
 }
+public Review addReview(String username, int reviewID, int roomNO, MyDate fromDate, MyDate postedDate, String comment)
+    throws RemoteException
+{
+    return  sharedInterface.addReview(username, reviewID, roomNO, fromDate, postedDate, comment);
+};
   public ArrayList<Room> getAllRooms() throws RemoteException
   {
     return sharedInterface.getAllRooms();

@@ -78,7 +78,7 @@
                         <ListView fx:id="myReservations" layoutX="36.0" layoutY="55.0" prefHeight="261.0" prefWidth="388.0" />
                         <VBox layoutX="456.0" layoutY="95.0" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
                            <children>
-                              <Button fx:id="review" mnemonicParsing="false" text="Review">
+                              <Button mnemonicParsing="false" onAction="#review" text="Review">
                                  <font>
                                     <Font name="Century Gothic" size="18.0" />
                                  </font>

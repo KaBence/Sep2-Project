@@ -2,6 +2,7 @@ package Client.Model;
 
 import Client.Mediator.Client;
 import Server.Model.*;
+import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
@@ -87,6 +88,12 @@ public class ModelManager implements Model,PropertyChangeListener
       throws RemoteException
   {
     return client.addEmployee(firstName,lastName,position,phoneNo,password);
+  }
+
+  @Override public Review addReview(String username, int reviewID, int roomNO,
+      MyDate fromDate, MyDate postedDate, String comment) throws RemoteException
+  {
+    return client.addReview(username, reviewID, roomNO, fromDate, postedDate, comment);
   }
 
   @Override public ArrayList<Room> getAllRooms() throws RemoteException

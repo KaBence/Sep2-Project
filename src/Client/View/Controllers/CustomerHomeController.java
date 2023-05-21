@@ -13,7 +13,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
-
 public class CustomerHomeController
 {
   @FXML TextField info, nrOfBeds, roomNr, username, password;
@@ -29,20 +28,25 @@ public class CustomerHomeController
   private Region root;
   private ViewHandler viewHandler;
   private CustomerHomeViewModel viewModel;
-  public void init(ViewHandler viewHandler, CustomerHomeViewModel viewModel, Region root){
-    this.viewHandler=viewHandler;
-    this.viewModel=viewModel;
-    this.root=root;
+
+  public void init(ViewHandler viewHandler, CustomerHomeViewModel viewModel,
+      Region root)
+  {
+    this.viewHandler = viewHandler;
+    this.viewModel = viewModel;
+    this.root = root;
     loggingIn.setOpacity(0.0);
     this.viewModel.bindRooms(roomListView.itemsProperty());
   }
 
-  public Region getRoot(){
+  public Region getRoot()
+  {
     root.setUserData("Customer Home Page");
     return root;
   }
 
-  public void reset(){
+  public void reset()
+  {
     viewModel.update();
   }
 
@@ -63,5 +67,9 @@ public class CustomerHomeController
   {
   }
 
+  @FXML void review()
+  {
+    viewHandler.openView(SceneNames.Review);
+  }
 
 }

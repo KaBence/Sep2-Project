@@ -6,6 +6,6 @@ public enum SceneNames
   EmployeeHomeReservations,EmployeeHomeRoom,EmployeeHomeEmployee,EmployeeHomeCustomer,EmployeeLogin,
   CustomerHome,AddRoom,EmployeeHomeAddReservations,
   EditRoom,EditCustomer,EditEmployee, EditReservation,
-  EmployeeSignIn
+  EmployeeSignIn,Review
 
 }
