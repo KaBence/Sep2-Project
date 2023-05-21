@@ -276,10 +276,6 @@ public void bindReserveInfo(StringProperty property){
     property.bindBidirectional(reserveNoBeds);
   }
 
-  public Person getPerson()
-  {
-    return model.getPerson();
-  }
 
   public void update()
   {
