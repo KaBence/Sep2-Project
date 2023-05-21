@@ -50,6 +50,7 @@ public interface Model
   ArrayList<Customer> getAllCustomers();
   ArrayList<Customer> filterCustomer(String customer);
   ArrayList<Employee> getAllEmployees();
+  ArrayList<Employee> getEmployeesFromDatabase();
   ArrayList<Employee> filterEmployee(String employee);
   ArrayList<Employee> getFilteredEmployee(String... attr);
 

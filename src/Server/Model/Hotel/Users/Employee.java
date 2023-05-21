@@ -63,7 +63,7 @@ public class Employee extends Person implements Serializable
 
   public String toString()
   {
-    return super.toString() + position;
+    return super.toString() + position+" | <"+getState()+"> ";
   }
 
   public String employeeInfo()

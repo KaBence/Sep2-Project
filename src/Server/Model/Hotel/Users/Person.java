@@ -20,16 +20,20 @@ public abstract class Person implements Serializable
 
   public void logIn()
   {
-    state.logIn(username);
+    state.logIn(this);
   }
   public void logOut()
   {
-    state.logOut(username);
+    state.logOut(this);
   }
 
   public String getState()
   {
     return state.getState();
+  }
+  public void setState(States state)
+  {
+    this.state = state;
   }
   public void setUsername(String username)
   {
@@ -68,5 +72,15 @@ public abstract class Person implements Serializable
   public String info(){
     String temp=username+" -> , FirstName "+ firstName+", LastName "+lastName+", PhoneNumber "+phoneNo;
     return temp.toLowerCase();
+  }
+
+  public boolean equals(Object obj)
+  {
+    if ( obj == null||obj.getClass()!=getClass())
+    {
+      return false;
+    }
+    Person other = (Person) obj;
+    return other.username.equals(username);
   }
 }

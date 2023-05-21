@@ -7,6 +7,7 @@ import Server.Model.Hotel.Users.Person;
 import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Alert;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -30,8 +31,9 @@ public class EmployeeLoginViewModel
     }
     catch (RemoteException e)
     {
-      System.out.println(e.detail);
-      //throw new RuntimeException(e);
+      Alert x = new Alert(Alert.AlertType.ERROR);
+      x.setHeaderText("The system doesn't have any employees.\nContact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      x.showAndWait();
     }
   }
 
@@ -65,7 +67,7 @@ public class EmployeeLoginViewModel
           }
           catch (Exception e)
           {
-            System.out.println(e.getMessage());
+            return DatabaseConnection.ERROR;
           }
         }
         else

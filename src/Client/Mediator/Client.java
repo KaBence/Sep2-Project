@@ -41,7 +41,7 @@ public class Client extends UnicastRemoteObject implements
 
   public Person logOut(Person user) throws RemoteException
   {
-    return sharedInterface.logIn(user);
+    return sharedInterface.logOut(user);
   }
 
   public String addRoom(int roomNumber, int numberOfBeds, int size, int price,
@@ -158,7 +158,6 @@ public Employee addEmployee(String firstName, String lastName, String position,
   public String checkIn(int roomNumber, String username,
       MyDate fromDate) throws RemoteException
   {
-    System.out.println("Client");
     return sharedInterface.checkIn(roomNumber,username,fromDate);
   }
   public String checkOut(int roomNumber, String username,
