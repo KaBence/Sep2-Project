@@ -14,9 +14,9 @@ import java.util.Date;
 
 public interface Model
 {
-  Person getPerson();
+  boolean getCurrent();
   Person logIn(Person user) throws RemoteException;
-  Person logOut(Person user) throws RemoteException;
+  Person logOut() throws RemoteException;
   String addRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException;

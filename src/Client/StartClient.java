@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 public class StartClient extends Application
 {
@@ -28,6 +29,17 @@ public class StartClient extends Application
     {
       @Override public void handle(WindowEvent event)
       {
+        if (model.getCurrent())
+        {
+          try
+          {
+            model.logOut();
+          }
+          catch (RemoteException e)
+          {
+            throw new RuntimeException(e);
+          }
+        }
         Platform.exit();
         System.exit(0);
       }

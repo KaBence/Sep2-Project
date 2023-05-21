@@ -5,14 +5,14 @@ import java.io.Serializable;
 public class LogIn implements States, Serializable
 {
 
-  @Override public void logIn(String username)
+  @Override public void logIn(Person user)
   {
-    throw new RuntimeException(username+" is already logged in");
+    throw new RuntimeException(user.getUsername()+" is already logged in");
   }
 
-  @Override public void logOut(String username)
+  @Override public void logOut(Person user)
   {
-    new LogOut();
+    user.setState(new LogOut());
   }
 
   @Override public String getState()

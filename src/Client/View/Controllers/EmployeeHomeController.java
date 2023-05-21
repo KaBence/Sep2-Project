@@ -146,8 +146,9 @@ public class EmployeeHomeController
     viewHandler.openView(SceneNames.AddRoom);
   }
 
-  @FXML void Home()
+  @FXML void Home() throws RemoteException
   {
+    viewModel.logOut();
     viewHandler.openView(SceneNames.Home);
   }
 
