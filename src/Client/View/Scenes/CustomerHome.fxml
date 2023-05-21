@@ -4,10 +4,12 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -21,7 +23,7 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="info" layoutX="32.0" layoutY="13.0" onKeyReleased="#simpleFilterRoom" promptText="Enter Room Info" />
+                  <TextField fx:id="info" layoutX="37.0" layoutY="14.0" onKeyReleased="#simpleFilterRoom" promptText="Enter Room Info" />
                   <Line endX="33.5999755859375" endY="257.20001220703125" layoutX="383.0" layoutY="114.0" startX="33.5999755859375" startY="-112.99999237060547" stroke="#00000064" />
                   <Button layoutX="315.0" layoutY="317.0" mnemonicParsing="false" text="Create">
                      <font>
@@ -63,44 +65,64 @@
                         <TextField fx:id="roomNr" prefHeight="26.0" prefWidth="118.0" promptText="Room Nr" />
                      </children>
                   </VBox>
+                  <ToggleButton layoutX="300.0" layoutY="14.0" mnemonicParsing="false" text="ToggleButton" />
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab fx:id="myReservation" text="My Reservation">
+    <Tab fx:id="myReservation" text="My Profile">
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ListView fx:id="myReservations" layoutX="38.0" layoutY="53.0" prefHeight="266.0" prefWidth="373.0" rotate="180.0" />
-                  <VBox layoutX="454.0" layoutY="106.0" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+                  <AnchorPane prefHeight="414.0" prefWidth="600.0">
                      <children>
-                        <Button fx:id="review" mnemonicParsing="false" text="Review">
+                        <ListView fx:id="myReservations" layoutX="36.0" layoutY="55.0" prefHeight="261.0" prefWidth="388.0" />
+                        <VBox layoutX="456.0" layoutY="95.0" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+                           <children>
+                              <Button fx:id="review" mnemonicParsing="false" text="Review">
+                                 <font>
+                                    <Font name="Century Gothic" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="cancel" mnemonicParsing="false" text="Cancel">
+                                 <font>
+                                    <Font name="Century Gothic" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="edit" mnemonicParsing="false" text="Edit">
+                                 <font>
+                                    <Font name="Century Gothic" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <Button layoutX="22.0" layoutY="328.0" mnemonicParsing="false" text="Home">
                            <font>
                               <Font name="Century Gothic" size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="cancel" mnemonicParsing="false" text="Cancel">
+                        <Button fx:id="logout" layoutX="506.0" layoutY="330.0" mnemonicParsing="false" text="LogOut">
                            <font>
-                              <Font name="Century Gothic" size="18.0" />
+                              <Font name="Century Gothic" size="16.0" />
                            </font>
                         </Button>
-                        <Button fx:id="edit" mnemonicParsing="false" text="Edit">
+                        <Label layoutX="46.0" layoutY="14.0" prefHeight="24.0" prefWidth="77.0" text="Label">
                            <font>
-                              <Font name="Century Gothic" size="18.0" />
+                              <Font name="Century Gothic" size="16.0" />
                            </font>
-                        </Button>
+                        </Label>
+                        <Label layoutX="171.0" layoutY="16.0" prefHeight="18.0" prefWidth="68.0" text="Label">
+                           <font>
+                              <Font name="Century Gothic" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="300.0" layoutY="16.0" prefHeight="18.0" prefWidth="68.0" text="Label">
+                           <font>
+                              <Font name="Century Gothic" size="16.0" />
+                           </font>
+                        </Label>
                      </children>
-                  </VBox>
-                  <Button layoutX="24.0" layoutY="323.0" mnemonicParsing="false" text="Home">
-                     <font>
-                        <Font name="Century Gothic" size="18.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="logout" layoutX="485.0" layoutY="24.0" mnemonicParsing="false" text="LogOut">
-                     <font>
-                        <Font name="Century Gothic" size="16.0" />
-                     </font>
-                  </Button>
-                  <AnchorPane fx:id="loggingIn" layoutX="6.0" layoutY="22.0" prefHeight="368.0" prefWidth="447.0">
+                  </AnchorPane>
+                  <AnchorPane fx:id="loggingIn" prefHeight="368.0" prefWidth="447.0">
                      <children>
                         <Text layoutX="228.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logging in">
                            <font>
@@ -119,7 +141,7 @@
                                     <TextField fx:id="username" prefHeight="26.0" prefWidth="177.0" />
                                  </children>
                               </HBox>
-                              <HBox prefHeight="55.0" prefWidth="306.0">
+                              <HBox prefHeight="43.0" prefWidth="306.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="127.01312255859375">
                                        <font>
@@ -129,11 +151,20 @@
                                     <TextField fx:id="password" prefHeight="26.0" prefWidth="176.0" />
                                  </children>
                               </HBox>
-                              <Button mnemonicParsing="false" text="LogIn">
-                                 <font>
-                                    <Font name="Century Gothic" size="18.0" />
-                                 </font>
-                              </Button>
+                              <HBox alignment="CENTER" prefHeight="47.0" prefWidth="306.0" spacing="40.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Register">
+                                       <font>
+                                          <Font name="Century Gothic" size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button alignment="CENTER" mnemonicParsing="false" text="LogIn">
+                                       <font>
+                                          <Font name="Century Gothic" size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>
@@ -146,7 +177,12 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <ListView fx:id="listReviews" layoutX="18.0" layoutY="14.0" prefHeight="346.0" prefWidth="566.0" />
+                  <ListView fx:id="listReviews" layoutX="18.0" layoutY="14.0" prefHeight="287.0" prefWidth="566.0" />
+                  <Button layoutX="27.0" layoutY="321.0" mnemonicParsing="false" text="Home">
+                     <font>
+                        <Font name="Century Gothic" size="18.0" />
+                     </font>
+                  </Button>
                </children></AnchorPane>
          </content>
       </Tab>

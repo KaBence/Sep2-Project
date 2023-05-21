@@ -41,7 +41,7 @@ public class ModelManager implements Model,PropertyChangeListener
 
   public ModelManager() throws IOException, NotBoundException
   {
-    Registry registry= LocateRegistry.getRegistry(1337);
+    Registry registry= LocateRegistry.getRegistry(1377);
     SharedInterface sharedInterface=(SharedInterface) registry.lookup("HotelServer");
     client=new Client(sharedInterface);
     client.addPropertyChangeListener(this);
@@ -76,7 +76,7 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.addRoom(roomNumber, numberOfBeds, size,price, orientation, internet, bathroom, kitchen, balcony);
   }
 
-  @Override public Reservation addReservation(int roomNumber, String username,
+  @Override public String addReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, boolean CheckedIn) throws RemoteException
   {
     return client.addReservation(roomNumber, username, fromDate, toDate, CheckedIn);

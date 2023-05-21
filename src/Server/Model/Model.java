@@ -20,7 +20,7 @@ public interface Model
   String addRoom(int roomNumber, int numberOfBeds, int size, int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony);
-  Reservation addReservation(int roomNumber, String username,
+  String  addReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, boolean CheckedIn);
   Employee addEmployee(String firstName, String lastName,
       String position, String phoneNo, String password);

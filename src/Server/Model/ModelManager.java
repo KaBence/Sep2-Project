@@ -97,7 +97,7 @@ public class ModelManager implements Model
         orientation, internet, bathroom, kitchen, balcony, "Free");
   }
 
-  @Override public Reservation addReservation(int roomNumber, String username,
+  @Override public String addReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, boolean CheckedIn)
   {
     return reservationData.addNewReservation(roomNumber, username, fromDate,

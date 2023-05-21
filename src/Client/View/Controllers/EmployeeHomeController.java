@@ -50,7 +50,7 @@ public class EmployeeHomeController
 
   @FXML TextField filteringRoom;
 
-  @FXML ToggleButton toggleRoomButton, toggleEmployeeButton, toggleCustomerButton;
+  @FXML ToggleButton toggleRoomButton, toggleEmployeeButton, toggleCustomerButton,toggleNewReservation;
 
   // employee new reservations
   @FXML TextField reserveInfo;
@@ -61,7 +61,7 @@ public class EmployeeHomeController
   @FXML CheckBox reserveKitchen;
   @FXML CheckBox reserveInternet;
   @FXML CheckBox reserveBathroom;
-  @FXML ComboBox reservePricePerNight;
+  @FXML ComboBox<Integer> reservePricePerNight;
   @FXML TextField reserveNrOfBeds;
   @FXML TextField reserveRoomNr;
   @FXML TextField hiddenFieldRoomNo;
@@ -70,7 +70,7 @@ public class EmployeeHomeController
   private ViewHandler viewHandler;
   private EmployeeHomeViewModel viewModel;
 
-  private boolean toggleRoomfilter = false, toggleEmployeefilter = false, toggleCustomerfilter = false;
+  private boolean toggleRoomfilter = false, toggleEmployeefilter = false, toggleCustomerFilter = false, toggleNewReservationFilter=false;
 
   public void init(ViewHandler viewHandler, EmployeeHomeViewModel viewModel,
       Region root)
@@ -78,7 +78,7 @@ public class EmployeeHomeController
     this.viewHandler = viewHandler;
     this.viewModel = viewModel;
     this.viewModel.bindRoomList(roomListView.itemsProperty());
-    this.viewModel.bindRoomList(roomListViewNewReservation.itemsProperty());
+    this.viewModel.bindNewReservations(roomListViewNewReservation.itemsProperty());
     this.viewModel.bindCustomerList(customerListView.itemsProperty());
     this.viewModel.bindEmployeeList(employeeListView.itemsProperty());
     this.viewModel.bindReservationList(reservationListView.itemsProperty());
@@ -115,6 +115,13 @@ public class EmployeeHomeController
     viewModel.bindFromDateReservation(fromDateReservation.valueProperty());
     viewModel.bindToDateReservation(toDateReservation.valueProperty());
     viewModel.bindReserveInfo(reserveInfo.textProperty());
+    viewModel.bindReserveBalcony(reserveBalcony.selectedProperty());
+    viewModel.bindReserveBathroom(reserveBathroom.selectedProperty());
+    viewModel.bindReserveInternet(reserveInternet.selectedProperty());
+    viewModel.bindReserveKitchen(reserveKitchen.selectedProperty());
+    viewModel.bindReservePrice(reservePricePerNight.valueProperty());
+    viewModel.bindReserveNoBeds(reserveNrOfBeds.textProperty());
+    viewModel.bindReserveRoomNo(reserveRoomNr.textProperty());
   }
 
   public void initialize()
@@ -126,6 +133,7 @@ public class EmployeeHomeController
     prices.add(300);
     prices.add(500);
     priceFilter.setItems(FXCollections.observableList(prices));
+    reservePricePerNight.setItems(FXCollections.observableList(prices));
   }
 
   public Region getRoot()
@@ -139,6 +147,7 @@ public class EmployeeHomeController
     ToggleRoom();
     ToggleCustomer();
     ToggleEmployee();
+    toggleNewReservation();
   }
 
   @FXML void addRoom()
@@ -202,80 +211,12 @@ public class EmployeeHomeController
 
   @FXML void checkIn() throws RemoteException
   {
-    Alert conf=new Alert(Alert.AlertType.CONFIRMATION,"Do you really want to check in this reservation?",ButtonType.YES,ButtonType.NO);
-    conf.setTitle("Confirmation");
-    conf.setHeaderText(null);
-    conf.showAndWait();
-    String x="";
-    if (conf.getResult().equals(ButtonType.YES)){
-      x = viewModel.checkIn();
-    }
-    else
-      return;
-    if (x.equals(DatabaseConnection.SUCCESS))
-    {
-      Alert alert = new Alert(Alert.AlertType.INFORMATION, "Check In successful",
-          ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Success");
-      alert.showAndWait();
-      viewHandler.openView(SceneNames.EmployeeHomeReservations);
-    }
-    else if (x.equals(DatabaseConnection.MANDATORY))
-    {
-      Alert error = new Alert(Alert.AlertType.ERROR);
-      error.setHeaderText("Error");
-      error.setHeaderText("Select a reservation");
-      error.showAndWait();
-      viewHandler.openView(SceneNames.EmployeeHomeReservations);
-    }
-    else
-    {
-      Alert error = new Alert(Alert.AlertType.ERROR);
-      error.setHeaderText("Error");
-      error.setHeaderText("The customer is already checked in");
-      error.showAndWait();
-      viewHandler.openView(SceneNames.EmployeeHomeReservations);
-    }
+    viewModel.checkIn();
   }
 
   @FXML void checkOut() throws RemoteException
   {
-    Alert conf=new Alert(Alert.AlertType.CONFIRMATION,"Do you really want to check in this reservation?",ButtonType.YES,ButtonType.NO);
-    conf.setTitle("Confirmation");
-    conf.setHeaderText(null);
-    conf.showAndWait();
-    String x="";
-    if (conf.getResult().equals(ButtonType.YES)){
-       x = viewModel.checkOut();
-    }
-    else
-      return;
-    if (x.equals(DatabaseConnection.SUCCESS))
-    {
-      Alert alert = new Alert(Alert.AlertType.INFORMATION, "Check Out successful",
-          ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Success");
-      alert.showAndWait();
-      viewHandler.openView(SceneNames.EmployeeHomeReservations);
-    }
-    else if (x.equals(DatabaseConnection.MANDATORY))
-    {
-      Alert error = new Alert(Alert.AlertType.ERROR);
-      error.setHeaderText("Error");
-      error.setHeaderText("Select a reservation");
-      error.showAndWait();
-      viewHandler.openView(SceneNames.EmployeeHomeReservations);
-    }
-    else
-    {
-      Alert error = new Alert(Alert.AlertType.ERROR);
-      error.setHeaderText("Error");
-      error.setHeaderText("The customer has never checked in");
-      error.showAndWait();
-      viewHandler.openView(SceneNames.EmployeeHomeReservations);
-    }
+    viewModel.checkOut();
   }
 
   @FXML void deleteReservation() throws RemoteException
@@ -333,39 +274,8 @@ public class EmployeeHomeController
 
   @FXML void createNewReservation() throws RemoteException
   {
-    boolean flag = true;
-    if (viewModel.addReservation() == null)
-    {
-      Alert wrong = new Alert(Alert.AlertType.ERROR);
-      wrong.setTitle("Invalid data");
-      wrong.setHeaderText("something is wrong");
-      wrong.showAndWait();
-    }
-    else
-    {
-      try
-      {
-        System.out.println(viewModel.addReservation());
-      }
-      catch (RuntimeException e)
-      {
-        Alert empty = new Alert(Alert.AlertType.WARNING);
-        empty.setTitle("Invalid data");
-        empty.setHeaderText(
-            "You need to fill up mandatory fields: \n from date and to date");
-        empty.showAndWait();
-        flag = false;
-      }
-      if (flag)
-      {
-        Alert success = new Alert(Alert.AlertType.INFORMATION);
-        success.setTitle("Success");
-        success.setHeaderText(
-            "The room has been successfully added to the system");
-        success.showAndWait();
-        viewHandler.openView(SceneNames.EmployeeHomeReservations);
-      }
-    }
+    if (viewModel.addReservation())
+      viewHandler.openView(SceneNames.EmployeeHomeReservations);
   }
 
   @FXML void ToggleRoom()
@@ -431,9 +341,9 @@ public class EmployeeHomeController
   @FXML void ToggleCustomer()
   {
     viewModel.update();
-    if (toggleCustomerfilter)
+    if (toggleCustomerFilter)
     {
-      toggleCustomerfilter = false;
+      toggleCustomerFilter = false;
       toggleCustomerButton.setText("Simple");
       username.setDisable(true);
       firstName.setDisable(true);
@@ -444,7 +354,7 @@ public class EmployeeHomeController
     }
     else
     {
-      toggleCustomerfilter = true;
+      toggleCustomerFilter = true;
       toggleCustomerButton.setText("Advanced");
       username.setDisable(false);
       firstName.setDisable(false);
@@ -452,6 +362,38 @@ public class EmployeeHomeController
       phoneNo.setDisable(false);
       paymentInfo.setDisable(false);
       filteringCustomer.setDisable(true);
+    }
+  }
+
+  @FXML void toggleNewReservation(){
+    viewModel.update();
+    if (toggleNewReservationFilter){
+      toggleNewReservationFilter=false;
+      toggleNewReservation.setText("Simple");
+      fromDateNewReservation.setDisable(true);
+      toDateNewReservation.setDisable(true);
+      reserveBalcony.setDisable(true);
+      reserveBathroom.setDisable(true);
+      reserveInternet.setDisable(true);
+      reserveKitchen.setDisable(true);
+      reserveNrOfBeds.setDisable(true);
+      reservePricePerNight.setDisable(true);
+      reserveRoomNr.setDisable(true);
+      reserveInfo.setDisable(false);
+    }
+    else{
+      toggleNewReservationFilter=true;
+      toggleNewReservation.setText("Advanced");
+      fromDateNewReservation.setDisable(false);
+      toDateNewReservation.setDisable(false);
+      reserveBalcony.setDisable(false);
+      reserveBathroom.setDisable(false);
+      reserveInternet.setDisable(false);
+      reserveKitchen.setDisable(false);
+      reserveNrOfBeds.setDisable(false);
+      reservePricePerNight.setDisable(false);
+      reserveRoomNr.setDisable(false);
+      reserveInfo.setDisable(true);
     }
   }
 
@@ -486,6 +428,11 @@ public class EmployeeHomeController
   @FXML void filterReservation() throws RemoteException
   {
     viewModel.filterReservation();
+  }
+
+  @FXML void filterNewReservation() throws RemoteException
+  {
+    viewModel.filterNewReservation();
   }
 
 }
