@@ -33,7 +33,7 @@ public class CustomerHomeController
     this.viewHandler=viewHandler;
     this.viewModel=viewModel;
     this.root=root;
-    loggingIn.setOpacity(0.0);
+    //loggingIn.setOpacity(0.0);
     this.viewModel.bindRooms(roomListView.itemsProperty());
   }
 
@@ -61,6 +61,11 @@ public class CustomerHomeController
 
   @FXML void filterRoom()
   {
+  }
+
+  @FXML void register()
+  {
+    viewHandler.openView(SceneNames.AddCustomer);
   }
 
 

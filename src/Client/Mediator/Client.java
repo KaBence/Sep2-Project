@@ -58,6 +58,13 @@ public Employee addEmployee(String firstName, String lastName, String position,
 {
     return sharedInterface.addEmployee(firstName, lastName, position,phoneNo,password);
 }
+
+  public String addCustomer(String username, String password,
+      String firstName, String lastName, String phoneNo, String paymentInfo)
+      throws RemoteException
+  {
+    return sharedInterface.addCustomer(username,password,firstName,lastName,phoneNo,paymentInfo);
+  }
   public ArrayList<Room> getAllRooms() throws RemoteException
   {
     return sharedInterface.getAllRooms();
@@ -165,4 +172,6 @@ public Employee addEmployee(String firstName, String lastName, String position,
   {
     return sharedInterface.checkOut(roomNumber,username,fromDate);
   }
+
+
 }

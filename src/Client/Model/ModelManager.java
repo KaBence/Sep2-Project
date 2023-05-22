@@ -256,6 +256,13 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.checkOut(roomNumber,username,fromDate);
   }
 
+  @Override public String addCustomer(String username, String password,
+      String firstName, String lastName, String phoneNo, String paymentInfo)
+      throws RemoteException
+  {
+    return client.addCustomer(username,password,firstName,lastName,phoneNo,paymentInfo);
+  }
+
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     support.firePropertyChange("update",null,evt.getNewValue());

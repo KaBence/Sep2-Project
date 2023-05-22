@@ -22,6 +22,7 @@ public class ViewFactory
   private EditCustomerController editCustomerController;
   private EditEmployeeController editEmployeeController;
   private EditReservationController editReservationController;
+  private AddCustomerController addCustomerController;
 
   private ViewModelFactory viewModelFactory;
 
@@ -194,6 +195,26 @@ public class ViewFactory
     return editReservationController.getRoot();
   }
 
+  private Region loadAddCustomer()
+  {
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("Scenes/AddCustomer.fxml"));
+
+    try
+    {
+      Region root = loader.load();
+      addCustomerController = loader.getController();
+      addCustomerController.init(viewHandler, viewModelFactory.getAddCustomerViewModel(), root);
+    }
+    catch (IOException e)
+    {
+      throw new IOError(e);
+    }
+    addCustomerController.reset();
+    return addCustomerController.getRoot();
+
+  }
+
 
   public Region load(SceneNames id){
     return switch (id){
@@ -211,6 +232,7 @@ public class ViewFactory
       case EditCustomer -> loadEditCustomer();
       case EditEmployee -> loadEditEmployee();
       case EditReservation -> loadEditReservation();
+      case AddCustomer -> loadAddCustomer();
     };
   }
 }

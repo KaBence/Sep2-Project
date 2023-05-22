@@ -17,6 +17,7 @@ public class ViewModelFactory
   private EditCustomerViewModel editCustomerViewModel;
   private EditEmployeeViewModel editEmployeeViewModel;
   private EditReservationViewModel editReservationViewModel;
+  private AddCustomerViewModel addCustomerViewModel;
 
   public ViewModelFactory(Model model)
   {
@@ -30,6 +31,7 @@ public class ViewModelFactory
     editCustomerViewModel = new EditCustomerViewModel(model);
     editEmployeeViewModel = new EditEmployeeViewModel(model);
     editReservationViewModel=new EditReservationViewModel(model);
+    addCustomerViewModel = new AddCustomerViewModel(model);
   }
 
   public EditReservationViewModel getEditReservationViewModel()
@@ -80,5 +82,10 @@ public class ViewModelFactory
   public EditEmployeeViewModel getEditEmployeeViewModel()
   {
     return editEmployeeViewModel;
+  }
+
+  public AddCustomerViewModel getAddCustomerViewModel()
+  {
+    return addCustomerViewModel;
   }
 }
