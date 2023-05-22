@@ -5,6 +5,7 @@ import Client.View.ViewHandler;
 import Client.ViewModel.CustomerHomeViewModel;
 import Client.ViewModel.HomeViewModel;
 import Server.Model.Hotel.Room;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -13,15 +14,23 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class CustomerHomeController
 {
-  @FXML TextField info, nrOfBeds, roomNr, username, password;
-  @FXML DatePicker fromDate, finishDate;
-  @FXML CheckBox balcony, kitchen, internet, bathroom;
-  @FXML ComboBox<Integer> pricePerNight;
+  @FXML TextField username, password;
+
+  @FXML DatePicker toDateNewReservation;
+  @FXML DatePicker fromDateNewReservation;
+  @FXML CheckBox reserveBalcony, reserveKitchen, reserveInternet, reserveBathroom;
+  @FXML ComboBox<Integer> reservePricePerNight;
+  @FXML TextField reserveNrOfBeds;
+  @FXML TextField reserveRoomNr;
+  @FXML TextField hiddenFieldRoomNo;
+
   @FXML ListView<String> listReviews, myReservations;
-  @FXML ListView<Room> roomListView;
+  @FXML ListView<Room> roomListViewNewReservation;
   @FXML Button logout, review, cancel, edit;
   @FXML AnchorPane loggingIn;
   @FXML TabPane tabPane;
@@ -34,7 +43,19 @@ public class CustomerHomeController
     this.viewModel=viewModel;
     this.root=root;
     loggingIn.setOpacity(0.0);
-    this.viewModel.bindRooms(roomListView.itemsProperty());
+
+    this.viewModel.bindRooms(roomListViewNewReservation.itemsProperty());
+
+    viewModel.bindFromDateNewReservation(fromDateNewReservation.valueProperty());
+    viewModel.bindReserveBalcony(reserveBalcony.selectedProperty());
+    viewModel.bindToDateNewReservation(toDateNewReservation.valueProperty());
+    viewModel.bindReserveInternet(reserveInternet.selectedProperty());
+    viewModel.bindReserveKitchen(reserveKitchen.selectedProperty());
+    viewModel.bindReservePrice(reservePricePerNight.valueProperty());
+    viewModel.bindReserveBathroom(reserveBathroom.selectedProperty());
+    viewModel.bindHiddenText(hiddenFieldRoomNo.textProperty());
+    viewModel.bindReserveRoomNo(reserveRoomNr.textProperty());
+    viewModel.bindReserveNoBeds(reserveNrOfBeds.textProperty());
   }
 
   public Region getRoot(){
@@ -46,22 +67,41 @@ public class CustomerHomeController
     viewModel.update();
   }
 
-  @FXML void simpleFilterRoom()
-  {
+  public void initialize(){
+    ArrayList<Integer> prices = new ArrayList<>();
+    prices.add(0);
+    prices.add(200);
+    prices.add(270);
+    prices.add(300);
+    prices.add(500);
+    reservePricePerNight.setItems(FXCollections.observableList(prices));
   }
+
+
 
   @FXML void Home()
   {
     viewHandler.openView(SceneNames.Home);
   }
 
-  @FXML void tableClickRoom()
+
+  @FXML void createNewReservation() throws RemoteException
   {
+    viewModel.addReservation();
+  }
+  @FXML void tableClickNewReservation(){
+    viewModel.saveRoom(roomListViewNewReservation.getSelectionModel().getSelectedItem());
+    viewModel.fillHiddenField();
   }
 
-  @FXML void filterRoom()
+  @FXML void filterNewReservation() throws RemoteException
   {
+    viewModel.filterNewReservation();
   }
 
+  @FXML void clearDates(){
+    fromDateNewReservation.setValue(null);
+    toDateNewReservation.setValue(null);
+  }
 
 }

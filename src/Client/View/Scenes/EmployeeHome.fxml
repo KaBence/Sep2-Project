@@ -45,7 +45,6 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="reserveInfo" layoutX="36.0" layoutY="18.0" onKeyReleased="#simpleFilterNewReservation" promptText="Enter Room Info" />
                   <Line endX="33.5999755859375" endY="203.0" layoutX="388.0" layoutY="144.0" startX="33.5999755859375" startY="-112.99999237060547" stroke="#00000064" />
                   <Button layoutX="325.0" layoutY="320.0" mnemonicParsing="false" onAction="#createNewReservation" text="Create">
                      <font>
@@ -57,7 +56,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <ListView fx:id="roomListViewNewReservation" layoutX="14.0" layoutY="55.0" onMouseClicked="#tableClickNewResevation" prefHeight="243.0" prefWidth="387.0" />
+                  <ListView fx:id="roomListViewNewReservation" layoutX="14.0" layoutY="55.0" onMouseClicked="#tableClickNewReservation" prefHeight="243.0" prefWidth="387.0" />
                   <VBox layoutX="436.0" layoutY="29.0" prefHeight="320.0" prefWidth="157.0" spacing="15.0">
                      <children>
                         <DatePicker fx:id="fromDateNewReservation" onAction="#filterNewReservation" promptText="From date" />
@@ -88,7 +87,7 @@
                      </children>
                   </VBox>
                   <TextField fx:id="hiddenFieldRoomNo" layoutX="214.0" layoutY="18.0" opacity="0.0" />
-                  <ToggleButton fx:id="toggleNewReservation" layoutX="300.0" layoutY="18.0" mnemonicParsing="false" onAction="#toggleNewReservation" text="ToggleButton" />
+                  <Button layoutX="325.0" layoutY="17.0" mnemonicParsing="false" onAction="#clearDates" text="Clear Dates" />
                </children></AnchorPane>
         </content>
       </Tab>

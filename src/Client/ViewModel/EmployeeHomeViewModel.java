@@ -39,7 +39,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private SimpleBooleanProperty bathroomFilter, kitchenFilter, internetFilter, balconyFilter;
   private SimpleObjectProperty<Integer> priceFilter;
 
-  private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom, hiddenFieldRoomNo,reserveInfo;
+  private SimpleStringProperty roomNoFilter,bedsFilter,filteringRoom, hiddenFieldRoomNo;
   private SimpleObjectProperty<LocalDate> fromDateNewReservation, toDateNewReservation;
   private SimpleBooleanProperty reserveBalcony,reserveKitchen,reserveInternet,reserveBathroom;
   private SimpleObjectProperty<Integer> reservePricePerNight;
@@ -99,7 +99,6 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     hiddenFieldRoomNo=new SimpleStringProperty();
     fromDateNewReservation=new SimpleObjectProperty<>();
     toDateNewReservation=new SimpleObjectProperty<>();
-    reserveInfo=new SimpleStringProperty();
     reserveBalcony=new SimpleBooleanProperty();
     reserveBathroom=new SimpleBooleanProperty();
     reserveInternet=new SimpleBooleanProperty();
@@ -157,9 +156,6 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   }
 public void bindHiddenText(StringProperty property){
     property.bindBidirectional(hiddenFieldRoomNo);
-}
-public void bindReserveInfo(StringProperty property){
-    property.bindBidirectional(reserveInfo);
 }
   public void bindInternet(BooleanProperty property)
   {
@@ -504,11 +500,6 @@ public void bindReserveInfo(StringProperty property){
     rooms.set(roomObservableList);
   }
 
-  public void simpleRoomNewReservationFilter() throws RemoteException
-  {
-    ObservableList<Room> roomObservableList=FXCollections.observableList(model.getSimpleFilteredRoom(reserveInfo.getValue()));
-    newReservations.set(roomObservableList);
-  }
 
   public void filterNewReservation() throws RemoteException
   {
@@ -553,8 +544,17 @@ public void bindReserveInfo(StringProperty property){
       counter++;
     }
     ObservableList<Room> roomObservableList;
-    if (toDateNewReservation.getValue()!=null&&fromDateNewReservation.getValue()!=null)
-       roomObservableList = FXCollections.observableList(model.getFilteredRoom(MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),MyDate.LocalDateToMyDate(toDateNewReservation.getValue()),temp));
+
+    if (toDateNewReservation.getValue()!=null&&fromDateNewReservation.getValue()!=null){
+      if(MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()))){
+        Alert alert=new Alert(Alert.AlertType.ERROR,"The finish date is before from date",ButtonType.OK);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.showAndWait();
+        return;
+      }
+      roomObservableList = FXCollections.observableList(model.getFilteredRoom(MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),MyDate.LocalDateToMyDate(toDateNewReservation.getValue()),temp));
+    }
     else
       roomObservableList = FXCollections.observableList(model.getFilteredRoom(null,null,temp));
     newReservations.set(roomObservableList);
@@ -580,7 +580,7 @@ public void bindReserveInfo(StringProperty property){
   {
     try
     {
-      String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), "john@hotmail.com", MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
+      String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), "12345", MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
       if (state.equals(DatabaseConnection.SUCCESS)){
         Alert alert=new Alert(Alert.AlertType.INFORMATION,"Successfully added a new reservation",ButtonType.OK);
         alert.setTitle("Success");
@@ -589,7 +589,7 @@ public void bindReserveInfo(StringProperty property){
         return true;
       }
       if (state.equals(DatabaseConnection.ERROR)){
-        Alert alert=new Alert(Alert.AlertType.ERROR,"Error occoured",ButtonType.OK);
+        Alert alert=new Alert(Alert.AlertType.ERROR,"Error occurred",ButtonType.OK);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.showAndWait();

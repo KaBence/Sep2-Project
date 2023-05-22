@@ -53,7 +53,6 @@ public class EmployeeHomeController
   @FXML ToggleButton toggleRoomButton, toggleEmployeeButton, toggleCustomerButton,toggleNewReservation;
 
   // employee new reservations
-  @FXML TextField reserveInfo;
 
   @FXML DatePicker toDateNewReservation;
   @FXML DatePicker fromDateNewReservation;
@@ -114,7 +113,6 @@ public class EmployeeHomeController
     viewModel.bindReservationFilter(reservationFilter.selectedProperty());
     viewModel.bindFromDateReservation(fromDateReservation.valueProperty());
     viewModel.bindToDateReservation(toDateReservation.valueProperty());
-    viewModel.bindReserveInfo(reserveInfo.textProperty());
     viewModel.bindReserveBalcony(reserveBalcony.selectedProperty());
     viewModel.bindReserveBathroom(reserveBathroom.selectedProperty());
     viewModel.bindReserveInternet(reserveInternet.selectedProperty());
@@ -147,7 +145,6 @@ public class EmployeeHomeController
     ToggleRoom();
     ToggleCustomer();
     ToggleEmployee();
-    toggleNewReservation();
   }
 
   @FXML void addRoom()
@@ -265,7 +262,7 @@ public class EmployeeHomeController
     viewHandler.openView(SceneNames.EditReservation);
   }
 
-  @FXML void tableClickNewResevation() throws RemoteException
+  @FXML void tableClickNewReservation() throws RemoteException
   {
     viewModel.saveRoom(
         roomListViewNewReservation.getSelectionModel().getSelectedItem());
@@ -274,8 +271,7 @@ public class EmployeeHomeController
 
   @FXML void createNewReservation() throws RemoteException
   {
-    if (viewModel.addReservation())
-      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    viewModel.addReservation();
   }
 
   @FXML void ToggleRoom()
@@ -365,38 +361,6 @@ public class EmployeeHomeController
     }
   }
 
-  @FXML void toggleNewReservation(){
-    viewModel.update();
-    if (toggleNewReservationFilter){
-      toggleNewReservationFilter=false;
-      toggleNewReservation.setText("Simple");
-      fromDateNewReservation.setDisable(true);
-      toDateNewReservation.setDisable(true);
-      reserveBalcony.setDisable(true);
-      reserveBathroom.setDisable(true);
-      reserveInternet.setDisable(true);
-      reserveKitchen.setDisable(true);
-      reserveNrOfBeds.setDisable(true);
-      reservePricePerNight.setDisable(true);
-      reserveRoomNr.setDisable(true);
-      reserveInfo.setDisable(false);
-    }
-    else{
-      toggleNewReservationFilter=true;
-      toggleNewReservation.setText("Advanced");
-      fromDateNewReservation.setDisable(false);
-      toDateNewReservation.setDisable(false);
-      reserveBalcony.setDisable(false);
-      reserveBathroom.setDisable(false);
-      reserveInternet.setDisable(false);
-      reserveKitchen.setDisable(false);
-      reserveNrOfBeds.setDisable(false);
-      reservePricePerNight.setDisable(false);
-      reserveRoomNr.setDisable(false);
-      reserveInfo.setDisable(true);
-    }
-  }
-
   public SingleSelectionModel<Tab> selection(int i)
   {
     SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
@@ -410,9 +374,9 @@ public class EmployeeHomeController
     viewModel.simpleFilterEmployee(x);
   }
 
-  @FXML void simpleFilterNewReservation() throws RemoteException
-  {
-    viewModel.simpleRoomNewReservationFilter();
+  @FXML void clearDates(){
+    fromDateNewReservation.setValue(null);
+    toDateNewReservation.setValue(null);
   }
 
   @FXML void filterCustomer() throws RemoteException

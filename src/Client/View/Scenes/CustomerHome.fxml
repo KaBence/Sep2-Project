@@ -9,7 +9,6 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -23,9 +22,8 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="info" layoutX="37.0" layoutY="14.0" onKeyReleased="#simpleFilterRoom" promptText="Enter Room Info" />
                   <Line endX="33.5999755859375" endY="257.20001220703125" layoutX="383.0" layoutY="114.0" startX="33.5999755859375" startY="-112.99999237060547" stroke="#00000064" />
-                  <Button layoutX="315.0" layoutY="317.0" mnemonicParsing="false" text="Create">
+                  <Button layoutX="315.0" layoutY="317.0" mnemonicParsing="false" onAction="#createNewReservation" text="Create">
                      <font>
                         <Font name="Century Gothic" size="18.0" />
                      </font>
@@ -35,37 +33,38 @@
                         <Font name="Century Gothic" size="18.0" />
                      </font>
                   </Button>
-                  <ListView fx:id="roomListView" layoutX="14.0" layoutY="55.0" onMouseClicked="#tableClickRoom" prefHeight="243.0" prefWidth="387.0" />
+                  <ListView fx:id="roomListViewNewReservation" layoutX="14.0" layoutY="55.0" onMouseClicked="#tableClickNewReservation" prefHeight="243.0" prefWidth="387.0" />
                   <VBox layoutX="426.0" layoutY="26.0" prefHeight="320.0" prefWidth="159.0" spacing="15.0">
                      <children>
-                        <DatePicker fx:id="fromDate" promptText="From date" />
-                        <DatePicker fx:id="finishDate" promptText="Finish date" />
-                        <CheckBox fx:id="balcony" mnemonicParsing="false" prefHeight="18.0" prefWidth="77.0" text="Balcony">
+                        <DatePicker fx:id="fromDateNewReservation" onAction="#filterNewReservation" promptText="From date" />
+                        <DatePicker fx:id="toDateNewReservation" onAction="#filterNewReservation" promptText="Finish date" />
+                        <CheckBox fx:id="reserveBalcony" mnemonicParsing="false" onAction="#filterNewReservation" prefHeight="18.0" prefWidth="77.0" text="Balcony">
                            <font>
                               <Font name="Century Gothic" size="13.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox fx:id="kitchen" mnemonicParsing="false" prefHeight="21.0" prefWidth="103.0" text="Kitchen">
+                        <CheckBox fx:id="reserveKitchen" mnemonicParsing="false" onAction="#filterNewReservation" prefHeight="21.0" prefWidth="103.0" text="Kitchen">
                            <font>
                               <Font name="Century Gothic" size="13.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox fx:id="internet" mnemonicParsing="false" prefHeight="18.0" prefWidth="121.0" text="Internet">
+                        <CheckBox fx:id="reserveInternet" mnemonicParsing="false" onAction="#filterNewReservation" prefHeight="18.0" prefWidth="121.0" text="Internet">
                            <font>
                               <Font name="Century Gothic" size="13.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox fx:id="bathroom" mnemonicParsing="false" onAction="#filterRoom" prefHeight="19.0" prefWidth="87.0" text="Bathroom">
+                        <CheckBox fx:id="reserveBathroom" mnemonicParsing="false" onAction="#filterNewReservation" prefHeight="19.0" prefWidth="87.0" text="Bathroom">
                            <font>
                               <Font name="Century Gothic" size="13.0" />
                            </font>
                         </CheckBox>
-                        <ComboBox fx:id="pricePerNight" prefHeight="26.0" prefWidth="120.0" promptText="Price per night" />
-                        <TextField fx:id="nrOfBeds" prefHeight="26.0" prefWidth="122.0" promptText="Nr of Beds" />
-                        <TextField fx:id="roomNr" prefHeight="26.0" prefWidth="118.0" promptText="Room Nr" />
+                        <ComboBox fx:id="reservePricePerNight" onAction="#filterNewReservation" prefHeight="26.0" prefWidth="120.0" promptText="Price per night" />
+                        <TextField fx:id="reserveNrOfBeds" onAction="#filterNewReservation" prefHeight="26.0" prefWidth="122.0" promptText="Nr of Beds" />
+                        <TextField fx:id="reserveRoomNr" onAction="#filterNewReservation" prefHeight="26.0" prefWidth="118.0" promptText="Room Nr" />
                      </children>
                   </VBox>
-                  <ToggleButton layoutX="300.0" layoutY="14.0" mnemonicParsing="false" text="ToggleButton" />
+                  <Button layoutX="320.0" layoutY="14.0" mnemonicParsing="false" onAction="#clearDates" text="Clear Dates" />
+                  <TextField fx:id="hiddenFieldRoomNo" layoutX="141.0" layoutY="14.0" opacity="0.0" />
                </children></AnchorPane>
       </content>
     </Tab>
