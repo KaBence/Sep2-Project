@@ -2,6 +2,7 @@ package Server.Model;
 
 
 import Server.Model.Hotel.Reservation;
+import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Room;
 import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
@@ -12,6 +13,8 @@ import Server.Utility.DataBase.Employee.EmployeeData;
 import Server.Utility.DataBase.Employee.EmployeeDataImplementation;
 import Server.Utility.DataBase.Reservation.ReservationData;
 import Server.Utility.DataBase.Reservation.ReservationDataImplementation;
+import Server.Utility.DataBase.Review.ReviewData;
+import Server.Utility.DataBase.Review.ReviewDataImplementation;
 import Server.Utility.DataBase.Room.RoomData;
 import Server.Utility.DataBase.Room.RoomDataImplementation;
 
@@ -25,6 +28,7 @@ public class ModelManager implements Model
   private RoomData roomData;
   private CustomerData customerData;
   private EmployeeData employeeData;
+  private ReviewData reviewData;
   private ReservationData reservationData;
   private ArrayList<Person> loggedInUsers;
   private PropertyChangeSupport support;
@@ -35,6 +39,7 @@ public class ModelManager implements Model
     customerData = new CustomerDataImplementation();
     reservationData = new ReservationDataImplementation();
     employeeData = new EmployeeDataImplementation();
+    reviewData= new ReviewDataImplementation();
     loggedInUsers = new ArrayList<>();
     support = new PropertyChangeSupport(this);
   }
@@ -112,6 +117,12 @@ public class ModelManager implements Model
         position);
   }
 
+  @Override public String addReview(String username, int roomNO,
+      MyDate fromDate, MyDate postedDate, String comment)
+  {
+    return reviewData.addReview(username, roomNO, fromDate, postedDate, comment) ;
+  }
+
   @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony)
@@ -158,6 +169,11 @@ public class ModelManager implements Model
   @Override public ArrayList<Room> getAllRooms()
   {
     return roomData.getAllRooms();
+  }
+
+  @Override public ArrayList<Review> getAllReviews()
+  {
+    return reviewData.getAllReviews();
   }
 
   @Override public ArrayList<Room> getSimpleFilteredRooms(String room)

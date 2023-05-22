@@ -55,6 +55,7 @@ public class ModelManager implements Model,PropertyChangeListener
     return current != null;
   }
 
+
   @Override public Person logIn(Person user) throws RemoteException
   {
     current = client.logIn(user);
@@ -90,15 +91,20 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.addEmployee(firstName,lastName,position,phoneNo,password);
   }
 
-  @Override public Review addReview(String username, int reviewID, int roomNO,
+  @Override public String addReview(String username, int roomNO,
       MyDate fromDate, MyDate postedDate, String comment) throws RemoteException
   {
-    return client.addReview(username, reviewID, roomNO, fromDate, postedDate, comment);
+    return client.addReview(username, roomNO, fromDate, postedDate, comment);
   }
 
   @Override public ArrayList<Room> getAllRooms() throws RemoteException
   {
     return client.getAllRooms();
+  }
+
+  @Override public ArrayList<Review> getAllReviews() throws RemoteException
+  {
+    return client.getAllReviews();
   }
 
   @Override public ArrayList<Room> getSimpleFilteredRoom(String room)
@@ -261,6 +267,11 @@ public class ModelManager implements Model,PropertyChangeListener
       MyDate fromDate) throws RemoteException
   {
     return client.checkOut(roomNumber,username,fromDate);
+  }
+
+  @Override public Person getCurrentCustomer()
+  {
+    return current;
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

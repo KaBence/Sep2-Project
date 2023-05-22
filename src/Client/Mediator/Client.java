@@ -13,6 +13,7 @@ import dk.via.remote.observer.RemotePropertyChangeListener;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -59,14 +60,17 @@ public Employee addEmployee(String firstName, String lastName, String position,
 {
     return sharedInterface.addEmployee(firstName, lastName, position,phoneNo,password);
 }
-public Review addReview(String username, int reviewID, int roomNO, MyDate fromDate, MyDate postedDate, String comment)
+public String addReview(String username, int roomNO, MyDate fromDate, MyDate postedDate, String comment)
     throws RemoteException
 {
-    return  sharedInterface.addReview(username, reviewID, roomNO, fromDate, postedDate, comment);
+    return  sharedInterface.addReview(username, roomNO, fromDate, postedDate, comment);
 };
   public ArrayList<Room> getAllRooms() throws RemoteException
   {
     return sharedInterface.getAllRooms();
+  }
+  public ArrayList<Review> getAllReviews() throws RemoteException{
+    return sharedInterface.getAllReviews();
   }
 
   public ArrayList<Room> getSimpleFilteredRoom(String room) throws RemoteException

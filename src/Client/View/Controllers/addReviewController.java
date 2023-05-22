@@ -5,9 +5,9 @@ import Client.View.ViewHandler;
 import Client.ViewModel.AddReviewViewModel;
 import Client.ViewModel.CustomerHomeViewModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 
-import java.awt.*;
 import java.rmi.RemoteException;
 
 public class addReviewController
@@ -33,7 +33,7 @@ public class addReviewController
 
   public void reset()
   {
-    // viewModel.update();
+    //viewModel.update();
   }
 
   @FXML void Home()

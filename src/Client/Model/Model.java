@@ -24,8 +24,9 @@ public interface Model
   String  addReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate, boolean CheckedIn) throws RemoteException;
   Employee addEmployee(String firstName, String lastName, String position,
       String phoneNo, String password) throws RemoteException;
-  Review addReview(String username, int reviewID, int roomNO, MyDate fromDate, MyDate postedDate, String comment) throws RemoteException;
+  String addReview(String username, int roomNO, MyDate fromDate, MyDate postedDate, String comment) throws RemoteException;
   ArrayList<Room> getAllRooms() throws RemoteException;
+  ArrayList<Review> getAllReviews() throws RemoteException;
 
   ArrayList<Room> getSimpleFilteredRoom(String room) throws RemoteException;
 
@@ -78,5 +79,5 @@ public interface Model
       MyDate fromDate) throws RemoteException;
   String checkOut(int roomNumber, String username,
       MyDate fromDate) throws RemoteException;
-
+Person getCurrentCustomer();
 }

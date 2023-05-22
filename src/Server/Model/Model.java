@@ -1,5 +1,6 @@
 package Server.Model;
 
+import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
@@ -25,6 +26,9 @@ public interface Model
   Employee addEmployee(String firstName, String lastName,
       String position, String phoneNo, String password);
 
+  String addReview(String username, int roomNO,
+      MyDate fromDate, MyDate postedDate, String comment);
+
   String updateRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony);
@@ -39,6 +43,7 @@ public interface Model
       MyDate fromDate);
 
   ArrayList<Room> getAllRooms();
+  ArrayList<Review> getAllReviews();
 
   ArrayList<Room> getSimpleFilteredRooms(String room);
 
