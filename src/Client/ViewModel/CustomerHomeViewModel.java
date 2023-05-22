@@ -189,7 +189,6 @@ public void bindMyReservation(ObjectProperty<ObservableList<Reservation>> proper
     ObservableList<Review> reviewObservableList = FXCollections.observableList(
         reviews);
     allReviews.set(reviewObservableList);
-    allRooms.set(roomObservableList);
     if(reservations!=null)
     {
       ObservableList<Reservation> reservationObservableList = FXCollections.observableList(

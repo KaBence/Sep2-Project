@@ -36,7 +36,7 @@ public class CustomerHomeController
   @FXML ListView<Review> listReviews;
   @FXML PasswordField passwordField;
 
-  @FXML ListView<String> myReservations;
+  @FXML ListView<Reservation> myReservations;
   @FXML ListView<Room> roomListViewNewReservation;
   @FXML Button logout, review, cancel, edit;
   @FXML AnchorPane loggingIn,myProfileAnchorPane;
@@ -146,6 +146,10 @@ public class CustomerHomeController
       myProfileAnchorPane.setOpacity(0.0);
       loggingIn.setOpacity(1.0);
     }
+  }
+
+  @FXML void tableClickReservation(){
+
   }
 
 }
