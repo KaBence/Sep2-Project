@@ -99,22 +99,22 @@ public class ReservationDataImplementation implements ReservationData
     }
   }
 
-  @Override public ArrayList<Reservation> getMyReservation(String username)
+  @Override public ArrayList<Reservation> getMyReservation(String name)
   {
-    System.out.println(1);
+
     ArrayList<Reservation> list = new ArrayList<>();
     try (Connection connection = getConnection())
     {
-      System.out.println(2);
+
       PreparedStatement ps = connection.prepareStatement(
           "SELECT * from ReservedBy WHERE username= ?");
-      ps.setString(1,"john@hotmail.com");
+      ps.setString(1,name);
       ResultSet rs = ps.executeQuery();
       while (rs.next())
       {
-        System.out.println(3);
+
         int roomNumber = rs.getInt("roomNo");
-        username = rs.getString("username");
+        String username = rs.getString("username");
         MyDate fromDate = MyDate.stringToDate(rs.getString("fromDate"));
         MyDate toDate = MyDate.stringToDate(rs.getString("toDate"));
         Boolean CheckedIn = rs.getBoolean("checkedIn");
