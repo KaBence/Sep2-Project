@@ -5,6 +5,7 @@ import Client.View.ViewHandler;
 import Client.ViewModel.CustomerHomeViewModel;
 import Client.ViewModel.HomeViewModel;
 import Server.Model.Hotel.Room;
+import Server.Utility.DataBase.DatabaseConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -16,14 +17,15 @@ import javafx.scene.layout.Region;
 
 public class CustomerHomeController
 {
-  @FXML TextField info, nrOfBeds, roomNr, username, password;
+  @FXML TextField info, nrOfBeds, roomNr, username;
+  @FXML PasswordField passwordField;
   @FXML DatePicker fromDate, finishDate;
   @FXML CheckBox balcony, kitchen, internet, bathroom;
   @FXML ComboBox<Integer> pricePerNight;
   @FXML ListView<String> listReviews, myReservations;
   @FXML ListView<Room> roomListView;
   @FXML Button logout, review, cancel, edit;
-  @FXML AnchorPane loggingIn;
+  @FXML AnchorPane loggingIn,myProfileAnchorPane;
   @FXML TabPane tabPane;
   @FXML Tab newReservation, myReservation, allReviews;
   private Region root;
@@ -33,8 +35,11 @@ public class CustomerHomeController
     this.viewHandler=viewHandler;
     this.viewModel=viewModel;
     this.root=root;
-    loggingIn.setOpacity(0.0);
+    myProfileAnchorPane.setOpacity(0.0);
+    loggingIn.setOpacity(1.0);
     this.viewModel.bindRooms(roomListView.itemsProperty());
+    viewModel.bindUsername(username.textProperty());
+    viewModel.bindPassword(passwordField.textProperty());
   }
 
   public Region getRoot(){
@@ -63,5 +68,13 @@ public class CustomerHomeController
   {
   }
 
+  @FXML void onLogin()
+  {
+    if (viewModel.logIn())
+    {
+      myProfileAnchorPane.setOpacity(1.0);
+      loggingIn.setOpacity(0.0);
+    }
+  }
 
 }

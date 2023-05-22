@@ -6,6 +6,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -73,7 +74,7 @@
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <AnchorPane prefHeight="414.0" prefWidth="600.0">
+                  <AnchorPane fx:id="myProfileAnchorPane" prefHeight="414.0" prefWidth="600.0">
                      <children>
                         <ListView fx:id="myReservations" layoutX="36.0" layoutY="55.0" prefHeight="261.0" prefWidth="388.0" />
                         <VBox layoutX="456.0" layoutY="95.0" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
@@ -148,7 +149,7 @@
                                           <Font name="Century Gothic" size="18.0" />
                                        </font>
                                     </Text>
-                                    <TextField fx:id="password" prefHeight="26.0" prefWidth="176.0" />
+                                    <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="176.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="47.0" prefWidth="306.0" spacing="40.0">
@@ -158,7 +159,7 @@
                                           <Font name="Century Gothic" size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" mnemonicParsing="false" text="LogIn">
+                                    <Button alignment="CENTER" mnemonicParsing="false" onAction="#onLogin" text="LogIn">
                                        <font>
                                           <Font name="Century Gothic" size="18.0" />
                                        </font>
