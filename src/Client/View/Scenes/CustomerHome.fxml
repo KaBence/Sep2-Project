@@ -75,7 +75,7 @@
                <children>
                   <AnchorPane fx:id="myProfileAnchorPane" prefHeight="414.0" prefWidth="600.0">
                      <children>
-                        <ListView fx:id="myReservations" layoutX="36.0" layoutY="55.0" prefHeight="261.0" prefWidth="388.0" />
+                        <ListView fx:id="myReservations" layoutX="36.0" layoutY="55.0" onMouseClicked="#tableClickReservation" prefHeight="261.0" prefWidth="388.0" />
                         <VBox layoutX="456.0" layoutY="95.0" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#review" text="Review">

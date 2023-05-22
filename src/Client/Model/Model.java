@@ -16,6 +16,7 @@ import java.util.Date;
 public interface Model
 {
   boolean getCurrent();
+  Person setGuest();
   Person logIn(Person user) throws RemoteException;
   Person logOut() throws RemoteException;
   String addRoom(int roomNumber, int numberOfBeds, int size,int price,
@@ -27,6 +28,7 @@ public interface Model
   String addReview(String username, int roomNO, MyDate fromDate, MyDate postedDate, String comment) throws RemoteException;
   ArrayList<Room> getAllRooms() throws RemoteException;
   ArrayList<Review> getAllReviews() throws RemoteException;
+  ArrayList<Reservation> getAllMyReservation(String username) throws RemoteException;
 
   ArrayList<Room> getSimpleFilteredRoom(String room) throws RemoteException;
 

@@ -1,6 +1,7 @@
 package Client.ViewModel;
 
 import Client.Model.Model;
+import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Room;
 import Server.Model.MyDate;
@@ -28,12 +29,13 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class CustomerHomeViewModel  implements PropertyChangeListener
+public class CustomerHomeViewModel implements PropertyChangeListener
 {
   private Model model;
 
   private SimpleObjectProperty<ObservableList<Room>> newReservations;
-
+  private SimpleObjectProperty<ObservableList<Review>> allReviews;
+  private SimpleObjectProperty<ObservableList<Reservation>> allMyReservation;
   private SimpleObjectProperty<LocalDate> fromDateNewReservation, toDateNewReservation;
   private SimpleBooleanProperty reserveBalcony,reserveKitchen,reserveInternet,reserveBathroom;
   private SimpleObjectProperty<Integer> reservePricePerNight;
@@ -44,7 +46,6 @@ public class CustomerHomeViewModel  implements PropertyChangeListener
   private ArrayList<Customer> allCustomers;
   private Person user;
 
-private SimpleObjectProperty<ObservableList<Review>> allReviews;
   public CustomerHomeViewModel(Model model)
   {
     this.model = model;
@@ -73,14 +74,21 @@ private SimpleObjectProperty<ObservableList<Review>> allReviews;
     }
     this.password = new SimpleStringProperty();
     this.username = new SimpleStringProperty();
+    this.allReviews = new SimpleObjectProperty<>();
+    this.allMyReservation= new SimpleObjectProperty<>();
   }
 
   public void bindRooms(ObjectProperty<ObservableList<Room>> property)
   {
     property.bindBidirectional(newReservations);
   }
-public void bindReviews(ObjectProperty<ObservableList<Review>> property){
+
+  public void bindReviews(ObjectProperty<ObservableList<Review>> property)
+  {
     property.bindBidirectional(allReviews);
+  }
+public void bindMyReservation(ObjectProperty<ObservableList<Reservation>> property){
+    property.bindBidirectional(allMyReservation);
 }
 
   public void bindUsername(StringProperty property)
@@ -164,18 +172,30 @@ public void bindReviews(ObjectProperty<ObservableList<Review>> property){
 
     ArrayList<Room> rooms;
     ArrayList<Review> reviews;
+    ArrayList<Reservation> reservations;
     try
     {
       rooms = model.getAllRooms();
-      reviews= model.getAllReviews();
+      reviews = model.getAllReviews();
+      model.setGuest();
+      reservations=model.getAllMyReservation(model.getCurrentCustomer().getUsername());
     }
     catch (RemoteException e)
     {
       throw new RuntimeException(e);
     }
-    ObservableList<Room> roomObservableList = FXCollections.observableList(rooms);
-    ObservableList<Review> reviewObservableList= FXCollections.observableList(reviews);
+    ObservableList<Room> roomObservableList = FXCollections.observableList(
+        rooms);
+    ObservableList<Review> reviewObservableList = FXCollections.observableList(
+        reviews);
     allReviews.set(reviewObservableList);
+    if(reservations!=null)
+    {
+      ObservableList<Reservation> reservationObservableList = FXCollections.observableList(
+          reservations);
+
+      allMyReservation.set(reservationObservableList);
+    }
     newReservations.set(roomObservableList);
   }
 

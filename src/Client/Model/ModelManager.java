@@ -7,6 +7,7 @@ import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Room;
+import Server.Model.Hotel.Users.Guest;
 import Server.Model.Hotel.Users.Person;
 import Shared.SharedInterface;
 
@@ -104,6 +105,18 @@ public class ModelManager implements Model,PropertyChangeListener
   @Override public ArrayList<Review> getAllReviews() throws RemoteException
   {
     return client.getAllReviews();
+  }
+
+  @Override public Person setGuest()
+  {
+    current = new Guest();
+    return current;
+  }
+
+  @Override public ArrayList<Reservation> getAllMyReservation(String username)
+      throws RemoteException
+  {
+    return client.getAllMyReservation(username);
   }
 
   @Override public ArrayList<Room> getSimpleFilteredRoom(String room)

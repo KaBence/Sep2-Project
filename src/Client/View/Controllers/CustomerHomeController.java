@@ -4,6 +4,7 @@ import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.CustomerHomeViewModel;
 import Client.ViewModel.HomeViewModel;
+import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Room;
 import javafx.collections.FXCollections;
@@ -35,7 +36,7 @@ public class CustomerHomeController
   @FXML ListView<Review> listReviews;
   @FXML PasswordField passwordField;
 
-  @FXML ListView<String> myReservations;
+  @FXML ListView<Reservation> myReservations;
   @FXML ListView<Room> roomListViewNewReservation;
   @FXML Button logout, review, cancel, edit;
   @FXML AnchorPane loggingIn,myProfileAnchorPane;
@@ -66,6 +67,8 @@ public class CustomerHomeController
     viewModel.bindHiddenText(hiddenFieldRoomNo.textProperty());
     viewModel.bindReserveRoomNo(reserveRoomNr.textProperty());
     viewModel.bindReserveNoBeds(reserveNrOfBeds.textProperty());
+    this.viewModel.bindMyReservation(myReservations.itemsProperty());
+
   }
 
 
@@ -143,6 +146,10 @@ public class CustomerHomeController
       myProfileAnchorPane.setOpacity(0.0);
       loggingIn.setOpacity(1.0);
     }
+  }
+
+  @FXML void tableClickReservation(){
+
   }
 
 }
