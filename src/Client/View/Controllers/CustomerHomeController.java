@@ -144,7 +144,9 @@ public class CustomerHomeController
     if (viewModel.logOut())
     {
       myProfileAnchorPane.setOpacity(0.0);
-      loggingIn.setOpacity(1.0);
+      //loggingIn.setOpacity(1.0);
+      loggingIn.setLayoutX(120.0);
+      loggingIn.setLayoutY(120.00);
     }
   }
 
