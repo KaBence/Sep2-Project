@@ -1,6 +1,7 @@
 package Client.Mediator;
 
 import Server.Model.*;
+import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
@@ -12,6 +13,7 @@ import dk.via.remote.observer.RemotePropertyChangeListener;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -58,9 +60,17 @@ public Employee addEmployee(String firstName, String lastName, String position,
 {
     return sharedInterface.addEmployee(firstName, lastName, position,phoneNo,password);
 }
+public String addReview(String username, int roomNO, MyDate fromDate, MyDate postedDate, String comment)
+    throws RemoteException
+{
+    return  sharedInterface.addReview(username, roomNO, fromDate, postedDate, comment);
+};
   public ArrayList<Room> getAllRooms() throws RemoteException
   {
     return sharedInterface.getAllRooms();
+  }
+  public ArrayList<Review> getAllReviews() throws RemoteException{
+    return sharedInterface.getAllReviews();
   }
 
   public ArrayList<Room> getSimpleFilteredRoom(String room) throws RemoteException
@@ -68,9 +78,9 @@ public Employee addEmployee(String firstName, String lastName, String position,
     return sharedInterface.getSimpleFilteredRoom(room);
   }
 
-  public ArrayList<Room> getFilteredRooms(String... attr) throws RemoteException
+  public ArrayList<Room> getFilteredRooms(MyDate from,MyDate to,String... attr) throws RemoteException
   {
-    return sharedInterface.getFilteredRoom(attr);
+    return sharedInterface.getFilteredRoom(from,to,attr);
   }
   public ArrayList<Customer> getFilteredCustomer(String... attr) throws RemoteException{
     return sharedInterface.getFilteredCustomer(attr);

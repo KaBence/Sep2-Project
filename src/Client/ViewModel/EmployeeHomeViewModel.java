@@ -296,6 +296,8 @@ public void bindReserveInfo(StringProperty property){
     reserveBathroom.set(false);
     reserveKitchen.set(false);
     reserveInternet.set(false);
+    fromDateNewReservation.set(null);
+    toDateNewReservation.set(null);
 
     employeeUsernameFilter.set("");
     employeeFirstNameFilter.set("");
@@ -491,7 +493,7 @@ public void bindReserveInfo(StringProperty property){
     }
 
     ObservableList<Room> roomObservableList = FXCollections.observableList(
-        model.getFilteredRoom(temp));
+        model.getFilteredRoom(null,null,temp));
     rooms.set(roomObservableList);
   }
 
@@ -548,10 +550,13 @@ public void bindReserveInfo(StringProperty property){
     if (!reserveNoBeds.getValue().equals(""))
     {
       temp[counter] = "NoBeds: " + reserveNoBeds.getValue() + ", ";
+      counter++;
     }
-
-    ObservableList<Room> roomObservableList = FXCollections.observableList(
-        model.getFilteredRoom(temp));
+    ObservableList<Room> roomObservableList;
+    if (toDateNewReservation.getValue()!=null&&fromDateNewReservation.getValue()!=null)
+       roomObservableList = FXCollections.observableList(model.getFilteredRoom(MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),MyDate.LocalDateToMyDate(toDateNewReservation.getValue()),temp));
+    else
+      roomObservableList = FXCollections.observableList(model.getFilteredRoom(null,null,temp));
     newReservations.set(roomObservableList);
   }
 

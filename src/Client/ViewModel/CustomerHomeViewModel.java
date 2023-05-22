@@ -1,6 +1,7 @@
 package Client.ViewModel;
 
 import Client.Model.Model;
+import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Room;
 import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Person;
@@ -31,11 +32,13 @@ public class CustomerHomeViewModel  implements PropertyChangeListener
   private ArrayList<Customer> allCustomers;
   private Person user;
 
+private SimpleObjectProperty<ObservableList<Review>> allReviews;
   public CustomerHomeViewModel(Model model)
   {
     this.model = model;
     model.addPropertyChangeListener(this);
     this.allRooms = new SimpleObjectProperty<>();
+    this.allReviews= new SimpleObjectProperty<>();
     try
     {
       allCustomers = model.getAllCustomers();
@@ -52,6 +55,9 @@ public class CustomerHomeViewModel  implements PropertyChangeListener
   {
     property.bindBidirectional(allRooms);
   }
+public void bindReviews(ObjectProperty<ObservableList<Review>> property){
+    property.bindBidirectional(allReviews);
+}
 
   public void bindUsername(StringProperty property)
   {
@@ -97,15 +103,19 @@ public class CustomerHomeViewModel  implements PropertyChangeListener
   public void update()
   {
     ArrayList<Room> rooms;
+    ArrayList<Review> reviews;
     try
     {
       rooms = model.getAllRooms();
+      reviews= model.getAllReviews();
     }
     catch (RemoteException e)
     {
       throw new RuntimeException(e);
     }
     ObservableList<Room> roomObservableList = FXCollections.observableList(rooms);
+    ObservableList<Review> reviewObservableList= FXCollections.observableList(reviews);
+    allReviews.set(reviewObservableList);
     allRooms.set(roomObservableList);
   }
 
@@ -114,6 +124,7 @@ public class CustomerHomeViewModel  implements PropertyChangeListener
   {
     Platform.runLater(() -> {
       update();
+      System.out.println("Test");
     });
   }
 }

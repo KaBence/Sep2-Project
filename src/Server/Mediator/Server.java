@@ -1,6 +1,7 @@
 package Server.Mediator;
 
 import Server.Model.*;
+import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
@@ -68,9 +69,21 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     return model.addEmployee(firstName,lastName,position,phoneNo,password);
   }
 
+  @Override public String addReview(String username, int roomNO,
+      MyDate fromDate, MyDate postedDate, String comment) throws RemoteException
+  {
+    support.firePropertyChange("addReview", null,"123" );
+    return  model.addReview(username, roomNO, fromDate, postedDate, comment);
+  }
+
   @Override public ArrayList<Room> getAllRooms()
   {
     return model.getAllRooms();
+  }
+
+  @Override public ArrayList<Review> getAllReviews() throws RemoteException
+  {
+    return model.getAllReviews();
   }
 
   @Override public ArrayList<Room> getSimpleFilteredRoom(String room)
@@ -79,10 +92,10 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     return model.getSimpleFilteredRooms(room);
   }
 
-  @Override public ArrayList<Room> getFilteredRoom(String... attr)
+  @Override public ArrayList<Room> getFilteredRoom(MyDate from,MyDate to,String... attr)
       throws RemoteException
   {
-    return model.getFilteredRooms(attr);
+    return model.getFilteredRooms(from,to,attr);
   }
 
   @Override public ArrayList<Customer> getFilteredCustomer(String... attr)

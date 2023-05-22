@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Controllers.CustomerHomeController">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Controllers.addReviewController">
    <tabs>
       <Tab fx:id="newReservation" text="AddReview">
          <content>
@@ -19,8 +19,8 @@
                         <Font name="Century Gothic" size="18.0" />
                      </font>
                   </Button>
-                  <TextArea layoutX="72.0" layoutY="60.0" prefHeight="235.0" prefWidth="462.0" promptText="write your review here..." />
-                  <Button layoutX="447.0" layoutY="317.0" mnemonicParsing="false" text="Create">
+                  <TextArea fx:id="review" layoutX="72.0" layoutY="60.0" prefHeight="235.0" prefWidth="462.0" promptText="write your review here..." />
+                  <Button layoutX="447.0" layoutY="317.0" mnemonicParsing="false" onAction="#create" text="Create">
                      <font>
                         <Font name="Century Gothic" size="18.0" />
                      </font>

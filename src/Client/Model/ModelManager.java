@@ -2,6 +2,7 @@ package Client.Model;
 
 import Client.Mediator.Client;
 import Server.Model.*;
+import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
@@ -54,6 +55,7 @@ public class ModelManager implements Model,PropertyChangeListener
     return current != null;
   }
 
+
   @Override public Person logIn(Person user) throws RemoteException
   {
     current = client.logIn(user);
@@ -89,9 +91,20 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.addEmployee(firstName,lastName,position,phoneNo,password);
   }
 
+  @Override public String addReview(String username, int roomNO,
+      MyDate fromDate, MyDate postedDate, String comment) throws RemoteException
+  {
+    return client.addReview(username, roomNO, fromDate, postedDate, comment);
+  }
+
   @Override public ArrayList<Room> getAllRooms() throws RemoteException
   {
     return client.getAllRooms();
+  }
+
+  @Override public ArrayList<Review> getAllReviews() throws RemoteException
+  {
+    return client.getAllReviews();
   }
 
   @Override public ArrayList<Room> getSimpleFilteredRoom(String room)
@@ -100,9 +113,9 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.getSimpleFilteredRoom(room);
   }
 
-  @Override public ArrayList<Room> getFilteredRoom(String... attr) throws RemoteException
+  @Override public ArrayList<Room> getFilteredRoom(MyDate from,MyDate to,String... attr) throws RemoteException
   {
-    return client.getFilteredRooms(attr);
+    return client.getFilteredRooms(from,to,attr);
   }
 
   @Override public ArrayList<Customer> getFilteredCustomers(String... attr)
@@ -254,6 +267,11 @@ public class ModelManager implements Model,PropertyChangeListener
       MyDate fromDate) throws RemoteException
   {
     return client.checkOut(roomNumber,username,fromDate);
+  }
+
+  @Override public Person getCurrentCustomer()
+  {
+    return current;
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)
