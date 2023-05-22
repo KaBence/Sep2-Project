@@ -71,8 +71,6 @@ public class ViewFactory
     return employeeLoginController.getRoot();
   }
 
-
-
   private Region loadEmployeeHome(int i)
   {
     FXMLLoader loader = new FXMLLoader();
