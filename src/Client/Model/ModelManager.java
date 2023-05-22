@@ -67,7 +67,7 @@ public class ModelManager implements Model,PropertyChangeListener
   {
     loggedUsers.remove(current);
     Person x = current;
-    current = null;
+    current = setGuest();
     return client.logOut(x);
   }
 
