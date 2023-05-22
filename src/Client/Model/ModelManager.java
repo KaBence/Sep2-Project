@@ -56,7 +56,6 @@ public class ModelManager implements Model,PropertyChangeListener
     return current != null;
   }
 
-
   @Override public Person logIn(Person user) throws RemoteException
   {
     current = client.logIn(user);
@@ -285,6 +284,13 @@ public class ModelManager implements Model,PropertyChangeListener
   @Override public Person getCurrentCustomer()
   {
     return current;
+  }
+
+  @Override public String addCustomer(String username, String password,
+      String firstName, String lastName, String phoneNo, String paymentInfo)
+      throws RemoteException
+  {
+    return client.addCustomer(username,password,firstName,lastName,phoneNo,paymentInfo);
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

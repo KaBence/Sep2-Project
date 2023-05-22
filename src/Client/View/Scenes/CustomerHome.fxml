@@ -154,7 +154,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="47.0" prefWidth="306.0" spacing="40.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Register">
+                                    <Button mnemonicParsing="false" onAction="#register" text="Register">
                                        <font>
                                           <Font name="Century Gothic" size="18.0" />
                                        </font>

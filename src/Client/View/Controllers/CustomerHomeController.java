@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
+
 public class CustomerHomeController
 {
   @FXML TextField info, nrOfBeds, roomNr, username;
@@ -75,6 +76,11 @@ public class CustomerHomeController
 
   @FXML void filterRoom()
   {
+  }
+
+  @FXML void register()
+  {
+    viewHandler.openView(SceneNames.AddCustomer);
   }
 
   @FXML void review()

@@ -65,6 +65,13 @@ public String addReview(String username, int roomNO, MyDate fromDate, MyDate pos
 {
     return  sharedInterface.addReview(username, roomNO, fromDate, postedDate, comment);
 };
+
+  public String addCustomer(String username, String password,
+      String firstName, String lastName, String phoneNo, String paymentInfo)
+      throws RemoteException
+  {
+    return sharedInterface.addCustomer(username,password,firstName,lastName,phoneNo,paymentInfo);
+  }
   public ArrayList<Room> getAllRooms() throws RemoteException
   {
     return sharedInterface.getAllRooms();

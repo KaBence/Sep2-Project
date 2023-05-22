@@ -82,4 +82,7 @@ public interface Model
   String checkOut(int roomNumber, String username,
       MyDate fromDate) throws RemoteException;
 Person getCurrentCustomer();
+
+  String addCustomer(String username, String password,
+      String firstName, String lastName, String phoneNO, String paymentInfo) throws RemoteException;
 }

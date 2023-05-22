@@ -1,6 +1,5 @@
 package Server.Model;
 
-
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Room;
@@ -307,6 +306,11 @@ public class ModelManager implements Model
         toDate, oldRoomNo, oldUsername, oldFromDate);
   }
 
+  @Override public String addCustomer(String username, String password,
+      String firstName, String lastName, String phoneNo, String paymentInfo)
+  {
+    return customerData.addCustomer(username,password,firstName,lastName,phoneNo,paymentInfo);
+  }
 
   @Override public String checkIn(int roomNumber, String username,
       MyDate fromDate)

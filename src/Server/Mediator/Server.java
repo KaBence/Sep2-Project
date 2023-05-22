@@ -204,6 +204,13 @@ public class Server extends UnicastRemoteObject implements SharedInterface
     return model.updateReservation(roomNumber, username, fromDate, toDate,oldRoomNo,oldUsername,oldFromDate);
   }
 
+  @Override public String addCustomer(String username, String password,
+      String firstName, String lastName, String phoneNo, String paymentInfo)
+      throws RemoteException
+  {
+    return model.addCustomer(username,password,firstName,lastName,phoneNo,paymentInfo);
+  }
+
   @Override public String checkIn(int roomNumber, String username, MyDate fromDate)
       throws RemoteException
   {
