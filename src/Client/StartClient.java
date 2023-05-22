@@ -24,8 +24,6 @@ public class StartClient extends Application
     ViewModelFactory viewModelFactory=new ViewModelFactory(model);
     ViewHandler view=new ViewHandler(viewModelFactory);
     view.start(primaryStage);
-    Alert fuck_you = new Alert(Alert.AlertType.ERROR,"FUCK YOU");
-    fuck_you.showAndWait();
 
     //When we close a client a thread stops (client is fully closed)
     primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>()

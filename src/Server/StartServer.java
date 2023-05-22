@@ -22,6 +22,5 @@ public class StartServer
     Server server=new Server(model);
     registry.bind("HotelServer",server);
     System.out.println("server started");
-    System.out.println("FUCK YOU");
   }
 }
