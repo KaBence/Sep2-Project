@@ -3,14 +3,13 @@ package Client.View.Controllers;
 import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.AddReviewViewModel;
-import Client.ViewModel.CustomerHomeViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 
 import java.rmi.RemoteException;
 
-public class addReviewController
+public class AddReviewController
 {
   @FXML TextArea review;
   private Region root;

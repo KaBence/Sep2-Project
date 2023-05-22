@@ -1,7 +1,6 @@
 package Client.View;
 
 import Client.View.Controllers.*;
-import Client.ViewModel.AddReviewViewModel;
 import Client.ViewModel.ViewModelFactory;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Region;
@@ -279,6 +278,7 @@ public class ViewFactory
       case EditReservation -> loadEditReservation();
       case Admin -> loadAdminView();
       case AddCustomer -> loadAddCustomer();
+      case Review -> loadReview();
     };
   }
 }
