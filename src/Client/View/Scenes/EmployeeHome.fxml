@@ -99,7 +99,7 @@
                      <font>
                         <Font size="18.0" />
                      </font></Button>
-                  <ListView fx:id="employeeListView" layoutX="11.0" layoutY="77.0" onMouseClicked="#tableClickEmployee" prefHeight="230.0" prefWidth="404.0" />
+                  <ListView fx:id="employeeListView" layoutX="11.0" layoutY="77.0" prefHeight="230.0" prefWidth="404.0" />
                   <Line endX="-100.0" endY="194.66665649414062" layoutX="523.0" layoutY="134.0" startX="-100.0" startY="-116.66666412353516" stroke="#00000063" />
                   <TextField fx:id="filteringEmployee" layoutX="80.0" layoutY="28.0" onKeyReleased="#simpleFilterEmployee" promptText="Enter Employee info" />
                   <TextField fx:id="employeeUsernameFilter" layoutX="438.0" layoutY="77.0" onKeyReleased="#filterEmployee" promptText="Username" />
