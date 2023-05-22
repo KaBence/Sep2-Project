@@ -146,6 +146,7 @@ public void bindMyReservation(ObjectProperty<ObservableList<Reservation>> proper
     try
     {
       model.logOut();
+      model.setGuest();
       return true;
     }
     catch (RemoteException e)
