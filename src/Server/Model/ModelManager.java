@@ -217,9 +217,32 @@ public class ModelManager implements Model
     return customerData.filter(attr);
   }
 
-  @Override public ArrayList<Customer> getAllCustomers()
+  @Override public ArrayList<Customer> getCustomersFromDatabase()
   {
     return customerData.getAllCustomers();
+  }
+
+  @Override public ArrayList<Customer> getAllCustomers()
+  {
+    ArrayList<Customer> all = getCustomersFromDatabase();
+    ArrayList<Customer> updated = new ArrayList<>(all.size());
+    for (int i = 0; i < all.size(); i++)
+    {
+      boolean flag = true;
+      for (int j = 0; j < loggedInUsers.size(); j++)
+      {
+        if (all.get(i).equals(loggedInUsers.get(j)))
+        {
+          flag = false;
+          updated.add((Customer) loggedInUsers.get(j));
+        }
+      }
+      if (flag)
+      {
+        updated.add(all.get(i));
+      }
+    }
+    return updated;
   }
 
   @Override public ArrayList<Customer> filterCustomer(String employee)
@@ -232,7 +255,7 @@ public class ModelManager implements Model
     return employeeData.getAllEmployees();
   }
 
-  public ArrayList<Employee> getAllEmployees()
+  @Override public ArrayList<Employee> getAllEmployees()
   {
     ArrayList<Employee> all = getEmployeesFromDatabase();
     ArrayList<Employee> updated = new ArrayList<>(all.size());
