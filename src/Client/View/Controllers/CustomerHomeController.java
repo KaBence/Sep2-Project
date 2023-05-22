@@ -26,8 +26,6 @@ public class CustomerHomeController
   @FXML ListView<Reservation>  myReservations;
   @FXML ListView<Room> roomListView;
   @FXML ListView<Review> listReviews;
-  @FXML Button logout, cancel, edit;
-  @FXML AnchorPane loggingIn;
   @FXML Button logout, review, cancel, edit;
   @FXML AnchorPane loggingIn,myProfileAnchorPane;
   @FXML TabPane tabPane;

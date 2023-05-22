@@ -35,7 +35,6 @@ private SimpleObjectProperty<ObservableList<Reservation>> allMyReservation;
   private ArrayList<Customer> allCustomers;
   private Person user;
 
-private SimpleObjectProperty<ObservableList<Review>> allReviews;
   public CustomerHomeViewModel(Model model)
   {
     this.model = model;
@@ -119,7 +118,7 @@ public void bindMyReservation(ObjectProperty<ObservableList<Reservation>> proper
     {
       rooms = model.getAllRooms();
       reviews = model.getAllReviews();
-
+      model.setGuest();
       reservations=model.getAllMyReservation(model.getCurrentCustomer().getUsername());
     }
     catch (RemoteException e)
