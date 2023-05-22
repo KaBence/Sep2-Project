@@ -28,6 +28,7 @@ public interface SharedInterface extends Remote
   String addReview(String username, int roomNO, MyDate fromDate, MyDate postedDate, String comment) throws RemoteException;
   ArrayList<Room> getAllRooms() throws RemoteException;
   ArrayList<Review> getAllReviews() throws RemoteException;
+  ArrayList<Reservation> getAllMyReservation(String username) throws RemoteException;
 
   ArrayList<Room> getSimpleFilteredRoom(String room) throws RemoteException;
 

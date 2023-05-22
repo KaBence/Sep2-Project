@@ -107,6 +107,12 @@ public class ModelManager implements Model,PropertyChangeListener
     return client.getAllReviews();
   }
 
+  @Override public ArrayList<Reservation> getAllMyReservation(String username)
+      throws RemoteException
+  {
+    return client.getAllMyReservation(username);
+  }
+
   @Override public ArrayList<Room> getSimpleFilteredRoom(String room)
       throws RemoteException
   {

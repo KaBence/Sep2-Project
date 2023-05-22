@@ -72,7 +72,9 @@ public String addReview(String username, int roomNO, MyDate fromDate, MyDate pos
   public ArrayList<Review> getAllReviews() throws RemoteException{
     return sharedInterface.getAllReviews();
   }
-
+public ArrayList<Reservation> getAllMyReservation(String username) throws RemoteException{
+    return sharedInterface.getAllMyReservation(username);
+}
   public ArrayList<Room> getSimpleFilteredRoom(String room) throws RemoteException
   {
     return sharedInterface.getSimpleFilteredRoom(room);

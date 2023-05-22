@@ -44,6 +44,7 @@ public interface Model
 
   ArrayList<Room> getAllRooms();
   ArrayList<Review> getAllReviews();
+  ArrayList<Reservation> getAllMyReservation(String username);
 
   ArrayList<Room> getSimpleFilteredRooms(String room);
 

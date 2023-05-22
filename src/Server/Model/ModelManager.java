@@ -176,6 +176,11 @@ public class ModelManager implements Model
     return reviewData.getAllReviews();
   }
 
+  @Override public ArrayList<Reservation> getAllMyReservation(String username)
+  {
+    return reservationData.getMyReservation(username);
+  }
+
   @Override public ArrayList<Room> getSimpleFilteredRooms(String room)
   {
     return roomData.filterRoom(room);

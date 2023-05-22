@@ -4,6 +4,7 @@ import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.CustomerHomeViewModel;
 import Client.ViewModel.HomeViewModel;
+import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Room;
 import javafx.event.ActionEvent;
@@ -20,10 +21,10 @@ public class CustomerHomeController
   @FXML DatePicker fromDate, finishDate;
   @FXML CheckBox balcony, kitchen, internet, bathroom;
   @FXML ComboBox<Integer> pricePerNight;
-  @FXML ListView<String>  myReservations;
+  @FXML ListView<Reservation>  myReservations;
   @FXML ListView<Room> roomListView;
   @FXML ListView<Review> listReviews;
-  @FXML Button logout, review, cancel, edit;
+  @FXML Button logout, cancel, edit;
   @FXML AnchorPane loggingIn;
   @FXML TabPane tabPane;
   @FXML Tab newReservation, myReservation, allReviews;
@@ -40,6 +41,8 @@ public class CustomerHomeController
     loggingIn.setOpacity(0.0);
     this.viewModel.bindRooms(roomListView.itemsProperty());
     this.viewModel.bindReviews(listReviews.itemsProperty());
+    this.viewModel.bindMyReservation(myReservations.itemsProperty());
+
   }
 
   public Region getRoot()

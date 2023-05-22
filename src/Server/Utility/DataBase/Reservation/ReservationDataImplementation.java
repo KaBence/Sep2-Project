@@ -105,7 +105,7 @@ public class ReservationDataImplementation implements ReservationData
     try (Connection connection = getConnection())
     {
       PreparedStatement ps = connection.prepareStatement(
-          "SELECT * from ReservedBy WHERE username= ?");
+          "SELECT * from ReservedBy WHERE username= john@hotmail.com");
       ResultSet rs = ps.executeQuery();
       while (rs.next())
       {
