@@ -50,7 +50,7 @@ public class EmployeeHomeController
 
   @FXML TextField filteringRoom;
 
-  @FXML ToggleButton toggleRoomButton, toggleEmployeeButton, toggleCustomerButton,toggleNewReservation;
+  @FXML ToggleButton toggleRoomButton, toggleEmployeeButton, toggleCustomerButton;
 
   // employee new reservations
 
@@ -107,6 +107,7 @@ public class EmployeeHomeController
     viewModel.bindEmployeeLastName(employeeLastNameFilter.textProperty());
     viewModel.bindEmployeePosition(employeePositionFilter.textProperty());
     viewModel.bindEmployeePhoneNo(employeePhoneNumberFilter.textProperty());
+    viewModel.bindFilteringEmployee(filteringEmployee.textProperty());
 
     viewModel.bindAllBookings(allFilter.selectedProperty());
     viewModel.bindBookingFilter(bookingFilter.selectedProperty());
@@ -370,8 +371,7 @@ public class EmployeeHomeController
 
   @FXML void simpleFilterEmployee() throws RemoteException
   {
-    String x = filteringEmployee.getText();
-    viewModel.simpleFilterEmployee(x);
+    viewModel.simpleFilterEmployee();
   }
 
   @FXML void clearDates(){

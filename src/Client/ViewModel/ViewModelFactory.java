@@ -4,6 +4,7 @@ import Client.Model.Model;
 
 public class ViewModelFactory
 {
+  private AdminViewModel adminViewModel;
   private HomeViewModel homeViewModel;
 
   private EmployeeLoginViewModel employeeLoginViewModel;
@@ -12,7 +13,6 @@ public class ViewModelFactory
 
   private CustomerHomeViewModel customerHomeViewModel;
   private AddRoomViewModel addRoomViewModel;
-  private RegisterEmployeeViewModel registerEmployeeViewModel;
   private EditRoomViewModel editRoomViewModel;
   private EditCustomerViewModel editCustomerViewModel;
   private EditEmployeeViewModel editEmployeeViewModel;
@@ -25,11 +25,16 @@ public class ViewModelFactory
     employeeLoginViewModel = new EmployeeLoginViewModel(model);
     customerHomeViewModel = new CustomerHomeViewModel(model);
     addRoomViewModel = new AddRoomViewModel(model);
-    registerEmployeeViewModel = new RegisterEmployeeViewModel(model);
     editRoomViewModel = new EditRoomViewModel(model);
     editCustomerViewModel = new EditCustomerViewModel(model);
     editEmployeeViewModel = new EditEmployeeViewModel(model);
     editReservationViewModel=new EditReservationViewModel(model);
+    adminViewModel=new AdminViewModel(model);
+  }
+
+  public AdminViewModel getAdminViewModel()
+  {
+    return adminViewModel;
   }
 
   public EditReservationViewModel getEditReservationViewModel()
@@ -47,10 +52,7 @@ public class ViewModelFactory
     return employeeLoginViewModel;
   }
 
-  public RegisterEmployeeViewModel getRegisterEmployeeViewModel()
-  {
-    return registerEmployeeViewModel;
-  }
+
 
   public EmployeeHomeViewModel getEmployeeHomeViewModel()
   {

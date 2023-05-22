@@ -45,6 +45,10 @@ public class EmployeeLoginController
   @FXML void login() throws RemoteException
   {
     String login = viewModel.logIn(employeeIdField.getText(),passwordField.getText());
+    if (login.equals("admin")){
+      viewHandler.openView(SceneNames.Admin);
+      return;
+    }
     if (login.equals(DatabaseConnection.SUCCESS))
     {
       viewHandler.openView(SceneNames.EmployeeHomeReservations);
@@ -67,18 +71,5 @@ public class EmployeeLoginController
     viewHandler.openView(SceneNames.Home);
   }
 
-  @FXML void SignIn()
-  {
-    Alert x = new Alert(Alert.AlertType.INFORMATION);
-    x.setHeaderText("Do you want to register new Employee?");
-    x.setTitle("Confirmation");
-    x.getButtonTypes().add(ButtonType.YES);
-    x.getButtonTypes().add(ButtonType.CANCEL);
-    x.getButtonTypes().remove(ButtonType.OK);
-    x.showAndWait();
-    if (x.getResult().equals(ButtonType.YES))
-    {
-      viewHandler.openView(SceneNames.EmployeeSignIn);
-    }
-  }
+
 }

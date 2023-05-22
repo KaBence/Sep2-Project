@@ -17,11 +17,11 @@ public class ViewFactory
   private EmployeeHomeController employeeHomeController;
   private CustomerHomeController customerHomeController;
   private AddRoomController addRoomController;
-  private RegistrateEmployeeController registrateEmployeeController;
   private EditRoomController editRoomController;
   private EditCustomerController editCustomerController;
   private EditEmployeeController editEmployeeController;
   private EditReservationController editReservationController;
+  private AdminController adminController;
 
   private ViewModelFactory viewModelFactory;
 
@@ -64,22 +64,7 @@ public class ViewFactory
     return employeeLoginController.getRoot();
   }
 
-  private Region loadRegisterEmployee(){
-    FXMLLoader loader=new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/RegisterEmployee.fxml"));
-    try
-    {
-      Region root = loader.load();
-      registrateEmployeeController = loader.getController();
-      registrateEmployeeController.init(viewHandler,viewModelFactory.getRegisterEmployeeViewModel(),root);
-    }
-    catch (IOException e){
-      throw new IOError(e);
-    }
 
-    registrateEmployeeController.reset();
-      return registrateEmployeeController.getRoot();
-    }
 
   private Region loadEmployeeHome(int i){
     FXMLLoader loader=new FXMLLoader();
@@ -194,6 +179,22 @@ public class ViewFactory
     return editReservationController.getRoot();
   }
 
+  private Region loadAdminView(){
+    FXMLLoader loader=new FXMLLoader();
+    loader.setLocation(getClass().getResource("Scenes/Admin.fxml"));
+    try
+    {
+      Region root = loader.load();
+      adminController=loader.getController();
+      adminController.init(viewHandler,viewModelFactory.getAdminViewModel(),root);
+    }
+    catch(IOException e){
+      throw new IOError(e);
+    }
+    adminController.reset();
+    return adminController.getRoot();
+  }
+
 
   public Region load(SceneNames id){
     return switch (id){
@@ -207,10 +208,10 @@ public class ViewFactory
       case CustomerHome -> loadCustomerHome();
       case AddRoom -> loadAddRoom();
       case EditRoom -> loadEditRoom();
-      case EmployeeSignIn -> loadRegisterEmployee();
       case EditCustomer -> loadEditCustomer();
       case EditEmployee -> loadEditEmployee();
       case EditReservation -> loadEditReservation();
+      case Admin -> loadAdminView();
     };
   }
 }

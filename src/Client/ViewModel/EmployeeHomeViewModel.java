@@ -44,6 +44,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
   private SimpleBooleanProperty reserveBalcony,reserveKitchen,reserveInternet,reserveBathroom;
   private SimpleObjectProperty<Integer> reservePricePerNight;
   private SimpleStringProperty reserveNoBeds,reserveRoomNo;
+  private SimpleStringProperty filteringEmployee;
 
   public EmployeeHomeViewModel(Model model)
   {
@@ -85,6 +86,7 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     employeeLastNameFilter = new SimpleStringProperty();
     employeePosition = new SimpleStringProperty();
     employeePhoneNumberFilter = new SimpleStringProperty();
+    filteringEmployee=new SimpleStringProperty();
     employeeUsernameFilter.set("");
     employeeFirstNameFilter.set("");
     employeeLastNameFilter.set("");
@@ -272,6 +274,10 @@ public void bindHiddenText(StringProperty property){
     property.bindBidirectional(reserveNoBeds);
   }
 
+  public void bindFilteringEmployee(StringProperty property){
+    property.bindBidirectional(filteringEmployee);
+  }
+
 
   public void update()
   {
@@ -377,12 +383,12 @@ public void bindHiddenText(StringProperty property){
     reservations.set(reservationObservableList);
   }
 
-  public void simpleFilterEmployee(String employee) throws RemoteException
+  public void simpleFilterEmployee() throws RemoteException
   {
     ArrayList<Employee> filterEmployee;
     try
     {
-      filterEmployee = model.filterEmployee(employee);
+      filterEmployee = model.filterEmployee(filteringEmployee.getValue());
     }
     catch (RemoteException e)
     {

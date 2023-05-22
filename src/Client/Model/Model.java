@@ -21,7 +21,7 @@ public interface Model
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException;
   String  addReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate, boolean CheckedIn) throws RemoteException;
-  Employee addEmployee(String firstName, String lastName, String position,
+  String  addEmployee(String firstName, String lastName, String position,
       String phoneNo, String password) throws RemoteException;
   ArrayList<Room> getAllRooms() throws RemoteException;
 

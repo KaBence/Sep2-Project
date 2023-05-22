@@ -105,7 +105,7 @@ public class ModelManager implements Model
         toDate, CheckedIn);
   }
 
-  @Override public Employee addEmployee(String firstName, String lastName,
+  @Override public String addEmployee(String firstName, String lastName,
       String position, String phoneNo, String password)
   {
     return employeeData.AddEmployee(password, firstName, lastName, phoneNo,
