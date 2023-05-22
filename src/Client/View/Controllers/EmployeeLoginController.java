@@ -52,7 +52,6 @@ public class EmployeeLoginController
     if (login.equals(DatabaseConnection.SUCCESS))
     {
       viewHandler.openView(SceneNames.EmployeeHomeReservations);
-      System.out.println(viewModel.getLoggedUser().getState());
     }
     else if (login.equals(DatabaseConnection.PASSWORD))
     {

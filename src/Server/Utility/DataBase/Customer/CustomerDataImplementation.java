@@ -27,32 +27,37 @@ public class CustomerDataImplementation implements CustomerData
         "postgres", "password");
   }
 
-  @Override public Customer addCustomer(String username, String password,
-      String firstName, String lastName, String phoneNO, String paymentInfo)
+  @Override public String addCustomer(String username, String password,
+      String firstName, String lastName, String phoneNo, String paymentInfo)
   {
-    try (Connection connection = getConnection())
+    if (username.equals("") || password.equals("")|| firstName.equals("") || lastName.equals("") || phoneNo.equals("") || paymentInfo.equals(""))
     {
-      PreparedStatement psUser = connection.prepareStatement(
-          "INSERT INTO \"user\"(username, password) VALUES(?,?)");
-      psUser.setString(1, username);
-      psUser.setString(2, password);
-      psUser.executeUpdate();
-
-      PreparedStatement psCustomer = connection.prepareStatement(
-          "INSERT INTO customer(username, firstName, lastName, phoneNo, paymentInfo) VALUES(?,?,?,?,?)");
-      psCustomer.setString(1, username);
-      psCustomer.setString(2, firstName);
-      psCustomer.setString(3, lastName);
-      psCustomer.setString(4, phoneNO);
-      psCustomer.setString(5, paymentInfo);
-      psCustomer.executeUpdate();
-
-      return new Customer(username, firstName, lastName, phoneNO, paymentInfo,
-          password);
+      return DatabaseConnection.MANDATORY;
     }
-    catch (SQLException e)
+    else
     {
-      return null;
+      try (Connection connection = getConnection())
+      {
+        PreparedStatement psUser = connection.prepareStatement(
+            "INSERT INTO \"user\"(username, password) VALUES(?,?)");
+        psUser.setString(1, username);
+        psUser.setString(2, password);
+        psUser.executeUpdate();
+
+        PreparedStatement psCustomer = connection.prepareStatement(
+            "INSERT INTO customer(username, firstName, lastName, phoneNo, paymentInfo) VALUES(?,?,?,?,?)");
+        psCustomer.setString(1, username);
+        psCustomer.setString(2, firstName);
+        psCustomer.setString(3, lastName);
+        psCustomer.setString(4, phoneNo);
+        psCustomer.setString(5, paymentInfo);
+        psCustomer.executeUpdate();
+        return DatabaseConnection.SUCCESS;
+      }
+      catch (SQLException e)
+      {
+        return DatabaseConnection.ERROR;
+      }
     }
   }
 

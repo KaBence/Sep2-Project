@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Scenes.AddCustomer">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Controllers.AddCustomerController">
    <children>
       <AnchorPane layoutY="1.0" prefHeight="400.0" prefWidth="632.0">
          <children>
@@ -40,7 +40,7 @@
                   <Font name="Century Gothic" size="16.0" />
                </font>
             </Label>
-            <Button layoutX="510.0" layoutY="342.0" mnemonicParsing="false" onAction="#save" text="Create">
+            <Button layoutX="510.0" layoutY="342.0" mnemonicParsing="false" onAction="#create" text="Create">
                <font>
                   <Font name="Century Gothic" size="16.0" />
                </font>
@@ -54,19 +54,19 @@
                <font>
                   <Font name="Century Gothic" size="16.0" />
                </font></TextField>
-            <TextField fx:id="lastName" layoutX="435.0" layoutY="284.0" prefHeight="31.0" prefWidth="178.0">
+            <TextField fx:id="repeatPassword" layoutX="435.0" layoutY="284.0" prefHeight="31.0" prefWidth="178.0">
                <font>
                   <Font name="Century Gothic" size="16.0" />
                </font></TextField>
-            <TextField fx:id="firstName" layoutX="132.0" layoutY="143.0" prefHeight="31.0" prefWidth="178.0">
+            <TextField fx:id="username" layoutX="132.0" layoutY="143.0" prefHeight="31.0" prefWidth="178.0">
                <font>
                   <Font name="Century Gothic" size="16.0" />
                </font></TextField>
-            <TextField fx:id="phoneNo" layoutX="435.0" layoutY="83.0" prefHeight="31.0" prefWidth="178.0">
+            <TextField fx:id="lastName" layoutX="435.0" layoutY="83.0" prefHeight="31.0" prefWidth="178.0">
                <font>
                   <Font name="Century Gothic" size="16.0" />
                </font></TextField>
-            <TextField fx:id="username" layoutX="132.0" layoutY="89.0" prefHeight="31.0" prefWidth="178.0">
+            <TextField fx:id="firstName" layoutX="132.0" layoutY="89.0" prefHeight="31.0" prefWidth="178.0">
                <font>
                   <Font name="Century Gothic" size="16.0" />
                </font></TextField>
@@ -75,7 +75,7 @@
                   <Font name="Century Gothic" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="lastName1" layoutX="435.0" layoutY="143.0" prefWidth="178.0">
+            <TextField fx:id="phoneNo" layoutX="435.0" layoutY="143.0" prefWidth="178.0">
                <font>
                   <Font name="Century Gothic" size="16.0" />
                </font></TextField>
@@ -84,7 +84,7 @@
                   <Font name="Century Gothic" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="lastName2" layoutX="132.0" layoutY="284.0" prefHeight="31.0" prefWidth="178.0">
+            <TextField fx:id="password" layoutX="132.0" layoutY="284.0" prefHeight="31.0" prefWidth="178.0">
                <font>
                   <Font name="Century Gothic" size="16.0" />
                </font>
