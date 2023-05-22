@@ -23,7 +23,7 @@ public interface Model
       boolean balcony);
   String  addReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, boolean CheckedIn);
-  Employee addEmployee(String firstName, String lastName,
+  String addEmployee(String firstName, String lastName,
       String position, String phoneNo, String password);
 
   String addReview(String username, int roomNO,
@@ -68,4 +68,7 @@ public interface Model
   String checkIn(int roomNumber, String username, MyDate fromDate);
   String checkOut(int roomNumber, String username, MyDate fromDate);
   String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate);
+  String addCustomer(String username, String password,
+      String firstName, String lastName, String phoneNo, String paymentInfo);
+
 }

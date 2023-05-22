@@ -4,6 +4,7 @@ import Client.Model.Model;
 
 public class ViewModelFactory
 {
+  private AdminViewModel adminViewModel;
   private HomeViewModel homeViewModel;
 
   private EmployeeLoginViewModel employeeLoginViewModel;
@@ -12,12 +13,12 @@ public class ViewModelFactory
 
   private CustomerHomeViewModel customerHomeViewModel;
   private AddRoomViewModel addRoomViewModel;
-  private RegisterEmployeeViewModel registerEmployeeViewModel;
   private EditRoomViewModel editRoomViewModel;
   private EditCustomerViewModel editCustomerViewModel;
   private EditEmployeeViewModel editEmployeeViewModel;
   private EditReservationViewModel editReservationViewModel;
   private AddReviewViewModel addReviewViewModel;
+  private AddCustomerViewModel addCustomerViewModel;
 
   public ViewModelFactory(Model model)
   {
@@ -26,12 +27,18 @@ public class ViewModelFactory
     employeeLoginViewModel = new EmployeeLoginViewModel(model);
     customerHomeViewModel = new CustomerHomeViewModel(model);
     addRoomViewModel = new AddRoomViewModel(model);
-    registerEmployeeViewModel = new RegisterEmployeeViewModel(model);
     editRoomViewModel = new EditRoomViewModel(model);
     editCustomerViewModel = new EditCustomerViewModel(model);
     editEmployeeViewModel = new EditEmployeeViewModel(model);
     editReservationViewModel=new EditReservationViewModel(model);
+    adminViewModel=new AdminViewModel(model);
     addReviewViewModel= new AddReviewViewModel(model);
+    addCustomerViewModel = new AddCustomerViewModel(model);
+  }
+
+  public AdminViewModel getAdminViewModel()
+  {
+    return adminViewModel;
   }
 
   public EditReservationViewModel getEditReservationViewModel()
@@ -49,10 +56,6 @@ public class ViewModelFactory
     return employeeLoginViewModel;
   }
 
-  public RegisterEmployeeViewModel getRegisterEmployeeViewModel()
-  {
-    return registerEmployeeViewModel;
-  }
   public AddReviewViewModel getAddReviewViewModel(){
     return addReviewViewModel;
   }
@@ -85,5 +88,10 @@ public class ViewModelFactory
   public EditEmployeeViewModel getEditEmployeeViewModel()
   {
     return editEmployeeViewModel;
+  }
+
+  public AddCustomerViewModel getAddCustomerViewModel()
+  {
+    return addCustomerViewModel;
   }
 }

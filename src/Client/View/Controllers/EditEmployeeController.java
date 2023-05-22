@@ -63,7 +63,7 @@ public class EditEmployeeController
       alert.setHeaderText(null);
       alert.setTitle("Success");
       alert.showAndWait();
-      viewHandler.openView(SceneNames.EmployeeHomeEmployee);
+      viewHandler.openView(SceneNames.Admin);
     }
     else if(temp.equals(DatabaseConnection.MANDATORY))
     {
@@ -78,7 +78,6 @@ public class EditEmployeeController
       error.setHeaderText("Error");
       error.setHeaderText("You cannot edit this employee's information right now");
       error.showAndWait();
-      viewHandler.openView(SceneNames.EmployeeHomeEmployee);
     }
   }
 
@@ -106,10 +105,10 @@ public class EditEmployeeController
         error.setHeaderText("You cannot delete this employee right now");
         error.showAndWait();
       }
-      viewHandler.openView(SceneNames.EmployeeHomeEmployee);
+      viewHandler.openView(SceneNames.Admin);
     }
   }
   @FXML void cancel(){
-    viewHandler.openView(SceneNames.EmployeeHomeEmployee);
+    viewHandler.openView(SceneNames.Admin);
   }
 }
