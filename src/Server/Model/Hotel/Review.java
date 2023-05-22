@@ -18,10 +18,10 @@ public class Review implements Serializable
 
     private String comment;
 
-    public Review(String username, int reviewID, int roomNO, MyDate fromDate, MyDate postedDate, String comment)
+    public Review(String username,  int roomNO, MyDate fromDate, MyDate postedDate, String comment)
     {
         this.username = username;
-        this.reviewID = reviewID;
+      //  this.reviewID = reviewID;
         this.roomNO = roomNO;
         this.fromDate = fromDate;
         this.postedDate = postedDate;
@@ -74,5 +74,8 @@ public class Review implements Serializable
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+    public String toString(){
+        return "name:" + getUsername() +" text: " +getComment();
     }
 }

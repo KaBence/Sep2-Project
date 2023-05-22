@@ -1,6 +1,7 @@
 package Shared;
 
 import Server.Model.*;
+import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
@@ -24,11 +25,13 @@ public interface SharedInterface extends Remote
   String  addReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate, boolean CheckedIn) throws RemoteException;
   Employee addEmployee(String firstName, String lastName, String position,
       String phoneNo, String password) throws RemoteException;
+  String addReview(String username, int roomNO, MyDate fromDate, MyDate postedDate, String comment) throws RemoteException;
   ArrayList<Room> getAllRooms() throws RemoteException;
+  ArrayList<Review> getAllReviews() throws RemoteException;
 
   ArrayList<Room> getSimpleFilteredRoom(String room) throws RemoteException;
 
-  ArrayList<Room> getFilteredRoom(String... attr) throws RemoteException;
+  ArrayList<Room> getFilteredRoom(MyDate from,MyDate to,String... attr) throws RemoteException;
   ArrayList<Customer> getFilteredCustomer(String...attr) throws RemoteException;
 
   ArrayList<Customer> getAllCustomers() throws RemoteException;
