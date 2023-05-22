@@ -36,7 +36,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="signIn" layoutX="401.0" layoutY="14.0" mnemonicParsing="false" onAction="#SignIn" text="Register new employee">
+      <Button fx:id="signIn" layoutX="401.0" layoutY="14.0" mnemonicParsing="false" text="Register new employee">
          <font>
             <Font size="15.0" />
          </font>

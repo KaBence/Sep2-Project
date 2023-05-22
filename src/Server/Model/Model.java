@@ -23,7 +23,7 @@ public interface Model
       boolean balcony);
   String  addReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, boolean CheckedIn);
-  Employee addEmployee(String firstName, String lastName,
+  String addEmployee(String firstName, String lastName,
       String position, String phoneNo, String password);
 
   String addReview(String username, int roomNO,

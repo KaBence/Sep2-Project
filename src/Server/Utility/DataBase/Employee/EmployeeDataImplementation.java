@@ -27,7 +27,7 @@ public class EmployeeDataImplementation implements EmployeeData
         "postgres", "password");
   }
 
-  @Override public Employee AddEmployee(String password,
+  @Override public String AddEmployee(String password,
       String firstName, String lastName, String phoneNumber, String position)
   {
     Employee newEmployee = new Employee(firstName,lastName,position,phoneNumber,password);
@@ -48,12 +48,11 @@ public class EmployeeDataImplementation implements EmployeeData
       psEmpoyee.setString(4, phoneNumber);
       psEmpoyee.setString(5, position);
       psEmpoyee.executeUpdate();
-      return newEmployee;
+      return DatabaseConnection.SUCCESS;
     }
     catch (SQLException e)
     {
-      System.out.println(e.getMessage());
-      return null;
+      return DatabaseConnection.ERROR;
     }
   }
 

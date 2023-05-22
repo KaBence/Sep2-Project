@@ -1,7 +1,6 @@
 package Client.View;
 
 import Client.View.Controllers.*;
-import Client.ViewModel.AddReviewViewModel;
 import Client.ViewModel.ViewModelFactory;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Region;
@@ -18,11 +17,11 @@ public class ViewFactory
   private EmployeeHomeController employeeHomeController;
   private CustomerHomeController customerHomeController;
   private AddRoomController addRoomController;
-  private RegistrateEmployeeController registrateEmployeeController;
   private EditRoomController editRoomController;
   private EditCustomerController editCustomerController;
   private EditEmployeeController editEmployeeController;
   private EditReservationController editReservationController;
+  private AdminController adminController;
   private AddCustomerController addCustomerController;
 
   private AddReviewController addReviewController;
@@ -72,25 +71,7 @@ public class ViewFactory
     return employeeLoginController.getRoot();
   }
 
-  private Region loadRegisterEmployee()
-  {
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/RegisterEmployee.fxml"));
-    try
-    {
-      Region root = loader.load();
-      registrateEmployeeController = loader.getController();
-      registrateEmployeeController.init(viewHandler,
-          viewModelFactory.getRegisterEmployeeViewModel(), root);
-    }
-    catch (IOException e)
-    {
-      throw new IOError(e);
-    }
 
-    registrateEmployeeController.reset();
-    return registrateEmployeeController.getRoot();
-  }
 
   private Region loadEmployeeHome(int i)
   {
@@ -234,7 +215,16 @@ public class ViewFactory
     {
       Region root = loader.load();
       addReviewController = loader.getController();
-      addReviewController.init(viewHandler,
+      addReviewController.init(viewHandler, viewModelFactory.getAddReviewViewModel(), root);
+    }
+    catch (IOException e)
+    {
+      throw new RuntimeException(e);
+    }
+    addReviewController.reset();
+    return addReviewController.getRoot();
+  }
+
   private Region loadAddCustomer()
   {
     FXMLLoader loader = new FXMLLoader();
@@ -255,15 +245,22 @@ public class ViewFactory
 
   }
 
-          viewModelFactory.getAddReviewViewModel(), root);
-    }
-    catch (IOException e)
+  private Region loadAdminView(){
+    FXMLLoader loader=new FXMLLoader();
+    loader.setLocation(getClass().getResource("Scenes/Admin.fxml"));
+    try
     {
-      throw new RuntimeException(e);
+      Region root = loader.load();
+      adminController=loader.getController();
+      adminController.init(viewHandler,viewModelFactory.getAdminViewModel(),root);
     }
-    addReviewController.reset();
-    return addReviewController.getRoot();
+    catch(IOException e){
+      throw new IOError(e);
+    }
+    adminController.reset();
+    return adminController.getRoot();
   }
+
   public Region load(SceneNames id){
     return switch (id){
       case Home -> loadHomeView();
@@ -276,11 +273,12 @@ public class ViewFactory
       case CustomerHome -> loadCustomerHome();
       case AddRoom -> loadAddRoom();
       case EditRoom -> loadEditRoom();
-      case EmployeeSignIn -> loadRegisterEmployee();
       case EditCustomer -> loadEditCustomer();
       case EditEmployee -> loadEditEmployee();
       case EditReservation -> loadEditReservation();
+      case Admin -> loadAdminView();
       case AddCustomer -> loadAddCustomer();
+      case Review -> loadReview();
     };
   }
 }
