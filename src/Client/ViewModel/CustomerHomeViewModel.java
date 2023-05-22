@@ -63,6 +63,8 @@ public class CustomerHomeViewModel implements PropertyChangeListener
     reserveRoomNo=new SimpleStringProperty();
     reservePricePerNight=new SimpleObjectProperty<>();
 
+    model.setGuest();
+
     this.allReviews= new SimpleObjectProperty<>();
     try
     {
@@ -177,7 +179,7 @@ public void bindMyReservation(ObjectProperty<ObservableList<Reservation>> proper
     {
       rooms = model.getAllRooms();
       reviews = model.getAllReviews();
-      model.setGuest();
+
       reservations=model.getAllMyReservation(model.getCurrentCustomer().getUsername());
     }
     catch (RemoteException e)

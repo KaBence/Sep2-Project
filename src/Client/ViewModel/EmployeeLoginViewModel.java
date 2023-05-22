@@ -51,10 +51,12 @@ public class EmployeeLoginViewModel
   {
     return user;
   }
-  public String logIn(String username, String password) throws RemoteException
+  public boolean logIn(String username, String password) throws RemoteException
   {
     if (username.equals("admin")&&password.equals("admin"))
-      return "admin";
+    {
+      return true;
+    }
     for (int i = 0; i < employees.size(); i++)
     {
       if (employees.get(i).getUsername().equals(username))
@@ -65,19 +67,32 @@ public class EmployeeLoginViewModel
           try
           {
             model.logIn(user);
-            return DatabaseConnection.SUCCESS;
+            return true;
           }
           catch (Exception e)
           {
-            return DatabaseConnection.ERROR;
+            if (e.getMessage().contains("already"))
+            {
+              Alert alreadyLoggedIn = new Alert(Alert.AlertType.ERROR);
+              alreadyLoggedIn.setHeaderText(username +" is already logged in");
+              alreadyLoggedIn.showAndWait();
+              return false;
+            }
+            Alert x = new Alert(Alert.AlertType.ERROR,"User: "+username+", does not exist");
+            x.showAndWait();
+            return false;
           }
         }
         else
         {
-          return DatabaseConnection.PASSWORD;
+          Alert x = new Alert(Alert.AlertType.ERROR,"Invalid password");
+          x.showAndWait();
+          return false;
         }
       }
     }
-    return DatabaseConnection.USER;
+    Alert x = new Alert(Alert.AlertType.ERROR,"User: "+username+", does not exist");
+    x.showAndWait();
+    return false;
   }
 }
