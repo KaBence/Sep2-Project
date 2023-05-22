@@ -45,7 +45,7 @@ private SimpleObjectProperty<ObservableList<Review>> allReviews;
     }
     catch (RemoteException e)
     {
-      throw new RuntimeException(e);
+      allCustomers = new ArrayList<>();
     }
     this.password = new SimpleStringProperty();
     this.username = new SimpleStringProperty();
@@ -69,7 +69,7 @@ public void bindReviews(ObjectProperty<ObservableList<Review>> property){
     property.bindBidirectional(password);
   }
 
-  public boolean logIn()
+  public Boolean logIn()
   {
     for (int i = 0; i < allCustomers.size(); i++)
     {
@@ -85,11 +85,18 @@ public void bindReviews(ObjectProperty<ObservableList<Review>> property){
           }
           catch (Exception e)
           {
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setHeaderText("Something went wrong");
+            error.setContentText("Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+            error.showAndWait();
             return false;
           }
         }
         else
         {
+          Alert invalidPassword = new Alert(Alert.AlertType.ERROR);
+          invalidPassword.setHeaderText("Invalid password try one more time");
+          invalidPassword.showAndWait();
           return false;
         }
       }
@@ -98,6 +105,23 @@ public void bindReviews(ObjectProperty<ObservableList<Review>> property){
     doesntExist.setHeaderText("User does not exist.");
     doesntExist.showAndWait();
     return false;
+  }
+
+  public boolean logOut()
+  {
+    try
+    {
+      model.logOut();
+      return true;
+    }
+    catch (RemoteException e)
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setHeaderText("Logging out error");
+      alert.setContentText("Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      alert.showAndWait();
+      return false;
+    }
   }
 
   public void update()
@@ -124,7 +148,6 @@ public void bindReviews(ObjectProperty<ObservableList<Review>> property){
   {
     Platform.runLater(() -> {
       update();
-      System.out.println("Test");
     });
   }
 }

@@ -64,6 +64,7 @@ public class CustomerHomeController
   @FXML void Home()
   {
     viewHandler.openView(SceneNames.Home);
+    onLogOut();
   }
 
   @FXML void tableClickRoom()
@@ -80,10 +81,22 @@ public class CustomerHomeController
   }
   @FXML void onLogin()
   {
-    if (viewModel.logIn())
+    Boolean x = viewModel.logIn();
+    if (x)
     {
       myProfileAnchorPane.setOpacity(1.0);
       loggingIn.setOpacity(0.0);
+    }
+      username.clear();
+      passwordField.clear();
+  }
+
+  @FXML public void onLogOut()
+  {
+    if (viewModel.logOut())
+    {
+      myProfileAnchorPane.setOpacity(0.0);
+      loggingIn.setOpacity(1.0);
     }
   }
 

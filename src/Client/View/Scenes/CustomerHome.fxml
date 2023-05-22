@@ -96,12 +96,12 @@
                               </Button>
                            </children>
                         </VBox>
-                        <Button layoutX="22.0" layoutY="328.0" mnemonicParsing="false" text="Home">
+                        <Button layoutX="22.0" layoutY="328.0" mnemonicParsing="false" onAction="#Home" text="Home">
                            <font>
                               <Font name="Century Gothic" size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="logout" layoutX="506.0" layoutY="330.0" mnemonicParsing="false" text="LogOut">
+                        <Button fx:id="logout" layoutX="506.0" layoutY="330.0" mnemonicParsing="false" onAction="#onLogOut" text="LogOut">
                            <font>
                               <Font name="Century Gothic" size="16.0" />
                            </font>
