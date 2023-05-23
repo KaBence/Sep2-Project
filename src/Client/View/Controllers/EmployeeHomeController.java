@@ -174,15 +174,7 @@ public class EmployeeHomeController
       viewHandler.openView(SceneNames.EditCustomer);
   }
 
-  @FXML void tableClickEmployee(MouseEvent event)
-  {
-    viewModel.saveEmployee(
-        employeeListView.getSelectionModel().getSelectedItem());
-    if (event.getClickCount() == 2)
-    {
-      viewHandler.openView(SceneNames.EditEmployee);
-    }
-  }
+
 
   @FXML void tableClickBooking(MouseEvent event)
   {
@@ -265,9 +257,11 @@ public class EmployeeHomeController
 
   @FXML void tableClickNewReservation() throws RemoteException
   {
-    viewModel.saveRoom(
-        roomListViewNewReservation.getSelectionModel().getSelectedItem());
-    viewModel.fillHiddenField();
+    if (roomListViewNewReservation.getSelectionModel().getSelectedItem()!=null){
+      viewModel.saveRoom(roomListViewNewReservation.getSelectionModel().getSelectedItem());
+      viewModel.fillHiddenField();
+    }
+
   }
 
   @FXML void createNewReservation() throws RemoteException

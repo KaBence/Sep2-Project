@@ -3,6 +3,7 @@ package Client.View.Controllers;
 import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.AddReviewViewModel;
+import Server.Model.Hotel.Reservation;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
@@ -22,6 +23,8 @@ public class AddReviewController
     this.viewHandler = viewHandler;
     this.viewModel = viewModel;
     this.root = root;
+
+    viewModel.bindReviews(review.textProperty());
   }
 
   public Region getRoot()

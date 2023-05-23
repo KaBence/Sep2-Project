@@ -41,7 +41,7 @@ public class CustomerHomeViewModel implements PropertyChangeListener
   private SimpleObjectProperty<Integer> reservePricePerNight;
   private SimpleStringProperty reserveNoBeds,reserveRoomNo,hiddenFieldRoomNo;
   private SimpleStringProperty password;
-  private SimpleStringProperty username;
+  private SimpleStringProperty username, firstName, lastName;
 
   private ArrayList<Customer> allCustomers;
   private Person user;
@@ -62,6 +62,8 @@ public class CustomerHomeViewModel implements PropertyChangeListener
     reserveNoBeds=new SimpleStringProperty();
     reserveRoomNo=new SimpleStringProperty();
     reservePricePerNight=new SimpleObjectProperty<>();
+    firstName=new SimpleStringProperty();
+    lastName= new SimpleStringProperty();
 
     model.setGuest();
 
@@ -102,7 +104,12 @@ public void bindMyReservation(ObjectProperty<ObservableList<Reservation>> proper
   {
     property.bindBidirectional(password);
   }
-
+public  void bindFirstName(StringProperty property){
+    property.bind(firstName);
+}
+public void bindLastName(StringProperty property){
+    property.bind(lastName);
+}
   public Boolean logIn()
   {
     for (int i = 0; i < allCustomers.size(); i++)
@@ -171,6 +178,8 @@ public void bindMyReservation(ObjectProperty<ObservableList<Reservation>> proper
     fromDateNewReservation.set(null);
     toDateNewReservation.set(null);
     reservePricePerNight.set(0);
+    firstName.set(model.getCurrentCustomer().getFirstName());
+    lastName.set(model.getCurrentCustomer().getLastName());
 
 
     ArrayList<Room> rooms;
@@ -206,6 +215,9 @@ public void bindMyReservation(ObjectProperty<ObservableList<Reservation>> proper
   {
     model.saveSelectedRoom(room);
   }
+  public void saveReservation(Reservation reservation){
+    model.saveSelectedReservation(reservation);
+  }
 
   public void fillHiddenField()
   {
@@ -225,7 +237,7 @@ public void bindMyReservation(ObjectProperty<ObservableList<Reservation>> proper
   {
     try
     {
-      String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), "john@hotmail.com", MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
+      String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), model.getCurrentCustomer().getUsername(), MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
       if (state.equals(DatabaseConnection.SUCCESS)){
         Alert alert=new Alert(Alert.AlertType.INFORMATION,"Successfully added a new reservation",
             ButtonType.OK);
