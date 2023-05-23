@@ -103,4 +103,21 @@ public class CustomerEditReservationViewModel
     fromDate.set(temp.getFromDate().convertToLocalDate());
     toDate.set(temp.getToDate().convertToLocalDate());
   }
+  public boolean logOut()
+  {
+    try
+    {
+      model.logOut();
+      model.setGuest();
+      return true;
+    }
+    catch (RemoteException e)
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setHeaderText("Logging out error");
+      alert.setContentText("Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      alert.showAndWait();
+      return false;
+    }
+  }
 }
