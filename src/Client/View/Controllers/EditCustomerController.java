@@ -69,7 +69,7 @@ public class EditCustomerController
     {
       Alert error = new Alert(Alert.AlertType.ERROR);
       error.setHeaderText("Error");
-      error.setHeaderText("You cannot edit this room right now");
+      error.setHeaderText("You cannot edit this customer right now");
       error.showAndWait();
       viewHandler.openView(SceneNames.EmployeeHomeCustomer);
     }

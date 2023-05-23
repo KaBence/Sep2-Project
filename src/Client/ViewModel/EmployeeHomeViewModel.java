@@ -577,6 +577,10 @@ public void bindHiddenText(StringProperty property){
     hiddenFieldRoomNo.set(String.valueOf(room.getRoomNo()));
   }
 
+  public void fillHiddenFieldForTest(int something){
+    hiddenFieldRoomNo.set(String.valueOf(something));
+  }
+
   public void saveReservation(Reservation reservation)
   {
     model.saveSelectedReservation(reservation);
@@ -586,7 +590,7 @@ public void bindHiddenText(StringProperty property){
   {
     try
     {
-      String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), "12345", MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
+      String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), model.getCurrentCustomer().getUsername(), MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
       if (state.equals(DatabaseConnection.SUCCESS)){
         Alert alert=new Alert(Alert.AlertType.INFORMATION,"Successfully added a new reservation",ButtonType.OK);
         alert.setTitle("Success");
@@ -664,6 +668,13 @@ public void bindHiddenText(StringProperty property){
       conf.setHeaderText("Do you really want to check in this reservation?");
       conf.showAndWait();
       if (conf.getResult().equals(ButtonType.NO)){
+        return;
+      }
+      if (!(reservation.getFromDate().equals(MyDate.today()))){
+        Alert alert=new Alert(Alert.AlertType.ERROR,"You are not supposed to be here yet...GTFO",ButtonType.OK);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.showAndWait();
         return;
       }
       if (!reservation.isCheckedIn())
