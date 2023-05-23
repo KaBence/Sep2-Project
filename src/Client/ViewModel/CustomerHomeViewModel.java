@@ -37,9 +37,9 @@ public class CustomerHomeViewModel implements PropertyChangeListener
   private SimpleObjectProperty<ObservableList<Review>> allReviews;
   private SimpleObjectProperty<ObservableList<Reservation>> allMyReservation;
   private SimpleObjectProperty<LocalDate> fromDateNewReservation, toDateNewReservation;
-  private SimpleBooleanProperty reserveBalcony,reserveKitchen,reserveInternet,reserveBathroom;
+  private SimpleBooleanProperty reserveBalcony, reserveKitchen, reserveInternet, reserveBathroom;
   private SimpleObjectProperty<Integer> reservePricePerNight;
-  private SimpleStringProperty reserveNoBeds,reserveRoomNo,hiddenFieldRoomNo;
+  private SimpleStringProperty reserveNoBeds, reserveRoomNo, hiddenFieldRoomNo;
   private SimpleStringProperty password;
   private SimpleStringProperty username, firstName, lastName;
 
@@ -52,22 +52,22 @@ public class CustomerHomeViewModel implements PropertyChangeListener
     model.addPropertyChangeListener(this);
     this.newReservations = new SimpleObjectProperty<>();
 
-    hiddenFieldRoomNo=new SimpleStringProperty();
-    fromDateNewReservation=new SimpleObjectProperty<>();
-    toDateNewReservation=new SimpleObjectProperty<>();
-    reserveBalcony=new SimpleBooleanProperty();
-    reserveBathroom=new SimpleBooleanProperty();
-    reserveInternet=new SimpleBooleanProperty();
-    reserveKitchen=new SimpleBooleanProperty();
-    reserveNoBeds=new SimpleStringProperty();
-    reserveRoomNo=new SimpleStringProperty();
-    reservePricePerNight=new SimpleObjectProperty<>();
-    firstName=new SimpleStringProperty();
-    lastName= new SimpleStringProperty();
+    hiddenFieldRoomNo = new SimpleStringProperty();
+    fromDateNewReservation = new SimpleObjectProperty<>();
+    toDateNewReservation = new SimpleObjectProperty<>();
+    reserveBalcony = new SimpleBooleanProperty();
+    reserveBathroom = new SimpleBooleanProperty();
+    reserveInternet = new SimpleBooleanProperty();
+    reserveKitchen = new SimpleBooleanProperty();
+    reserveNoBeds = new SimpleStringProperty();
+    reserveRoomNo = new SimpleStringProperty();
+    reservePricePerNight = new SimpleObjectProperty<>();
+    firstName = new SimpleStringProperty();
+    lastName = new SimpleStringProperty();
 
     model.setGuest();
 
-    this.allReviews= new SimpleObjectProperty<>();
+    this.allReviews = new SimpleObjectProperty<>();
     try
     {
       allCustomers = model.getAllCustomers();
@@ -79,7 +79,7 @@ public class CustomerHomeViewModel implements PropertyChangeListener
     this.password = new SimpleStringProperty();
     this.username = new SimpleStringProperty();
     this.allReviews = new SimpleObjectProperty<>();
-    this.allMyReservation= new SimpleObjectProperty<>();
+    this.allMyReservation = new SimpleObjectProperty<>();
   }
 
   public void bindRooms(ObjectProperty<ObservableList<Room>> property)
@@ -91,9 +91,12 @@ public class CustomerHomeViewModel implements PropertyChangeListener
   {
     property.bindBidirectional(allReviews);
   }
-public void bindMyReservation(ObjectProperty<ObservableList<Reservation>> property){
+
+  public void bindMyReservation(
+      ObjectProperty<ObservableList<Reservation>> property)
+  {
     property.bindBidirectional(allMyReservation);
-}
+  }
 
   public void bindUsername(StringProperty property)
   {
@@ -104,12 +107,17 @@ public void bindMyReservation(ObjectProperty<ObservableList<Reservation>> proper
   {
     property.bindBidirectional(password);
   }
-public  void bindFirstName(StringProperty property){
+
+  public void bindFirstName(StringProperty property)
+  {
     property.bind(firstName);
-}
-public void bindLastName(StringProperty property){
+  }
+
+  public void bindLastName(StringProperty property)
+  {
     property.bind(lastName);
-}
+  }
+
   public Boolean logIn()
   {
     for (int i = 0; i < allCustomers.size(); i++)
@@ -129,7 +137,8 @@ public void bindLastName(StringProperty property){
             e.printStackTrace();
             Alert error = new Alert(Alert.AlertType.ERROR);
             error.setHeaderText("Something went wrong");
-            error.setContentText("Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+            error.setContentText(
+                "Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
             error.showAndWait();
             return false;
           }
@@ -161,7 +170,8 @@ public void bindLastName(StringProperty property){
     {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setHeaderText("Logging out error");
-      alert.setContentText("Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      alert.setContentText(
+          "Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
       alert.showAndWait();
       return false;
     }
@@ -182,7 +192,6 @@ public void bindLastName(StringProperty property){
     firstName.set(model.getCurrentCustomer().getFirstName());
     lastName.set(model.getCurrentCustomer().getLastName());
 
-
     ArrayList<Room> rooms;
     ArrayList<Review> reviews;
     ArrayList<Reservation> reservations;
@@ -191,7 +200,8 @@ public void bindLastName(StringProperty property){
       rooms = model.getAllRooms();
       reviews = model.getAllReviews();
 
-      reservations=model.getAllMyReservation(model.getCurrentCustomer().getUsername());
+      reservations = model.getAllMyReservation(
+          model.getCurrentCustomer().getUsername());
     }
     catch (RemoteException e)
     {
@@ -202,7 +212,7 @@ public void bindLastName(StringProperty property){
     ObservableList<Review> reviewObservableList = FXCollections.observableList(
         reviews);
     allReviews.set(reviewObservableList);
-    if(reservations!=null)
+    if (reservations != null)
     {
       ObservableList<Reservation> reservationObservableList = FXCollections.observableList(
           reservations);
@@ -216,8 +226,24 @@ public void bindLastName(StringProperty property){
   {
     model.saveSelectedRoom(room);
   }
-  public void saveReservation(Reservation reservation){
+
+  public void saveReservation(Reservation reservation)
+  {
     model.saveSelectedReservation(reservation);
+  }
+
+  public boolean getSelectedReservation()
+  {
+    if (model.getSelectedReservation()==null)
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "Please select a reservation", ButtonType.OK);
+      alert.setTitle("Error");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+      return false;
+    }
+    return true;
   }
 
   public void fillHiddenField()
@@ -225,7 +251,6 @@ public void bindLastName(StringProperty property){
     Room room = model.getSelectedRoom();
     hiddenFieldRoomNo.set(String.valueOf(room.getRoomNo()));
   }
-
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
@@ -238,17 +263,24 @@ public void bindLastName(StringProperty property){
   {
     try
     {
-      String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), model.getCurrentCustomer().getUsername(), MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
-      if (state.equals(DatabaseConnection.SUCCESS)){
-        Alert alert=new Alert(Alert.AlertType.INFORMATION,"Successfully added a new reservation",
-            ButtonType.OK);
+      String state = model.addReservation(
+          Integer.parseInt(hiddenFieldRoomNo.getValue()),
+          model.getCurrentCustomer().getUsername(),
+          MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),
+          MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
+      if (state.equals(DatabaseConnection.SUCCESS))
+      {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,
+            "Successfully added a new reservation", ButtonType.OK);
         alert.setTitle("Success");
         alert.setHeaderText(null);
         alert.showAndWait();
         return true;
       }
-      if (state.equals(DatabaseConnection.ERROR)){
-        Alert alert=new Alert(Alert.AlertType.ERROR,"Error occurred",ButtonType.OK);
+      if (state.equals(DatabaseConnection.ERROR))
+      {
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Error occurred",
+            ButtonType.OK);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.showAndWait();
@@ -257,7 +289,8 @@ public void bindLastName(StringProperty property){
     }
     catch (NumberFormatException e)
     {
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Please select a room to reserve",ButtonType.OK);
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "Please select a room to reserve", ButtonType.OK);
       alert.setTitle("Error");
       alert.setHeaderText(null);
       alert.showAndWait();
@@ -273,43 +306,53 @@ public void bindLastName(StringProperty property){
     return false;
   }
 
-  public void bindHiddenText(StringProperty property){
+  public void bindHiddenText(StringProperty property)
+  {
     property.bindBidirectional(hiddenFieldRoomNo);
   }
 
-  public void bindFromDateNewReservation(ObjectProperty<LocalDate> property){
+  public void bindFromDateNewReservation(ObjectProperty<LocalDate> property)
+  {
     property.bindBidirectional(fromDateNewReservation);
   }
 
-  public void bindToDateNewReservation(ObjectProperty<LocalDate> property){
+  public void bindToDateNewReservation(ObjectProperty<LocalDate> property)
+  {
     property.bindBidirectional(toDateNewReservation);
   }
 
-  public void bindReserveKitchen(BooleanProperty property){
+  public void bindReserveKitchen(BooleanProperty property)
+  {
     property.bindBidirectional(reserveKitchen);
   }
 
-  public void bindReserveBalcony(BooleanProperty property){
+  public void bindReserveBalcony(BooleanProperty property)
+  {
     property.bindBidirectional(reserveBalcony);
   }
 
-  public void bindReserveInternet(BooleanProperty property){
+  public void bindReserveInternet(BooleanProperty property)
+  {
     property.bindBidirectional(reserveInternet);
   }
 
-  public void bindReserveBathroom(BooleanProperty property){
+  public void bindReserveBathroom(BooleanProperty property)
+  {
     property.bindBidirectional(reserveBathroom);
   }
 
-  public void bindReservePrice(ObjectProperty<Integer> property){
+  public void bindReservePrice(ObjectProperty<Integer> property)
+  {
     property.bindBidirectional(reservePricePerNight);
   }
 
-  public void bindReserveRoomNo(StringProperty property){
+  public void bindReserveRoomNo(StringProperty property)
+  {
     property.bindBidirectional(reserveRoomNo);
   }
 
-  public void bindReserveNoBeds(StringProperty property){
+  public void bindReserveNoBeds(StringProperty property)
+  {
     property.bindBidirectional(reserveNoBeds);
   }
 
@@ -357,24 +400,32 @@ public void bindLastName(StringProperty property){
     }
     ObservableList<Room> roomObservableList;
 
-    if (toDateNewReservation.getValue()!=null&&fromDateNewReservation.getValue()!=null){
-      if(MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()))){
-        Alert alert=new Alert(Alert.AlertType.ERROR,"The finish date is before from date",ButtonType.OK);
+    if (toDateNewReservation.getValue() != null
+        && fromDateNewReservation.getValue() != null)
+    {
+      if (MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(
+          MyDate.LocalDateToMyDate(fromDateNewReservation.getValue())))
+      {
+        Alert alert = new Alert(Alert.AlertType.ERROR,
+            "The finish date is before from date", ButtonType.OK);
         alert.setHeaderText(null);
         alert.setTitle("Error");
         alert.showAndWait();
         return;
       }
-      roomObservableList = FXCollections.observableList(model.getFilteredRoom(MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),MyDate.LocalDateToMyDate(toDateNewReservation.getValue()),temp));
+      roomObservableList = FXCollections.observableList(model.getFilteredRoom(
+          MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),
+          MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), temp));
     }
     else
-      roomObservableList = FXCollections.observableList(model.getFilteredRoom(null,null,temp));
+      roomObservableList = FXCollections.observableList(
+          model.getFilteredRoom(null, null, temp));
     newReservations.set(roomObservableList);
   }
 
   public String cancelReservation(int roomNo, String username, MyDate fromDate)
       throws RemoteException
   {
-    return model.deleteReservation(roomNo,username,fromDate);
+    return model.deleteReservation(roomNo, username, fromDate);
   }
 }

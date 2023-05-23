@@ -48,5 +48,7 @@ public class AddReviewController
   {
     viewModel.addReview();
     viewModel.logOut();
+    viewHandler.openView(SceneNames.CustomerHome);
+
   }
 }
