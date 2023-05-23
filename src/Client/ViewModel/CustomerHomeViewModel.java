@@ -126,6 +126,7 @@ public void bindLastName(StringProperty property){
           }
           catch (Exception e)
           {
+            e.printStackTrace();
             Alert error = new Alert(Alert.AlertType.ERROR);
             error.setHeaderText("Something went wrong");
             error.setContentText("Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");

@@ -46,6 +46,7 @@ public class CustomerHomeController
   private ViewHandler viewHandler;
   private CustomerHomeViewModel viewModel;
 
+
   public void init(ViewHandler viewHandler, CustomerHomeViewModel viewModel,
       Region root)
   {
@@ -163,6 +164,13 @@ public class CustomerHomeController
   {
     viewModel.saveReservation(myReservations.getSelectionModel().getSelectedItem());
 
+  }
+
+  public SingleSelectionModel<Tab> selection(int i)
+  {
+    SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+    selectionModel.select(i);
+    return selectionModel;
   }
 
 }

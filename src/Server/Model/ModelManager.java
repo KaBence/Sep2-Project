@@ -16,10 +16,13 @@ import Server.Utility.DataBase.Review.ReviewData;
 import Server.Utility.DataBase.Review.ReviewDataImplementation;
 import Server.Utility.DataBase.Room.RoomData;
 import Server.Utility.DataBase.Room.RoomDataImplementation;
+import Server.Utility.Log.FileLog;
+import Server.Utility.Log.Types;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.rmi.RemoteException;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ModelManager implements Model
@@ -31,6 +34,18 @@ public class ModelManager implements Model
   private ReservationData reservationData;
   private ArrayList<Person> loggedInUsers;
   private PropertyChangeSupport support;
+
+  private static String homePath = System.getProperty("user.home");
+  private static File downloads = new File(homePath, "Downloads/SepLogs");
+
+
+  private FileLog logInLogOut=FileLog.getInstance(new File(downloads,"LogInOut.txt"));
+  private FileLog customerLog=FileLog.getInstance(new File(downloads,"CustomerLog.txt"));
+  private FileLog employeeLog=FileLog.getInstance(new File(downloads,"EmployeeLog.txt"));
+  private FileLog reservationLog=FileLog.getInstance(new File(downloads,"ReservationLog.txt"));
+  private FileLog reviewLog=FileLog.getInstance(new File(downloads,"ReviewLog.txt"));
+  private FileLog roomLog=FileLog.getInstance(new File(downloads,"RoomLog.txt"));
+
 
   public ModelManager()
   {
@@ -48,6 +63,25 @@ public class ModelManager implements Model
     support.addPropertyChangeListener(listener);
   }
 
+  public void log(Types type,String message)
+  {
+    try
+    {
+      switch (type){
+        case logInOut -> logInLogOut.log(message);
+        case Review -> reviewLog.log(message);
+        case Room -> roomLog.log(message);
+        case Customer -> customerLog.log(message);
+        case Employee -> employeeLog.log(message);
+        case Reservation -> reservationLog.log(message);
+      }
+      support.firePropertyChange("log",null,message);
+    }
+    catch (IOException e){
+      e.printStackTrace();
+    }
+  }
+
   @Override public Person logIn(Person user)
   {
     ArrayList<Person> list = getAllRegisteredUsers();
@@ -57,6 +91,7 @@ public class ModelManager implements Model
       {
         list.get(i).logIn();
         loggedInUsers.add(list.get(i));
+        log(Types.logInOut,list.get(i)+" is logged in");
         return list.get(i);
       }
     }
@@ -72,6 +107,7 @@ public class ModelManager implements Model
       {
         list.get(i).logOut();
         loggedInUsers.remove(user);
+        log(Types.logInOut,list.get(i)+" is logged out");
         return list.get(i);
       }
     }
@@ -98,6 +134,7 @@ public class ModelManager implements Model
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony)
   {
+    log(Types.Room,roomNumber+" is added to the system");
     return roomData.addNewRoom(roomNumber, numberOfBeds, size, price,
         orientation, internet, bathroom, kitchen, balcony, "Free");
   }
@@ -105,6 +142,7 @@ public class ModelManager implements Model
   @Override public String addReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, boolean CheckedIn)
   {
+    log(Types.Reservation,roomNumber+" ->"+ fromDate+" / "+toDate+" is added");
     return reservationData.addNewReservation(roomNumber, username, fromDate,
         toDate, CheckedIn);
   }
@@ -112,6 +150,7 @@ public class ModelManager implements Model
   @Override public String addEmployee(String firstName, String lastName,
       String position, String phoneNo, String password)
   {
+    log(Types.Employee,firstName+" "+lastName+" is added to the system");
     return employeeData.AddEmployee(password, firstName, lastName, phoneNo,
         position);
   }
@@ -119,6 +158,7 @@ public class ModelManager implements Model
   @Override public String addReview(String username, int roomNO,
       MyDate fromDate, MyDate postedDate, String comment)
   {
+    log(Types.Review,roomNO+" -> "+fromDate+" / "+postedDate+" added");
     return reviewData.addReview(username, roomNO, fromDate, postedDate, comment) ;
   }
 
@@ -126,6 +166,7 @@ public class ModelManager implements Model
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony)
   {
+    log(Types.Room,roomNumber+" has been updated");
     return roomData.updateRoom(roomNumber, numberOfBeds, size, price,
         orientation, internet, bathroom, kitchen, balcony);
   }
@@ -133,35 +174,42 @@ public class ModelManager implements Model
   @Override public String updateCustomer(String username, String firstName,
       String lastName, String phoneNumber, String payment)
   {
+    log(Types.Customer,firstName+" "+lastName+" has been updated");
     return customerData.editCustomer(username, firstName, lastName, phoneNumber,
         payment);
   }
 
   @Override public String updateEmployee(String username, String firstName,
-      String lastName, String position, String phoneNo) throws RemoteException
+      String lastName, String position, String phoneNo)
   {
+    log(Types.Employee,firstName+" "+lastName+" has been updated");
     return employeeData.editEmployee(username, firstName, lastName, position,
         phoneNo);
   }
 
   @Override public String deleteRoom(int roomNumber)
   {
+    log(Types.Room,roomNumber+" has been deleted from the database");
     return roomData.deleteRoom(roomNumber);
   }
 
   @Override public String deleteSelectedCustomer(String username)
+
   {
+    log(Types.Customer,username+" has been deleted");
     return customerData.deleteCustomer(username);
   }
 
   @Override public String deleteEmployee(String userID)
   {
+    log(Types.Employee,userID+" has been deleted");
     return employeeData.deleteEmployee(userID);
   }
 
   @Override public String deleteReservation(int roomNo, String username,
       MyDate fromDate)
   {
+    log(Types.Reservation,roomNo+" ->"+ fromDate+" has been deleted");
     return reservationData.deleteReservation(roomNo, username, fromDate);
   }
 
@@ -302,25 +350,30 @@ public class ModelManager implements Model
       MyDate fromDate, MyDate toDate, int oldRoomNo, String oldUsername,
       MyDate oldFromDate)
   {
+    log(Types.Reservation,roomNumber+" -> "+fromDate+" "+toDate+" has been updated");
     return reservationData.updateReservation(roomNumber, username, fromDate,
         toDate, oldRoomNo, oldUsername, oldFromDate);
   }
 
   @Override public String addCustomer(String username, String password,
       String firstName, String lastName, String phoneNo, String paymentInfo)
+
   {
+    log(Types.Customer,firstName+" "+lastName+" has been added");
     return customerData.addCustomer(username,password,firstName,lastName,phoneNo,paymentInfo);
   }
 
   @Override public String checkIn(int roomNumber, String username,
       MyDate fromDate)
   {
+    log(Types.Reservation,roomNumber+" -> "+username+" checked in");
     return reservationData.checkIn(roomNumber, username, fromDate);
   }
 
   @Override public String checkOut(int roomNumber, String username,
       MyDate fromDate)
   {
+    log(Types.Reservation,roomNumber+" -> "+username+" checked out");
     return reservationData.checkOut(roomNumber, username, fromDate);
   }
 }

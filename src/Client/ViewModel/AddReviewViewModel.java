@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -53,4 +54,24 @@ public class AddReviewViewModel
     }
     return false;
     }
+
+  public boolean logOut()
+  {
+    try
+    {
+      model.logOut();
+      model.setGuest();
+      return true;
+    }
+    catch (RemoteException e)
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setHeaderText("Logging out error");
+      alert.setContentText("Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      alert.showAndWait();
+      return false;
+    }
   }
+  }
+
+
