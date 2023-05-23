@@ -28,6 +28,7 @@ public interface Model
   String  addReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate, boolean CheckedIn) throws RemoteException;
   String  addEmployee(String firstName, String lastName, String position,
       String phoneNo, String password) throws RemoteException;
+  Employee getNewEmployee() throws RemoteException;
   String addReview(String username, int roomNO, MyDate fromDate, MyDate postedDate, String comment) throws RemoteException;
   ArrayList<Room> getAllRooms() throws RemoteException;
   ArrayList<Review> getAllReviews() throws RemoteException;

@@ -147,6 +147,11 @@ public class ModelManager implements Model
         toDate, CheckedIn);
   }
 
+  @Override public Employee getNewEmployee()
+  {
+    return employeeData.getNewEmployee();
+  }
+
   @Override public String addEmployee(String firstName, String lastName,
       String position, String phoneNo, String password)
   {

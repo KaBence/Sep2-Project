@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public interface EmployeeData
 {
+  Employee getNewEmployee();
   String AddEmployee(String password,String firstName, String lastName, String phoneNumber, String position);
   String editEmployee(String username, String firstName, String lastName, String phoneNumber, String position);
   String deleteEmployee(String username);

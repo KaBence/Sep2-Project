@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class EmployeeDataImplementation implements EmployeeData
 {
+  private Employee newEmp;
   public EmployeeDataImplementation()
   {
     try
@@ -27,11 +28,17 @@ public class EmployeeDataImplementation implements EmployeeData
         "postgres", "password");
   }
 
+  @Override public Employee getNewEmployee()
+  {
+    return newEmp;
+  }
+
   @Override public String AddEmployee(String password,
       String firstName, String lastName, String phoneNumber, String position)
   {
     Employee newEmployee = new Employee(firstName,lastName,position,phoneNumber,password);
     String username = newEmployee.getUsername();
+    newEmp = newEmployee;
     try (Connection connection = getConnection())
     {
       PreparedStatement psUser = connection.prepareStatement(

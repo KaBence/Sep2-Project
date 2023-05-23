@@ -96,8 +96,9 @@ public class AdminViewModel
     }
     String state= model.addEmployee(firstName.getValue(), lastName.getValue(), position.getValue(), phoneNo.getValue(), password.getValue());
     if (state.equals(DatabaseConnection.SUCCESS)){
-      Alert alert=new Alert(Alert.AlertType.INFORMATION,"Employee added successfully",ButtonType.OK);
-      alert.setHeaderText(null);
+      Alert alert=new Alert(Alert.AlertType.INFORMATION);
+      alert.setHeaderText("Employee added successfully");
+      alert.setContentText("New Employee login: "+model.getNewEmployee().getUsername()+"\nPassword: "+password.getValue());
       alert.setTitle("Success");
       alert.showAndWait();
       return true;
