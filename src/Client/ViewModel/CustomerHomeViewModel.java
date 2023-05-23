@@ -263,6 +263,8 @@ public class CustomerHomeViewModel implements PropertyChangeListener
   {
     try
     {
+      if (fromDateNewReservation.getValue()==null||toDateNewReservation.getValue()==null)
+        throw new IllegalDateException(8);
       String state = model.addReservation(
           Integer.parseInt(hiddenFieldRoomNo.getValue()),
           model.getCurrentCustomer().getUsername(),
