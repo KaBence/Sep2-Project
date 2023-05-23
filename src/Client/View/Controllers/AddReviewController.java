@@ -47,6 +47,7 @@ public class AddReviewController
   @FXML void create() throws RemoteException
   {
     viewModel.addReview();
+    viewModel.logOut();
     viewHandler.openView(SceneNames.CustomerHome);
   }
 }
