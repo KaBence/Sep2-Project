@@ -5,6 +5,8 @@ import Server.Model.Hotel.Users.Customer;
 import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import java.rmi.RemoteException;
 
@@ -44,9 +46,32 @@ public class EditCustomerViewModel
     property.bindBidirectional(payment);
   }
 
-  public String delete() throws RemoteException
+  public boolean delete() throws RemoteException
   {
-    return  model.deleteSelectedCustomer(username.getValue());
+    Alert alert = new Alert(Alert.AlertType.WARNING,
+        "Do you really want to delete this customer from the system?",
+        ButtonType.NO, ButtonType.YES);
+    alert.setTitle("Warning");
+    alert.setHeaderText(null);
+    alert.showAndWait();
+    if (alert.getResult().equals(ButtonType.NO))
+      return false;
+
+    String state=model.deleteSelectedCustomer(username.getValue());
+    if (state.equals(DatabaseConnection.SUCCESS)){
+      Alert success = new Alert(Alert.AlertType.INFORMATION);
+      success.setHeaderText("Success");
+      success.setHeaderText("The customer has been successfully removed");
+      success.showAndWait();
+      return true;
+    }
+    else {
+      Alert error = new Alert(Alert.AlertType.ERROR);
+      error.setHeaderText("Error");
+      error.setHeaderText("You cannot delete this customer right now");
+      error.showAndWait();
+      return false;
+    }
   }
   public void fill(){
     Customer temp= model.getSelectedCustomer();
@@ -56,13 +81,31 @@ public class EditCustomerViewModel
     phoneNo.set(temp.getPhoneNo());
     payment.set(temp.getPaymentInfo());
   }
-  public String save() throws RemoteException{
+  public boolean save() throws RemoteException{
+
     try{
-      return model.updateCustomer(username.getValue(),firstName.getValue(),
-          lastName.getValue(), phoneNo.getValue(), payment.getValue());
+      String state=model.updateCustomer(username.getValue(),firstName.getValue(), lastName.getValue(), phoneNo.getValue(), payment.getValue());
+      if (state.equals(DatabaseConnection.SUCCESS)){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful", ButtonType.OK);
+        alert.setHeaderText(null);
+        alert.setTitle("Success");
+        alert.showAndWait();
+        return true;
+      }
+      else {
+        Alert error = new Alert(Alert.AlertType.ERROR);
+        error.setHeaderText("Error");
+        error.setHeaderText("You cannot edit this customer right now");
+        error.showAndWait();
+        return false;
+      }
     }
     catch (Exception e){
-      return DatabaseConnection.MANDATORY;
+      Alert mandatory = new Alert(Alert.AlertType.ERROR);
+      mandatory.setHeaderText("Error");
+      mandatory.setHeaderText("Mandatory fields can not be empty");
+      mandatory.showAndWait();
+      return false;
     }
   }
 }

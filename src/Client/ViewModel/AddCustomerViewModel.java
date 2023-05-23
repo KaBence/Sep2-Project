@@ -65,8 +65,14 @@ public class AddCustomerViewModel
   {
     try
     {
-      if(repeatPassword.getValue().equals(password.getValue()))
-      {
+      if (!(password.getValue().equals(repeatPassword.getValue()))){
+        Alert alert = new Alert(Alert.AlertType.ERROR,
+            "Passwords are not identical", ButtonType.OK);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.showAndWait();
+        return false;
+      }
         String temp = model.addCustomer(username.getValue(), password.getValue(),
             firstName.getValue(), lastName.getValue(), phoneNo.getValue(),
             payment.getValue());
@@ -99,25 +105,6 @@ public class AddCustomerViewModel
           alert.showAndWait();
           return false;
         }
-      }
-      if (repeatPassword.equals(""))
-      {
-        Alert alert = new Alert(Alert.AlertType.ERROR,
-            "Fill in the Repeat Password field, please", ButtonType.OK);
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.showAndWait();
-        return false;
-      }
-      else if (!repeatPassword.equals(password))
-      {
-        Alert alert = new Alert(Alert.AlertType.ERROR,
-            "Passwords are not identical", ButtonType.OK);
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.showAndWait();
-        return false;
-      }
     }
     catch (NumberFormatException | NullPointerException e)
     {
