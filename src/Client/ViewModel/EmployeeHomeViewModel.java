@@ -590,6 +590,8 @@ public void bindHiddenText(StringProperty property){
   {
     try
     {
+      if (fromDateNewReservation.getValue()==null||toDateNewReservation.getValue()==null)
+        throw new IllegalDateException(8);
       String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), model.getCurrentCustomer().getUsername(), MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
       if (state.equals(DatabaseConnection.SUCCESS)){
         Alert alert=new Alert(Alert.AlertType.INFORMATION,"Successfully added a new reservation",ButtonType.OK);
