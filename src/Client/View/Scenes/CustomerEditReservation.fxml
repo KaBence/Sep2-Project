@@ -34,8 +34,8 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="roomNo" layoutX="133.0" layoutY="82.0" />
-      <TextField fx:id="username" layoutX="133.0" layoutY="162.0" />
+      <TextField fx:id="roomNo" editable="false" layoutX="133.0" layoutY="82.0" />
+      <TextField fx:id="username" editable="false" layoutX="133.0" layoutY="162.0" />
       <Button layoutX="481.0" layoutY="331.0" mnemonicParsing="false" onAction="#save" text="Save">
          <font>
             <Font size="18.0" />

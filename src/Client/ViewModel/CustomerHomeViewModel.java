@@ -191,6 +191,7 @@ public class CustomerHomeViewModel implements PropertyChangeListener
     reservePricePerNight.set(0);
     firstName.set(model.getCurrentCustomer().getFirstName());
     lastName.set(model.getCurrentCustomer().getLastName());
+    saveReservation(null);
 
     ArrayList<Room> rooms;
     ArrayList<Review> reviews;
@@ -234,10 +235,19 @@ public class CustomerHomeViewModel implements PropertyChangeListener
 
   public boolean getSelectedReservation()
   {
+
     if (model.getSelectedReservation()==null)
     {
       Alert alert = new Alert(Alert.AlertType.ERROR,
           "Please select a reservation", ButtonType.OK);
+      alert.setTitle("Error");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+      return false;
+    }
+    if(MyDate.today().isBefore(model.getSelectedReservation().getToDate())){
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "You cannot leave a review before you had enought time to enjoy your stay!!! Do finifh it pls", ButtonType.OK);
       alert.setTitle("Error");
       alert.setHeaderText(null);
       alert.showAndWait();

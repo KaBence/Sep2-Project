@@ -47,35 +47,41 @@ public class AddReviewViewModel
   {
     try
     {
-      String state = model.addReview(model.getCurrentCustomer().getUsername(),
-          model.getSelectedReservation().getRoomNumber(),
-          model.getSelectedReservation().getFromDate(), MyDate.today(),
-          reviews.getValue());
-      if (state.equals(DatabaseConnection.SUCCESS))
-      {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION,
-            "Successfully added a new review", ButtonType.OK);
-        alert.setTitle("Success");
-        alert.setHeaderText(null);
-        alert.showAndWait();
 
-        return true;
-      }
-      if(state.equals(DatabaseConnection.ERROR)){
-        Alert alert=new Alert(Alert.AlertType.ERROR,"Please select a reservation for your review",ButtonType.OK);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.showAndWait();
-      }
+        String state = model.addReview(model.getCurrentCustomer().getUsername(),
+            model.getSelectedReservation().getRoomNumber(),
+            model.getSelectedReservation().getFromDate(), MyDate.today(),
+            reviews.getValue());
+
+        if (state.equals(DatabaseConnection.SUCCESS))
+        {
+          Alert alert = new Alert(Alert.AlertType.INFORMATION,
+              "Successfully added a new review", ButtonType.OK);
+          alert.setTitle("Success");
+          alert.setHeaderText(null);
+          alert.showAndWait();
+
+          return true;
+        }
+        if (state.equals(DatabaseConnection.ERROR))
+        {
+          Alert alert = new Alert(Alert.AlertType.ERROR,
+              "Please select a reservation for your review", ButtonType.OK);
+          alert.setTitle("Error");
+          alert.setHeaderText(null);
+          alert.showAndWait();
+        }
+
+
+
+
     }
     catch (NumberFormatException e)
     {
 
-    }
-    return false;
+    } return false;
+
   }
-
-
 
   public boolean logOut()
   {
@@ -89,11 +95,12 @@ public class AddReviewViewModel
     {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setHeaderText("Logging out error");
-      alert.setContentText("Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      alert.setContentText(
+          "Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
       alert.showAndWait();
       return false;
     }
   }
-  }
+}
 
 
