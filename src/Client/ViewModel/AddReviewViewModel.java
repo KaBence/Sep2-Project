@@ -61,13 +61,16 @@ public class AddReviewViewModel
 
         return true;
       }
+      if(state.equals(DatabaseConnection.ERROR)){
+        Alert alert=new Alert(Alert.AlertType.ERROR,"Please select a reservation for your review",ButtonType.OK);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+      }
     }
     catch (NumberFormatException e)
     {
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Please select a reservation for your review",ButtonType.OK);
-      alert.setTitle("Error");
-      alert.setHeaderText(null);
-      alert.showAndWait();
+
     }
     return false;
   }

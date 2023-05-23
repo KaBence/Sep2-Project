@@ -138,11 +138,9 @@ public class CustomerHomeController
 
   @FXML void review()
   {
-    if (!myReservations.getSelectionModel().isEmpty())
-    {
+    if (viewModel.getSelectedReservation()){
       viewHandler.openView(SceneNames.Review);
     }
-
   }
 
   @FXML void onLogin()
@@ -168,11 +166,10 @@ public class CustomerHomeController
 
   @FXML void tableClickReservation()
   {
-    if (roomListViewNewReservation.getSelectionModel().getSelectedItem()
+    if (myReservations.getSelectionModel().getSelectedItem()
         != null)
     {
-      viewModel.saveReservation(
-          myReservations.getSelectionModel().getSelectedItem());
+      viewModel.saveReservation(myReservations.getSelectionModel().getSelectedItem());
     }
   }
 

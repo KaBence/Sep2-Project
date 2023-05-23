@@ -229,15 +229,21 @@ public class CustomerHomeViewModel implements PropertyChangeListener
 
   public void saveReservation(Reservation reservation)
   {
-
     model.saveSelectedReservation(reservation);
-    if(reservation==null){
-      Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a reservation",
-          ButtonType.OK);
+  }
+
+  public boolean getSelectedReservation()
+  {
+    if (model.getSelectedReservation()==null)
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "Please select a reservation", ButtonType.OK);
       alert.setTitle("Error");
       alert.setHeaderText(null);
       alert.showAndWait();
+      return false;
     }
+    return true;
   }
 
   public void fillHiddenField()
@@ -420,6 +426,6 @@ public class CustomerHomeViewModel implements PropertyChangeListener
   public String cancelReservation(int roomNo, String username, MyDate fromDate)
       throws RemoteException
   {
-    return model.deleteReservation(roomNo,username,fromDate);
+    return model.deleteReservation(roomNo, username, fromDate);
   }
 }
