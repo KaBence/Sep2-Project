@@ -48,6 +48,8 @@ public class CustomerEditReservationController
   @FXML void save() throws RemoteException
   {
     if (viewModel.save())
-      viewHandler.openView(SceneNames.CustomerHomeNewReservations);
+      viewModel.logOut();
+      viewHandler.openView(SceneNames.CustomerHome);
+
   }
 }
