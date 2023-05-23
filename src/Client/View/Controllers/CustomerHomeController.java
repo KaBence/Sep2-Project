@@ -22,7 +22,8 @@ import java.util.ArrayList;
 
 public class CustomerHomeController
 {
-  @FXML TextField username, password;
+  @FXML TextField username;
+  @FXML Label firstName, lastName;
 
   @FXML DatePicker toDateNewReservation;
   @FXML DatePicker fromDateNewReservation;
@@ -32,23 +33,25 @@ public class CustomerHomeController
   @FXML TextField reserveRoomNr;
   @FXML TextField hiddenFieldRoomNo;
 
-
   @FXML ListView<Review> listReviews;
   @FXML PasswordField passwordField;
 
   @FXML ListView<Reservation> myReservations;
   @FXML ListView<Room> roomListViewNewReservation;
   @FXML Button logout, review, cancel, edit;
-  @FXML AnchorPane loggingIn,myProfileAnchorPane;
+  @FXML AnchorPane loggingIn, myProfileAnchorPane;
   @FXML TabPane tabPane;
   @FXML Tab newReservation, myReservation, allReviews;
   private Region root;
   private ViewHandler viewHandler;
   private CustomerHomeViewModel viewModel;
-  public void init(ViewHandler viewHandler, CustomerHomeViewModel viewModel, Region root){
-    this.viewHandler=viewHandler;
-    this.viewModel=viewModel;
-    this.root=root;
+
+  public void init(ViewHandler viewHandler, CustomerHomeViewModel viewModel,
+      Region root)
+  {
+    this.viewHandler = viewHandler;
+    this.viewModel = viewModel;
+    this.root = root;
     myProfileAnchorPane.setOpacity(0.0);
     loggingIn.setOpacity(1.0);
 
@@ -57,7 +60,8 @@ public class CustomerHomeController
     this.viewModel.bindPassword(passwordField.textProperty());
     this.viewModel.bindReviews(listReviews.itemsProperty());
 
-    viewModel.bindFromDateNewReservation(fromDateNewReservation.valueProperty());
+    viewModel.bindFromDateNewReservation(
+        fromDateNewReservation.valueProperty());
     viewModel.bindReserveBalcony(reserveBalcony.selectedProperty());
     viewModel.bindToDateNewReservation(toDateNewReservation.valueProperty());
     viewModel.bindReserveInternet(reserveInternet.selectedProperty());
@@ -67,10 +71,11 @@ public class CustomerHomeController
     viewModel.bindHiddenText(hiddenFieldRoomNo.textProperty());
     viewModel.bindReserveRoomNo(reserveRoomNr.textProperty());
     viewModel.bindReserveNoBeds(reserveNrOfBeds.textProperty());
+
     this.viewModel.bindMyReservation(myReservations.itemsProperty());
-
+    viewModel.bindFirstName(firstName.textProperty());
+    viewModel.bindLastName(lastName.textProperty());
   }
-
 
   public Region getRoot()
   {
@@ -83,7 +88,8 @@ public class CustomerHomeController
     viewModel.update();
   }
 
-  public void initialize(){
+  public void initialize()
+  {
     ArrayList<Integer> prices = new ArrayList<>();
     prices.add(0);
     prices.add(200);
@@ -99,13 +105,15 @@ public class CustomerHomeController
     onLogOut();
   }
 
-
   @FXML void createNewReservation() throws RemoteException
   {
     viewModel.addReservation();
   }
-  @FXML void tableClickNewReservation(){
-    viewModel.saveRoom(roomListViewNewReservation.getSelectionModel().getSelectedItem());
+
+  @FXML void tableClickNewReservation()
+  {
+    viewModel.saveRoom(
+        roomListViewNewReservation.getSelectionModel().getSelectedItem());
     viewModel.fillHiddenField();
   }
 
@@ -114,10 +122,12 @@ public class CustomerHomeController
     viewModel.filterNewReservation();
   }
 
-  @FXML void clearDates(){
+  @FXML void clearDates()
+  {
     fromDateNewReservation.setValue(null);
     toDateNewReservation.setValue(null);
   }
+
   @FXML void register()
   {
     viewHandler.openView(SceneNames.AddCustomer);
@@ -127,16 +137,17 @@ public class CustomerHomeController
   {
     viewHandler.openView(SceneNames.Review);
   }
+
   @FXML void onLogin()
   {
     Boolean x = viewModel.logIn();
     if (x)
     {
       myProfileAnchorPane.setOpacity(1.0);
-      loggingIn.setOpacity(0.0);
+      loggingIn.setLayoutY(400.00);
     }
-      username.clear();
-      passwordField.clear();
+    username.clear();
+    passwordField.clear();
   }
 
   @FXML public void onLogOut()
@@ -144,11 +155,13 @@ public class CustomerHomeController
     if (viewModel.logOut())
     {
       myProfileAnchorPane.setOpacity(0.0);
-      loggingIn.setOpacity(1.0);
+      loggingIn.setLayoutY(00.00);
     }
   }
 
-  @FXML void tableClickReservation(){
+  @FXML void tableClickReservation()
+  {
+    viewModel.saveReservation(myReservations.getSelectionModel().getSelectedItem());
 
   }
 

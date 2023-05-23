@@ -44,25 +44,19 @@ public class EmployeeLoginController
 
   @FXML void login() throws RemoteException
   {
-    String login = viewModel.logIn(employeeIdField.getText(),passwordField.getText());
-    if (login.equals("admin")){
-      viewHandler.openView(SceneNames.Admin);
-      return;
-    }
-    if (login.equals(DatabaseConnection.SUCCESS))
+    if (viewModel.logIn(employeeIdField.getText(),passwordField.getText()))
     {
-      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+      if (employeeIdField.getText().equals("admin")&&passwordField.getText().equals("admin"))
+      {
+        viewHandler.openView(SceneNames.Admin);
+      }
+      else
+      {
+        viewHandler.openView(SceneNames.EmployeeHomeReservations);
+      }
     }
-    else if (login.equals(DatabaseConnection.PASSWORD))
-    {
-      Alert x = new Alert(Alert.AlertType.ERROR,"Invalid password");
-      x.showAndWait();
-    }
-    else
-    {
-      Alert x = new Alert(Alert.AlertType.ERROR,"User: "+employeeIdField.getText()+", does not exist");
-      x.showAndWait();
-    }
+    employeeIdField.clear();
+    passwordField.clear();
   }
 
   @FXML void Back()
