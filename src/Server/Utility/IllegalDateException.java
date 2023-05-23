@@ -21,4 +21,9 @@ public class IllegalDateException extends RuntimeException
       default -> throw new IllegalStateException("Unexpected value: " + check);
     };
   }
+
+  public int getCheck()
+  {
+    return check;
+  }
 }

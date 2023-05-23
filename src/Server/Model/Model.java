@@ -67,7 +67,7 @@ public interface Model
 
   String checkIn(int roomNumber, String username, MyDate fromDate);
   String checkOut(int roomNumber, String username, MyDate fromDate);
-  String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate);
+  String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate,MyDate oldToDate);
   String addCustomer(String username, String password, String firstName, String lastName, String phoneNo, String paymentInfo);
 
 }

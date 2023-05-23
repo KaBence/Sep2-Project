@@ -65,7 +65,7 @@ public interface SharedInterface extends Remote
       throws RemoteException;
   String checkOut(int roomNumber, String username, MyDate fromDate)
       throws RemoteException;
-  String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate) throws RemoteException;
+  String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate,MyDate oldToDate) throws RemoteException;
 
   String addCustomer(String username, String password,
       String firstName, String lastName, String phoneNo, String paymentInfo) throws RemoteException;
