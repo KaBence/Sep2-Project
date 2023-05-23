@@ -1,5 +1,6 @@
 package Client.Model;
 
+import Client.View.SceneNames;
 import Server.Model.*;
 import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Users.Customer;
@@ -19,6 +20,8 @@ public interface Model
   Person setGuest();
   Person logIn(Person user) throws RemoteException;
   Person logOut() throws RemoteException;
+  void setPreviousView(boolean b);
+  boolean getPreviousView();
   String addRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
       boolean balcony) throws RemoteException;

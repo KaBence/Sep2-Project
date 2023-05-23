@@ -17,7 +17,6 @@ import java.rmi.RemoteException;
 public class StartClient extends Application
 {
   private Model model;
-
   @Override public void start(Stage primaryStage) throws Exception
   {
     model=new ModelManager();

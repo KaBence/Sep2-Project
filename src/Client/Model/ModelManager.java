@@ -1,6 +1,7 @@
 package Client.Model;
 
 import Client.Mediator.Client;
+import Client.View.SceneNames;
 import Server.Model.*;
 import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Users.Customer;
@@ -29,6 +30,7 @@ public class ModelManager implements Model,PropertyChangeListener
   private Employee selectedEmployee;
   private Reservation selectedReservation;
   private Person current;
+  private boolean previousView;
   private ArrayList<Person> loggedUsers;
 
   private PropertyChangeSupport support;
@@ -39,6 +41,7 @@ public class ModelManager implements Model,PropertyChangeListener
     client.addPropertyChangeListener(this);
     support=new PropertyChangeSupport(this);
     loggedUsers = new ArrayList<>();
+    previousView = true;
   }
 
   public ModelManager() throws IOException, NotBoundException
@@ -49,6 +52,7 @@ public class ModelManager implements Model,PropertyChangeListener
     client.addPropertyChangeListener(this);
     support=new PropertyChangeSupport(this);
     loggedUsers = new ArrayList<>();
+    previousView = true;
   }
 
   @Override public boolean getCurrent()
@@ -134,6 +138,16 @@ public class ModelManager implements Model,PropertyChangeListener
       throws RemoteException
   {
     return client.getFilteredCustomer(attr);
+  }
+
+  @Override public void setPreviousView(boolean b)
+  {
+    previousView = b;
+  }
+
+  @Override public boolean getPreviousView()
+  {
+    return previousView;
   }
 
   @Override public ArrayList<Customer> getAllCustomers() throws RemoteException

@@ -31,6 +31,11 @@ public class AddReviewViewModel
 
   }
 
+  public void previousScene(boolean b)
+  {
+    model.setPreviousView(b);
+  }
+
   /*public void update(){
     ArrayList<Review> reviewsList;
     try{
@@ -58,7 +63,6 @@ public class AddReviewViewModel
         alert.setTitle("Success");
         alert.setHeaderText(null);
         alert.showAndWait();
-
         return true;
       }
       if(state.equals(DatabaseConnection.ERROR)){

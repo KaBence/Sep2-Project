@@ -52,9 +52,16 @@ public class CustomerHomeController
     this.viewHandler = viewHandler;
     this.viewModel = viewModel;
     this.root = root;
-    myProfileAnchorPane.setOpacity(0.0);
-    loggingIn.setOpacity(1.0);
-
+    if (viewModel.previousView())
+    {
+      myProfileAnchorPane.setOpacity(0.0);
+      loggingIn.setOpacity(1.0);
+    }
+    else
+    {
+      myProfileAnchorPane.setOpacity(1.0);
+      loggingIn.setLayoutY(400.00);
+    }
     this.viewModel.bindRooms(roomListViewNewReservation.itemsProperty());
     this.viewModel.bindUsername(username.textProperty());
     this.viewModel.bindPassword(passwordField.textProperty());
@@ -145,8 +152,7 @@ public class CustomerHomeController
 
   @FXML void onLogin()
   {
-    Boolean x = viewModel.logIn();
-    if (x)
+    if (viewModel.logIn())
     {
       myProfileAnchorPane.setOpacity(1.0);
       loggingIn.setLayoutY(400.00);

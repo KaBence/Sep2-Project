@@ -4,6 +4,7 @@ import Client.Model.Model;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Room;
+import Server.Model.Hotel.Users.Guest;
 import Server.Model.MyDate;
 import Server.Utility.DataBase.DatabaseConnection;
 import Server.Utility.IllegalDateException;
@@ -118,44 +119,50 @@ public class CustomerHomeViewModel implements PropertyChangeListener
     property.bind(lastName);
   }
 
-  public Boolean logIn()
+  public boolean logIn()
   {
-    for (int i = 0; i < allCustomers.size(); i++)
+    if (model.getCurrentCustomer().equals(new Guest()))
     {
-      if (allCustomers.get(i).getUsername().equals(username.getValue()))
+      for (int i = 0; i < allCustomers.size(); i++)
       {
-        if (allCustomers.get(i).getPassword().equals(password.getValue()))
+        if (allCustomers.get(i).getUsername().equals(username.getValue()))
         {
-          user = allCustomers.get(i);
-          try
+          if (allCustomers.get(i).getPassword().equals(password.getValue()))
           {
-            model.logIn(user);
-            return true;
+            user = allCustomers.get(i);
+            try
+            {
+              model.logIn(user);
+              return true;
+            }
+            catch (Exception e)
+            {
+              Alert error = new Alert(Alert.AlertType.ERROR);
+              error.setHeaderText("Something went wrong");
+              error.setContentText(
+                  "Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+              error.showAndWait();
+              return false;
+            }
           }
-          catch (Exception e)
+          else
           {
-            e.printStackTrace();
-            Alert error = new Alert(Alert.AlertType.ERROR);
-            error.setHeaderText("Something went wrong");
-            error.setContentText(
-                "Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
-            error.showAndWait();
+            Alert invalidPassword = new Alert(Alert.AlertType.ERROR);
+            invalidPassword.setHeaderText("Invalid password try one more time");
+            invalidPassword.showAndWait();
             return false;
           }
         }
-        else
-        {
-          Alert invalidPassword = new Alert(Alert.AlertType.ERROR);
-          invalidPassword.setHeaderText("Invalid password try one more time");
-          invalidPassword.showAndWait();
-          return false;
-        }
       }
+      Alert doesntExist = new Alert(Alert.AlertType.ERROR);
+      doesntExist.setHeaderText("User does not exist.");
+      doesntExist.showAndWait();
+      return false;
     }
-    Alert doesntExist = new Alert(Alert.AlertType.ERROR);
-    doesntExist.setHeaderText("User does not exist.");
-    doesntExist.showAndWait();
-    return false;
+    else
+    {
+      return true;
+    }
   }
 
   public boolean logOut()
@@ -175,6 +182,11 @@ public class CustomerHomeViewModel implements PropertyChangeListener
       alert.showAndWait();
       return false;
     }
+  }
+
+  public boolean previousView()
+  {
+    return model.getPreviousView();
   }
 
   public void update()

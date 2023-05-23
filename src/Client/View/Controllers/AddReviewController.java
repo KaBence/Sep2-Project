@@ -23,8 +23,8 @@ public class AddReviewController
     this.viewHandler = viewHandler;
     this.viewModel = viewModel;
     this.root = root;
-
     viewModel.bindReviews(review.textProperty());
+    viewModel.previousScene(false);
   }
 
   public Region getRoot()
@@ -41,14 +41,11 @@ public class AddReviewController
   @FXML void Home()
   {
     viewHandler.openView(SceneNames.CustomerHomeNewReservations);
-    viewModel.logOut();
   }
 
   @FXML void create() throws RemoteException
   {
     viewModel.addReview();
-    viewModel.logOut();
     viewHandler.openView(SceneNames.CustomerHome);
-
   }
 }
