@@ -42,6 +42,7 @@ public class CustomerEditReservationController
   }
 
   @FXML void cancel(){
+    viewModel.logOut();
     viewHandler.openView(SceneNames.CustomerHomeNewReservations );
   }
 
