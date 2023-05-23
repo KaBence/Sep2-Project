@@ -23,6 +23,7 @@ public class StartClient extends Application
     model=new ModelManager();
     ViewModelFactory viewModelFactory=new ViewModelFactory(model);
     ViewHandler view=new ViewHandler(viewModelFactory);
+    primaryStage.setResizable(false);
     view.start(primaryStage);
 
     //When we close a client a thread stops (client is fully closed)
