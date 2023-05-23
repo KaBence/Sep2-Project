@@ -3,6 +3,8 @@ package Client.View.Controllers;
 import Client.View.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.CustomerEditReservationViewModel;
+import Client.ViewModel.CustomerHomeViewModel;
+import Client.ViewModel.CustomerEditReservationViewModel;
 import Client.ViewModel.EditReservationViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -40,12 +42,12 @@ public class CustomerEditReservationController
   }
 
   @FXML void cancel(){
-    viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    viewHandler.openView(SceneNames.CustomerHome);
   }
 
   @FXML void save() throws RemoteException
   {
     if (viewModel.save())
-      viewHandler.openView(SceneNames.EmployeeHomeReservations);
+      viewHandler.openView(SceneNames.CustomerHome);
   }
 }

@@ -246,6 +246,41 @@ public class CustomerHomeViewModel implements PropertyChangeListener
     return true;
   }
 
+  public String reservationEditCheckers()
+  {System.out.println("checkers");
+    Reservation temp = model.getSelectedReservation();
+    System.out.println(temp.isCheckedIn());
+    if(temp == null)
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Please, select a reservation to edit first",ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return DatabaseConnection.MANDATORY;
+    }
+    else if (temp.isCheckedIn())
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Sorry, you cannot edit reservation after checking in",ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return DatabaseConnection.ALREADY;
+    }
+    else if (temp.isCheckedIn()==null)
+    {
+
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Sorry, you cannot edit past reservations",ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return DatabaseConnection.USER;
+    }
+    else
+    {
+      return DatabaseConnection.SUCCESS;
+    }
+  }
+
   public void fillHiddenField()
   {
     Room room = model.getSelectedRoom();
@@ -430,4 +465,11 @@ public class CustomerHomeViewModel implements PropertyChangeListener
   {
     return model.deleteReservation(roomNo, username, fromDate);
   }
+
+  public void editReservation()
+  {
+
+
+  }
+
 }
