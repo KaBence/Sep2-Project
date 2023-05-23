@@ -371,4 +371,10 @@ public void bindLastName(StringProperty property){
       roomObservableList = FXCollections.observableList(model.getFilteredRoom(null,null,temp));
     newReservations.set(roomObservableList);
   }
+
+  public String cancelReservation(int roomNo, String username, MyDate fromDate)
+      throws RemoteException
+  {
+    return model.deleteReservation(roomNo,username,fromDate);
+  }
 }

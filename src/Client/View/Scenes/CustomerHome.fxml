@@ -83,7 +83,7 @@
                                     <Font name="Century Gothic" size="18.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="cancel" mnemonicParsing="false" text="Cancel">
+                              <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancelReservation" text="Cancel">
                                  <font>
                                     <Font name="Century Gothic" size="18.0" />
                                  </font>
