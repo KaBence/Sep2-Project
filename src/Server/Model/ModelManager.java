@@ -244,7 +244,7 @@ public class ModelManager implements Model
     for (int i = 0; i < filtered.size(); i++)
     {
       if (occupied.isEmpty())
-        break;
+        return filtered;
       boolean temp=false;
       for (int j = 0; j < occupied.size(); j++)
       {
