@@ -1,7 +1,5 @@
 package Server.Utility;
 
-import java.io.IOException;
-
 public class IllegalDateException extends RuntimeException
 {
   private int check;
@@ -19,12 +17,8 @@ public class IllegalDateException extends RuntimeException
       case 5-> "Both between";
       case 6-> "From is before and return in between";
       case 7-> "From is before and to is equals";
+      case 8 ->"From or to Date is empty";
       default -> throw new IllegalStateException("Unexpected value: " + check);
     };
-  }
-
-  public int getCheck()
-  {
-    return check;
   }
 }
