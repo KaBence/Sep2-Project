@@ -4,6 +4,7 @@ import Client.Model.Model;
 import Server.Model.Hotel.Review;
 import Server.Model.MyDate;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -21,7 +22,7 @@ public class AddReviewViewModel
     reviews = new SimpleStringProperty();
   }
 
-  public void bindReviews(SimpleStringProperty property)
+  public void bindReviews(StringProperty property)
   {
     property.bindBidirectional(reviews);
 
@@ -43,7 +44,8 @@ public class AddReviewViewModel
   {
     try
     {
-      model.addReview("john@hotmail.com",model.getSelectedReservation().getRoomNumber(), model.getSelectedReservation().getFromDate(), MyDate.today(),reviews.getValue() );
+      model.addReview(model.getCurrentCustomer().getUsername(),model.getSelectedReservation().getRoomNumber(), model.getSelectedReservation().getFromDate(), MyDate.today(),reviews.getValue() );
+      //if()
       return true;
     }
     catch (NumberFormatException e){

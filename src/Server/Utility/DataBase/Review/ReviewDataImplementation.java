@@ -51,6 +51,7 @@ public class ReviewDataImplementation implements ReviewData
       ps.setDate(4, convertToSQLDate(postedDate.toString()));
       ps.setString(5, comment);
       ps.executeUpdate();
+      System.out.println(new Review(username, roomNO, fromDate, postedDate, comment));
     }
     catch (SQLException e)
     {
