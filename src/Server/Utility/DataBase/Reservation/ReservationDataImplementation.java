@@ -136,6 +136,7 @@ public class ReservationDataImplementation implements ReservationData
   {
     if (username.equals("") || fromDate == null || toDate == null)
       return DatabaseConnection.MANDATORY;
+    dateChecker(roomNumber,fromDate,toDate);
     try (Connection connection = getConnection())
     {
 
