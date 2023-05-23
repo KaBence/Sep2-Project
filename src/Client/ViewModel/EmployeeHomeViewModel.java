@@ -601,7 +601,7 @@ public void bindHiddenText(StringProperty property){
     {
       if (fromDateNewReservation.getValue()==null||toDateNewReservation.getValue()==null)
         throw new IllegalDateException(8);
-      if (MyDate.LocalDateToMyDate(fromDateReservation.getValue()).isBefore(MyDate.today())||MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(MyDate.today()))
+      if (MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()).isBefore(MyDate.today())||MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(MyDate.today()))
         throw new IllegalDateException(9);
       String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), model.getCurrentCustomer().getUsername(), MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
       if (state.equals(DatabaseConnection.SUCCESS)){

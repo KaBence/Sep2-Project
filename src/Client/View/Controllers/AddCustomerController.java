@@ -57,7 +57,7 @@ public class AddCustomerController
   @FXML public void create() throws RemoteException
   {
     if(viewModel.addCustomer())
-      viewHandler.openView(SceneNames.CustomerHome);
+      viewHandler.openView(SceneNames.CustomerHomeNewReservations);
   }
 
 }
