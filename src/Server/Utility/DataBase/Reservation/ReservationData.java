@@ -14,6 +14,7 @@ public interface ReservationData
   String deleteReservation(int roomNumber,String username,
       MyDate fromDate);
   ArrayList<Reservation> getAllReservations();
+  ArrayList<Reservation> getAllUpcomingReservations();
   ArrayList<Reservation> getFilteredReservations(String state,MyDate fromDate,MyDate toDate);
 
   ArrayList<Reservation> getFilteredWithDateChecker(MyDate from,MyDate to);

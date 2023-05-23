@@ -337,7 +337,7 @@ public class ModelManager implements Model
 
   @Override public ArrayList<Reservation> getAllReservations()
   {
-    return reservationData.getAllReservations();
+    return reservationData.getAllUpcomingReservations();
   }
 
   @Override public ArrayList<Reservation> getFilteredReservations(String state,

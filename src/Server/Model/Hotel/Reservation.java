@@ -92,6 +92,6 @@ public class Reservation implements Serializable
     return "RoomNo: " + roomNumber +", Username: " + username +", FromDate: " +fromDate+", ToDate: "+ toDate;
   }
   public String toString(){
-    return roomNumber +", " + username +", " +fromDate+" -- "+ toDate;
+    return roomNumber +", " + username +", " +fromDate+" -- "+ toDate+"  "+getState();
   }
 }

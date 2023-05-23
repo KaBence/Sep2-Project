@@ -203,6 +203,9 @@ public class CustomerHomeViewModel implements PropertyChangeListener
 
       reservations = model.getAllMyReservation(
           model.getCurrentCustomer().getUsername());
+      for (Reservation item:reservations){
+        System.out.println(item);
+      }
     }
     catch (RemoteException e)
     {

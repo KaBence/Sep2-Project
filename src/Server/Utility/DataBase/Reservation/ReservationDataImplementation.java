@@ -231,6 +231,17 @@ public class ReservationDataImplementation implements ReservationData
     return list;
   }
 
+  @Override public ArrayList<Reservation> getAllUpcomingReservations()
+  {
+    ArrayList<Reservation> all=getAllReservations();
+    ArrayList<Reservation> upcoming=new ArrayList<>();
+    for (Reservation item:all){
+      if (!(item.getState().equals("In The Past"))){
+        upcoming.add(item);
+      }
+    }
+    return upcoming;
+  }
 
   @Override public ArrayList<Reservation> getFilteredReservations(String state,
       MyDate fromDate, MyDate toDate)
