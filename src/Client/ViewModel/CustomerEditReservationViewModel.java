@@ -56,7 +56,7 @@ public class CustomerEditReservationViewModel
     MyDate to=new MyDate(temp2.getDayOfMonth(), temp2.getMonthValue(), temp2.getYear());
     try
     {
-      String state=model.updateReservation(Integer.parseInt(roomNo.getValue()), username.getValue(),from,to, old.getRoomNumber(), old.getUsername(), old.getFromDate());
+      String state=model.updateReservation(Integer.parseInt(roomNo.getValue()), username.getValue(),from,to, old.getRoomNumber(), old.getUsername(), old.getFromDate(),old.getToDate());
       if (state.equals(DatabaseConnection.SUCCESS)){
         Alert alert=new Alert(Alert.AlertType.INFORMATION,"Edit successful", ButtonType.OK);
         alert.setTitle("Success");
@@ -102,5 +102,22 @@ public class CustomerEditReservationViewModel
     roomNo.set(String.valueOf(temp.getRoomNumber()));
     fromDate.set(temp.getFromDate().convertToLocalDate());
     toDate.set(temp.getToDate().convertToLocalDate());
+  }
+  public boolean logOut()
+  {
+    try
+    {
+      model.logOut();
+      model.setGuest();
+      return true;
+    }
+    catch (RemoteException e)
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setHeaderText("Logging out error");
+      alert.setContentText("Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      alert.showAndWait();
+      return false;
+    }
   }
 }

@@ -203,6 +203,7 @@ public class CustomerHomeViewModel implements PropertyChangeListener
     reservePricePerNight.set(0);
     firstName.set(model.getCurrentCustomer().getFirstName());
     lastName.set(model.getCurrentCustomer().getLastName());
+    saveReservation(null);
 
     ArrayList<Room> rooms;
     ArrayList<Review> reviews;
@@ -214,6 +215,9 @@ public class CustomerHomeViewModel implements PropertyChangeListener
 
       reservations = model.getAllMyReservation(
           model.getCurrentCustomer().getUsername());
+      for (Reservation item:reservations){
+        System.out.println(item);
+      }
     }
     catch (RemoteException e)
     {
@@ -246,6 +250,7 @@ public class CustomerHomeViewModel implements PropertyChangeListener
 
   public boolean getSelectedReservation()
   {
+
     if (model.getSelectedReservation()==null)
     {
       Alert alert = new Alert(Alert.AlertType.ERROR,
@@ -255,7 +260,49 @@ public class CustomerHomeViewModel implements PropertyChangeListener
       alert.showAndWait();
       return false;
     }
+    if(MyDate.today().isBefore(model.getSelectedReservation().getToDate())){
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "You cannot leave a review before you had enought time to enjoy your stay!!! Do finifh it pls", ButtonType.OK);
+      alert.setTitle("Error");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+      return false;
+    }
     return true;
+  }
+
+  public String reservationEditCheckers()
+  {
+    Reservation temp = model.getSelectedReservation();
+    System.out.println(temp.getState());
+    if(temp == null)
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Please, select a reservation to edit first",ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return DatabaseConnection.MANDATORY;
+    }
+    else if (temp.getState().equals("Booked"))
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Sorry, you cannot edit reservation after checking in",ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return DatabaseConnection.ALREADY;
+    }
+    else if (temp.getState().equals("Reserved"))
+    {
+      return DatabaseConnection.SUCCESS;
+    }
+    else
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Sorry, you cannot edit past reservations",ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return DatabaseConnection.USER;
+    }
   }
 
   public void fillHiddenField()
@@ -442,4 +489,11 @@ public class CustomerHomeViewModel implements PropertyChangeListener
   {
     return model.deleteReservation(roomNo, username, fromDate);
   }
+
+  public void editReservation()
+  {
+
+
+  }
+
 }

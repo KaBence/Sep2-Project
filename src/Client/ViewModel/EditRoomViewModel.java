@@ -68,9 +68,30 @@ public class EditRoomViewModel
     return false;
   }
 
-  public String delete() throws RemoteException
+  public boolean delete() throws RemoteException
   {
-    return model.deleteRoom(Integer.parseInt(roomNumber.getValue()));
+    Alert alert = new Alert(Alert.AlertType.WARNING,
+        "Do you really want to delete this room from the system?", ButtonType.NO, ButtonType.YES);
+    alert.setTitle("Warning");
+    alert.setHeaderText(null);
+    alert.showAndWait();
+    if (alert.getResult().equals(ButtonType.NO))
+      return false;
+    String state = model.deleteRoom(Integer.parseInt(roomNumber.getValue()));
+    if (state.equals(DatabaseConnection.SUCCESS)){
+      Alert success = new Alert(Alert.AlertType.INFORMATION);
+      success.setHeaderText("Success");
+      success.setHeaderText("The room has been successfully removed");
+      success.showAndWait();
+      return true;
+    }
+    else {
+      Alert error = new Alert(Alert.AlertType.ERROR);
+      error.setHeaderText("Error");
+      error.setHeaderText("You cannot delete this room right now");
+      error.showAndWait();
+      return false;
+    }
   }
 
   public void fill(){

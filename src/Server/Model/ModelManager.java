@@ -337,7 +337,7 @@ public class ModelManager implements Model
 
   @Override public ArrayList<Reservation> getAllReservations()
   {
-    return reservationData.getAllReservations();
+    return reservationData.getAllUpcomingReservations();
   }
 
   @Override public ArrayList<Reservation> getFilteredReservations(String state,
@@ -348,11 +348,11 @@ public class ModelManager implements Model
 
   @Override public String updateReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, int oldRoomNo, String oldUsername,
-      MyDate oldFromDate)
+      MyDate oldFromDate,MyDate oldToDate)
   {
     log(Types.Reservation,roomNumber+" -> "+fromDate+" "+toDate+" has been updated");
     return reservationData.updateReservation(roomNumber, username, fromDate,
-        toDate, oldRoomNo, oldUsername, oldFromDate);
+        toDate, oldRoomNo, oldUsername, oldFromDate,oldToDate);
   }
 
   @Override public String addCustomer(String username, String password,

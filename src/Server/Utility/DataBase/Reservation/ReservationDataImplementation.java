@@ -45,7 +45,7 @@ public class ReservationDataImplementation implements ReservationData
       ps.setString(2, username);
       ps.setDate(3, convertToSQLDate(fromDate.toString()));
       ps.setDate(4, convertToSQLDate(toDate.toString()));
-      ps.setBoolean(5, CheckedIn);
+      ps.setObject(5, CheckedIn);
       ps.executeUpdate();
       return DatabaseConnection.SUCCESS;
     }
@@ -117,11 +117,11 @@ public class ReservationDataImplementation implements ReservationData
         String username = rs.getString("username");
         MyDate fromDate = MyDate.stringToDate(rs.getString("fromDate"));
         MyDate toDate = MyDate.stringToDate(rs.getString("toDate"));
-        Boolean CheckedIn = rs.getBoolean("checkedIn");
+        Boolean CheckedIn = (Boolean) rs.getObject("checkedIn");
         list.add(
             new Reservation(roomNumber, username, fromDate, toDate, CheckedIn));
       }
-      System.out.println(4);
+
     }
     catch (SQLException e)
     {
@@ -132,11 +132,23 @@ public class ReservationDataImplementation implements ReservationData
 
   @Override public String updateReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, int oldRoomNo, String oldUsername,
-      MyDate oldFromDate)
+      MyDate oldFromDate,MyDate oldToDate)
   {
     if (username.equals("") || fromDate == null || toDate == null)
       return DatabaseConnection.MANDATORY;
-    try (Connection connection = getConnection())
+    deleteReservation(oldRoomNo,oldUsername,oldFromDate);
+    try
+    {
+      dateChecker(roomNumber,fromDate,toDate);
+      addNewReservation(roomNumber,username,fromDate,toDate,false);
+      return DatabaseConnection.SUCCESS;
+    }
+    catch (IllegalDateException e){
+      addNewReservation(oldRoomNo,username,oldFromDate,oldToDate,false);
+      throw new IllegalDateException(e.getCheck());
+    }
+
+    /*try (Connection connection = getConnection())
     {
 
       PreparedStatement ps = connection.prepareStatement(
@@ -159,7 +171,7 @@ public class ReservationDataImplementation implements ReservationData
     catch (ParseException e)
     {
       throw new RuntimeException(e);
-    }
+    }*/
   }
 
   private Date convertToSQLDate(String date) throws ParseException
@@ -207,11 +219,9 @@ public class ReservationDataImplementation implements ReservationData
         String username = rs.getString("username");
         MyDate fromDate = MyDate.stringToDate(rs.getString("fromDate"));
         MyDate toDate = MyDate.stringToDate(rs.getString("toDate"));
-        Boolean CheckedIn = rs.getBoolean("checkedIn");
-
-        list.add(
-            new Reservation(roomNumber, username, fromDate, toDate, CheckedIn));
-
+        Boolean CheckedIn = (Boolean) rs.getObject("checkedIn");
+        Reservation x = new Reservation(roomNumber, username, fromDate, toDate, CheckedIn);
+        list.add(x);
       }
     }
     catch (SQLException e)
@@ -221,6 +231,17 @@ public class ReservationDataImplementation implements ReservationData
     return list;
   }
 
+  @Override public ArrayList<Reservation> getAllUpcomingReservations()
+  {
+    ArrayList<Reservation> all=getAllReservations();
+    ArrayList<Reservation> upcoming=new ArrayList<>();
+    for (Reservation item:all){
+      if (!(item.getState().equals("In The Past"))){
+        upcoming.add(item);
+      }
+    }
+    return upcoming;
+  }
 
   @Override public ArrayList<Reservation> getFilteredReservations(String state,
       MyDate fromDate, MyDate toDate)
@@ -281,7 +302,7 @@ public class ReservationDataImplementation implements ReservationData
       PreparedStatement ps = connection.prepareStatement(
           "UPDATE ReservedBy SET checkedin = ? WHERE roomNo=? and username=? and fromDate=?");
 
-      ps.setBoolean(1, true);
+      ps.setObject(1, true);
       ps.setInt(2, roomNumber);
       ps.setString(3, username);
       ps.setDate(4, convertToSQLDate(fromDate.toString()));
