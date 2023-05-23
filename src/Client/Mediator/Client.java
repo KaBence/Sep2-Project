@@ -163,10 +163,10 @@ public ArrayList<Reservation> getAllMyReservation(String username) throws Remote
     return sharedInterface.getFilteredReservation(state, fromDate, toDate);
   }
 
-  public String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate)
+  public String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate,MyDate oldToDate)
       throws RemoteException
   {
-    return sharedInterface.updateReservation(roomNumber, username, fromDate, toDate,oldRoomNo,oldUsername,oldFromDate);
+    return sharedInterface.updateReservation(roomNumber, username, fromDate, toDate,oldRoomNo,oldUsername,oldFromDate,oldToDate);
   }
 
   public void addPropertyChangeListener(PropertyChangeListener listener){

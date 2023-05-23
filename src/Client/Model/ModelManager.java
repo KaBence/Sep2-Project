@@ -197,9 +197,9 @@ public class ModelManager implements Model,PropertyChangeListener
   }
 
   @Override public String updateReservation(int roomNumber, String username,
-      MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate) throws RemoteException
+      MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate,MyDate oldToDate) throws RemoteException
   {
-    return client.updateReservation(roomNumber, username, fromDate, toDate,oldRoomNo,oldUsername,oldFromDate);
+    return client.updateReservation(roomNumber, username, fromDate, toDate,oldRoomNo,oldUsername,oldFromDate,oldToDate);
   }
 
   @Override public String deleteRoom(int roomNumber) throws RemoteException

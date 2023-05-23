@@ -55,58 +55,14 @@ public class EditEmployeeController
 
   @FXML void save() throws RemoteException
   {
-    String temp = viewModel.edit();
-    if (temp.equals(DatabaseConnection.SUCCESS))
-    {
-      Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful",
-          ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Success");
-      alert.showAndWait();
+    if (viewModel.edit())
       viewHandler.openView(SceneNames.Admin);
-    }
-    else if(temp.equals(DatabaseConnection.MANDATORY))
-    {
-      Alert mandatory = new Alert(Alert.AlertType.ERROR);
-      mandatory.setHeaderText("Error");
-      mandatory.setHeaderText("Mandatory fields can not be empty");
-      mandatory.showAndWait();
-    }
-    else
-    {
-      Alert error = new Alert(Alert.AlertType.ERROR);
-      error.setHeaderText("Error");
-      error.setHeaderText("You cannot edit this employee's information right now");
-      error.showAndWait();
-    }
   }
 
   @FXML void delete() throws RemoteException
   {
-    Alert alert = new Alert(Alert.AlertType.WARNING,
-        "Do you really want to delete this employee from the system?",
-        ButtonType.NO, ButtonType.YES);
-    alert.setTitle("Warning");
-    alert.setHeaderText(null);
-    alert.showAndWait();
-    if (alert.getResult() == ButtonType.YES)
-    {
-      if (viewModel.delete().equals(DatabaseConnection.SUCCESS))
-      {
-        Alert success = new Alert(Alert.AlertType.INFORMATION);
-        success.setHeaderText("Success");
-        success.setHeaderText("The employee has been successfully removed");
-        success.showAndWait();
-      }
-      else
-      {
-        Alert error = new Alert(Alert.AlertType.ERROR);
-        error.setHeaderText("Error");
-        error.setHeaderText("You cannot delete this employee right now");
-        error.showAndWait();
-      }
+    if (viewModel.delete())
       viewHandler.openView(SceneNames.Admin);
-    }
   }
   @FXML void cancel(){
     viewHandler.openView(SceneNames.Admin);

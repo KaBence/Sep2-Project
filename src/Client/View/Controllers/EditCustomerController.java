@@ -48,31 +48,8 @@ public class EditCustomerController
 
   @FXML void save() throws RemoteException
   {
-    String x = viewModel.save();
-    if (x.equals(DatabaseConnection.SUCCESS))
-    {
-      Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful",
-          ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Success");
-      alert.showAndWait();
+    if (viewModel.save())
       viewHandler.openView(SceneNames.EmployeeHomeCustomer);
-    }
-    else if (x.equals(DatabaseConnection.MANDATORY))
-    {
-      Alert mandatory = new Alert(Alert.AlertType.ERROR);
-      mandatory.setHeaderText("Error");
-      mandatory.setHeaderText("Mandatory fields can not be empty");
-      mandatory.showAndWait();
-    }
-    else
-    {
-      Alert error = new Alert(Alert.AlertType.ERROR);
-      error.setHeaderText("Error");
-      error.setHeaderText("You cannot edit this customer right now");
-      error.showAndWait();
-      viewHandler.openView(SceneNames.EmployeeHomeCustomer);
-    }
   }
 
   @FXML void cancel()
@@ -82,31 +59,9 @@ public class EditCustomerController
 
   @FXML void delete() throws RemoteException
   {
-    Alert alert = new Alert(Alert.AlertType.WARNING,
-        "Do you really want to delete this customer from the system?",
-        ButtonType.NO, ButtonType.YES);
-    alert.setTitle("Warning");
-    alert.setHeaderText(null);
-    alert.showAndWait();
-    if (alert.getResult() == ButtonType.YES)
-    {
-      if (viewModel.delete().equals(DatabaseConnection.SUCCESS))
-      {
-        Alert success = new Alert(Alert.AlertType.INFORMATION);
-        success.setHeaderText("Success");
-        success.setHeaderText("The customer has been successfully removed");
-        success.showAndWait();
-        viewHandler.openView(SceneNames.EmployeeHomeCustomer);
-      }
-      else
-      {
-        Alert error = new Alert(Alert.AlertType.ERROR);
-        error.setHeaderText("Error");
-        error.setHeaderText("You cannot delete this customer right now");
-        error.showAndWait();
-      }
+    if (viewModel.delete())
+      viewHandler.openView(SceneNames.EmployeeHomeCustomer);
 
-    }
   }
 
 }

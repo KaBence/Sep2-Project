@@ -7,6 +7,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import java.rmi.RemoteException;
 
@@ -37,22 +39,62 @@ public class EditEmployeeViewModel
 
   }
 
-  public String edit() throws RemoteException
+  public boolean edit() throws RemoteException
   {
     try
     {
-      return model.updateEmployee(username.getValue(),firstName.getValue(), lastName.getValue(),
-          position.getValue(), phoneNo.getValue());
+      String state= model.updateEmployee(username.getValue(),firstName.getValue(), lastName.getValue(), position.getValue(), phoneNo.getValue());
+      if (state.equals(DatabaseConnection.SUCCESS)){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful",
+            ButtonType.OK);
+        alert.setHeaderText(null);
+        alert.setTitle("Success");
+        alert.showAndWait();
+        return true;
+      }
+      else {
+        Alert error = new Alert(Alert.AlertType.ERROR);
+        error.setHeaderText("Error");
+        error.setHeaderText("You cannot edit this employee's information right now");
+        error.showAndWait();
+        return false;
+      }
     }
     catch (Exception e)
     {
-      return DatabaseConnection.MANDATORY;
+      Alert mandatory = new Alert(Alert.AlertType.ERROR);
+      mandatory.setHeaderText("Error");
+      mandatory.setHeaderText("Mandatory fields can not be empty");
+      mandatory.showAndWait();
+      return false;
     }
   }
 
-  public String delete() throws RemoteException
+  public boolean delete() throws RemoteException
   {
-    return  model.deleteEmployee(username.getValue());
+    Alert alert = new Alert(Alert.AlertType.WARNING,
+        "Do you really want to delete this employee from the system?",
+        ButtonType.NO, ButtonType.YES);
+    alert.setTitle("Warning");
+    alert.setHeaderText(null);
+    alert.showAndWait();
+    if (alert.getResult().equals(ButtonType.NO))
+      return false;
+    String state= model.deleteEmployee(username.getValue());
+    if (state.equals(DatabaseConnection.SUCCESS)){
+      Alert success = new Alert(Alert.AlertType.INFORMATION);
+      success.setHeaderText("Success");
+      success.setHeaderText("The employee has been successfully removed");
+      success.showAndWait();
+      return true;
+    }
+    else {
+      Alert error = new Alert(Alert.AlertType.ERROR);
+      error.setHeaderText("Error");
+      error.setHeaderText("You cannot delete this employee right now");
+      error.showAndWait();
+      return false;
+    }
   }
 
   public void bindUsername(StringProperty property)
