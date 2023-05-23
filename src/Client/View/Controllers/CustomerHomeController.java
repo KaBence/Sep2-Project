@@ -217,4 +217,17 @@ public class CustomerHomeController
     }
   }
 
+  @FXML void editReservation()
+  {
+    String temp = viewModel.reservationEditCheckers();
+    if(temp.equals(DatabaseConnection.SUCCESS))
+    {
+      viewModel.saveReservation(
+          myReservations.getSelectionModel().getSelectedItem());
+      viewHandler.openView(SceneNames.CustomerEditReservation);
+    }
+    else {
+      //do nothing
+    }
+  }
 }

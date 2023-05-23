@@ -19,6 +19,7 @@ public class ViewModelFactory
   private EditReservationViewModel editReservationViewModel;
   private AddReviewViewModel addReviewViewModel;
   private AddCustomerViewModel addCustomerViewModel;
+  private CustomerEditReservationViewModel customerEditReservationViewModel;
 
   public ViewModelFactory(Model model)
   {
@@ -34,6 +35,7 @@ public class ViewModelFactory
     adminViewModel=new AdminViewModel(model);
     addReviewViewModel= new AddReviewViewModel(model);
     addCustomerViewModel = new AddCustomerViewModel(model);
+    customerEditReservationViewModel = new CustomerEditReservationViewModel(model);
   }
 
   public AdminViewModel getAdminViewModel()
@@ -93,5 +95,10 @@ public class ViewModelFactory
   public AddCustomerViewModel getAddCustomerViewModel()
   {
     return addCustomerViewModel;
+  }
+
+  public CustomerEditReservationViewModel getCustomerEditReservationViewModel()
+  {
+    return customerEditReservationViewModel;
   }
 }
