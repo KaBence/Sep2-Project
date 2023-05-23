@@ -8,6 +8,7 @@ import Server.Model.Hotel.Room;
 import Server.Model.Hotel.Users.Person;
 
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -20,27 +21,25 @@ public interface Model
 
   String addRoom(int roomNumber, int numberOfBeds, int size, int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
-      boolean balcony);
+      boolean balcony) ;
   String  addReservation(int roomNumber, String username,
-      MyDate fromDate, MyDate toDate, boolean CheckedIn);
+      MyDate fromDate, MyDate toDate, boolean CheckedIn) ;
   String addEmployee(String firstName, String lastName,
-      String position, String phoneNo, String password);
+      String position, String phoneNo, String password) ;
 
   String addReview(String username, int roomNO,
-      MyDate fromDate, MyDate postedDate, String comment);
+      MyDate fromDate, MyDate postedDate, String comment) ;
 
   String updateRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
-      boolean balcony);
+      boolean balcony) ;
   String updateCustomer(String username, String firstName, String lastName, String phoneNumber, String payment);
 
-  String updateEmployee( String username, String firstName, String lastName, String position, String phoneNo) throws
-      RemoteException;
+  String updateEmployee( String username, String firstName, String lastName, String position, String phoneNo);
   String deleteRoom(int roomNumber);
   String deleteSelectedCustomer(String username);
   String deleteEmployee(String userID);
-  String deleteReservation(int roomNo, String username,
-      MyDate fromDate);
+  String deleteReservation(int roomNo, String username, MyDate fromDate);
 
   ArrayList<Room> getAllRooms();
   ArrayList<Review> getAllReviews();
@@ -69,7 +68,6 @@ public interface Model
   String checkIn(int roomNumber, String username, MyDate fromDate);
   String checkOut(int roomNumber, String username, MyDate fromDate);
   String updateReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate);
-  String addCustomer(String username, String password,
-      String firstName, String lastName, String phoneNo, String paymentInfo);
+  String addCustomer(String username, String password, String firstName, String lastName, String phoneNo, String paymentInfo);
 
 }

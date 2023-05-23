@@ -1,4 +1,4 @@
-package Server.Utility;
+package Server.Utility.Log;
 
 import java.io.File;
 import java.io.FileWriter;

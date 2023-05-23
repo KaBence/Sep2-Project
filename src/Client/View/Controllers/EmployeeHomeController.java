@@ -161,27 +161,31 @@ public class EmployeeHomeController
 
   @FXML void tableClickRoom(MouseEvent event)
   {
-    viewModel.saveRoom(roomListView.getSelectionModel().getSelectedItem());
-    if (event.getClickCount() == 2)
-      viewHandler.openView(SceneNames.EditRoom);
+    if (roomListView.getSelectionModel().getSelectedItem()!=null){
+      viewModel.saveRoom(roomListView.getSelectionModel().getSelectedItem());
+      if (event.getClickCount() == 2)
+        viewHandler.openView(SceneNames.EditRoom);
+    }
   }
 
   @FXML void tableClickCustomer(MouseEvent event)
   {
-    viewModel.saveCustomer(
-        customerListView.getSelectionModel().getSelectedItem());
-    if (event.getClickCount() == 2)
-      viewHandler.openView(SceneNames.EditCustomer);
+    if (customerListView.getSelectionModel().getSelectedItem()!=null){
+      viewModel.saveCustomer(customerListView.getSelectionModel().getSelectedItem());
+      if (event.getClickCount() == 2)
+        viewHandler.openView(SceneNames.EditCustomer);
+    }
   }
 
 
 
   @FXML void tableClickBooking(MouseEvent event)
   {
-    viewModel.saveReservation(
-        reservationListView.getSelectionModel().getSelectedItem());
-    if (event.getClickCount() == 2)
-      viewHandler.openView(SceneNames.EditReservation);
+    if (reservationListView.getSelectionModel().getSelectedItem()!=null){
+      viewModel.saveReservation(reservationListView.getSelectionModel().getSelectedItem());
+      if (event.getClickCount() == 2)
+        viewHandler.openView(SceneNames.EditReservation);
+    }
   }
 
   @FXML void filterRoom() throws RemoteException

@@ -134,6 +134,7 @@ public class CustomerHomeViewModel implements PropertyChangeListener
           }
           catch (Exception e)
           {
+            e.printStackTrace();
             Alert error = new Alert(Alert.AlertType.ERROR);
             error.setHeaderText("Something went wrong");
             error.setContentText(
@@ -414,5 +415,11 @@ public class CustomerHomeViewModel implements PropertyChangeListener
       roomObservableList = FXCollections.observableList(
           model.getFilteredRoom(null, null, temp));
     newReservations.set(roomObservableList);
+  }
+
+  public String cancelReservation(int roomNo, String username, MyDate fromDate)
+      throws RemoteException
+  {
+    return model.deleteReservation(roomNo,username,fromDate);
   }
 }

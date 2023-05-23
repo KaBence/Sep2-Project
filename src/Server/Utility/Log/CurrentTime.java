@@ -1,4 +1,4 @@
-package Server.Utility;
+package Server.Utility.Log;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

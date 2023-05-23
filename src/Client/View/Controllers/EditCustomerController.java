@@ -96,6 +96,7 @@ public class EditCustomerController
         success.setHeaderText("Success");
         success.setHeaderText("The customer has been successfully removed");
         success.showAndWait();
+        viewHandler.openView(SceneNames.EmployeeHomeCustomer);
       }
       else
       {
@@ -104,7 +105,7 @@ public class EditCustomerController
         error.setHeaderText("You cannot delete this customer right now");
         error.showAndWait();
       }
-      viewHandler.openView(SceneNames.EmployeeHomeRoom);
+
     }
   }
 

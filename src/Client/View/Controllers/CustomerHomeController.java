@@ -46,6 +46,7 @@ public class CustomerHomeController
   private ViewHandler viewHandler;
   private CustomerHomeViewModel viewModel;
 
+
   public void init(ViewHandler viewHandler, CustomerHomeViewModel viewModel,
       Region root)
   {
@@ -172,6 +173,50 @@ public class CustomerHomeController
     {
       viewModel.saveReservation(
           myReservations.getSelectionModel().getSelectedItem());
+    }
+  }
+
+  public SingleSelectionModel<Tab> selection(int i)
+  {
+    SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+    selectionModel.select(i);
+    return selectionModel;
+  }
+
+  @FXML void cancelReservation() throws RemoteException
+  {
+    Reservation temp = myReservations.getSelectionModel().getSelectedItem();
+    if (temp == null)
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "Select a reservation first", ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+    }
+    else if (temp.isCheckedIn())
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "You cannot cancel active booking", ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+    }
+    else if(!temp.isCheckedIn())
+    {
+      if (viewModel.cancelReservation(temp.getRoomNumber(), temp.getUsername(),
+          temp.getFromDate()).equals(DatabaseConnection.SUCCESS))
+      {
+        Alert good = new Alert(Alert.AlertType.INFORMATION);
+        good.setHeaderText("The reservation has been canceled.");
+        good.showAndWait();
+      }
+      else
+      {
+        Alert bad = new Alert(Alert.AlertType.ERROR);
+        bad.setHeaderText("You cannot cancel this reservation");
+        bad.showAndWait();
+      }
     }
   }
 
