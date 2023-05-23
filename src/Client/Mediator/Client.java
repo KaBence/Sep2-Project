@@ -60,6 +60,10 @@ public String  addEmployee(String firstName, String lastName, String position,
 {
     return sharedInterface.addEmployee(firstName, lastName, position,phoneNo,password);
 }
+public Employee getNewEmployee() throws RemoteException
+{
+  return sharedInterface.getNewEmployee();
+}
 public String addReview(String username, int roomNO, MyDate fromDate, MyDate postedDate, String comment)
     throws RemoteException
 {

@@ -60,8 +60,9 @@ public class EditCustomerController
   @FXML void delete() throws RemoteException
   {
     if (viewModel.delete())
+    {
       viewHandler.openView(SceneNames.EmployeeHomeCustomer);
-
+    }
   }
 
 }

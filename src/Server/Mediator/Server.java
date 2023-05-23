@@ -55,6 +55,11 @@ public class Server extends UnicastRemoteObject implements SharedInterface
         internet, bathroom, kitchen, balcony);
   }
 
+  @Override public Employee getNewEmployee() throws RemoteException
+  {
+    return model.getNewEmployee();
+  }
+
   @Override public String  addReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, boolean CheckedIn) throws RemoteException
   {

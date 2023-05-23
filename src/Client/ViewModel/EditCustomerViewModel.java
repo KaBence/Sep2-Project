@@ -57,20 +57,33 @@ public class EditCustomerViewModel
     if (alert.getResult().equals(ButtonType.NO))
       return false;
 
-    String state=model.deleteSelectedCustomer(username.getValue());
-    if (state.equals(DatabaseConnection.SUCCESS)){
-      Alert success = new Alert(Alert.AlertType.INFORMATION);
-      success.setHeaderText("Success");
-      success.setHeaderText("The customer has been successfully removed");
-      success.showAndWait();
-      return true;
-    }
-    else {
-      Alert error = new Alert(Alert.AlertType.ERROR);
-      error.setHeaderText("Error");
-      error.setHeaderText("You cannot delete this customer right now");
-      error.showAndWait();
+    if (model.getSelectedCustomer().getState().equals("Logged in"))
+    {
+      Alert logged = new Alert(Alert.AlertType.ERROR);
+      logged.setHeaderText("Error");
+      logged.setHeaderText("You cannot delete this customer right now, because the Customer is currently using the system.");
+      logged.showAndWait();
       return false;
+    }
+    else
+    {
+      String state = model.deleteSelectedCustomer(username.getValue());
+      if (state.equals(DatabaseConnection.SUCCESS))
+      {
+        Alert success = new Alert(Alert.AlertType.INFORMATION);
+        success.setHeaderText("Success");
+        success.setHeaderText("The customer has been successfully removed");
+        success.showAndWait();
+        return true;
+      }
+      else
+      {
+        Alert error = new Alert(Alert.AlertType.ERROR);
+        error.setHeaderText("Error");
+        error.setHeaderText("You cannot delete this customer right now");
+        error.showAndWait();
+        return false;
+      }
     }
   }
   public void fill(){

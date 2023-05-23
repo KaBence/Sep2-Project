@@ -26,6 +26,7 @@ public interface Model
       MyDate fromDate, MyDate toDate, boolean CheckedIn) ;
   String addEmployee(String firstName, String lastName,
       String position, String phoneNo, String password) ;
+  Employee getNewEmployee();
 
   String addReview(String username, int roomNO,
       MyDate fromDate, MyDate postedDate, String comment) ;
