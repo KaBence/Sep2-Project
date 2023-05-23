@@ -3,10 +3,13 @@ package Client.ViewModel;
 import Client.Model.Model;
 import Server.Model.Hotel.Review;
 import Server.Model.MyDate;
+import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -44,13 +47,28 @@ public class AddReviewViewModel
   {
     try
     {
-      model.addReview(model.getCurrentCustomer().getUsername(),model.getSelectedReservation().getRoomNumber(), model.getSelectedReservation().getFromDate(), MyDate.today(),reviews.getValue() );
-      //if()
-      return true;
-    }
-    catch (NumberFormatException e){
+      String state = model.addReview(model.getCurrentCustomer().getUsername(),
+          model.getSelectedReservation().getRoomNumber(),
+          model.getSelectedReservation().getFromDate(), MyDate.today(),
+          reviews.getValue());
+      if (state.equals(DatabaseConnection.SUCCESS))
+      {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,
+            "Successfully added a new review", ButtonType.OK);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.showAndWait();
 
+        return true;
+      }
+    }
+    catch (NumberFormatException e)
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Please select a reservation for your review",ButtonType.OK);
+      alert.setTitle("Error");
+      alert.setHeaderText(null);
+      alert.showAndWait();
     }
     return false;
-    }
   }
+}

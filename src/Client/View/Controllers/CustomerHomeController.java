@@ -112,8 +112,10 @@ public class CustomerHomeController
 
   @FXML void tableClickNewReservation()
   {
-    viewModel.saveRoom(
-        roomListViewNewReservation.getSelectionModel().getSelectedItem());
+    if (roomListViewNewReservation.getSelectionModel().getSelectedItem()
+        != null)
+      viewModel.saveRoom(
+          roomListViewNewReservation.getSelectionModel().getSelectedItem());
     viewModel.fillHiddenField();
   }
 
@@ -135,7 +137,11 @@ public class CustomerHomeController
 
   @FXML void review()
   {
-    viewHandler.openView(SceneNames.Review);
+    if (!myReservations.getSelectionModel().isEmpty())
+    {
+      viewHandler.openView(SceneNames.Review);
+    }
+
   }
 
   @FXML void onLogin()
@@ -161,8 +167,12 @@ public class CustomerHomeController
 
   @FXML void tableClickReservation()
   {
-    viewModel.saveReservation(myReservations.getSelectionModel().getSelectedItem());
-
+    if (roomListViewNewReservation.getSelectionModel().getSelectedItem()
+        != null)
+    {
+      viewModel.saveReservation(
+          myReservations.getSelectionModel().getSelectedItem());
+    }
   }
 
 }
