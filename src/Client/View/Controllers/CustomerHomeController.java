@@ -224,7 +224,7 @@ public class CustomerHomeController
     {
       viewModel.saveReservation(
           myReservations.getSelectionModel().getSelectedItem());
-      viewHandler.openView(SceneNames.EditReservation);
+      viewHandler.openView(SceneNames.CustomerEditReservation);
     }
     else {
       //do nothing

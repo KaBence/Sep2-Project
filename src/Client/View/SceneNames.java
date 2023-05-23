@@ -4,7 +4,7 @@ public enum SceneNames
 {
   Home,Admin,
   EmployeeHomeReservations,EmployeeHomeRoom,EmployeeHomeEmployee,EmployeeHomeCustomer,EmployeeLogin,
-  CustomerHome,CustomerHomeNewReservations,
+  CustomerHome,CustomerHomeNewReservations, CustomerEditReservation,
   AddRoom,EmployeeHomeAddReservations,AddCustomer,
   EditRoom,EditCustomer,EditEmployee, EditReservation,
   Review

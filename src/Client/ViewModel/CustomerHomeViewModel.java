@@ -247,7 +247,7 @@ public class CustomerHomeViewModel implements PropertyChangeListener
   }
 
   public String reservationEditCheckers()
-  {
+  {System.out.println("checkers");
     Reservation temp = model.getSelectedReservation();
     System.out.println(temp.isCheckedIn());
     if(temp == null)
