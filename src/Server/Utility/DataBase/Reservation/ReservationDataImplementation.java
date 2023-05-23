@@ -246,7 +246,7 @@ public class ReservationDataImplementation implements ReservationData
   @Override public ArrayList<Reservation> getFilteredReservations(String state,
       MyDate fromDate, MyDate toDate)
   {
-    ArrayList<Reservation> all = getAllReservations();
+    ArrayList<Reservation> all = getAllUpcomingReservations();
     ArrayList<Reservation> filtered = new ArrayList<>();
     boolean flag = true;
     if (fromDate == null && toDate == null)
@@ -277,7 +277,7 @@ public class ReservationDataImplementation implements ReservationData
   @Override public ArrayList<Reservation> getFilteredWithDateChecker(
       MyDate from, MyDate to)
   {
-    ArrayList<Reservation> all=getAllReservations();
+    ArrayList<Reservation> all=getAllUpcomingReservations();
     ArrayList<Reservation> filtered=new ArrayList<>();
     for (Reservation item:all){
       boolean flag=false;
