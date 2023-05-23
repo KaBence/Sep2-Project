@@ -246,6 +246,41 @@ public class CustomerHomeViewModel implements PropertyChangeListener
     return true;
   }
 
+  public String reservationEditCheckers()
+  {
+    Reservation temp = model.getSelectedReservation();
+    System.out.println(temp.isCheckedIn());
+    if(temp == null)
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Please, select a reservation to edit first",ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return DatabaseConnection.MANDATORY;
+    }
+    else if (temp.isCheckedIn())
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Sorry, you cannot edit reservation after checking in",ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return DatabaseConnection.ALREADY;
+    }
+    else if (temp.isCheckedIn()==null)
+    {
+
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Sorry, you cannot edit past reservations",ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return DatabaseConnection.USER;
+    }
+    else
+    {
+      return DatabaseConnection.SUCCESS;
+    }
+  }
+
   public void fillHiddenField()
   {
     Room room = model.getSelectedRoom();
@@ -431,24 +466,8 @@ public class CustomerHomeViewModel implements PropertyChangeListener
 
   public void editReservation()
   {
-    model.getSelectedReservation().isCheckedIn()
-    String temp = "IDK how to get it";
-    if(temp.equals(DatabaseConnection.SELECT))
-    {
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Please, select a reservation to edit first",ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Error");
-      alert.showAndWait();
-    }
-    else if (temp.equals(DatabaseConnection.ALREADY))
-    {
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Sorry, you cannot edit reservation after checking in date",ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Error");
-      alert.showAndWait();
-    }
-    {
+
 
   }
-  }
+
 }

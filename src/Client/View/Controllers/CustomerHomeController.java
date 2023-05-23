@@ -217,30 +217,17 @@ public class CustomerHomeController
     }
   }
 
-  @FXML String editReservation()
+  @FXML void editReservation()
   {
-    /*
-    Reservation temp = myReservations.getSelectionModel().getSelectedItem();
-    if (temp == null)
-    {
-     return DatabaseConnection.SELECT;
-    }
-    else if (temp.isCheckedIn()) //
-    {
-      return DatabaseConnection.ALREADY;
-    }
-    else if (temp.isCheckedIn()== null) //
-    {
-      return DatabaseConnection.USER;
-    }
-    else
+    String temp = viewModel.reservationEditCheckers();
+    if(temp.equals(DatabaseConnection.SUCCESS))
     {
       viewModel.saveReservation(
           myReservations.getSelectionModel().getSelectedItem());
       viewHandler.openView(SceneNames.EditReservation);
-      return DatabaseConnection.SUCCESS;
     }
-
-     */
+    else {
+      //do nothing
+    }
   }
 }
