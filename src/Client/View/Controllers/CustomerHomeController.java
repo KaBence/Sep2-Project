@@ -46,7 +46,6 @@ public class CustomerHomeController
   private ViewHandler viewHandler;
   private CustomerHomeViewModel viewModel;
 
-
   public void init(ViewHandler viewHandler, CustomerHomeViewModel viewModel,
       Region root)
   {
@@ -114,11 +113,11 @@ public class CustomerHomeController
   @FXML void tableClickNewReservation()
   {
     if (roomListViewNewReservation.getSelectionModel().getSelectedItem()
-        != null)
+        != null){
       viewModel.saveRoom(
           roomListViewNewReservation.getSelectionModel().getSelectedItem());
     viewModel.fillHiddenField();
-  }
+  }}
 
   @FXML void filterNewReservation() throws RemoteException
   {
@@ -138,7 +137,8 @@ public class CustomerHomeController
 
   @FXML void review()
   {
-    if (viewModel.getSelectedReservation()){
+    if (viewModel.getSelectedReservation())
+    {
       viewHandler.openView(SceneNames.Review);
     }
   }
@@ -166,10 +166,10 @@ public class CustomerHomeController
 
   @FXML void tableClickReservation()
   {
-    if (myReservations.getSelectionModel().getSelectedItem()
-        != null)
+    if (myReservations.getSelectionModel().getSelectedItem() != null)
     {
-      viewModel.saveReservation(myReservations.getSelectionModel().getSelectedItem());
+      viewModel.saveReservation(
+          myReservations.getSelectionModel().getSelectedItem());
     }
   }
 
@@ -199,7 +199,7 @@ public class CustomerHomeController
       alert.setTitle("Error");
       alert.showAndWait();
     }
-    else if(!temp.isCheckedIn())
+    else if (!temp.isCheckedIn())
     {
       if (viewModel.cancelReservation(temp.getRoomNumber(), temp.getUsername(),
           temp.getFromDate()).equals(DatabaseConnection.SUCCESS))
