@@ -40,11 +40,13 @@ public class AddReviewController
 
   @FXML void Home()
   {
-    viewHandler.openView(SceneNames.Home);
+    viewHandler.openView(SceneNames.CustomerHomeNewReservations);
+    viewModel.logOut();
   }
 
   @FXML void create() throws RemoteException
   {
     viewModel.addReview();
+    viewHandler.openView(SceneNames.CustomerHome);
   }
 }

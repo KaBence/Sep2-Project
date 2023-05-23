@@ -91,7 +91,7 @@ public class ViewFactory
     return employeeHomeController.getRoot();
   }
 
-  private Region loadCustomerHome()
+  private Region loadCustomerHome(int i)
   {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("Scenes/CustomerHome.fxml"));
@@ -107,6 +107,7 @@ public class ViewFactory
       throw new IOError(e);
     }
     customerHomeController.reset();
+    customerHomeController.selection(i);
     return customerHomeController.getRoot();
   }
 
@@ -268,7 +269,8 @@ public class ViewFactory
       case EmployeeHomeEmployee -> loadEmployeeHome(2);
       case EmployeeHomeCustomer -> loadEmployeeHome(3);
       case EmployeeHomeRoom -> loadEmployeeHome(4);
-      case CustomerHome -> loadCustomerHome();
+      case CustomerHome -> loadCustomerHome(0);
+      case CustomerHomeNewReservations -> loadCustomerHome(1);
       case AddRoom -> loadAddRoom();
       case EditRoom -> loadEditRoom();
       case EditCustomer -> loadEditCustomer();
