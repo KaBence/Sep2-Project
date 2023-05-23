@@ -18,7 +18,13 @@ public class IllegalDateException extends RuntimeException
       case 6-> "From is before and return in between";
       case 7-> "From is before and to is equals";
       case 8 ->"From or to Date is empty";
+      case 9 ->"From date or finish date is before today";
       default -> throw new IllegalStateException("Unexpected value: " + check);
     };
+  }
+
+  public int getCheck()
+  {
+    return check;
   }
 }

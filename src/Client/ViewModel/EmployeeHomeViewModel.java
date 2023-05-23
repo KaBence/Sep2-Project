@@ -581,9 +581,18 @@ public void bindHiddenText(StringProperty property){
     hiddenFieldRoomNo.set(String.valueOf(something));
   }
 
-  public void saveReservation(Reservation reservation)
+  public boolean saveReservation(Reservation reservation)
   {
+    if (reservation==null){
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "Select a reservation first", ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return false;
+    }
     model.saveSelectedReservation(reservation);
+    return true;
   }
 
   public boolean addReservation() throws RemoteException
@@ -592,6 +601,8 @@ public void bindHiddenText(StringProperty property){
     {
       if (fromDateNewReservation.getValue()==null||toDateNewReservation.getValue()==null)
         throw new IllegalDateException(8);
+      if (MyDate.LocalDateToMyDate(fromDateReservation.getValue()).isBefore(MyDate.today())||MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(MyDate.today()))
+        throw new IllegalDateException(9);
       String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), model.getCurrentCustomer().getUsername(), MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
       if (state.equals(DatabaseConnection.SUCCESS)){
         Alert alert=new Alert(Alert.AlertType.INFORMATION,"Successfully added a new reservation",ButtonType.OK);
@@ -750,10 +761,31 @@ public void bindHiddenText(StringProperty property){
     model.saveSelectedReservation(null);
   }
 
-  public String deleteReservation(int roomNo, String username, MyDate fromDate)
+  public boolean deleteReservation()
       throws RemoteException
   {
-    return model.deleteReservation(roomNo, username, fromDate);
+    Reservation selected=model.getSelectedReservation();
+    if (selected==null){
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "Select a reservation first", ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return false;
+    }
+    String state= model.deleteReservation(selected.getRoomNumber(), selected.getUsername(), selected.getFromDate());
+    if (state.equals(DatabaseConnection.SUCCESS)){
+      Alert good = new Alert(Alert.AlertType.INFORMATION);
+      good.setHeaderText("The reservation has been canceled.");
+      good.showAndWait();
+      return true;
+    }
+    else {
+      Alert bad = new Alert(Alert.AlertType.ERROR);
+      bad.setHeaderText("You cannot cancel this reservation");
+      bad.showAndWait();
+      return false;
+    }
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

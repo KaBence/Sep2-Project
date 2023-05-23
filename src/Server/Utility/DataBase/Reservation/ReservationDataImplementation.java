@@ -132,12 +132,23 @@ public class ReservationDataImplementation implements ReservationData
 
   @Override public String updateReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, int oldRoomNo, String oldUsername,
-      MyDate oldFromDate)
+      MyDate oldFromDate,MyDate oldToDate)
   {
     if (username.equals("") || fromDate == null || toDate == null)
       return DatabaseConnection.MANDATORY;
-    dateChecker(roomNumber,fromDate,toDate);
-    try (Connection connection = getConnection())
+    deleteReservation(oldRoomNo,oldUsername,oldFromDate);
+    try
+    {
+      dateChecker(roomNumber,fromDate,toDate);
+      addNewReservation(roomNumber,username,fromDate,toDate,false);
+      return DatabaseConnection.SUCCESS;
+    }
+    catch (IllegalDateException e){
+      addNewReservation(oldRoomNo,username,oldFromDate,oldToDate,false);
+      throw new IllegalDateException(e.getCheck());
+    }
+
+    /*try (Connection connection = getConnection())
     {
 
       PreparedStatement ps = connection.prepareStatement(
@@ -160,7 +171,7 @@ public class ReservationDataImplementation implements ReservationData
     catch (ParseException e)
     {
       throw new RuntimeException(e);
-    }
+    }*/
   }
 
   private Date convertToSQLDate(String date) throws ParseException
