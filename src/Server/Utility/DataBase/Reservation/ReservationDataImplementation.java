@@ -45,7 +45,7 @@ public class ReservationDataImplementation implements ReservationData
       ps.setString(2, username);
       ps.setDate(3, convertToSQLDate(fromDate.toString()));
       ps.setDate(4, convertToSQLDate(toDate.toString()));
-      ps.setBoolean(5, CheckedIn);
+      ps.setObject(5, CheckedIn);
       ps.executeUpdate();
       return DatabaseConnection.SUCCESS;
     }
@@ -117,11 +117,11 @@ public class ReservationDataImplementation implements ReservationData
         String username = rs.getString("username");
         MyDate fromDate = MyDate.stringToDate(rs.getString("fromDate"));
         MyDate toDate = MyDate.stringToDate(rs.getString("toDate"));
-        Boolean CheckedIn = rs.getBoolean("checkedIn");
+        Boolean CheckedIn = (Boolean) rs.getObject("checkedIn");
         list.add(
             new Reservation(roomNumber, username, fromDate, toDate, CheckedIn));
       }
-      System.out.println(4);
+
     }
     catch (SQLException e)
     {
@@ -208,11 +208,9 @@ public class ReservationDataImplementation implements ReservationData
         String username = rs.getString("username");
         MyDate fromDate = MyDate.stringToDate(rs.getString("fromDate"));
         MyDate toDate = MyDate.stringToDate(rs.getString("toDate"));
-        Boolean CheckedIn = rs.getBoolean("checkedIn");
-
-        list.add(
-            new Reservation(roomNumber, username, fromDate, toDate, CheckedIn));
-
+        Boolean CheckedIn = (Boolean) rs.getObject("checkedIn");
+        Reservation x = new Reservation(roomNumber, username, fromDate, toDate, CheckedIn);
+        list.add(x);
       }
     }
     catch (SQLException e)
@@ -282,7 +280,7 @@ public class ReservationDataImplementation implements ReservationData
       PreparedStatement ps = connection.prepareStatement(
           "UPDATE ReservedBy SET checkedin = ? WHERE roomNo=? and username=? and fromDate=?");
 
-      ps.setBoolean(1, true);
+      ps.setObject(1, true);
       ps.setInt(2, roomNumber);
       ps.setString(3, username);
       ps.setDate(4, convertToSQLDate(fromDate.toString()));

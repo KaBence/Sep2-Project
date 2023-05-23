@@ -247,9 +247,9 @@ public class CustomerHomeViewModel implements PropertyChangeListener
   }
 
   public String reservationEditCheckers()
-  {System.out.println("checkers");
+  {
     Reservation temp = model.getSelectedReservation();
-    System.out.println(temp.isCheckedIn());
+    System.out.println(temp.getState());
     if(temp == null)
     {
       Alert alert=new Alert(Alert.AlertType.ERROR,"Please, select a reservation to edit first",ButtonType.OK);
@@ -258,7 +258,7 @@ public class CustomerHomeViewModel implements PropertyChangeListener
       alert.showAndWait();
       return DatabaseConnection.MANDATORY;
     }
-    else if (temp.isCheckedIn())
+    else if (temp.getState().equals("Booked"))
     {
       Alert alert=new Alert(Alert.AlertType.ERROR,"Sorry, you cannot edit reservation after checking in",ButtonType.OK);
       alert.setHeaderText(null);
@@ -266,18 +266,17 @@ public class CustomerHomeViewModel implements PropertyChangeListener
       alert.showAndWait();
       return DatabaseConnection.ALREADY;
     }
-    else if (temp.isCheckedIn()==null)
+    else if (temp.getState().equals("Reserved"))
     {
-
+      return DatabaseConnection.SUCCESS;
+    }
+    else
+    {
       Alert alert=new Alert(Alert.AlertType.ERROR,"Sorry, you cannot edit past reservations",ButtonType.OK);
       alert.setHeaderText(null);
       alert.setTitle("Error");
       alert.showAndWait();
       return DatabaseConnection.USER;
-    }
-    else
-    {
-      return DatabaseConnection.SUCCESS;
     }
   }
 
