@@ -376,4 +376,27 @@ public void bindLastName(StringProperty property){
   {
     return model.deleteReservation(roomNo,username,fromDate);
   }
+
+  public void editReservation()
+  {
+    model.getSelectedReservation().isCheckedIn()
+    String temp = "IDK how to get it";
+    if(temp.equals(DatabaseConnection.SELECT))
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Please, select a reservation to edit first",ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+    }
+    else if (temp.equals(DatabaseConnection.ALREADY))
+    {
+      Alert alert=new Alert(Alert.AlertType.ERROR,"Sorry, you cannot edit reservation after checking in date",ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+    }
+    {
+
+  }
+  }
 }

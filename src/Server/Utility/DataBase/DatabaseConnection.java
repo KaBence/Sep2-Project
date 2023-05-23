@@ -8,4 +8,5 @@ public interface DatabaseConnection
   static final String ALREADY = "alreadyDone";
   static final String PASSWORD = "invalid password";
   static final String USER = "invalid user";
+  static final String SELECT = "not selected";
 }
