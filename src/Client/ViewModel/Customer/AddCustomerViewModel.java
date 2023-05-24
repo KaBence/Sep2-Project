@@ -1,6 +1,7 @@
 package Client.ViewModel.Customer;
 
 import Client.Model.Model;
+import Client.Model.ModelCustomerSide;
 import Client.Utility.Alerts;
 import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,7 +11,7 @@ import java.rmi.RemoteException;
 
 public class AddCustomerViewModel
 {
-  private Model model;
+  private ModelCustomerSide model;
   private SimpleStringProperty firstName, lastName, payment, password, repeatPassword, phoneNo, username;
 
   public AddCustomerViewModel(Model model)
