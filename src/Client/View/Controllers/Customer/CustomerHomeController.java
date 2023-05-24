@@ -1,12 +1,13 @@
 package Client.View.Controllers.Customer;
 
+import Client.Utility.Alerts;
 import Client.View.Scenes.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.Customer.CustomerHomeViewModel;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Room;
-import Server.Utility.DataBase.DatabaseConnection;
+import Server.Utility.IllegalDateException;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -34,7 +35,7 @@ public class CustomerHomeController
 
   @FXML ListView<Reservation> myReservations;
   @FXML ListView<Room> roomListViewNewReservation;
-  @FXML Button logout, review, cancel, edit;
+  @FXML Button logout, cancel, edit;
   @FXML AnchorPane loggingIn, myProfileAnchorPane;
   @FXML TabPane tabPane;
   @FXML Tab newReservation, myReservation, allReviews;
@@ -63,21 +64,20 @@ public class CustomerHomeController
     this.viewModel.bindPassword(passwordField.textProperty());
     this.viewModel.bindReviews(listReviews.itemsProperty());
 
-    viewModel.bindFromDateNewReservation(
-        fromDateNewReservation.valueProperty());
-    viewModel.bindReserveBalcony(reserveBalcony.selectedProperty());
-    viewModel.bindToDateNewReservation(toDateNewReservation.valueProperty());
-    viewModel.bindReserveInternet(reserveInternet.selectedProperty());
-    viewModel.bindReserveKitchen(reserveKitchen.selectedProperty());
-    viewModel.bindReservePrice(reservePricePerNight.valueProperty());
-    viewModel.bindReserveBathroom(reserveBathroom.selectedProperty());
-    viewModel.bindHiddenText(hiddenFieldRoomNo.textProperty());
-    viewModel.bindReserveRoomNo(reserveRoomNr.textProperty());
-    viewModel.bindReserveNoBeds(reserveNrOfBeds.textProperty());
+    this.viewModel.bindFromDateNewReservation(fromDateNewReservation.valueProperty());
+    this.viewModel.bindReserveBalcony(reserveBalcony.selectedProperty());
+    this.viewModel.bindToDateNewReservation(toDateNewReservation.valueProperty());
+    this.viewModel.bindReserveInternet(reserveInternet.selectedProperty());
+    this.viewModel.bindReserveKitchen(reserveKitchen.selectedProperty());
+    this.viewModel.bindReservePrice(reservePricePerNight.valueProperty());
+    this.viewModel.bindReserveBathroom(reserveBathroom.selectedProperty());
+    this.viewModel.bindHiddenText(hiddenFieldRoomNo.textProperty());
+    this.viewModel.bindReserveRoomNo(reserveRoomNr.textProperty());
+    this.viewModel.bindReserveNoBeds(reserveNrOfBeds.textProperty());
 
     this.viewModel.bindMyReservation(myReservations.itemsProperty());
-    viewModel.bindFirstName(firstName.textProperty());
-    viewModel.bindLastName(lastName.textProperty());
+    this.viewModel.bindFirstName(firstName.textProperty());
+    this.viewModel.bindLastName(lastName.textProperty());
   }
 
   public Region getRoot()
@@ -108,7 +108,7 @@ public class CustomerHomeController
     onLogOut();
   }
 
-  @FXML void createNewReservation() throws RemoteException
+  @FXML void createNewReservation()
   {
     if (viewModel.addReservation() == null)
     {
@@ -128,9 +128,22 @@ public class CustomerHomeController
     }
   }
 
-  @FXML void filterNewReservation() throws RemoteException
+  @FXML void filterNewReservation()
   {
-    viewModel.filterNewReservation();
+    try
+    {
+      viewModel.filterNewReservation();
+    }
+    catch (IllegalDateException e)
+    {
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Error", e.message());
+      x.showAndWait();
+    }
+    catch (RemoteException e)
+    {
+      Alerts alert = new Alerts(Alert.AlertType.ERROR,"Error","Error occurred");
+      alert.showAndWait();
+    }
   }
 
   @FXML void clearDates()
@@ -146,15 +159,18 @@ public class CustomerHomeController
 
   @FXML void review()
   {
-    if (viewModel.getSelectedReservation())
+    Alerts x = viewModel.getSelectedReservation();
+    if (!x.getAlertType().equals(Alert.AlertType.ERROR))
     {
       viewHandler.openView(SceneNames.Review);
     }
+    x.showAndWait();
   }
 
   @FXML void onLogin()
   {
-    if (viewModel.logIn())
+    Alerts x = viewModel.logIn();
+    if (x.getAlertType().equals(Alert.AlertType.NONE))
     {
       myProfileAnchorPane.setOpacity(1.0);
       loggingIn.setLayoutY(400.00);
@@ -165,7 +181,8 @@ public class CustomerHomeController
 
   @FXML public void onLogOut()
   {
-    if (viewModel.logOut())
+    Alerts x = viewModel.logOut();
+    if (x.getAlertType().equals(Alert.AlertType.NONE))
     {
       myProfileAnchorPane.setOpacity(0.0);
       loggingIn.setLayoutY(00.00);
@@ -181,53 +198,21 @@ public class CustomerHomeController
     }
   }
 
-  @FXML void cancelReservation() throws RemoteException
+  @FXML void cancelReservation()
   {
-    Reservation temp = myReservations.getSelectionModel().getSelectedItem();
-    if (temp == null)
-    {
-      Alert alert = new Alert(Alert.AlertType.ERROR,
-          "Select a reservation first", ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Error");
-      alert.showAndWait();
-    }
-    else if (temp.isCheckedIn())
-    {
-      Alert alert = new Alert(Alert.AlertType.ERROR,
-          "You cannot cancel active booking", ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Error");
-      alert.showAndWait();
-    }
-    else if (!temp.isCheckedIn())
-    {
-      if (viewModel.cancelReservation(temp.getRoomNumber(), temp.getUsername(),
-          temp.getFromDate()))
-      {
-        Alert good = new Alert(Alert.AlertType.INFORMATION);
-        good.setHeaderText("The reservation has been canceled.");
-        good.showAndWait();
-      }
-      else
-      {
-        Alert bad = new Alert(Alert.AlertType.ERROR);
-        bad.setHeaderText("You cannot cancel this reservation");
-        bad.showAndWait();
-      }
-    }
+    Alerts x = viewModel.cancelReservation();
+    x.showAndWait();
   }
 
   @FXML void editReservation()
   {
-    boolean temp = viewModel.reservationEditCheckers();
-    if (temp)
+    Alerts x = viewModel.reservationEditCheckers();
+    x.showAndWait();
+    if (x.getAlertType().equals(Alert.AlertType.NONE))
     {
-      viewModel.saveReservation(
-          myReservations.getSelectionModel().getSelectedItem());
+      viewModel.saveReservation(myReservations.getSelectionModel().getSelectedItem());
       viewHandler.openView(SceneNames.CustomerEditReservation);
     }
-
   }
 
   public SingleSelectionModel<Tab> selection(int i)

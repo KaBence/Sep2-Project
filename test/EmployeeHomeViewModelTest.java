@@ -21,6 +21,7 @@ import java.rmi.RemoteException;
 
 public class EmployeeHomeViewModelTest
 {
+  //test employee home view model
 
   private Client client;
   private SharedInterface sharedInterface;

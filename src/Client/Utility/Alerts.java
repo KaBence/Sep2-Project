@@ -34,10 +34,13 @@ public class Alerts
 
   public void showAndWait()
   {
-    Alert x = new Alert(alertType);
-    x.setHeaderText(headerText);
-    x.setContentText(contentText);
-    x.showAndWait();
+    if (!alertType.equals(Alert.AlertType.NONE))
+    {
+      Alert x = new Alert(alertType);
+      x.setHeaderText(headerText);
+      x.setContentText(contentText);
+      x.showAndWait();
+    }
   }
 
   public String toString()

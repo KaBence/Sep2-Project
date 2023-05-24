@@ -24,12 +24,12 @@ public class CustomerEditReservationController
   {
     this.viewHandler = viewHandler;
     this.viewModel = viewModel;
-    viewModel.bindRoomNo(roomNo.textProperty());
-    viewModel.bindFromDate(fromDate.valueProperty());
-    viewModel.bindToDate(toDate.valueProperty());
-    viewModel.bindUsername(username.textProperty());
+    this.viewModel.bindRoomNo(roomNo.textProperty());
+    this.viewModel.bindFromDate(fromDate.valueProperty());
+    this.viewModel.bindToDate(toDate.valueProperty());
+    this.viewModel.bindUsername(username.textProperty());
+    this.viewModel.previousScene(false);
     this.root = root;
-
   }
 
   public Region getRoot()
@@ -45,17 +45,12 @@ public class CustomerEditReservationController
 
   @FXML void cancel()
   {
-    viewModel.logOut();
     viewHandler.openView(SceneNames.CustomerHomeNewReservations);
   }
 
   @FXML void save() throws RemoteException
   {
-    if (viewModel.save())
-    {
-      viewModel.logOut();
-    }
+    viewModel.save().showAndWait();
     viewHandler.openView(SceneNames.CustomerHome);
-
   }
 }
