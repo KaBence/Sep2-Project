@@ -1,12 +1,14 @@
 import Client.Mediator.Client;
 import Client.Model.Model;
 import Client.Model.ModelManager;
+import Client.Utility.Alerts;
 import Client.ViewModel.Employee.EmployeeHomeViewModel;
 import Server.Mediator.Server;
 import Server.Model.Hotel.Reservation;
 import Server.Model.MyDate;
 import Server.Utility.DataBase.DatabaseConnection;
 import Shared.SharedInterface;
+import javafx.scene.control.Alert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -43,7 +45,18 @@ public class EmployeeHomeViewModelTest
         DatabaseConnection.SUCCESS);
 
     viewModel.saveReservation(new Reservation(10,"John",test,new MyDate(12,5,2023),false));
-    assertTrue(viewModel.deleteReservation());
+    //assertTrue(viewModel.deleteReservation());
+  }
+
+  @Test
+  void deleteReservationReturnsSuccessNEWONE() throws RemoteException
+  {
+    MyDate test=new MyDate(2,5,2023);
+    Mockito.when(sharedInterface.deleteReservation(10,"John",test)).thenReturn(
+        DatabaseConnection.SUCCESS);
+    viewModel.saveReservation(new Reservation(10,"John",test,new MyDate(12,5,2023),false));
+    Alerts x = new Alerts(Alert.AlertType.INFORMATION,"Success","Reservation has been canceled");
+    assertEquals(viewModel.deleteReservation().toString(), x.toString());
   }
 
   @Test

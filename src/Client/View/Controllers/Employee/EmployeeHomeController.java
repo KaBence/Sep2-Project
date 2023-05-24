@@ -1,5 +1,6 @@
 package Client.View.Controllers.Employee;
 
+import Client.Utility.Alerts;
 import Client.View.Scenes.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.Employee.EmployeeHomeViewModel;
@@ -214,13 +215,21 @@ public class EmployeeHomeController
 
   @FXML void deleteReservation() throws RemoteException
   {
-    viewModel.deleteReservation();
+    viewModel.deleteReservation().showAndWait();
   }
 
   @FXML void editReservation()
   {
-    if (viewModel.saveReservation(reservationListView.getSelectionModel().getSelectedItem()))
+    Alerts x = viewModel.saveReservation(reservationListView.getSelectionModel().getSelectedItem());
+    if (x.getAlertType().equals(Alert.AlertType.INFORMATION))
+    {
+      x.showAndWait();
       viewHandler.openView(SceneNames.EditReservation);
+    }
+    else
+    {
+      x.showAndWait();
+    }
   }
 
   @FXML void tableClickNewReservation()

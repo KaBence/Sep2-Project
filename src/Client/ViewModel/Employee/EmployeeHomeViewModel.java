@@ -1,6 +1,7 @@
 package Client.ViewModel.Employee;
 
 import Client.Model.Model;
+import Client.Utility.Alerts;
 import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Reservation;
@@ -581,18 +582,22 @@ public void bindHiddenText(StringProperty property){
     hiddenFieldRoomNo.set(String.valueOf(something));
   }
 
-  public boolean saveReservation(Reservation reservation)
+  public Alerts saveReservation(Reservation reservation)
   {
-    if (reservation==null){
+    if (reservation==null)
+    {
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Error","Select a reservation first");
+      /*
       Alert alert = new Alert(Alert.AlertType.ERROR,
           "Select a reservation first", ButtonType.OK);
       alert.setHeaderText(null);
       alert.setTitle("Error");
       alert.showAndWait();
-      return false;
+       */
+      return x;
     }
     model.saveSelectedReservation(reservation);
-    return true;
+    return new Alerts(Alert.AlertType.INFORMATION,"Success","Reservation has been saved");
   }
 
   public boolean addReservation() throws RemoteException
@@ -761,9 +766,10 @@ public void bindHiddenText(StringProperty property){
     model.saveSelectedReservation(null);
   }
 
-  public boolean deleteReservation()
+  public Alerts deleteReservation()
       throws RemoteException
   {
+    Alerts bad = new Alerts(Alert.AlertType.ERROR,"","");
     Reservation selected=model.getSelectedReservation();
     if (selected==null){
       Alert alert = new Alert(Alert.AlertType.ERROR,
@@ -771,20 +777,24 @@ public void bindHiddenText(StringProperty property){
       alert.setHeaderText(null);
       alert.setTitle("Error");
       alert.showAndWait();
-      return false;
+      return bad;
     }
     String state= model.deleteReservation(selected.getRoomNumber(), selected.getUsername(), selected.getFromDate());
-    if (state.equals(DatabaseConnection.SUCCESS)){
+    if (state.equals(DatabaseConnection.SUCCESS))
+    {
+      /*
       Alert good = new Alert(Alert.AlertType.INFORMATION);
       good.setHeaderText("The reservation has been canceled.");
       good.showAndWait();
-      return true;
+       */
+      Alerts x = new Alerts(Alert.AlertType.INFORMATION,"Success","Reservation has been canceled");
+      return x;
     }
     else {
-      Alert bad = new Alert(Alert.AlertType.ERROR);
-      bad.setHeaderText("You cannot cancel this reservation");
-      bad.showAndWait();
-      return false;
+      Alert bads = new Alert(Alert.AlertType.ERROR);
+      bads.setHeaderText("You cannot cancel this reservation");
+      bads.showAndWait();
+      return bad;
     }
   }
 
