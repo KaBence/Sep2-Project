@@ -1,28 +1,21 @@
-package Client.ViewModel;
+package Client.ViewModel.Customer;
 
 import Client.Model.Model;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Room;
+import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Guest;
+import Server.Model.Hotel.Users.Person;
 import Server.Model.MyDate;
 import Server.Utility.DataBase.DatabaseConnection;
 import Server.Utility.IllegalDateException;
-import Server.Model.Hotel.Users.Customer;
-import Server.Model.Hotel.Users.Person;
-import Server.Utility.DataBase.DatabaseConnection;
-import dk.via.remote.observer.RemotePropertyChangeListener;
 import javafx.application.Platform;
 import javafx.beans.property.*;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -215,7 +208,8 @@ public class CustomerHomeViewModel implements PropertyChangeListener
 
       reservations = model.getAllMyReservation(
           model.getCurrentCustomer().getUsername());
-      for (Reservation item:reservations){
+      for (Reservation item : reservations)
+      {
         System.out.println(item);
       }
     }
@@ -250,8 +244,8 @@ public class CustomerHomeViewModel implements PropertyChangeListener
 
   public boolean getSelectedReservation()
   {
-
-    if (model.getSelectedReservation()==null)
+    Reservation x = model.getSelectedReservation();
+    if (x == null)
     {
       Alert alert = new Alert(Alert.AlertType.ERROR,
           "Please select a reservation", ButtonType.OK);
@@ -260,9 +254,11 @@ public class CustomerHomeViewModel implements PropertyChangeListener
       alert.showAndWait();
       return false;
     }
-    if(MyDate.today().isBefore(model.getSelectedReservation().getToDate())){
+    if (MyDate.today().isBefore(x.getToDate()))
+    {
       Alert alert = new Alert(Alert.AlertType.ERROR,
-          "You cannot leave a review before you had enought time to enjoy your stay!!! Do finifh it pls", ButtonType.OK);
+          "You cannot leave a review before you had enough time to enjoy your stay.\nYou can leave a review after you finish your stay",
+          ButtonType.OK);
       alert.setTitle("Error");
       alert.setHeaderText(null);
       alert.showAndWait();
@@ -271,37 +267,40 @@ public class CustomerHomeViewModel implements PropertyChangeListener
     return true;
   }
 
-  public String reservationEditCheckers()
+  public boolean reservationEditCheckers()
   {
     Reservation temp = model.getSelectedReservation();
-    System.out.println(temp.getState());
-    if(temp == null)
+    if (temp == null)
     {
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Please, select a reservation to edit first",ButtonType.OK);
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "Please, select a reservation to edit first", ButtonType.OK);
       alert.setHeaderText(null);
       alert.setTitle("Error");
       alert.showAndWait();
-      return DatabaseConnection.MANDATORY;
+      return false;
     }
     else if (temp.getState().equals("Booked"))
     {
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Sorry, you cannot edit reservation after checking in",ButtonType.OK);
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "Sorry, you cannot edit reservation after checking in",
+          ButtonType.OK);
       alert.setHeaderText(null);
       alert.setTitle("Error");
       alert.showAndWait();
-      return DatabaseConnection.ALREADY;
+      return false;
     }
     else if (temp.getState().equals("Reserved"))
     {
-      return DatabaseConnection.SUCCESS;
+      return true;
     }
     else
     {
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Sorry, you cannot edit past reservations",ButtonType.OK);
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "Sorry, you cannot edit past reservations", ButtonType.OK);
       alert.setHeaderText(null);
       alert.setTitle("Error");
       alert.showAndWait();
-      return DatabaseConnection.USER;
+      return false;
     }
   }
 
@@ -318,53 +317,61 @@ public class CustomerHomeViewModel implements PropertyChangeListener
     });
   }
 
-  public boolean addReservation() throws RemoteException
+  public Boolean addReservation() throws RemoteException
   {
-    try
+    if (user == null)
     {
-      if (fromDateNewReservation.getValue()==null||toDateNewReservation.getValue()==null)
-        throw new IllegalDateException(8);
-      String state = model.addReservation(
-          Integer.parseInt(hiddenFieldRoomNo.getValue()),
-          model.getCurrentCustomer().getUsername(),
-          MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),
-          MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
-      if (state.equals(DatabaseConnection.SUCCESS))
+      Alert notLoggedIn = new Alert(Alert.AlertType.INFORMATION);
+      notLoggedIn.setHeaderText("Log in required");
+      notLoggedIn.setContentText("Please log in into the system or create new account");
+      notLoggedIn.showAndWait();
+      return null;
+    }
+    else
+    {
+      try
       {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION,
-            "Successfully added a new reservation", ButtonType.OK);
-        alert.setTitle("Success");
-        alert.setHeaderText(null);
-        alert.showAndWait();
-        return true;
+        if (fromDateNewReservation.getValue() == null || toDateNewReservation.getValue() == null)
+          throw new IllegalDateException(8);
+        String state = model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()),
+            model.getCurrentCustomer().getUsername(), MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),
+            MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
+        if (state.equals(DatabaseConnection.SUCCESS))
+        {
+          Alert alert = new Alert(Alert.AlertType.INFORMATION,
+              "Successfully added a new reservation", ButtonType.OK);
+          alert.setTitle("Success");
+          alert.setHeaderText(null);
+          alert.showAndWait();
+          return true;
+        }
+        if (state.equals(DatabaseConnection.ERROR))
+        {
+          Alert alert = new Alert(Alert.AlertType.ERROR, "Error occurred",
+              ButtonType.OK);
+          alert.setTitle("Error");
+          alert.setHeaderText(null);
+          alert.showAndWait();
+          return false;
+        }
       }
-      if (state.equals(DatabaseConnection.ERROR))
+      catch (NumberFormatException e)
       {
-        Alert alert = new Alert(Alert.AlertType.ERROR, "Error occurred",
-            ButtonType.OK);
+        Alert alert = new Alert(Alert.AlertType.ERROR,
+            "Please select a room to reserve", ButtonType.OK);
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.showAndWait();
-        return false;
       }
+      catch (IllegalDateException e)
+      {
+        Alert alert = new Alert(Alert.AlertType.ERROR, e.message(), ButtonType.OK);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+      }
+      return false;
     }
-    catch (NumberFormatException e)
-    {
-      Alert alert = new Alert(Alert.AlertType.ERROR,
-          "Please select a room to reserve", ButtonType.OK);
-      alert.setTitle("Error");
-      alert.setHeaderText(null);
-      alert.showAndWait();
-    }
-    catch (IllegalDateException e)
-    {
-      Alert alert = new Alert(Alert.AlertType.ERROR, e.message(),
-          ButtonType.OK);
-      alert.setTitle("Error");
-      alert.setHeaderText(null);
-      alert.showAndWait();
-    }
-    return false;
   }
 
   public void bindHiddenText(StringProperty property)
@@ -484,16 +491,46 @@ public class CustomerHomeViewModel implements PropertyChangeListener
     newReservations.set(roomObservableList);
   }
 
-  public String cancelReservation(int roomNo, String username, MyDate fromDate)
+  public boolean cancelReservation(int roomNo, String username, MyDate fromDate)
       throws RemoteException
   {
-    return model.deleteReservation(roomNo, username, fromDate);
-  }
-
-  public void editReservation()
-  {
-
-
+    Reservation x = model.getSelectedReservation();
+    if (x == null)
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "Select a reservation first", ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return false;
+    }
+    else if (x.isCheckedIn())
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR,
+          "You cannot cancel active booking", ButtonType.OK);
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.showAndWait();
+      return false;
+    }
+    else if (!x.isCheckedIn())
+    {
+      if (model.deleteReservation(roomNo,username,fromDate).equals(DatabaseConnection.SUCCESS))
+      {
+        Alert good = new Alert(Alert.AlertType.INFORMATION);
+        good.setHeaderText("The reservation has been canceled.");
+        good.showAndWait();
+        return true;
+      }
+      else
+      {
+        Alert bad = new Alert(Alert.AlertType.ERROR);
+        bad.setHeaderText("You cannot cancel this reservation");
+        bad.showAndWait();
+        return false;
+      }
+    }
+    return false;
   }
 
 }

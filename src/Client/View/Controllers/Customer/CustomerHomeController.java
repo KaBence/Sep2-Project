@@ -1,19 +1,15 @@
-package Client.View.Controllers;
+package Client.View.Controllers.Customer;
 
-import Client.View.SceneNames;
+import Client.View.Scenes.SceneNames;
 import Client.View.ViewHandler;
-import Client.ViewModel.CustomerHomeViewModel;
-import Client.ViewModel.HomeViewModel;
+import Client.ViewModel.Customer.CustomerHomeViewModel;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Room;
-import javafx.collections.FXCollections;
 import Server.Utility.DataBase.DatabaseConnection;
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
@@ -114,17 +110,23 @@ public class CustomerHomeController
 
   @FXML void createNewReservation() throws RemoteException
   {
-    viewModel.addReservation();
+    if (viewModel.addReservation() == null)
+    {
+      SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+      selectionModel.select(1);
+    }
   }
 
   @FXML void tableClickNewReservation()
   {
     if (roomListViewNewReservation.getSelectionModel().getSelectedItem()
-        != null){
+        != null)
+    {
       viewModel.saveRoom(
           roomListViewNewReservation.getSelectionModel().getSelectedItem());
-    viewModel.fillHiddenField();
-  }}
+      viewModel.fillHiddenField();
+    }
+  }
 
   @FXML void filterNewReservation() throws RemoteException
   {
@@ -179,13 +181,6 @@ public class CustomerHomeController
     }
   }
 
-  public SingleSelectionModel<Tab> selection(int i)
-  {
-    SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
-    selectionModel.select(i);
-    return selectionModel;
-  }
-
   @FXML void cancelReservation() throws RemoteException
   {
     Reservation temp = myReservations.getSelectionModel().getSelectedItem();
@@ -208,7 +203,7 @@ public class CustomerHomeController
     else if (!temp.isCheckedIn())
     {
       if (viewModel.cancelReservation(temp.getRoomNumber(), temp.getUsername(),
-          temp.getFromDate()).equals(DatabaseConnection.SUCCESS))
+          temp.getFromDate()))
       {
         Alert good = new Alert(Alert.AlertType.INFORMATION);
         good.setHeaderText("The reservation has been canceled.");
@@ -225,15 +220,20 @@ public class CustomerHomeController
 
   @FXML void editReservation()
   {
-    String temp = viewModel.reservationEditCheckers();
-    if(temp.equals(DatabaseConnection.SUCCESS))
+    boolean temp = viewModel.reservationEditCheckers();
+    if (temp)
     {
       viewModel.saveReservation(
           myReservations.getSelectionModel().getSelectedItem());
       viewHandler.openView(SceneNames.CustomerEditReservation);
     }
-    else {
-      //do nothing
-    }
+
+  }
+
+  public SingleSelectionModel<Tab> selection(int i)
+  {
+    SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+    selectionModel.select(i);
+    return selectionModel;
   }
 }
