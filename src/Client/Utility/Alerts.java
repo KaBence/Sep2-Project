@@ -20,9 +20,16 @@ public class Alerts
   {
     return alertType;
   }
+
+
   public String getHeaderText()
   {
     return headerText;
+  }
+
+  public String getContentText()
+  {
+    return contentText;
   }
 
   public void showAndWait()
@@ -35,6 +42,6 @@ public class Alerts
 
   public String toString()
   {
-    return alertType.toString()+", "+headerText+", "+contentText;
+    return alertType.toString()+", "+getHeaderText()+", "+getContentText();
   }
 }

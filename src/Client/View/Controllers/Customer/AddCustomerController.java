@@ -1,9 +1,11 @@
 package Client.View.Controllers.Customer;
 
+import Client.Utility.Alerts;
 import Client.View.Scenes.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.Customer.AddCustomerViewModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
@@ -58,9 +60,20 @@ public class AddCustomerController
 
   @FXML public void create() throws RemoteException
   {
-    if (viewModel.addCustomer())
+    Alerts x = viewModel.addCustomer();
+    if (x.getAlertType().equals(Alert.AlertType.INFORMATION))
     {
+      x.showAndWait();
       viewHandler.openView(SceneNames.CustomerHomeNewReservations);
+    }
+    else
+    {
+      if (x.getContentText().equals("Passwords are not identical"))
+      {
+        password.clear();
+        repeatPassword.clear();
+      }
+      x.showAndWait();
     }
   }
 

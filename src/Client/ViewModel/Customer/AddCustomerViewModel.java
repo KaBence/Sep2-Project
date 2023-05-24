@@ -1,12 +1,11 @@
 package Client.ViewModel.Customer;
 
 import Client.Model.Model;
+import Client.Utility.Alerts;
 import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-
 import java.rmi.RemoteException;
 
 public class AddCustomerViewModel
@@ -17,13 +16,13 @@ public class AddCustomerViewModel
   public AddCustomerViewModel(Model model)
   {
     this.model = model;
-    firstName = new SimpleStringProperty();
-    lastName = new SimpleStringProperty();
-    username = new SimpleStringProperty();
-    phoneNo = new SimpleStringProperty();
-    payment = new SimpleStringProperty();
-    password = new SimpleStringProperty();
-    repeatPassword = new SimpleStringProperty();
+    this.firstName = new SimpleStringProperty();
+    this.lastName = new SimpleStringProperty();
+    this.username = new SimpleStringProperty();
+    this.phoneNo = new SimpleStringProperty();
+    this.payment = new SimpleStringProperty();
+    this.password = new SimpleStringProperty();
+    this.repeatPassword = new SimpleStringProperty();
   }
 
   public void bindFirstName(StringProperty property)
@@ -61,60 +60,36 @@ public class AddCustomerViewModel
     property.bindBidirectional(repeatPassword);
   }
 
-  public boolean addCustomer() throws RemoteException
+  public Alerts addCustomer() throws RemoteException
   {
     try
     {
-      if (!(password.getValue().equals(repeatPassword.getValue()))){
-        Alert alert = new Alert(Alert.AlertType.ERROR,
-            "Passwords are not identical", ButtonType.OK);
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.showAndWait();
-        return false;
+      if (!(password.getValue().equals(repeatPassword.getValue())))
+      {
+        return new Alerts(Alert.AlertType.ERROR,"Error","Passwords are not identical");
       }
+      else
+      {
         String temp = model.addCustomer(username.getValue(), password.getValue(),
             firstName.getValue(), lastName.getValue(), phoneNo.getValue(),
             payment.getValue());
         if (temp.equals(DatabaseConnection.SUCCESS))
         {
-          Alert alert = new Alert(Alert.AlertType.INFORMATION,
-              "The Customer Account Was Created: \n Username: "
-                  + username.getValue() + "\n Password: " + password.getValue(),
-              ButtonType.OK);
-          alert.setHeaderText(null);
-          alert.setTitle("Success");
-          alert.showAndWait();
-          return true;
-        }
-        if (temp.equals(DatabaseConnection.ERROR))
-        {
-          Alert alert = new Alert(Alert.AlertType.ERROR,
-              "Sorry. Some Error Occurred", ButtonType.OK);
-          alert.setHeaderText(null);
-          alert.setTitle("Error");
-          alert.showAndWait();
-          return false;
+          return new Alerts(Alert.AlertType.INFORMATION,"Customer account has been created","Username: " + username.getValue() + "\nPassword: "+ password.getValue());
         }
         if (temp.equals(DatabaseConnection.MANDATORY))
         {
-          Alert alert = new Alert(Alert.AlertType.ERROR,
-              "Please fill up every field", ButtonType.OK);
-          alert.setHeaderText(null);
-          alert.setTitle("Error");
-          alert.showAndWait();
-          return false;
+          return new Alerts(Alert.AlertType.ERROR,"Error","Please fill up every field");
         }
+        else
+        {
+          return new Alerts(Alert.AlertType.ERROR,"Error","Sorry. Some Error Occurred");
+        }
+      }
     }
     catch (NumberFormatException | NullPointerException e)
     {
-      Alert alert = new Alert(Alert.AlertType.ERROR,
-          "Please fill up the every field", ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Error");
-      alert.showAndWait();
+      return new Alerts(Alert.AlertType.ERROR,"Error","Please fill up the every field");
     }
-    return false;
   }
-
 }
