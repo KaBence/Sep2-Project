@@ -1,9 +1,11 @@
 package Client.View.Controllers.Customer;
 
+import Client.Utility.Alerts;
 import Client.View.Scenes.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.Customer.AddReviewViewModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 
@@ -44,7 +46,11 @@ public class AddReviewController
 
   @FXML void create() throws RemoteException
   {
-    viewModel.addReview();
-    viewHandler.openView(SceneNames.CustomerHome);
+    Alerts x = viewModel.addReview();
+    x.showAndWait();
+    if (x.getAlertType().equals(Alert.AlertType.INFORMATION))
+    {
+      viewHandler.openView(SceneNames.CustomerHome);
+    }
   }
 }
