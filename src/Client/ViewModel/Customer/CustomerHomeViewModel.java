@@ -333,6 +333,8 @@ public class CustomerHomeViewModel implements PropertyChangeListener
       {
         if (fromDateNewReservation.getValue() == null || toDateNewReservation.getValue() == null)
           throw new IllegalDateException(8);
+        if (MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()).isBefore(MyDate.today())||MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(MyDate.today()))
+          throw new IllegalDateException(9);
         String state = model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()),
             model.getCurrentCustomer().getUsername(), MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),
             MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
