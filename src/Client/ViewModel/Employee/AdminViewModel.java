@@ -1,6 +1,7 @@
 package Client.ViewModel.Employee;
 
 import Client.Model.Model;
+import Client.Model.ModelEmployeeSide;
 import Server.Model.Hotel.Users.Employee;
 import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.ObjectProperty;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 public class AdminViewModel
 {
-  private Model model;
+  private ModelEmployeeSide model;
   private SimpleStringProperty username, firstName, lastName, phoneNo,password,repeatPassword;
   private SimpleObjectProperty<String> position;
 

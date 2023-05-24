@@ -26,6 +26,7 @@ import java.util.ArrayList;
 public class CustomerHomeViewModel implements PropertyChangeListener
 {
   private Model model;
+
   private SimpleObjectProperty<ObservableList<Room>> newReservations;
   private SimpleObjectProperty<ObservableList<Review>> allReviews;
   private SimpleObjectProperty<ObservableList<Reservation>> allMyReservation;
@@ -35,6 +36,7 @@ public class CustomerHomeViewModel implements PropertyChangeListener
   private SimpleStringProperty reserveNoBeds, reserveRoomNo, hiddenFieldRoomNo;
   private SimpleStringProperty password;
   private SimpleStringProperty username, firstName, lastName;
+
   private ArrayList<Customer> allCustomers;
   private Person user;
 
@@ -303,6 +305,128 @@ public class CustomerHomeViewModel implements PropertyChangeListener
     {
       return new Alerts(Alert.AlertType.ERROR,"Error","Sorry, you cannot edit past reservations");
     }
+  }
+
+  public void fillHiddenField()
+  {
+    Room room = model.getSelectedRoom();
+    hiddenFieldRoomNo.set(String.valueOf(room.getRoomNo()));
+  }
+
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    Platform.runLater(() -> {
+      update();
+    });
+  }
+
+  public Boolean addReservation() throws RemoteException
+  {
+    if (user == null)
+    {
+      Alert notLoggedIn = new Alert(Alert.AlertType.INFORMATION);
+      notLoggedIn.setHeaderText("Log in required");
+      notLoggedIn.setContentText("Please log in into the system or create new account");
+      notLoggedIn.showAndWait();
+      return null;
+    }
+    else
+    {
+      try
+      {
+        if (fromDateNewReservation.getValue() == null || toDateNewReservation.getValue() == null)
+          throw new IllegalDateException(8);
+        if (MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()).isBefore(MyDate.today())||MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(MyDate.today()))
+          throw new IllegalDateException(9);
+        String state = model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()),
+            model.getCurrentCustomer().getUsername(), MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),
+            MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
+        if (state.equals(DatabaseConnection.SUCCESS))
+        {
+          Alert alert = new Alert(Alert.AlertType.INFORMATION,
+              "Successfully added a new reservation", ButtonType.OK);
+          alert.setTitle("Success");
+          alert.setHeaderText(null);
+          alert.showAndWait();
+          return true;
+        }
+        if (state.equals(DatabaseConnection.ERROR))
+        {
+          Alert alert = new Alert(Alert.AlertType.ERROR, "Error occurred",
+              ButtonType.OK);
+          alert.setTitle("Error");
+          alert.setHeaderText(null);
+          alert.showAndWait();
+          return false;
+        }
+      }
+      catch (NumberFormatException e)
+      {
+        Alert alert = new Alert(Alert.AlertType.ERROR,
+            "Please select a room to reserve", ButtonType.OK);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+      }
+      catch (IllegalDateException e)
+      {
+        Alert alert = new Alert(Alert.AlertType.ERROR, e.message(), ButtonType.OK);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+      }
+      return false;
+    }
+  }
+
+  public void bindHiddenText(StringProperty property)
+  {
+    property.bindBidirectional(hiddenFieldRoomNo);
+  }
+
+  public void bindFromDateNewReservation(ObjectProperty<LocalDate> property)
+  {
+    property.bindBidirectional(fromDateNewReservation);
+  }
+
+  public void bindToDateNewReservation(ObjectProperty<LocalDate> property)
+  {
+    property.bindBidirectional(toDateNewReservation);
+  }
+
+  public void bindReserveKitchen(BooleanProperty property)
+  {
+    property.bindBidirectional(reserveKitchen);
+  }
+
+  public void bindReserveBalcony(BooleanProperty property)
+  {
+    property.bindBidirectional(reserveBalcony);
+  }
+
+  public void bindReserveInternet(BooleanProperty property)
+  {
+    property.bindBidirectional(reserveInternet);
+  }
+
+  public void bindReserveBathroom(BooleanProperty property)
+  {
+    property.bindBidirectional(reserveBathroom);
+  }
+
+  public void bindReservePrice(ObjectProperty<Integer> property)
+  {
+    property.bindBidirectional(reservePricePerNight);
+  }
+
+  public void bindReserveRoomNo(StringProperty property)
+  {
+    property.bindBidirectional(reserveRoomNo);
+  }
+
+  public void bindReserveNoBeds(StringProperty property)
+  {
+    property.bindBidirectional(reserveNoBeds);
   }
 
   public void filterNewReservation() throws RemoteException

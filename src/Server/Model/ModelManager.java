@@ -8,6 +8,7 @@ import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Users.Person;
 import Server.Utility.DataBase.Customer.CustomerData;
 import Server.Utility.DataBase.Customer.CustomerDataImplementation;
+import Server.Utility.DataBase.DatabaseConnection;
 import Server.Utility.DataBase.Employee.EmployeeData;
 import Server.Utility.DataBase.Employee.EmployeeDataImplementation;
 import Server.Utility.DataBase.Reservation.ReservationData;
@@ -134,17 +135,20 @@ public class ModelManager implements Model
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony)
   {
-    log(Types.Room,roomNumber+" is added to the system");
-    return roomData.addNewRoom(roomNumber, numberOfBeds, size, price,
-        orientation, internet, bathroom, kitchen, balcony, "Free");
+    String state=roomData.addNewRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony, "Free");
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Room,roomNumber+" is added to the system");
+    return state;
   }
 
   @Override public String addReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, boolean CheckedIn)
   {
-    log(Types.Reservation,roomNumber+" ->"+ fromDate+" / "+toDate+" is added");
-    return reservationData.addNewReservation(roomNumber, username, fromDate,
+    String state=reservationData.addNewReservation(roomNumber, username, fromDate,
         toDate, CheckedIn);
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Reservation,roomNumber+" ->"+ fromDate+" / "+toDate+" is added");
+    return state;
   }
 
   @Override public Employee getNewEmployee()
@@ -155,67 +159,85 @@ public class ModelManager implements Model
   @Override public String addEmployee(String firstName, String lastName,
       String position, String phoneNo, String password)
   {
-    log(Types.Employee,firstName+" "+lastName+" is added to the system");
-    return employeeData.AddEmployee(password, firstName, lastName, phoneNo,
+    String state=employeeData.AddEmployee(password, firstName, lastName, phoneNo,
         position);
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Employee,firstName+" "+lastName+" is added to the system");
+    return state;
   }
 
   @Override public String addReview(String username, int roomNO,
       MyDate fromDate, MyDate postedDate, String comment)
   {
-    log(Types.Review,roomNO+" -> "+fromDate+" / "+postedDate+" added");
-    return reviewData.addReview(username, roomNO, fromDate, postedDate, comment) ;
+    String state=reviewData.addReview(username, roomNO, fromDate, postedDate, comment) ;
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Review,roomNO+" -> "+fromDate+" / "+postedDate+" added");
+    return state;
   }
 
   @Override public String updateRoom(int roomNumber, int numberOfBeds, int size,
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony)
   {
-    log(Types.Room,roomNumber+" has been updated");
-    return roomData.updateRoom(roomNumber, numberOfBeds, size, price,
+    String state=roomData.updateRoom(roomNumber, numberOfBeds, size, price,
         orientation, internet, bathroom, kitchen, balcony);
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Room,roomNumber+" has been updated");
+    return state;
   }
 
   @Override public String updateCustomer(String username, String firstName,
       String lastName, String phoneNumber, String payment)
   {
-    log(Types.Customer,firstName+" "+lastName+" has been updated");
-    return customerData.editCustomer(username, firstName, lastName, phoneNumber,
+    String state=customerData.editCustomer(username, firstName, lastName, phoneNumber,
         payment);
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Customer,firstName+" "+lastName+" has been updated");
+    return state;
   }
 
   @Override public String updateEmployee(String username, String firstName,
       String lastName, String position, String phoneNo)
   {
-    log(Types.Employee,firstName+" "+lastName+" has been updated");
-    return employeeData.editEmployee(username, firstName, lastName, position,
+    String state=employeeData.editEmployee(username, firstName, lastName, position,
         phoneNo);
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Employee,firstName+" "+lastName+" has been updated");
+    return state;
   }
 
   @Override public String deleteRoom(int roomNumber)
   {
-    log(Types.Room,roomNumber+" has been deleted from the database");
-    return roomData.deleteRoom(roomNumber);
+    String state=roomData.deleteRoom(roomNumber);
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Room,roomNumber+" has been deleted from the database");
+    return state;
   }
 
   @Override public String deleteSelectedCustomer(String username)
 
   {
-    log(Types.Customer,username+" has been deleted");
-    return customerData.deleteCustomer(username);
+    String state=customerData.deleteCustomer(username);
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Customer,username+" has been deleted");
+    return state;
   }
 
   @Override public String deleteEmployee(String userID)
   {
-    log(Types.Employee,userID+" has been deleted");
-    return employeeData.deleteEmployee(userID);
+    String state=employeeData.deleteEmployee(userID);
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Employee,userID+" has been deleted");
+    return state;
   }
 
   @Override public String deleteReservation(int roomNo, String username,
       MyDate fromDate)
   {
-    log(Types.Reservation,roomNo+" ->"+ fromDate+" has been deleted");
-    return reservationData.deleteReservation(roomNo, username, fromDate);
+    String state=reservationData.deleteReservation(roomNo, username, fromDate);
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Reservation,roomNo+" ->"+ fromDate+" has been deleted");
+    return state;
   }
 
   @Override public ArrayList<Room> getAllRooms()
@@ -355,30 +377,38 @@ public class ModelManager implements Model
       MyDate fromDate, MyDate toDate, int oldRoomNo, String oldUsername,
       MyDate oldFromDate,MyDate oldToDate)
   {
-    log(Types.Reservation,roomNumber+" -> "+fromDate+" "+toDate+" has been updated");
-    return reservationData.updateReservation(roomNumber, username, fromDate,
+    String state=reservationData.updateReservation(roomNumber, username, fromDate,
         toDate, oldRoomNo, oldUsername, oldFromDate,oldToDate);
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Reservation,roomNumber+" -> "+fromDate+" "+toDate+" has been updated");
+    return state;
   }
 
   @Override public String addCustomer(String username, String password,
       String firstName, String lastName, String phoneNo, String paymentInfo)
 
   {
-    log(Types.Customer,firstName+" "+lastName+" has been added");
-    return customerData.addCustomer(username,password,firstName,lastName,phoneNo,paymentInfo);
+    String state=customerData.addCustomer(username,password,firstName,lastName,phoneNo,paymentInfo);
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Customer,firstName+" "+lastName+" has been added");
+    return state;
   }
 
   @Override public String checkIn(int roomNumber, String username,
       MyDate fromDate)
   {
-    log(Types.Reservation,roomNumber+" -> "+username+" checked in");
-    return reservationData.checkIn(roomNumber, username, fromDate);
+    String state=reservationData.checkIn(roomNumber, username, fromDate);
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Reservation,roomNumber+" -> "+username+" checked in");
+    return state;
   }
 
   @Override public String checkOut(int roomNumber, String username,
       MyDate fromDate)
   {
-    log(Types.Reservation,roomNumber+" -> "+username+" checked out");
-    return reservationData.checkOut(roomNumber, username, fromDate);
+    String state=reservationData.checkOut(roomNumber, username, fromDate);
+    if (state.equals(DatabaseConnection.SUCCESS))
+      log(Types.Reservation,roomNumber+" -> "+username+" checked out");
+    return state;
   }
 }

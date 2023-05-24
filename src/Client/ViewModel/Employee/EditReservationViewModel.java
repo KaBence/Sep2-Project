@@ -1,6 +1,7 @@
 package Client.ViewModel.Employee;
 
 import Client.Model.Model;
+import Client.Model.ModelEmployeeSide;
 import Server.Model.MyDate;
 import Server.Model.Hotel.Reservation;
 import Server.Utility.DataBase.DatabaseConnection;
@@ -17,7 +18,7 @@ import java.time.LocalDate;
 
 public class EditReservationViewModel
 {
-  private Model model;
+  private ModelEmployeeSide model;
 
   private SimpleObjectProperty<LocalDate> fromDate,toDate;
 

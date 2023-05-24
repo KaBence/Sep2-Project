@@ -30,18 +30,6 @@ public class AddReviewViewModel
     model.setPreviousView(b);
   }
 
-  /*public void update(){
-    ArrayList<Review> reviewsList;
-    try{
-      reviewsList =model.getAllReviews();
-    }
-    catch (RemoteException e)
-    {
-      throw new RuntimeException(e);
-    }
-    ObservableList<Review> reviewObservableList= FXCollections.observableList(reviewsList);
-
-  }*/
   public Alerts addReview() throws RemoteException
   {
     try

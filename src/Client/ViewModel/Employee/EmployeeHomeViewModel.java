@@ -1,6 +1,7 @@
 package Client.ViewModel.Employee;
 
 import Client.Model.Model;
+import Client.Model.ModelEmployeeSide;
 import Client.Utility.Alerts;
 import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Employee;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 
 public class EmployeeHomeViewModel implements PropertyChangeListener
 {
-  private Model  model;
+  private ModelEmployeeSide model;
   private SimpleObjectProperty<ObservableList<Room>> rooms;
   private SimpleObjectProperty<ObservableList<Customer>> customers;
   private SimpleObjectProperty<ObservableList<Employee>> employees;

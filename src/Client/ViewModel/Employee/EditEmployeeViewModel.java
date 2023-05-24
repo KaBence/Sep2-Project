@@ -1,6 +1,7 @@
 package Client.ViewModel.Employee;
 
 import Client.Model.Model;
+import Client.Model.ModelEmployeeSide;
 import Server.Model.Hotel.Users.Employee;
 import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.ObjectProperty;
@@ -14,7 +15,7 @@ import java.rmi.RemoteException;
 
 public class EditEmployeeViewModel
 {
-  private Model model;
+  private ModelEmployeeSide model;
   private SimpleStringProperty username, firstName, lastName, phoneNo;
   private SimpleObjectProperty<String> position;
 

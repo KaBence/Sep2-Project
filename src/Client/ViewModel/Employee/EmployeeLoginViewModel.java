@@ -1,6 +1,7 @@
 package Client.ViewModel.Employee;
 
 import Client.Model.Model;
+import Client.Model.ModelEmployeeSide;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Users.Person;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 
 public class EmployeeLoginViewModel
 {
-  private Model model;
+  private ModelEmployeeSide model;
   private Person user;
   private ArrayList<Employee> employees;
   private SimpleStringProperty username;
