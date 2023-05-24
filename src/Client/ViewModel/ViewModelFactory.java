@@ -1,6 +1,12 @@
 package Client.ViewModel;
 
 import Client.Model.Model;
+import Client.ViewModel.Customer.AddCustomerViewModel;
+import Client.ViewModel.Customer.AddReviewViewModel;
+import Client.ViewModel.Customer.CustomerEditReservationViewModel;
+import Client.ViewModel.Customer.CustomerHomeViewModel;
+import Client.ViewModel.Employee.*;
+import Client.ViewModel.Shared.HomeViewModel;
 
 public class ViewModelFactory
 {

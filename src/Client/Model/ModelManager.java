@@ -1,7 +1,6 @@
 package Client.Model;
 
 import Client.Mediator.Client;
-import Client.View.SceneNames;
 import Server.Model.*;
 import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Users.Customer;

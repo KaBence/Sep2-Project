@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Controllers.Employee.EditCustomerController">
+   <children>
+      <Label layoutX="233.0" layoutY="25.0" text="Customer's info">
+         <font>
+            <Font name="Century Gothic" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="52.0" layoutY="174.0" text="Email">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="45.0" layoutY="91.0" text="Firstname">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="334.0" layoutY="95.0" text="Lastname">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="333.0" layoutY="174.0" text="Phone No.">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="250.0" text="Payment Info">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="502.0" layoutY="336.0" mnemonicParsing="false" onAction="#save" text="Save">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="396.0" layoutY="336.0" mnemonicParsing="false" onAction="#cancel" text="Cancel">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+      </Button>
+      <TextField fx:id="payment" layoutX="146.0" layoutY="244.0" prefHeight="31.0" prefWidth="154.0">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="lastName" layoutX="430.0" layoutY="89.0" prefHeight="31.0" prefWidth="154.0">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="firstName" layoutX="146.0" layoutY="91.0" prefHeight="31.0" prefWidth="154.0">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="phoneNo" layoutX="429.0" layoutY="168.0" prefHeight="31.0" prefWidth="154.0">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font></TextField>
+      <TextField fx:id="username" layoutX="144.0" layoutY="168.0" prefHeight="31.0" prefWidth="154.0">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font></TextField>
+      <Button layoutX="45.0" layoutY="336.0" mnemonicParsing="false" onAction="#delete" text="Delete this customer">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

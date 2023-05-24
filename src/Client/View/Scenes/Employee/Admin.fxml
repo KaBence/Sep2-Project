@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Controllers.Employee.AdminController">
+  <tabs>
+    <Tab text="Add new Employee">
+         <content>
+            <AnchorPane prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <Label layoutX="167.0" layoutY="26.0" text="Adding a New Employee">
+                     <font>
+                        <Font name="Cambria Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="33.0" layoutY="93.0" text="First Name">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="331.0" layoutY="93.0" text="Last Name">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="18.0" layoutY="176.0" text="Phone Number">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="354.0" layoutY="176.0" text="Position">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="45.0" layoutY="252.0" text="Password">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="308.0" layoutY="252.0" text="Repeat Password">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="firstNameAddEmployee" layoutX="128.0" layoutY="91.0" />
+                  <TextField fx:id="lastNameAddEmployee" layoutX="431.0" layoutY="91.0" />
+                  <TextField fx:id="phoneAddEmployee" layoutX="127.0" layoutY="174.0" />
+                  <ChoiceBox fx:id="positionAddNewEmployee" layoutX="430.0" layoutY="174.0" prefWidth="150.0" />
+                  <Button layoutX="325.0" layoutY="319.0" mnemonicParsing="false" onAction="#register" text="Register">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <Line endX="609.1000366210938" endY="141.69288635253906" startX="1.029968279908644E-5" startY="141.69288635253906" />
+                  <Line endX="600.0" endY="141.69288635253906" layoutX="8.0" layoutY="86.0" startX="-7.999996662139893" startY="141.69288635253906" />
+                  <Button layoutX="228.0" layoutY="319.0" mnemonicParsing="false" onAction="#home" text="Home">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                  <PasswordField fx:id="password" layoutX="127.0" layoutY="250.0" />
+                  <PasswordField fx:id="repeatPassword" layoutX="431.0" layoutY="250.0" />
+               </children>
+            </AnchorPane>
+         </content>
+    </Tab>
+      <Tab fx:id="employeeInfo" text="Employee info">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="35.0" layoutY="318.0" mnemonicParsing="false" onAction="#home" text="Home">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <ListView fx:id="employeeListView" layoutX="11.0" layoutY="77.0" onMouseClicked="#tableClickEmployee" prefHeight="230.0" prefWidth="404.0" />
+                  <Line endX="-100.0" endY="194.66665649414062" layoutX="523.0" layoutY="134.0" startX="-100.0" startY="-116.66666412353516" stroke="#00000063" />
+                  <TextField fx:id="filteringEmployee" layoutX="80.0" layoutY="28.0" onKeyReleased="#simpleFilterEmployee" promptText="Enter Employee info" />
+                  <TextField fx:id="employeeUsernameFilter" layoutX="438.0" layoutY="77.0" onKeyReleased="#filterEmployee" promptText="Username" />
+                  <TextField fx:id="employeeLastNameFilter" layoutX="437.0" layoutY="179.0" onKeyReleased="#filterEmployee" promptText="Last Name" />
+                  <TextField fx:id="employeePhoneNumberFilter" layoutX="438.0" layoutY="281.0" onKeyReleased="#filterEmployee" promptText="Phone number" />
+                  <TextField fx:id="employeeFirstNameFilter" layoutX="438.0" layoutY="128.0" onKeyReleased="#filterEmployee" promptText="First Name" />
+                  <TextField fx:id="employeePositionFilter" layoutX="438.0" layoutY="233.0" onKeyReleased="#filterEmployee" promptText="Position" />
+                  <ToggleButton fx:id="toggleEmployeeButton" layoutX="300.0" layoutY="28.0" mnemonicParsing="false" onAction="#ToggleEmployee" text="ToggleButton" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>

@@ -1,5 +1,8 @@
 package Server.Model.Hotel.Users;
 
+import Server.Model.Hotel.Users.States.LogOut;
+import Server.Model.Hotel.Users.States.States;
+
 import java.io.Serializable;
 
 public abstract class Person implements Serializable

@@ -1,7 +1,7 @@
 package Client.View;
 
+import Client.View.Scenes.SceneNames;
 import Client.ViewModel.ViewModelFactory;
-import Server.Model.Hotel.Users.Guest;
 import Server.Model.Hotel.Users.Person;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;

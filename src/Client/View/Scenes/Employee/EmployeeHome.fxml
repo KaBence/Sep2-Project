@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Controllers.Employee.EmployeeHomeController">
+  <tabs>
+      <Tab fx:id="reservation" text="Booking">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="checkIn" layoutX="275.0" layoutY="324.0" mnemonicParsing="false" onAction="#checkIn" text="Check In" />
+                  <Button fx:id="checkOut" layoutX="363.0" layoutY="324.0" mnemonicParsing="false" onAction="#checkOut" text="Check out" />
+                  <ListView fx:id="reservationListView" layoutX="32.0" layoutY="29.0" onMouseClicked="#tableClickBooking" prefHeight="278.0" prefWidth="358.0" />
+                  <Button layoutX="32.0" layoutY="324.0" mnemonicParsing="false" onAction="#Home" text="Home" />
+                  <Button layoutX="534.0" layoutY="324.0" mnemonicParsing="false" onAction="#editReservation" text="Edit" />
+                  <RadioButton fx:id="allFilter" layoutX="412.0" layoutY="29.0" mnemonicParsing="false" onAction="#filterReservation" selected="true" text="All Reservations/Bookings">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="thingies" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="bookingFilter" layoutX="412.0" layoutY="82.0" mnemonicParsing="false" onAction="#filterReservation" text="Bookings" toggleGroup="$thingies" />
+                  <RadioButton fx:id="reservationFilter" layoutX="412.0" layoutY="56.0" mnemonicParsing="false" onAction="#filterReservation" text="Reservations" toggleGroup="$thingies" />
+                  <DatePicker fx:id="fromDateReservation" layoutX="413.0" layoutY="119.0" onAction="#filterReservation" promptText="From" />
+                  <DatePicker fx:id="toDateReservation" layoutX="413.0" layoutY="161.0" onAction="#filterReservation" promptText="To" />
+                  <Button layoutX="457.0" layoutY="324.0" mnemonicParsing="false" onAction="#deleteReservation" text="Delete" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab fx:id="newReservation" text="New Reservation">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Line endX="33.5999755859375" endY="203.0" layoutX="388.0" layoutY="144.0" startX="33.5999755859375" startY="-112.99999237060547" stroke="#00000064" />
+                  <Button layoutX="325.0" layoutY="320.0" mnemonicParsing="false" onAction="#createNewReservation" text="Create">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="26.0" layoutY="320.0" mnemonicParsing="false" onAction="#Home" text="Home">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <ListView fx:id="roomListViewNewReservation" layoutX="14.0" layoutY="55.0" onMouseClicked="#tableClickNewReservation" prefHeight="243.0" prefWidth="387.0" />
+                  <VBox layoutX="436.0" layoutY="29.0" prefHeight="320.0" prefWidth="157.0" spacing="15.0">
+                     <children>
+                        <DatePicker fx:id="fromDateNewReservation" onAction="#filterNewReservation" promptText="From date" />
+                        <DatePicker fx:id="toDateNewReservation" onAction="#filterNewReservation" promptText="Finish date" />
+                        <CheckBox fx:id="reserveBalcony" mnemonicParsing="false" onAction="#filterNewReservation" prefHeight="18.0" prefWidth="77.0" text="Balcony">
+                           <font>
+                              <Font name="Century Gothic" size="13.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="reserveKitchen" mnemonicParsing="false" onAction="#filterNewReservation" prefHeight="21.0" prefWidth="103.0" text="Kitchen">
+                           <font>
+                              <Font name="Century Gothic" size="13.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="reserveInternet" mnemonicParsing="false" onAction="#filterNewReservation" text="Internet">
+                           <font>
+                              <Font name="Century Gothic" size="13.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="reserveBathroom" mnemonicParsing="false" onAction="#filterNewReservation" prefHeight="19.0" prefWidth="87.0" text="Bathroom">
+                           <font>
+                              <Font name="Century Gothic" size="13.0" />
+                           </font>
+                        </CheckBox>
+                        <ComboBox fx:id="reservePricePerNight" onAction="#filterNewReservation" prefHeight="26.0" prefWidth="120.0" promptText="Price per night" />
+                        <TextField fx:id="reserveNrOfBeds" onAction="#filterNewReservation" prefHeight="26.0" prefWidth="122.0" promptText="Nr of Beds" />
+                        <TextField fx:id="reserveRoomNr" onAction="#filterNewReservation" prefHeight="26.0" prefWidth="118.0" promptText="Room Nr" />
+                     </children>
+                  </VBox>
+                  <TextField fx:id="hiddenFieldRoomNo" layoutX="214.0" layoutY="18.0" opacity="0.0" />
+                  <Button layoutX="325.0" layoutY="17.0" mnemonicParsing="false" onAction="#clearDates" text="Clear Dates" />
+               </children></AnchorPane>
+        </content>
+      </Tab>
+    <Tab fx:id="employeeInfo" text="Employee info">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="35.0" layoutY="318.0" mnemonicParsing="false" onAction="#Home" text="Home">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <ListView fx:id="employeeListView" layoutX="11.0" layoutY="77.0" prefHeight="230.0" prefWidth="404.0" />
+                  <Line endX="-100.0" endY="194.66665649414062" layoutX="523.0" layoutY="134.0" startX="-100.0" startY="-116.66666412353516" stroke="#00000063" />
+                  <TextField fx:id="filteringEmployee" layoutX="80.0" layoutY="28.0" onKeyReleased="#simpleFilterEmployee" promptText="Enter Employee info" />
+                  <TextField fx:id="employeeUsernameFilter" layoutX="438.0" layoutY="77.0" onKeyReleased="#filterEmployee" promptText="Username" />
+                  <TextField fx:id="employeeLastNameFilter" layoutX="437.0" layoutY="179.0" onKeyReleased="#filterEmployee" promptText="Last Name" />
+                  <TextField fx:id="employeePhoneNumberFilter" layoutX="438.0" layoutY="281.0" onKeyReleased="#filterEmployee" promptText="Phone number" />
+                  <TextField fx:id="employeeFirstNameFilter" layoutX="438.0" layoutY="128.0" onKeyReleased="#filterEmployee" promptText="First Name" />
+                  <TextField fx:id="employeePositionFilter" layoutX="438.0" layoutY="233.0" onKeyReleased="#filterEmployee" promptText="Position" />
+                  <ToggleButton fx:id="toggleEmployeeButton" layoutX="300.0" layoutY="28.0" mnemonicParsing="false" onAction="#ToggleEmployee" text="ToggleButton" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab fx:id="customerInfo" text="Customer info">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="34.0" layoutY="317.0" mnemonicParsing="false" onAction="#Home" text="Home">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <ListView fx:id="customerListView" layoutX="14.0" layoutY="83.0" onMouseClicked="#tableClickCustomer" prefHeight="218.0" prefWidth="376.0" />
+                  <TextField fx:id="filteringCustomer" layoutX="83.0" layoutY="28.0" onKeyReleased="#filterCustomer" promptText="Enter Customer Info" />
+                  <TextField fx:id="username" layoutX="429.0" layoutY="77.0" onKeyReleased="#onFilter" promptText="Username" />
+                  <TextField fx:id="firstName" layoutX="429.0" layoutY="132.0" onKeyReleased="#onFilter" promptText="First Name" />
+                  <TextField fx:id="lastName" layoutX="429.0" layoutY="180.0" onKeyReleased="#onFilter" promptText="Last Name" />
+                  <TextField fx:id="phoneNo" layoutX="429.0" layoutY="233.0" onKeyReleased="#onFilter" promptText="Phone Number" />
+                  <TextField fx:id="paymentInfo" layoutX="429.0" layoutY="282.0" onKeyReleased="#onFilter" promptText="Payment Info" />
+                  <Line endX="25.20001220703125" endY="330.20001220703125" layoutX="384.0" layoutY="41.0" startX="25.20001220703125" startY="-40.99999237060547" stroke="#00000064" />
+                  <ToggleButton fx:id="toggleCustomerButton" layoutX="286.0" layoutY="28.0" mnemonicParsing="false" onAction="#ToggleCustomer" text="ToggleButton" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+    <Tab fx:id="room" text="Rooms">
+         <content>
+            <AnchorPane prefHeight="298.0" prefWidth="483.0">
+               <children>
+                  <Line endX="33.5999755859375" endY="203.0" layoutX="385.0" layoutY="123.0" startX="33.5999755859375" startY="-112.99999237060547" stroke="#00000064" />
+                  <TextField fx:id="filteringRoom" layoutX="98.0" layoutY="22.0" onKeyReleased="#simpleFilterRoom" promptText="Enter Room Info" />
+                  <Button layoutX="353.0" layoutY="319.0" mnemonicParsing="false" onAction="#addRoom" text="Add">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button layoutX="24.0" layoutY="319.0" mnemonicParsing="false" onAction="#Home" text="Home">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
+                  <ListView fx:id="roomListView" layoutX="24.0" layoutY="64.0" onMouseClicked="#tableClickRoom" prefHeight="243.0" prefWidth="387.0" />
+                  <ToggleButton fx:id="toggleRoomButton" layoutX="312.0" layoutY="22.0" mnemonicParsing="false" onAction="#ToggleRoom" text="ToggleButton" />
+                  <VBox layoutX="430.0" layoutY="29.0" prefHeight="277.0" prefWidth="156.0" spacing="15.0">
+                     <children>
+                        <CheckBox fx:id="balconyFilter" mnemonicParsing="false" onAction="#filterRoom" prefHeight="18.0" prefWidth="77.0" text="Balcony">
+                           <font>
+                              <Font name="Century Gothic" size="13.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="kitchenFilter" mnemonicParsing="false" onAction="#filterRoom" prefHeight="21.0" prefWidth="103.0" text="Kitchen">
+                           <font>
+                              <Font name="Century Gothic" size="13.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="internetFilter" mnemonicParsing="false" onAction="#filterRoom" text="Internet">
+                           <font>
+                              <Font name="Century Gothic" size="13.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="bathroomFilter" mnemonicParsing="false" onAction="#filterRoom" prefHeight="19.0" prefWidth="87.0" text="Bathroom">
+                           <font>
+                              <Font name="Century Gothic" size="13.0" />
+                           </font>
+                        </CheckBox>
+                        <ComboBox fx:id="priceFilter" onAction="#filterRoom" prefHeight="26.0" prefWidth="120.0" promptText="Price per night" />
+                        <TextField fx:id="bedsFilter" onKeyReleased="#filterRoom" prefHeight="26.0" prefWidth="122.0" promptText="Nr of Beds" />
+                        <TextField fx:id="roomNoFilter" onKeyReleased="#filterRoom" prefHeight="26.0" prefWidth="118.0" promptText="Room Nr" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </content>
+    </Tab>
+  </tabs>
+</TabPane>

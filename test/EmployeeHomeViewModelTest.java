@@ -1,8 +1,9 @@
 import Client.Mediator.Client;
 import Client.Model.Model;
 import Client.Model.ModelManager;
-import Client.ViewModel.EmployeeHomeViewModel;
+import Client.ViewModel.Employee.EmployeeHomeViewModel;
 import Server.Mediator.Server;
+import Server.Model.Hotel.Reservation;
 import Server.Model.MyDate;
 import Server.Utility.DataBase.DatabaseConnection;
 import Shared.SharedInterface;
@@ -28,7 +29,7 @@ public class EmployeeHomeViewModelTest
   @BeforeEach
   void setUp() throws IOException, NotBoundException
   {
-    sharedInterface= Mockito.mock(Server.class);
+    sharedInterface= Mockito.mock(SharedInterface.class);
     client=new Client(sharedInterface);
     model=new ModelManager(sharedInterface);
     viewModel=new EmployeeHomeViewModel(model);
@@ -40,7 +41,9 @@ public class EmployeeHomeViewModelTest
     MyDate test=new MyDate(2,5,2023);
     Mockito.when(sharedInterface.deleteReservation(10,"John",test)).thenReturn(
         DatabaseConnection.SUCCESS);
-    assertEquals(viewModel.deleteReservation(10,"John",test),DatabaseConnection.SUCCESS);
+
+    viewModel.saveReservation(new Reservation(10,"John",test,new MyDate(12,5,2023),false));
+    assertTrue(viewModel.deleteReservation());
   }
 
   @Test

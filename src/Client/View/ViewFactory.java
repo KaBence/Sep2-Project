@@ -1,6 +1,9 @@
 package Client.View;
 
-import Client.View.Controllers.*;
+import Client.View.Controllers.Customer.*;
+import Client.View.Controllers.Employee.*;
+import Client.View.Controllers.Shared.HomeController;
+import Client.View.Scenes.SceneNames;
 import Client.ViewModel.ViewModelFactory;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Region;
@@ -37,7 +40,7 @@ public class ViewFactory
   private Region loadHomeView()
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/Home.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/Shared/Home.fxml"));
     try
     {
       Region root = loader.load();
@@ -56,7 +59,7 @@ public class ViewFactory
   private Region loadEmployeeLogin()
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/EmployeeLogin.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/Employee/EmployeeLogin.fxml"));
     try
     {
       Region root = loader.load();
@@ -75,7 +78,7 @@ public class ViewFactory
   private Region loadEmployeeHome(int i)
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/EmployeeHome.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/Employee/EmployeeHome.fxml"));
     try
     {
       Region root = loader.load();
@@ -95,7 +98,7 @@ public class ViewFactory
   private Region loadCustomerHome(int i)
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/CustomerHome.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/Customer/CustomerHome.fxml"));
     try
     {
       Region root = loader.load();
@@ -115,7 +118,7 @@ public class ViewFactory
   private Region loadAddRoom()
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/AddRoom.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/Employee/AddRoom.fxml"));
     try
     {
       Region root = loader.load();
@@ -134,7 +137,7 @@ public class ViewFactory
   private Region loadEditRoom()
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/EditRoom.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/Employee/EditRoom.fxml"));
     try
     {
       Region root = loader.load();
@@ -153,7 +156,7 @@ public class ViewFactory
   private Region loadEditCustomer()
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/EditCustomer.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/Employee/EditCustomer.fxml"));
     try
     {
       Region root = loader.load();
@@ -172,7 +175,7 @@ public class ViewFactory
   private Region loadEditEmployee()
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/EditEmployees.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/Employee/EditEmployees.fxml"));
     try
     {
       Region root = loader.load();
@@ -191,7 +194,7 @@ public class ViewFactory
   private Region loadEditReservation()
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/EditReservation.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/Employee/EditReservation.fxml"));
     try
     {
       Region root = loader.load();
@@ -210,7 +213,7 @@ public class ViewFactory
   private Region loadReview()
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/AddReview.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/Customer/AddReview.fxml"));
     try
     {
       Region root = loader.load();
@@ -228,7 +231,7 @@ public class ViewFactory
   private Region loadAddCustomer()
   {
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/AddCustomer.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/Customer/AddCustomer.fxml"));
 
     try
     {
@@ -245,9 +248,9 @@ public class ViewFactory
 
   }
 
-  private Region loadAdminView(){
+  private Region loadAdminView(int i){
     FXMLLoader loader=new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/Admin.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/Employee/Admin.fxml"));
     try
     {
       Region root = loader.load();
@@ -258,13 +261,14 @@ public class ViewFactory
       throw new IOError(e);
     }
     adminController.reset();
+    adminController.selection(i);
     return adminController.getRoot();
   }
 
   private Region loadCustomerEditReservation()
   {
     FXMLLoader loader=new FXMLLoader();
-    loader.setLocation(getClass().getResource("Scenes/CustomerEditReservation.fxml"));
+    loader.setLocation(getClass().getResource("Scenes/Customer/CustomerEditReservation.fxml"));
     try
     {
       Region root = loader.load();
@@ -294,7 +298,8 @@ public class ViewFactory
       case EditCustomer -> loadEditCustomer();
       case EditEmployee -> loadEditEmployee();
       case EditReservation -> loadEditReservation();
-      case Admin -> loadAdminView();
+      case AdminAddEmployee -> loadAdminView(0);
+      case AdminAllEmployees -> loadAdminView(1);
       case AddCustomer -> loadAddCustomer();
       case Review -> loadReview();
       case CustomerEditReservation -> loadCustomerEditReservation();
