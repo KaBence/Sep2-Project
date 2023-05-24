@@ -7,10 +7,11 @@ import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Users.Person;
 import Server.Model.MyDate;
 
+import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface ModelEmployeeSide
+public interface ModelEmployeeSide extends PropertyChangeListener
 {
   Person setGuest();
   Person logIn(Person user) throws RemoteException;
@@ -89,5 +90,5 @@ public interface ModelEmployeeSide
   String checkIn(int roomNumber, String username, MyDate fromDate) throws RemoteException;
   String checkOut(int roomNumber, String username, MyDate fromDate) throws RemoteException;
 
-
+  void addPropertyChangeListener(PropertyChangeListener listener);
 }

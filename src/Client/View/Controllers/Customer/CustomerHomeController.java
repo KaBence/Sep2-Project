@@ -39,6 +39,7 @@ public class CustomerHomeController
   @FXML AnchorPane loggingIn, myProfileAnchorPane;
   @FXML TabPane tabPane;
   @FXML Tab newReservation, myReservation, allReviews;
+
   private Region root;
   private ViewHandler viewHandler;
   private CustomerHomeViewModel viewModel;
@@ -105,25 +106,26 @@ public class CustomerHomeController
   @FXML void Home()
   {
     viewHandler.openView(SceneNames.Home);
-    onLogOut();
+    viewModel.previousView();
   }
 
   @FXML void createNewReservation()
   {
-    if (viewModel.addReservation() == null)
+    Alerts x = viewModel.addReservation();
+    x.showAndWait();
+    if (x.getAlertType().equals(Alert.AlertType.WARNING))
     {
       SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
       selectionModel.select(1);
     }
+
   }
 
   @FXML void tableClickNewReservation()
   {
-    if (roomListViewNewReservation.getSelectionModel().getSelectedItem()
-        != null)
+    if (roomListViewNewReservation.getSelectionModel().getSelectedItem() != null)
     {
-      viewModel.saveRoom(
-          roomListViewNewReservation.getSelectionModel().getSelectedItem());
+      viewModel.saveRoom(roomListViewNewReservation.getSelectionModel().getSelectedItem());
       viewModel.fillHiddenField();
     }
   }
@@ -160,11 +162,11 @@ public class CustomerHomeController
   @FXML void review()
   {
     Alerts x = viewModel.getSelectedReservation();
+    x.showAndWait();
     if (!x.getAlertType().equals(Alert.AlertType.ERROR))
     {
       viewHandler.openView(SceneNames.Review);
     }
-    x.showAndWait();
   }
 
   @FXML void onLogin()
@@ -175,6 +177,10 @@ public class CustomerHomeController
       myProfileAnchorPane.setOpacity(1.0);
       loggingIn.setLayoutY(400.00);
     }
+    else
+    {
+      x.showAndWait();
+    }
     username.clear();
     passwordField.clear();
   }
@@ -182,6 +188,7 @@ public class CustomerHomeController
   @FXML public void onLogOut()
   {
     Alerts x = viewModel.logOut();
+    x.showAndWait();
     if (x.getAlertType().equals(Alert.AlertType.NONE))
     {
       myProfileAnchorPane.setOpacity(0.0);
@@ -193,8 +200,7 @@ public class CustomerHomeController
   {
     if (myReservations.getSelectionModel().getSelectedItem() != null)
     {
-      viewModel.saveReservation(
-          myReservations.getSelectionModel().getSelectedItem());
+      viewModel.saveReservation(myReservations.getSelectionModel().getSelectedItem());
     }
   }
 

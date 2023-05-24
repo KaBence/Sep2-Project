@@ -1,6 +1,7 @@
 package Client.ViewModel.Customer;
 
 import Client.Model.Model;
+import Client.Model.ModelCustomerSide;
 import Client.Utility.Alerts;
 import Server.Model.Hotel.Reservation;
 import Server.Model.MyDate;
@@ -18,7 +19,7 @@ import java.time.LocalDate;
 
 public class CustomerEditReservationViewModel
 {
-  private Model model;
+  private ModelCustomerSide model;
 
   private SimpleObjectProperty<LocalDate> fromDate, toDate;
 

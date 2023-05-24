@@ -16,6 +16,5 @@ public interface Model extends ModelCustomerSide,ModelEmployeeSide
 {
   boolean getCurrent();
 
-  void addPropertyChangeListener(PropertyChangeListener listener);
 
 }
