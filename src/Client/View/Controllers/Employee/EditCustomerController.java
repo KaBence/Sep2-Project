@@ -1,9 +1,12 @@
 package Client.View.Controllers.Employee;
 
+import Client.Utility.Alerts;
 import Client.View.Scenes.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.Employee.EditCustomerViewModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 
@@ -45,8 +48,12 @@ public class EditCustomerController
 
   @FXML void save() throws RemoteException
   {
-    if (viewModel.save())
+    Alerts x = viewModel.save();
+    x.showAndWait();
+    if (x.getAlertType().equals(Alert.AlertType.INFORMATION))
+    {
       viewHandler.openView(SceneNames.EmployeeHomeCustomer);
+    }
   }
 
   @FXML void cancel()
@@ -56,9 +63,15 @@ public class EditCustomerController
 
   @FXML void delete() throws RemoteException
   {
-    if (viewModel.delete())
+    Alerts conformation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want to delete this customer from the system?",null);
+    if (conformation.getResult().equals(ButtonType.YES))
     {
-      viewHandler.openView(SceneNames.EmployeeHomeCustomer);
+      Alerts x = viewModel.delete();
+      x.showAndWait();
+      if (x.getAlertType().equals(Alert.AlertType.INFORMATION))
+      {
+        viewHandler.openView(SceneNames.EmployeeHomeCustomer);
+      }
     }
   }
 

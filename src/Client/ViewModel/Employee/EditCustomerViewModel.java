@@ -2,7 +2,9 @@ package Client.ViewModel.Employee;
 
 import Client.Model.Model;
 import Client.Model.ModelEmployeeSide;
+import Client.Utility.Alerts;
 import Server.Model.Hotel.Users.Customer;
+import Server.Model.Hotel.Users.States.LogIn;
 import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -47,43 +49,22 @@ public class EditCustomerViewModel
     property.bindBidirectional(payment);
   }
 
-  public boolean delete() throws RemoteException
+  public Alerts delete() throws RemoteException
   {
-    Alert alert = new Alert(Alert.AlertType.WARNING,
-        "Do you really want to delete this customer from the system?",
-        ButtonType.NO, ButtonType.YES);
-    alert.setTitle("Warning");
-    alert.setHeaderText(null);
-    alert.showAndWait();
-    if (alert.getResult().equals(ButtonType.NO))
-      return false;
-
-    if (model.getSelectedCustomer().getState().equals("Logged in"))
+    if (model.getSelectedCustomer().getState().equals(new LogIn().getState()))
     {
-      Alert logged = new Alert(Alert.AlertType.ERROR);
-      logged.setHeaderText("Error");
-      logged.setHeaderText("You cannot delete this customer right now, because the Customer is currently using the system.");
-      logged.showAndWait();
-      return false;
+      return new Alerts(Alert.AlertType.ERROR,"Error","You cannot delete this customer right now, because the Customer is currently using the system.");
     }
     else
     {
       String state = model.deleteSelectedCustomer(username.getValue());
       if (state.equals(DatabaseConnection.SUCCESS))
       {
-        Alert success = new Alert(Alert.AlertType.INFORMATION);
-        success.setHeaderText("Success");
-        success.setHeaderText("The customer has been successfully removed");
-        success.showAndWait();
-        return true;
+        return new Alerts(Alert.AlertType.INFORMATION,"Success","The customer has been successfully removed");
       }
       else
       {
-        Alert error = new Alert(Alert.AlertType.ERROR);
-        error.setHeaderText("Error");
-        error.setHeaderText("You cannot delete this customer right now");
-        error.showAndWait();
-        return false;
+        return new Alerts(Alert.AlertType.ERROR,"Error","You cannot delete this customer right now");
       }
     }
   }
@@ -95,31 +76,23 @@ public class EditCustomerViewModel
     phoneNo.set(temp.getPhoneNo());
     payment.set(temp.getPaymentInfo());
   }
-  public boolean save() throws RemoteException{
+  public Alerts save() throws RemoteException{
 
-    try{
+    try
+    {
       String state=model.updateCustomer(username.getValue(),firstName.getValue(), lastName.getValue(), phoneNo.getValue(), payment.getValue());
-      if (state.equals(DatabaseConnection.SUCCESS)){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful", ButtonType.OK);
-        alert.setHeaderText(null);
-        alert.setTitle("Success");
-        alert.showAndWait();
-        return true;
+      if (state.equals(DatabaseConnection.SUCCESS))
+      {
+        return new Alerts(Alert.AlertType.INFORMATION,"Success","Edit Successful");
       }
-      else {
-        Alert error = new Alert(Alert.AlertType.ERROR);
-        error.setHeaderText("Error");
-        error.setHeaderText("You cannot edit this customer right now");
-        error.showAndWait();
-        return false;
+      else
+      {
+        return new Alerts(Alert.AlertType.ERROR,"Error","You cannot edit this customer right now");
       }
     }
-    catch (Exception e){
-      Alert mandatory = new Alert(Alert.AlertType.ERROR);
-      mandatory.setHeaderText("Error");
-      mandatory.setHeaderText("Mandatory fields can not be empty");
-      mandatory.showAndWait();
-      return false;
+    catch (Exception e)
+    {
+      return new Alerts(Alert.AlertType.WARNING,"Error","Mandatory fields can not be empty");
     }
   }
 }

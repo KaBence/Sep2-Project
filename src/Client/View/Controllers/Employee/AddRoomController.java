@@ -1,9 +1,11 @@
 package Client.View.Controllers.Employee;
 
+import Client.Utility.Alerts;
 import Client.View.Scenes.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.Employee.AddRoomViewModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -77,8 +79,12 @@ public class AddRoomController
 
   @FXML void Add() throws RemoteException
   {
-    if (viewModel.addRoom())
+    Alerts x = viewModel.addRoom();
+    x.showAndWait();
+    if (x.getAlertType().equals(Alert.AlertType.INFORMATION))
+    {
       viewHandler.openView(SceneNames.EmployeeHomeRoom);
+    }
   }
 
   @FXML void Cancel()

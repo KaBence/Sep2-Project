@@ -2,6 +2,7 @@ package Client.ViewModel.Employee;
 
 import Client.Model.Model;
 import Client.Model.ModelEmployeeSide;
+import Client.Utility.Alerts;
 import Server.Model.Hotel.Users.Employee;
 import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.ObjectProperty;
@@ -19,35 +20,34 @@ import java.util.ArrayList;
 public class AdminViewModel
 {
   private ModelEmployeeSide model;
-  private SimpleStringProperty username, firstName, lastName, phoneNo,password,repeatPassword;
+  private SimpleStringProperty username, firstName, lastName, phoneNo, password, repeatPassword;
   private SimpleObjectProperty<String> position;
 
-  private SimpleStringProperty employeeUsernameFilter, employeeFirstNameFilter, employeeLastNameFilter, employeePhoneNumberFilter, employeePosition,filteringEmployee;
+  private SimpleStringProperty employeeUsernameFilter, employeeFirstNameFilter, employeeLastNameFilter, employeePhoneNumberFilter, employeePosition, filteringEmployee;
   private SimpleObjectProperty<ObservableList<Employee>> employees;
-
-
 
   public AdminViewModel(Model model)
   {
     this.model = model;
-    employees=new SimpleObjectProperty<>();
+    employees = new SimpleObjectProperty<>();
     username = new SimpleStringProperty();
     firstName = new SimpleStringProperty();
     lastName = new SimpleStringProperty();
     position = new SimpleObjectProperty<>();
     phoneNo = new SimpleStringProperty();
-    password=new SimpleStringProperty();
-    repeatPassword=new SimpleStringProperty();
+    password = new SimpleStringProperty();
+    repeatPassword = new SimpleStringProperty();
 
     employeeUsernameFilter = new SimpleStringProperty();
     employeeFirstNameFilter = new SimpleStringProperty();
     employeeLastNameFilter = new SimpleStringProperty();
     employeePosition = new SimpleStringProperty();
     employeePhoneNumberFilter = new SimpleStringProperty();
-    filteringEmployee=new SimpleStringProperty();
+    filteringEmployee = new SimpleStringProperty();
   }
 
-  public void update(){
+  public void update()
+  {
     employeeUsernameFilter.set("");
     employeeFirstNameFilter.set("");
     employeeLastNameFilter.set("");
@@ -57,61 +57,57 @@ public class AdminViewModel
     ArrayList<Employee> allEmployee;
     try
     {
-      allEmployee=model.getAllEmployees();
+      allEmployee = model.getAllEmployees();
     }
-    catch (RemoteException e){
+    catch (RemoteException e)
+    {
       throw new RuntimeException(e);
     }
-    ObservableList<Employee> employeeObservableList = FXCollections.observableList(
-        allEmployee);
+    ObservableList<Employee> employeeObservableList = FXCollections.observableList(allEmployee);
     employees.set(employeeObservableList);
   }
 
 
-  public String edit() throws RemoteException
-  {
-    try
-    {
-      return model.updateEmployee(username.getValue(),firstName.getValue(), lastName.getValue(),
-          position.getValue(), phoneNo.getValue());
-    }
-    catch (Exception e)
-    {
-      return DatabaseConnection.MANDATORY;
-    }
-  }
 
-  public String delete() throws RemoteException
+  public Alerts addEmployee()
   {
-    return  model.deleteEmployee(username.getValue());
-  }
+    if (password.getValue()!=null && username.getValue()!=null && firstName.getValue()!=null && lastName.getValue()!=null && position.getValue()!=null && phoneNo.getValue()!=null)
+    {
+      if (!(password.getValue().equals(repeatPassword.getValue())))
+      {
+        return new Alerts(Alert.AlertType.WARNING, "Invalid password",
+            "The two passwords doesn't match");
+      }
+      else
+      {
+        try
+        {
+          String state = model.addEmployee(firstName.getValue(), lastName.getValue(), position.getValue(), phoneNo.getValue(),
+              password.getValue());
 
-  public Boolean addEmployee() throws RemoteException
-  {
-    if (!(password.getValue().equals(repeatPassword.getValue()))){
-      Alert alert=new Alert(Alert.AlertType.ERROR,"The two passwords doesn't match", ButtonType.OK);
-      alert.setTitle("Error");
-      alert.setHeaderText(null);
-      alert.showAndWait();
-      return null;
+          if (state.equals(DatabaseConnection.SUCCESS))
+          {
+            return new Alerts(Alert.AlertType.INFORMATION,
+                "Employee added successfully",
+                "New Employee login: " + model.getNewEmployee().getUsername() + "\nPassword: " + password.getValue());
+          }
+          else
+          {
+            return new Alerts(Alert.AlertType.ERROR, "Error",
+                "Some Error occurred");
+          }
+        }
+        catch (RemoteException e)
+        {
+          return new Alerts(Alert.AlertType.ERROR, "Error",
+              "Some Error occurred");
+        }
+      }
     }
-    String state= model.addEmployee(firstName.getValue(), lastName.getValue(), position.getValue(), phoneNo.getValue(), password.getValue());
-    if (state.equals(DatabaseConnection.SUCCESS)){
-      Alert alert=new Alert(Alert.AlertType.INFORMATION);
-      alert.setHeaderText("Employee added successfully");
-      alert.setContentText("New Employee login: "+model.getNewEmployee().getUsername()+"\nPassword: "+password.getValue());
-      alert.setTitle("Success");
-      alert.showAndWait();
-      return true;
+    else
+    {
+      return new Alerts(Alert.AlertType.WARNING,"Error","Mandatory fields cannot be empty");
     }
-    if (state.equals(DatabaseConnection.ERROR)){
-      Alert alert=new Alert(Alert.AlertType.ERROR,"An error occurred", ButtonType.OK);
-      alert.setTitle("Error");
-      alert.setHeaderText(null);
-      alert.showAndWait();
-      return false;
-    }
-    return false;
   }
 
   public void filterEmployee() throws RemoteException
@@ -125,30 +121,31 @@ public class AdminViewModel
     }
     if (!employeeFirstNameFilter.getValue().equals(""))
     {
-      temp[counter] = " -> , firstname " + employeeFirstNameFilter.getValue().toLowerCase();
+      temp[counter] =
+          " -> , firstname " + employeeFirstNameFilter.getValue().toLowerCase();
       counter++;
     }
     if (!employeeLastNameFilter.getValue().equals(""))
     {
-      temp[counter] = ", lastname " + employeeLastNameFilter.getValue().toLowerCase();
+      temp[counter] =
+          ", lastname " + employeeLastNameFilter.getValue().toLowerCase();
       counter++;
     }
     if (!employeePhoneNumberFilter.getValue().equals(""))
     {
-      temp[counter] = ", phonenumber " + employeePhoneNumberFilter.getValue().toLowerCase();
+      temp[counter] =
+          ", phonenumber " + employeePhoneNumberFilter.getValue().toLowerCase();
       counter++;
     }
     if (!employeePosition.getValue().equals(""))
     {
       temp[counter] = ", position " + employeePosition.getValue().toLowerCase();
-      System.out.println(temp[counter]);
     }
-    ObservableList<Employee> employeeObservableList = FXCollections.observableList(
-        model.getFilteredEmployee(temp));
+    ObservableList<Employee> employeeObservableList = FXCollections.observableList(model.getFilteredEmployee(temp));
     employees.set(employeeObservableList);
   }
 
-  public void simpleFilterEmployee() throws RemoteException
+  public void simpleFilterEmployee()
   {
     ArrayList<Employee> filterEmployee;
     try
@@ -159,7 +156,7 @@ public class AdminViewModel
     {
       throw new RuntimeException(e);
     }
-    ObservableList<Employee> employeeObservableList=FXCollections.observableList(filterEmployee);
+    ObservableList<Employee> employeeObservableList = FXCollections.observableList(filterEmployee);
     employees.set(employeeObservableList);
   }
 
@@ -167,7 +164,6 @@ public class AdminViewModel
   {
     model.saveSelectedEmployee(employee);
   }
-
 
   public void bindFirstName(StringProperty property)
   {
@@ -199,7 +195,8 @@ public class AdminViewModel
     property.bindBidirectional(repeatPassword);
   }
 
-  public void bindEmployees(ObjectProperty<ObservableList<Employee>> property){
+  public void bindEmployees(ObjectProperty<ObservableList<Employee>> property)
+  {
     property.bindBidirectional(employees);
   }
 
@@ -228,7 +225,8 @@ public class AdminViewModel
     property.bindBidirectional(employeePosition);
   }
 
-  public void bindFilteringEmployee(StringProperty property){
+  public void bindFilteringEmployee(StringProperty property)
+  {
     property.bindBidirectional(filteringEmployee);
   }
 }

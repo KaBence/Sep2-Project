@@ -2,6 +2,7 @@ package Client.ViewModel.Employee;
 
 import Client.Model.Model;
 import Client.Model.ModelEmployeeSide;
+import Client.Utility.Alerts;
 import Server.Model.Hotel.Room;
 import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.*;
@@ -78,44 +79,28 @@ public class AddRoomViewModel
     property.bindBidirectional(orientation);
   }
 
-  public boolean addRoom() throws RemoteException
+  public Alerts addRoom() throws RemoteException
   {
     try
     {
-      String state = model.addRoom(Integer.parseInt(roomNumber.getValue()),
-          Integer.parseInt(numberOfBeds.getValue()),
-          Integer.parseInt(size.getValue()), price.getValue(),
-          orientation.getValue(), internet.getValue(), bathroom.getValue(),
-          kitchen.getValue(), balcony.getValue());
-      if (state.equals(DatabaseConnection.SUCCESS)){
-        Alert alert=new Alert(Alert.AlertType.INFORMATION,"Adding a room is successful", ButtonType.OK);
-        alert.setHeaderText(null);
-        alert.setTitle("Success");
-        alert.showAndWait();
-        return true;
+      String state = model.addRoom(Integer.parseInt(roomNumber.getValue()), Integer.parseInt(numberOfBeds.getValue()), Integer.parseInt(size.getValue()), price.getValue(), orientation.getValue(), internet.getValue(), bathroom.getValue(), kitchen.getValue(), balcony.getValue());
+      if (state.equals(DatabaseConnection.SUCCESS))
+      {
+        return new Alerts(Alert.AlertType.INFORMATION,"Success","Adding a room is successful");
       }
-      if (state.equals(DatabaseConnection.ERROR)){
-        Alert alert=new Alert(Alert.AlertType.ERROR,"Some Error occurred", ButtonType.OK);
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.showAndWait();
-        return false;
+      if (state.equals(DatabaseConnection.ERROR))
+      {
+        return new Alerts(Alert.AlertType.ERROR,"Error","Some Error occurred");
       }
-      if (state.equals(DatabaseConnection.MANDATORY)){
-        Alert alert=new Alert(Alert.AlertType.ERROR,"Please fill up every field", ButtonType.OK);
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.showAndWait();
-        return false;
+      if (state.equals(DatabaseConnection.MANDATORY))
+      {
+        return new Alerts(Alert.AlertType.WARNING,"Error","Please fill up every field");
       }
     }
     catch (NumberFormatException | NullPointerException e)
     {
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Please fill up the every field", ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Error");
-      alert.showAndWait();
+      return new Alerts(Alert.AlertType.WARNING,"Error","Please fill up every field");
     }
-    return false;
+    return new Alerts(Alert.AlertType.WARNING,"Error","Please fill up every field");
   }
 }

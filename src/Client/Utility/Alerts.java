@@ -1,6 +1,7 @@
 package Client.Utility;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 public class Alerts
 {
@@ -32,7 +33,7 @@ public class Alerts
     return contentText;
   }
 
-  public void showAndWait()
+  public Alert showAndWait()
   {
     if (!alertType.equals(Alert.AlertType.NONE))
     {
@@ -40,7 +41,24 @@ public class Alerts
       x.setHeaderText(headerText);
       x.setContentText(contentText);
       x.showAndWait();
+      return x;
     }
+    return null;
+  }
+
+  public ButtonType getResult()
+  {
+    return showAndWait().getResult();
+  }
+
+  @Override public boolean equals(Object obj)
+  {
+    if (obj == null || !obj.getClass().equals(getClass()))
+    {
+      return false;
+    }
+    Alerts other = (Alerts) obj;
+    return other.alertType.equals(alertType) && other.contentText.equals(contentText) && other.headerText.equals(headerText);
   }
 
   public String toString()

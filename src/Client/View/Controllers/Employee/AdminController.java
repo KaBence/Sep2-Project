@@ -1,5 +1,6 @@
 package Client.View.Controllers.Employee;
 
+import Client.Utility.Alerts;
 import Client.View.Scenes.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.Employee.AdminViewModel;
@@ -84,9 +85,11 @@ public class AdminController
     viewHandler.openView(SceneNames.Home);
   }
 
-  @FXML void register() throws RemoteException
+  @FXML void register()
   {
-    if (viewModel.addEmployee() == null)
+    Alerts x = viewModel.addEmployee();
+    x.showAndWait();
+    if (x.getAlertType().equals(Alert.AlertType.WARNING))
     {
       wrongPassword();
     }
