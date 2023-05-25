@@ -9,7 +9,6 @@ import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 
 import java.rmi.RemoteException;
 

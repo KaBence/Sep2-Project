@@ -350,18 +350,20 @@ public void bindHiddenText(StringProperty property){
     newReservations.set(roomObservableList);
   }
 
-  public Person logOut() throws RemoteException
+  public Person logOut()
   {
-    return model.logOut();
+    try
+    {
+      return model.logOut();
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Unable to log out");
+    }
   }
   public void saveRoom(Room room)
   {
     model.saveSelectedRoom(room);
-  }
-
-  public String deleteRoom(Room room) throws RemoteException
-  {
-    return model.deleteRoom(room.getRoomNo());
   }
 
   public void filterReservation() throws RemoteException
@@ -385,7 +387,7 @@ public void bindHiddenText(StringProperty property){
     reservations.set(reservationObservableList);
   }
 
-  public void simpleFilterEmployee() throws RemoteException
+  public void simpleFilterEmployee()
   {
     ArrayList<Employee> filterEmployee;
     try
@@ -400,7 +402,7 @@ public void bindHiddenText(StringProperty property){
     employees.set(employeeObservableList);
   }
 
-  public void filterCustomer(String customer) throws RemoteException
+  public void filterCustomer(String customer)
   {
     ArrayList<Customer> filterEmployee;
     try
@@ -416,7 +418,7 @@ public void bindHiddenText(StringProperty property){
   }
 
 
-  public void filterFilterCustomer() throws RemoteException
+  public void filterFilterCustomer()
   {
     String[] temp = new String[5];
     int counter = 0;
@@ -444,9 +446,15 @@ public void bindHiddenText(StringProperty property){
     {
       temp[counter] = ", PaymentInfo " + paymentInfoFilter.getValue();
     }
-    ObservableList<Customer> customerObservableList = FXCollections.observableList(
-        model.getFilteredCustomers(temp));
-    customers.set(customerObservableList);
+    try
+    {
+      ObservableList<Customer> customerObservableList = FXCollections.observableList(model.getFilteredCustomers(temp));
+      customers.set(customerObservableList);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e.detail);
+    }
   }
 
   public void saveCustomer(Customer customer)
@@ -454,7 +462,7 @@ public void bindHiddenText(StringProperty property){
     model.saveSelectedCustomer(customer);
   }
 
-  public void filterRoom() throws RemoteException
+  public void filterRoom()
   {
     String[] temp = new String[7];
     int counter = 0;
@@ -496,20 +504,36 @@ public void bindHiddenText(StringProperty property){
       temp[counter] = "NoBeds: " + bedsFilter.getValue() + ", ";
     }
 
-    ObservableList<Room> roomObservableList = FXCollections.observableList(
-        model.getFilteredRoom(null,null,temp));
+    ObservableList<Room> roomObservableList = null;
+    try
+    {
+      roomObservableList = FXCollections.observableList(
+          model.getFilteredRoom(null,null,temp));
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e.detail);
+    }
     rooms.set(roomObservableList);
   }
 
-  public void simpleRoomFilter() throws RemoteException
+  public void simpleRoomFilter()
   {
-    ObservableList<Room> roomObservableList = FXCollections.observableList(
-        model.getSimpleFilteredRoom(filteringRoom.getValue()));
+    ObservableList<Room> roomObservableList = null;
+    try
+    {
+      roomObservableList = FXCollections.observableList(
+          model.getSimpleFilteredRoom(filteringRoom.getValue()));
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e.detail);
+    }
     rooms.set(roomObservableList);
   }
 
 
-  public void filterNewReservation() throws RemoteException
+  public void filterNewReservation()
   {
     String[] temp = new String[7];
     int counter = 0;
@@ -553,25 +577,31 @@ public void bindHiddenText(StringProperty property){
     }
     ObservableList<Room> roomObservableList;
 
-    if (toDateNewReservation.getValue()!=null&&fromDateNewReservation.getValue()!=null){
-      if(MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()))){
-        Alert alert=new Alert(Alert.AlertType.ERROR,"The finish date is before from date",ButtonType.OK);
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.showAndWait();
-        return;
+    try
+    {
+      if (toDateNewReservation.getValue() != null && fromDateNewReservation.getValue() != null)
+      {
+        if (MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(MyDate.LocalDateToMyDate(fromDateNewReservation.getValue())))
+        {
+          Alert alert = new Alert(Alert.AlertType.ERROR, "The finish date is before from date", ButtonType.OK);
+          alert.setHeaderText(null);
+          alert.setTitle("Error");
+          alert.showAndWait();
+          return;
+        }
+        roomObservableList = FXCollections.observableList(model.getFilteredRoom(MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), temp));
       }
-      roomObservableList = FXCollections.observableList(model.getFilteredRoom(MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),MyDate.LocalDateToMyDate(toDateNewReservation.getValue()),temp));
+      else
+        roomObservableList = FXCollections.observableList(
+            model.getFilteredRoom(null, null, temp));
+      newReservations.set(roomObservableList);
     }
-    else
-      roomObservableList = FXCollections.observableList(model.getFilteredRoom(null,null,temp));
-    newReservations.set(roomObservableList);
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e.detail);
+    }
   }
 
-  public void saveEmployee(Employee employee)
-  {
-    model.saveSelectedEmployee(employee);
-  }
 
   public void fillHiddenField()
   {
@@ -587,60 +617,46 @@ public void bindHiddenText(StringProperty property){
   {
     if (reservation==null)
     {
-      Alerts x = new Alerts(Alert.AlertType.ERROR,"Error","Select a reservation first");
-      /*
-      Alert alert = new Alert(Alert.AlertType.ERROR,
-          "Select a reservation first", ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Error");
-      alert.showAndWait();
-       */
-      return x;
+      return new Alerts(Alert.AlertType.ERROR,"Error","Select a reservation first");
     }
     model.saveSelectedReservation(reservation);
-    return new Alerts(Alert.AlertType.INFORMATION,"Success","Reservation has been saved");
+    return new Alerts(Alert.AlertType.NONE,"","");
   }
 
-  public boolean addReservation() throws RemoteException
+  public Alerts addReservation()
   {
     try
     {
       if (fromDateNewReservation.getValue()==null||toDateNewReservation.getValue()==null)
+      {
         throw new IllegalDateException(8);
-      if (MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()).isBefore(MyDate.today())||MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(MyDate.today()))
-        throw new IllegalDateException(9);
-      String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), model.getCurrentCustomer().getUsername(), MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
-      if (state.equals(DatabaseConnection.SUCCESS)){
-        Alert alert=new Alert(Alert.AlertType.INFORMATION,"Successfully added a new reservation",ButtonType.OK);
-        alert.setTitle("Success");
-        alert.setHeaderText(null);
-        alert.showAndWait();
-        return true;
       }
-      if (state.equals(DatabaseConnection.ERROR)){
-        Alert alert=new Alert(Alert.AlertType.ERROR,"Error occurred",ButtonType.OK);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.showAndWait();
-        return false;
+      else if (MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()).isBefore(MyDate.today())||MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(MyDate.today()))
+      {
+        throw new IllegalDateException(9);
+      }
+      String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), model.getCurrentCustomer().getUsername(), MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
+      if (state.equals(DatabaseConnection.SUCCESS))
+      {
+        return new Alerts(Alert.AlertType.INFORMATION,"Success","Successfully added a new reservation");
+      }
+      else
+      {
+        return new Alerts(Alert.AlertType.ERROR,"Error","Error occurred");
       }
     }
     catch (NumberFormatException e)
     {
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Please select a room to reserve",ButtonType.OK);
-      alert.setTitle("Error");
-      alert.setHeaderText(null);
-      alert.showAndWait();
+      return  new Alerts(Alert.AlertType.ERROR,"Error","Please select a room to reserve");
     }
     catch (IllegalDateException e)
     {
-      Alert alert = new Alert(Alert.AlertType.ERROR, e.message(),
-          ButtonType.OK);
-      alert.setTitle("Error");
-      alert.setHeaderText(null);
-      alert.showAndWait();
+      return new Alerts(Alert.AlertType.ERROR,"Date error",e.message());
     }
-    return false;
+    catch (RemoteException e)
+    {
+      return new Alerts(Alert.AlertType.ERROR,"Error","An error occurred");
+    }
   }
 
   public void filterEmployee() throws RemoteException
@@ -677,125 +693,100 @@ public void bindHiddenText(StringProperty property){
     employees.set(customerObservableList);
   }
 
-  public void checkIn() throws RemoteException
+  public Alerts checkIn()
   {
     try
     {
       Reservation reservation = model.getSelectedReservation();
-      Alert conf=new Alert(Alert.AlertType.CONFIRMATION,reservation.getUsername()+" -> "+reservation.getFromDate()+" / "+reservation.getToDate(),ButtonType.YES,ButtonType.NO);
-      conf.setTitle("Confirmation");
-      conf.setHeaderText("Do you really want to check in this reservation?");
-      conf.showAndWait();
-      if (conf.getResult().equals(ButtonType.NO)){
-        return;
+      if (!(reservation.getFromDate().equals(MyDate.today())))
+      {
+        return new Alerts(Alert.AlertType.WARNING,"Check in error","You can not check in because your reservation is valid from"+reservation.getFromDate().toString());
       }
-      if (!(reservation.getFromDate().equals(MyDate.today()))){
-        Alert alert=new Alert(Alert.AlertType.ERROR,"You are not supposed to be here yet...GTFO",ButtonType.OK);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.showAndWait();
-        return;
-      }
-      if (!reservation.isCheckedIn())
+      else if (!reservation.isCheckedIn())
       {
         String state=model.checkIn(reservation.getRoomNumber(), reservation.getUsername(), reservation.getFromDate());
         if (state.equals(DatabaseConnection.SUCCESS))
         {
-          Alert alert = new Alert(Alert.AlertType.INFORMATION, "Check In successful",
-              ButtonType.OK);
-          alert.setHeaderText(null);
-          alert.setTitle("Success");
-          alert.showAndWait();
+          return new Alerts(Alert.AlertType.INFORMATION,"Success","Check in was successful");
+        }
+        else
+        {
+          return new Alerts(Alert.AlertType.ERROR,"Error","An error occurred");
         }
       }
       else
       {
-        Alert error = new Alert(Alert.AlertType.ERROR);
-        error.setHeaderText("Error");
-        error.setHeaderText("The customer is already checked in");
-        error.showAndWait();
+        return new Alerts(Alert.AlertType.ERROR,"Error","The reservation is already checked in");
       }
     }
     catch (NullPointerException e)
     {
-      Alert error = new Alert(Alert.AlertType.ERROR);
-      error.setHeaderText("Error");
-      error.setHeaderText("Select a reservation");
-      error.showAndWait();
+      return new Alerts(Alert.AlertType.ERROR,"Error","Select a reservation first");
     }
-    model.saveSelectedReservation(null);
+    catch (RemoteException e)
+    {
+      return new Alerts(Alert.AlertType.ERROR,"Error","An error occurred");
+    }
+    //model.saveSelectedReservation(null);
   }
 
-  public void checkOut() throws RemoteException
+  public Alerts checkOut() throws RemoteException
   {
     try
     {
       Reservation reservation = model.getSelectedReservation();
-      Alert conf=new Alert(Alert.AlertType.CONFIRMATION,reservation.getUsername()+" -> "+reservation.getFromDate()+" / "+reservation.getToDate(),ButtonType.YES,ButtonType.NO);
-      conf.setTitle("Confirmation");
-      conf.setHeaderText("Do you really want to check out this reservation?");
-      conf.showAndWait();
-      if (conf.getResult().equals(ButtonType.NO)){
-        return;
-      }
       if (reservation.isCheckedIn())
       {
         String state= model.checkOut(reservation.getRoomNumber(), reservation.getUsername(), reservation.getFromDate());
-        if (state.equals(DatabaseConnection.SUCCESS)){
-          Alert alert = new Alert(Alert.AlertType.INFORMATION, "Check Out successful",
-              ButtonType.OK);
-          alert.setHeaderText(null);
-          alert.setTitle("Success");
-          alert.showAndWait();
+        if (state.equals(DatabaseConnection.SUCCESS))
+        {
+          return new Alerts(Alert.AlertType.INFORMATION,"Success","Check Out was successful");
+        }
+        else
+        {
+          return new Alerts(Alert.AlertType.ERROR,"Error","An error occurred");
         }
       }
       else
       {
-        Alert error = new Alert(Alert.AlertType.ERROR);
-        error.setHeaderText("Error");
-        error.setHeaderText("The customer has never checked in");
-        error.showAndWait();
+        return new Alerts(Alert.AlertType.ERROR,"Error","The customer has never checked in");
       }
     }
     catch (NullPointerException e)
     {
-      Alert error = new Alert(Alert.AlertType.ERROR);
-      error.setHeaderText("Error");
-      error.setHeaderText("Select a reservation");
-      error.showAndWait();
+      return new Alerts(Alert.AlertType.ERROR,"Error","Select a reservation first");
     }
-    model.saveSelectedReservation(null);
+    catch (RemoteException e)
+    {
+      return new Alerts(Alert.AlertType.ERROR,"Error","An error occurred");
+    }
+    //model.saveSelectedReservation(null);
   }
 
   public Alerts deleteReservation()
-      throws RemoteException
   {
-    Alerts bad = new Alerts(Alert.AlertType.ERROR,"","");
     Reservation selected=model.getSelectedReservation();
-    if (selected==null){
-      Alert alert = new Alert(Alert.AlertType.ERROR,
-          "Select a reservation first", ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Error");
-      alert.showAndWait();
-      return bad;
-    }
-    String state= model.deleteReservation(selected.getRoomNumber(), selected.getUsername(), selected.getFromDate());
-    if (state.equals(DatabaseConnection.SUCCESS))
+    if (selected==null)
     {
-      /*
-      Alert good = new Alert(Alert.AlertType.INFORMATION);
-      good.setHeaderText("The reservation has been canceled.");
-      good.showAndWait();
-       */
-      Alerts x = new Alerts(Alert.AlertType.INFORMATION,"Success","Reservation has been canceled");
-      return x;
+      return new Alerts(Alert.AlertType.ERROR,"Error","Select a reservation first");
     }
-    else {
-      Alert bads = new Alert(Alert.AlertType.ERROR);
-      bads.setHeaderText("You cannot cancel this reservation");
-      bads.showAndWait();
-      return bad;
+    try
+    {
+      String state = model.deleteReservation(selected.getRoomNumber(), selected.getUsername(), selected.getFromDate());
+      if (state.equals(DatabaseConnection.SUCCESS))
+      {
+        return new Alerts(Alert.AlertType.INFORMATION, "Success",
+            "Reservation has been canceled");
+      }
+      else
+      {
+        return new Alerts(Alert.AlertType.ERROR, "Error",
+            "You cannot cancel this reservation");
+      }
+    }
+    catch (RemoteException e)
+    {
+      return new Alerts(Alert.AlertType.ERROR,"Error","An error occurred");
     }
   }
 

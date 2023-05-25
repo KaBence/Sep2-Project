@@ -2,6 +2,7 @@ package Client.ViewModel.Employee;
 
 import Client.Model.Model;
 import Client.Model.ModelEmployeeSide;
+import Client.Utility.Alerts;
 import Server.Model.Hotel.Room;
 import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.*;
@@ -32,66 +33,51 @@ public class EditRoomViewModel
     orientation= new SimpleObjectProperty();
   }
 
-  public boolean edit() throws RemoteException
+  public Alerts edit()
   {
     try
     {
       String state= model.updateRoom(Integer.parseInt(roomNumber.getValue()),Integer.parseInt(numberOfBeds.getValue()),Integer.parseInt(size.getValue()),price.getValue(),orientation.getValue(),internet.getValue(),bathroom.getValue(),kitchen.getValue(),balcony.getValue());
-      if (state.equals(DatabaseConnection.SUCCESS)){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful", ButtonType.OK);
-        alert.setHeaderText(null);
-        alert.setTitle("Success");
-        alert.showAndWait();
-        return true;
+      if (state.equals(DatabaseConnection.SUCCESS))
+      {
+        return new Alerts(Alert.AlertType.INFORMATION,"Success","Edit was successful");
       }
-      if (state.equals(DatabaseConnection.ERROR)){
-        Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred", ButtonType.OK);
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.showAndWait();
-        return false;
+      else if (state.equals(DatabaseConnection.ERROR))
+      {
+        return new Alerts(Alert.AlertType.ERROR,"Error","An error occurred");
       }
-      if (state.equals(DatabaseConnection.MANDATORY)){
-        Alert alert = new Alert(Alert.AlertType.ERROR, "Please fill up the fields with the correct information", ButtonType.OK);
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.showAndWait();
-        return false;
+      else
+      {
+        return new Alerts(Alert.AlertType.ERROR,"Error","Please fill up the fields with the correct information");
       }
     }
     catch (NumberFormatException e)
     {
-      Alert alert = new Alert(Alert.AlertType.ERROR, "Please fill up the fields with the correct information", ButtonType.OK);
-      alert.setHeaderText(null);
-      alert.setTitle("Error");
-      alert.showAndWait();
+      return new Alerts(Alert.AlertType.ERROR,"Error","Please fill up the fields with the correct information");
     }
-    return false;
+    catch (RemoteException e)
+    {
+      return new Alerts(Alert.AlertType.ERROR,"Error","An error occurred");
+    }
   }
 
-  public boolean delete() throws RemoteException
+  public Alerts delete()
   {
-    Alert alert = new Alert(Alert.AlertType.WARNING,
-        "Do you really want to delete this room from the system?", ButtonType.NO, ButtonType.YES);
-    alert.setTitle("Warning");
-    alert.setHeaderText(null);
-    alert.showAndWait();
-    if (alert.getResult().equals(ButtonType.NO))
-      return false;
-    String state = model.deleteRoom(Integer.parseInt(roomNumber.getValue()));
-    if (state.equals(DatabaseConnection.SUCCESS)){
-      Alert success = new Alert(Alert.AlertType.INFORMATION);
-      success.setHeaderText("Success");
-      success.setHeaderText("The room has been successfully removed");
-      success.showAndWait();
-      return true;
+    try
+    {
+      String state = model.deleteRoom(Integer.parseInt(roomNumber.getValue()));
+      if (state.equals(DatabaseConnection.SUCCESS))
+      {
+        return new Alerts(Alert.AlertType.INFORMATION, "Success", "The room has been successfully removed");
+      }
+      else
+      {
+        return new Alerts(Alert.AlertType.ERROR,"Error","You cannot delete this room right now");
+      }
     }
-    else {
-      Alert error = new Alert(Alert.AlertType.ERROR);
-      error.setHeaderText("Error");
-      error.setHeaderText("You cannot delete this room right now");
-      error.showAndWait();
-      return false;
+    catch (RemoteException e)
+    {
+      return new Alerts(Alert.AlertType.ERROR,"Error","An error occurred");
     }
   }
 

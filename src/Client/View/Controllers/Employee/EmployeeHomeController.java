@@ -181,10 +181,13 @@ public class EmployeeHomeController
 
   @FXML void tableClickBooking(MouseEvent event)
   {
-    if (reservationListView.getSelectionModel().getSelectedItem()!=null){
+    if (reservationListView.getSelectionModel().getSelectedItem()!=null)
+    {
       viewModel.saveReservation(reservationListView.getSelectionModel().getSelectedItem());
       if (event.getClickCount() == 2)
+      {
         viewHandler.openView(SceneNames.EditReservation);
+      }
     }
   }
 
@@ -203,19 +206,34 @@ public class EmployeeHomeController
     viewModel.filterEmployee();
   }
 
-  @FXML void checkIn() throws RemoteException
+  @FXML void checkIn()
   {
-    viewModel.checkIn();
+    Alerts conformation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want to check in this reservation?",null);
+    if (conformation.getResult().equals(ButtonType.YES))
+    {
+      Alerts x = viewModel.checkIn();
+      x.showAndWait();
+    }
   }
 
   @FXML void checkOut() throws RemoteException
   {
-    viewModel.checkOut();
+    Alerts conformation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want to check out this reservation?",null);
+    if (conformation.getResult().equals(ButtonType.YES))
+    {
+      Alerts x = viewModel.checkOut();
+      x.showAndWait();
+    }
   }
 
-  @FXML void deleteReservation() throws RemoteException
+  @FXML void deleteReservation()
   {
-    viewModel.deleteReservation().showAndWait();
+    Alerts conformation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want cancel this reservation?",null);
+    if (conformation.getResult().equals(ButtonType.YES))
+    {
+      Alerts x = viewModel.deleteReservation();
+      x.showAndWait();
+    }
   }
 
   @FXML void editReservation()
@@ -241,9 +259,9 @@ public class EmployeeHomeController
 
   }
 
-  @FXML void createNewReservation() throws RemoteException
+  @FXML void createNewReservation()
   {
-    viewModel.addReservation();
+    viewModel.addReservation().showAndWait();
   }
 
   @FXML void ToggleRoom()

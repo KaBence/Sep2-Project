@@ -2,14 +2,15 @@ package Client.ViewModel.Employee;
 
 import Client.Model.Model;
 import Client.Model.ModelEmployeeSide;
+import Client.Utility.Alerts;
 import Server.Model.Hotel.Users.Employee;
+import Server.Model.Hotel.Users.States.LogIn;
 import Server.Utility.DataBase.DatabaseConnection;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 
 import java.rmi.RemoteException;
 
@@ -40,73 +41,53 @@ public class EditEmployeeViewModel
 
   }
 
-  public boolean edit() throws RemoteException
+  public Alerts edit()
   {
     try
     {
       String state= model.updateEmployee(username.getValue(),firstName.getValue(), lastName.getValue(), position.getValue(), phoneNo.getValue());
-      if (state.equals(DatabaseConnection.SUCCESS)){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edit Successful",
-            ButtonType.OK);
-        alert.setHeaderText(null);
-        alert.setTitle("Success");
-        alert.showAndWait();
-        return true;
-      }
-      else {
-        Alert error = new Alert(Alert.AlertType.ERROR);
-        error.setHeaderText("Error");
-        error.setHeaderText("You cannot edit this employee's information right now");
-        error.showAndWait();
-        return false;
-      }
-    }
-    catch (Exception e)
-    {
-      Alert mandatory = new Alert(Alert.AlertType.ERROR);
-      mandatory.setHeaderText("Error");
-      mandatory.setHeaderText("Mandatory fields can not be empty");
-      mandatory.showAndWait();
-      return false;
-    }
-  }
-
-  public boolean delete() throws RemoteException
-  {
-    Alert alert = new Alert(Alert.AlertType.WARNING,
-        "Do you really want to delete this employee from the system?",
-        ButtonType.NO, ButtonType.YES);
-    alert.setTitle("Warning");
-    alert.setHeaderText(null);
-    alert.showAndWait();
-    if (alert.getResult().equals(ButtonType.NO))
-      return false;
-    if (model.getSelectedEmployee().getState().equals("Logged in"))
-    {
-      Alert logged = new Alert(Alert.AlertType.ERROR);
-      logged.setHeaderText("Error");
-      logged.setHeaderText("You cannot delete this Employee right now, because the Employee is currently using the system.");
-      logged.showAndWait();
-      return false;
-    }
-    else
-    {
-      String state = model.deleteEmployee(username.getValue());
       if (state.equals(DatabaseConnection.SUCCESS))
       {
-        Alert success = new Alert(Alert.AlertType.INFORMATION);
-        success.setHeaderText("Success");
-        success.setHeaderText("The employee has been successfully removed");
-        success.showAndWait();
-        return true;
+        return new Alerts(Alert.AlertType.INFORMATION,"Success","Edit was successful");
       }
       else
       {
-        Alert error = new Alert(Alert.AlertType.ERROR);
-        error.setHeaderText("Error");
-        error.setHeaderText("You cannot delete this employee right now");
-        error.showAndWait();
-        return false;
+        return new Alerts(Alert.AlertType.ERROR,"Error","You cannot edit this employee's information right now");
+      }
+    }
+    catch (RemoteException e)
+    {
+      return new Alerts(Alert.AlertType.ERROR,"Error","Mandatory fields can not be empty");
+    }
+    catch (Exception e)
+    {
+      return new Alerts(Alert.AlertType.ERROR,"Error","Some Error occurred");
+    }
+  }
+
+  public Alerts delete()
+  {
+    if (model.getSelectedEmployee().getState().equals(new LogIn().getState()))
+    {
+      return new Alerts(Alert.AlertType.ERROR,"Error","You cannot delete this Employee right now, because the Employee is currently using the system.");
+    }
+    else
+    {
+      try
+      {
+        String state = model.deleteEmployee(username.getValue());
+        if (state.equals(DatabaseConnection.SUCCESS))
+        {
+          return new Alerts(Alert.AlertType.INFORMATION,"Success","The employee has been successfully removed");
+        }
+        else
+        {
+          return new Alerts(Alert.AlertType.ERROR,"Error","You cannot delete this employee right now");
+        }
+      }
+      catch (RemoteException e)
+      {
+        return new Alerts(Alert.AlertType.ERROR,"Error","Some Error occurred");
       }
     }
   }

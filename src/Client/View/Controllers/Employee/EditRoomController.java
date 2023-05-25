@@ -1,5 +1,6 @@
 package Client.View.Controllers.Employee;
 
+import Client.Utility.Alerts;
 import Client.View.Scenes.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.Employee.EditRoomViewModel;
@@ -64,10 +65,14 @@ public class EditRoomController
     viewModel.fill();
   }
 
-  @FXML void Save() throws RemoteException
+  @FXML void Save()
   {
-    if (viewModel.edit())
+    Alerts x = viewModel.edit();
+    x.showAndWait();
+    if (x.getAlertType().equals(Alert.AlertType.INFORMATION))
+    {
       viewHandler.openView(SceneNames.EmployeeHomeRoom);
+    }
   }
 
   @FXML void Cancel()
@@ -75,9 +80,17 @@ public class EditRoomController
     viewHandler.openView(SceneNames.EmployeeHomeRoom);
   }
 
-  @FXML void delete() throws RemoteException
+  @FXML void delete()
   {
-    if (viewModel.delete())
-      viewHandler.openView(SceneNames.EmployeeHomeRoom);
+    Alerts conformation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want to delete this room from the system?",null);
+    if (conformation.getResult().equals(ButtonType.YES))
+    {
+      Alerts x = viewModel.delete();
+      x.showAndWait();
+      if (x.getAlertType().equals(Alert.AlertType.INFORMATION))
+      {
+        viewHandler.openView(SceneNames.EmployeeHomeRoom);
+      }
+    }
   }
 }

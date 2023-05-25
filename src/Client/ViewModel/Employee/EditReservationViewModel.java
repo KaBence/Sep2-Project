@@ -2,6 +2,7 @@ package Client.ViewModel.Employee;
 
 import Client.Model.Model;
 import Client.Model.ModelEmployeeSide;
+import Client.Utility.Alerts;
 import Server.Model.MyDate;
 import Server.Model.Hotel.Reservation;
 import Server.Utility.DataBase.DatabaseConnection;
@@ -48,7 +49,7 @@ public class EditReservationViewModel
     property.bindBidirectional(roomNo);
   }
 
-  public boolean save() throws RemoteException
+  public Alerts save()
   {
     Reservation old=model.getSelectedReservation();
     LocalDate temp=fromDate.getValue();
@@ -58,46 +59,35 @@ public class EditReservationViewModel
     try
     {
       String state=model.updateReservation(Integer.parseInt(roomNo.getValue()), username.getValue(),from,to, old.getRoomNumber(), old.getUsername(), old.getFromDate(),old.getToDate());
-      if (state.equals(DatabaseConnection.SUCCESS)){
-        Alert alert=new Alert(Alert.AlertType.INFORMATION,"Edit successful", ButtonType.OK);
-        alert.setTitle("Success");
-        alert.setHeaderText(null);
-        alert.showAndWait();
-        return true;
+      if (state.equals(DatabaseConnection.SUCCESS))
+      {
+        return new Alerts(Alert.AlertType.INFORMATION,"Success","Edit was successful");
       }
-      if (state.equals(DatabaseConnection.ERROR)){
-        Alert alert=new Alert(Alert.AlertType.ERROR,"Error happened", ButtonType.OK);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.showAndWait();
-        return false;
+      else if (state.equals(DatabaseConnection.ERROR))
+      {
+        return new Alerts(Alert.AlertType.ERROR,"Error","Some Error occurred");
       }
-      if (state.equals(DatabaseConnection.MANDATORY)){
-        Alert alert=new Alert(Alert.AlertType.ERROR,"Fill every field", ButtonType.OK);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.showAndWait();
-        return false;
+      else
+      {
+        return new Alerts(Alert.AlertType.ERROR,"Error","Fill every field");
       }
     }
-    catch (IllegalDateException e){
-      Alert alert=new Alert(Alert.AlertType.ERROR,e.message(), ButtonType.OK);
-      alert.setTitle("Error");
-      alert.setHeaderText(null);
-      alert.showAndWait();
-      return false;
+    catch (RemoteException e)
+    {
+      return new Alerts(Alert.AlertType.ERROR,"Error","Some Error occurred");
     }
-    catch (NumberFormatException e){
-      Alert alert=new Alert(Alert.AlertType.ERROR,"Fill every field", ButtonType.OK);
-      alert.setTitle("Error");
-      alert.setHeaderText(null);
-      alert.showAndWait();
-      return false;
+    catch (IllegalDateException e)
+    {
+      return new Alerts(Alert.AlertType.ERROR,"Date Error",e.message());
     }
-    return false;
+    catch (NumberFormatException e)
+    {
+      return new Alerts(Alert.AlertType.ERROR,"Error","Fill every field");
+    }
   }
 
-  public void fill(){
+  public void fill()
+  {
     Reservation temp=model.getSelectedReservation();
     username.set(temp.getUsername());
     roomNo.set(String.valueOf(temp.getRoomNumber()));

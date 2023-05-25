@@ -1,5 +1,6 @@
 package Client.View.Controllers.Employee;
 
+import Client.Utility.Alerts;
 import Client.View.Scenes.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.Employee.EditEmployeeViewModel;
@@ -50,18 +51,31 @@ public class EditEmployeeController
   viewModel.fill();
   }
 
-  @FXML void save() throws RemoteException
+  @FXML void save()
   {
-    if (viewModel.edit())
+    Alerts x = viewModel.edit();
+    x.showAndWait();
+    if (x.getAlertType().equals(Alert.AlertType.INFORMATION))
+    {
       viewHandler.openView(SceneNames.AdminAllEmployees);
+    }
   }
 
-  @FXML void delete() throws RemoteException
+  @FXML void delete()
   {
-    if (viewModel.delete())
-      viewHandler.openView(SceneNames.AdminAllEmployees);
+    Alerts conformation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want to delete this customer from the system?",null);
+    if (conformation.getResult().equals(ButtonType.YES))
+    {
+      Alerts x = viewModel.delete();
+      x.showAndWait();
+      if (x.getAlertType().equals(Alert.AlertType.INFORMATION))
+      {
+        viewHandler.openView(SceneNames.AdminAllEmployees);
+      }
+    }
   }
-  @FXML void cancel(){
+  @FXML void cancel()
+  {
     viewHandler.openView(SceneNames.AdminAllEmployees);
   }
 }

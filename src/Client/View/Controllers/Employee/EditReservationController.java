@@ -1,9 +1,11 @@
 package Client.View.Controllers.Employee;
 
+import Client.Utility.Alerts;
 import Client.View.Scenes.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.Employee.EditReservationViewModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
@@ -29,7 +31,8 @@ public class EditReservationController
 
   }
 
-  public Region getRoot(){
+  public Region getRoot()
+  {
     root.setUserData("Edit Reservation");
     return root;
   }
@@ -38,13 +41,18 @@ public class EditReservationController
     viewModel.fill();
   }
 
-  @FXML void cancel(){
+  @FXML void cancel()
+  {
     viewHandler.openView(SceneNames.EmployeeHomeReservations);
   }
 
-  @FXML void save() throws RemoteException
+  @FXML void save()
   {
-    if (viewModel.save())
+    Alerts x = viewModel.save();
+    x.showAndWait();
+    if (x.getAlertType().equals(Alert.AlertType.INFORMATION))
+    {
       viewHandler.openView(SceneNames.EmployeeHomeReservations);
+    }
   }
 }
