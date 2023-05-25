@@ -82,8 +82,8 @@ public class EditRoomController
 
   @FXML void delete()
   {
-    Alerts conformation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want to delete this room from the system?",null);
-    if (conformation.getResult().equals(ButtonType.YES))
+    Alerts confirmation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want to delete this room from the system?",null);
+    if (confirmation.getResult().equals(ButtonType.OK))
     {
       Alerts x = viewModel.delete();
       x.showAndWait();

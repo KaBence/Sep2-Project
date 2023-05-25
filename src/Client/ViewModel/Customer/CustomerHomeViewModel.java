@@ -187,20 +187,21 @@ public class CustomerHomeViewModel implements PropertyChangeListener
       rooms = model.getAllRooms();
       reviews = model.getAllReviews();
       reservations = model.getAllMyReservation(model.getCurrentCustomer().getUsername());
+      ObservableList<Room> roomObservableList = FXCollections.observableList(rooms);
+      ObservableList<Review> reviewObservableList = FXCollections.observableList(reviews);
+      allReviews.set(reviewObservableList);
+      if (reservations != null)
+      {
+        ObservableList<Reservation> reservationObservableList = FXCollections.observableList(reservations);
+        allMyReservation.set(reservationObservableList);
+      }
+      newReservations.set(roomObservableList);
     }
     catch (RemoteException e)
     {
-      throw new RuntimeException(e);
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      x.showAndWait();
     }
-    ObservableList<Room> roomObservableList = FXCollections.observableList(rooms);
-    ObservableList<Review> reviewObservableList = FXCollections.observableList(reviews);
-    allReviews.set(reviewObservableList);
-    if (reservations != null)
-    {
-      ObservableList<Reservation> reservationObservableList = FXCollections.observableList(reservations);
-      allMyReservation.set(reservationObservableList);
-    }
-    newReservations.set(roomObservableList);
   }
 
   public void fillHiddenField()

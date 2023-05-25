@@ -67,7 +67,7 @@ public class CustomerEditReservationViewModel
     model.setPreviousView(b);
   }
 
-  public Alerts save() throws RemoteException
+  public Alerts save()
   {
     Reservation old = model.getSelectedReservation();
     LocalDate temp = fromDate.getValue();
@@ -91,7 +91,7 @@ public class CustomerEditReservationViewModel
         return new Alerts(Alert.AlertType.ERROR, "Error", "Sorry. Some Error Occurred :(");
       }
     }
-    catch (NumberFormatException | IllegalDateException e)
+    catch (NumberFormatException | IllegalDateException | RemoteException e)
     {
       return new Alerts(Alert.AlertType.ERROR, "Error", "Sorry. Some Error Occurred :(");
     }

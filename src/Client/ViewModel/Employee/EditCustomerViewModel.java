@@ -75,8 +75,8 @@ public class EditCustomerViewModel
     phoneNo.set(temp.getPhoneNo());
     payment.set(temp.getPaymentInfo());
   }
-  public Alerts save() throws RemoteException{
-
+  public Alerts save()
+  {
     try
     {
       String state=model.updateCustomer(username.getValue(),firstName.getValue(), lastName.getValue(), phoneNo.getValue(), payment.getValue());

@@ -2,6 +2,7 @@ package Client.ViewModel.Employee;
 
 import Client.Model.Model;
 import Client.Model.ModelEmployeeSide;
+import Client.Utility.Alerts;
 import Server.Model.Hotel.Users.Employee;
 import Server.Model.Hotel.Users.Person;
 import javafx.beans.property.SimpleStringProperty;
@@ -30,8 +31,7 @@ public class EmployeeLoginViewModel
     }
     catch (RemoteException e)
     {
-      Alert x = new Alert(Alert.AlertType.ERROR);
-      x.setHeaderText("The system doesn't have any employees.\nContact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
       x.showAndWait();
     }
   }
@@ -46,52 +46,47 @@ public class EmployeeLoginViewModel
     property.bindBidirectional(password);
   }
 
-  public Person getLoggedUser()
+  public Alerts logIn()
   {
-    return user;
-  }
-  public boolean logIn(String username, String password) throws RemoteException
-  {
-    if (username.equals("admin")&&password.equals("admin"))
+    if (username.getValue().equals("admin") && password.getValue().equals("admin"))
     {
-      return true;
+      return new Alerts(Alert.AlertType.NONE, "", "");
     }
-    for (int i = 0; i < employees.size(); i++)
+    else
     {
-      if (employees.get(i).getUsername().equals(username))
+      for (int i = 0; i < employees.size(); i++)
       {
-        if (employees.get(i).getPassword().equals(password))
+        if (employees.get(i).getUsername().equals(username.getValue()))
         {
-          user = employees.get(i);
-          try
+          if (employees.get(i).getPassword().equals(password.getValue()))
           {
-            model.logIn(user);
-            return true;
-          }
-          catch (Exception e)
-          {
-            if (e.getMessage().contains("already"))
+            user = employees.get(i);
+            try
             {
-              Alert alreadyLoggedIn = new Alert(Alert.AlertType.ERROR);
-              alreadyLoggedIn.setHeaderText(username +" is already logged in");
-              alreadyLoggedIn.showAndWait();
-              return false;
+              model.logIn(user);
+              return new Alerts(Alert.AlertType.NONE, "", "");
             }
-            Alert x = new Alert(Alert.AlertType.ERROR,"User: "+username+", does not exist");
-            x.showAndWait();
-            return false;
+            catch (Exception e)
+            {
+              if (e.getMessage().contains("already"))
+              {
+                return new Alerts(Alert.AlertType.ERROR, "Error",
+                    username.getValue() + " is already logged in");
+              }
+              else
+              {
+                return new Alerts(Alert.AlertType.ERROR, "Error",
+                    "User: " + username.getValue() + " does not exist");
+              }
+            }
           }
-        }
-        else
-        {
-          Alert x = new Alert(Alert.AlertType.ERROR,"Invalid password");
-          x.showAndWait();
-          return false;
+          else
+          {
+            return new Alerts(Alert.AlertType.ERROR, "Error", "Invalid password");
+          }
         }
       }
     }
-    Alert x = new Alert(Alert.AlertType.ERROR,"User: "+username+", does not exist");
-    x.showAndWait();
-    return false;
+    return new Alerts(Alert.AlertType.ERROR, "Error","User: "+username.getValue()+" does not exist");
   }
 }

@@ -30,7 +30,7 @@ public class AddReviewViewModel
     model.setPreviousView(b);
   }
 
-  public Alerts addReview() throws RemoteException
+  public Alerts addReview()
   {
     try
     {
@@ -47,7 +47,7 @@ public class AddReviewViewModel
         return new Alerts(Alert.AlertType.ERROR,"Error","Please select a reservation for your review");
       }
     }
-    catch (NumberFormatException e)
+    catch (NumberFormatException | RemoteException e)
     {
       return new Alerts(Alert.AlertType.ERROR,"Error","Sorry. Some Error Occurred :(");
     }

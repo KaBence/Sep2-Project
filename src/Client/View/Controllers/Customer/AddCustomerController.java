@@ -58,7 +58,7 @@ public class AddCustomerController
     viewHandler.openView(SceneNames.CustomerHome);
   }
 
-  @FXML public void create() throws RemoteException
+  @FXML public void create()
   {
     Alerts x = viewModel.addCustomer();
     if (x.getAlertType().equals(Alert.AlertType.INFORMATION))

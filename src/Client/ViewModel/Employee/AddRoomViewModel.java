@@ -79,7 +79,7 @@ public class AddRoomViewModel
     property.bindBidirectional(orientation);
   }
 
-  public Alerts addRoom() throws RemoteException
+  public Alerts addRoom()
   {
     try
     {
@@ -100,6 +100,10 @@ public class AddRoomViewModel
     catch (NumberFormatException | NullPointerException e)
     {
       return new Alerts(Alert.AlertType.WARNING,"Error","Please fill up every field");
+    }
+    catch (RemoteException e)
+    {
+      return new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
     }
     return new Alerts(Alert.AlertType.WARNING,"Error","Please fill up every field");
   }

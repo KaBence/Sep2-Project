@@ -153,7 +153,7 @@ public class EmployeeHomeController
     viewHandler.openView(SceneNames.AddRoom);
   }
 
-  @FXML void Home() throws RemoteException
+  @FXML void Home()
   {
     viewModel.logOut();
     viewHandler.openView(SceneNames.Home);
@@ -191,17 +191,17 @@ public class EmployeeHomeController
     }
   }
 
-  @FXML void filterRoom() throws RemoteException
+  @FXML void filterRoom()
   {
     viewModel.filterRoom();
   }
 
-  @FXML void onFilter() throws RemoteException
+  @FXML void onFilter()
   {
     viewModel.filterFilterCustomer();
   }
 
-  @FXML void filterEmployee() throws RemoteException
+  @FXML void filterEmployee()
   {
     viewModel.filterEmployee();
   }
@@ -216,7 +216,7 @@ public class EmployeeHomeController
     }
   }
 
-  @FXML void checkOut() throws RemoteException
+  @FXML void checkOut()
   {
     Alerts conformation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want to check out this reservation?",null);
     if (conformation.getResult().equals(ButtonType.YES))
@@ -228,8 +228,8 @@ public class EmployeeHomeController
 
   @FXML void deleteReservation()
   {
-    Alerts conformation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want cancel this reservation?",null);
-    if (conformation.getResult().equals(ButtonType.YES))
+    Alerts confirmation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want cancel this reservation?",null);
+    if (confirmation.getResult().equals(ButtonType.OK))
     {
       Alerts x = viewModel.deleteReservation();
       x.showAndWait();
@@ -358,7 +358,7 @@ public class EmployeeHomeController
     return selectionModel;
   }
 
-  @FXML void simpleFilterEmployee() throws RemoteException
+  @FXML void simpleFilterEmployee()
   {
     viewModel.simpleFilterEmployee();
   }
@@ -368,24 +368,23 @@ public class EmployeeHomeController
     toDateNewReservation.setValue(null);
   }
 
-  @FXML void filterCustomer() throws RemoteException
+  @FXML void filterCustomer()
   {
     String x = filteringCustomer.getText();
     viewModel.filterCustomer(x);
   }
 
-  @FXML void simpleFilterRoom() throws RemoteException
+  @FXML void simpleFilterRoom()
   {
     viewModel.simpleRoomFilter();
   }
-  @FXML void filterReservation() throws RemoteException
+  @FXML void filterReservation()
   {
     viewModel.filterReservation();
   }
 
-  @FXML void filterNewReservation() throws RemoteException
+  @FXML void filterNewReservation()
   {
     viewModel.filterNewReservation();
   }
-
 }

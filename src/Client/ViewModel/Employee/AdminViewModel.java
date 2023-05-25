@@ -58,13 +58,14 @@ public class AdminViewModel
     try
     {
       allEmployee = model.getAllEmployees();
+      ObservableList<Employee> employeeObservableList = FXCollections.observableList(allEmployee);
+      employees.set(employeeObservableList);
     }
     catch (RemoteException e)
     {
-      throw new RuntimeException(e);
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      x.showAndWait();
     }
-    ObservableList<Employee> employeeObservableList = FXCollections.observableList(allEmployee);
-    employees.set(employeeObservableList);
   }
 
 
@@ -114,7 +115,7 @@ public class AdminViewModel
     }
   }
 
-  public void filterEmployee() throws RemoteException
+  public void filterEmployee()
   {
     String[] temp = new String[5];
     int counter = 0;
@@ -145,8 +146,17 @@ public class AdminViewModel
     {
       temp[counter] = ", position " + employeePosition.getValue().toLowerCase();
     }
-    ObservableList<Employee> employeeObservableList = FXCollections.observableList(model.getFilteredEmployee(temp));
-    employees.set(employeeObservableList);
+    try
+    {
+      ObservableList<Employee> employeeObservableList = FXCollections.observableList(
+          model.getFilteredEmployee(temp));
+      employees.set(employeeObservableList);
+    }
+    catch (RemoteException e)
+    {
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      x.showAndWait();
+    }
   }
 
   public void simpleFilterEmployee()
@@ -155,13 +165,14 @@ public class AdminViewModel
     try
     {
       filterEmployee = model.filterEmployee(filteringEmployee.getValue());
+      ObservableList<Employee> employeeObservableList = FXCollections.observableList(filterEmployee);
+      employees.set(employeeObservableList);
     }
     catch (RemoteException e)
     {
-      throw new RuntimeException(e);
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      x.showAndWait();
     }
-    ObservableList<Employee> employeeObservableList = FXCollections.observableList(filterEmployee);
-    employees.set(employeeObservableList);
   }
 
   public void saveEmployee(Employee employee)

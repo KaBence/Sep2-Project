@@ -117,48 +117,57 @@ public class EmployeeHomeViewModel implements PropertyChangeListener
     property.bindBidirectional(rooms);
   }
 
-  public void bindNewReservations(ObjectProperty<ObservableList<Room>> property){
+  public void bindNewReservations(ObjectProperty<ObservableList<Room>> property)
+  {
     property.bindBidirectional(newReservations);
   }
 
-  public void bindCustomerList(
-      ObjectProperty<ObservableList<Customer>> property)
+  public void bindCustomerList(ObjectProperty<ObservableList<Customer>> property)
   {
     property.bindBidirectional(customers);
   }
 
-  public void bindEmployeeList(ObjectProperty<ObservableList<Employee>> property){
+  public void bindEmployeeList(ObjectProperty<ObservableList<Employee>> property)
+  {
     property.bindBidirectional(employees);
   }
 
-  public void bindReservationList(ObjectProperty<ObservableList<Reservation>> property){
+  public void bindReservationList(ObjectProperty<ObservableList<Reservation>> property)
+  {
     property.bindBidirectional(reservations);
   }
 
-  public void bindAllBookings(BooleanProperty property){
+  public void bindAllBookings(BooleanProperty property)
+  {
     property.bindBidirectional(allBookingFilter);
   }
 
-  public void bindReservationFilter(BooleanProperty property){
+  public void bindReservationFilter(BooleanProperty property)
+  {
     property.bindBidirectional(reservationFilter);
   }
 
-  public void bindBookingFilter(BooleanProperty property){
+  public void bindBookingFilter(BooleanProperty property)
+  {
     property.bindBidirectional(bookingFilter);
   }
 
-  public void bindFromDateReservation(ObjectProperty<LocalDate> property){
+  public void bindFromDateReservation(ObjectProperty<LocalDate> property)
+  {
     property.bindBidirectional(fromDateReservation);
   }
 
-  public void bindToDateReservation(ObjectProperty<LocalDate> property){
+  public void bindToDateReservation(ObjectProperty<LocalDate> property)
+  {
     property.bindBidirectional(toDateReservation);
   }
 
-  public void bindFilteringRoom(StringProperty property){
+  public void bindFilteringRoom(StringProperty property)
+  {
     property.bindBidirectional(filteringRoom);
   }
-public void bindHiddenText(StringProperty property){
+public void bindHiddenText(StringProperty property)
+{
     property.bindBidirectional(hiddenFieldRoomNo);
 }
   public void bindInternet(BooleanProperty property)
@@ -166,27 +175,33 @@ public void bindHiddenText(StringProperty property){
     property.bindBidirectional(internetFilter);
   }
 
-  public void bindKitchen(BooleanProperty property){
+  public void bindKitchen(BooleanProperty property)
+  {
     property.bindBidirectional(kitchenFilter);
   }
 
-  public void bindBathroom(BooleanProperty property){
+  public void bindBathroom(BooleanProperty property)
+  {
     property.bindBidirectional(bathroomFilter);
   }
 
-  public void bindBalcony(BooleanProperty property){
+  public void bindBalcony(BooleanProperty property)
+  {
     property.bindBidirectional(balconyFilter);
   }
 
-  public void bindPrice(ObjectProperty<Integer> property){
+  public void bindPrice(ObjectProperty<Integer> property)
+  {
     property.bindBidirectional(priceFilter);
   }
 
-  public void bindBeds(StringProperty property){
+  public void bindBeds(StringProperty property)
+  {
     property.bindBidirectional(bedsFilter);
   }
 
-  public void bindRoomNo(StringProperty property){
+  public void bindRoomNo(StringProperty property)
+  {
     property.bindBidirectional(roomNoFilter);
   }
 
@@ -240,43 +255,53 @@ public void bindHiddenText(StringProperty property){
     property.bindBidirectional(paymentInfoFilter);
   }
 
-  public void bindFromDateNewReservation(ObjectProperty<LocalDate> property){
+  public void bindFromDateNewReservation(ObjectProperty<LocalDate> property)
+  {
     property.bindBidirectional(fromDateNewReservation);
   }
 
-  public void bindToDateNewReservation(ObjectProperty<LocalDate> property){
+  public void bindToDateNewReservation(ObjectProperty<LocalDate> property)
+  {
     property.bindBidirectional(toDateNewReservation);
   }
 
-  public void bindReserveKitchen(BooleanProperty property){
+  public void bindReserveKitchen(BooleanProperty property)
+  {
     property.bindBidirectional(reserveKitchen);
   }
 
-  public void bindReserveBalcony(BooleanProperty property){
+  public void bindReserveBalcony(BooleanProperty property)
+  {
     property.bindBidirectional(reserveBalcony);
   }
 
-  public void bindReserveInternet(BooleanProperty property){
+  public void bindReserveInternet(BooleanProperty property)
+  {
     property.bindBidirectional(reserveInternet);
   }
 
-  public void bindReserveBathroom(BooleanProperty property){
+  public void bindReserveBathroom(BooleanProperty property)
+  {
     property.bindBidirectional(reserveBathroom);
   }
 
-  public void bindReservePrice(ObjectProperty<Integer> property){
+  public void bindReservePrice(ObjectProperty<Integer> property)
+  {
     property.bindBidirectional(reservePricePerNight);
   }
 
-  public void bindReserveRoomNo(StringProperty property){
+  public void bindReserveRoomNo(StringProperty property)
+  {
     property.bindBidirectional(reserveRoomNo);
   }
 
-  public void bindReserveNoBeds(StringProperty property){
+  public void bindReserveNoBeds(StringProperty property)
+  {
     property.bindBidirectional(reserveNoBeds);
   }
 
-  public void bindFilteringEmployee(StringProperty property){
+  public void bindFilteringEmployee(StringProperty property)
+  {
     property.bindBidirectional(filteringEmployee);
   }
 
@@ -330,24 +355,25 @@ public void bindHiddenText(StringProperty property){
       allCustomer = model.getAllCustomers();
       allEmployee = model.getAllEmployees();
       allReservations = model.getAllReservations();
+      ObservableList<Room> roomObservableList = FXCollections.observableList(
+          allRooms);
+      ObservableList<Customer> customerObservableList = FXCollections.observableList(
+          allCustomer);
+      ObservableList<Employee> employeeObservableList = FXCollections.observableList(
+          allEmployee);
+      ObservableList<Reservation> reservationObservableList = FXCollections.observableList(
+          allReservations);
+      reservations.set(reservationObservableList);
+      employees.set(employeeObservableList);
+      customers.set(customerObservableList);
+      rooms.set(roomObservableList);
+      newReservations.set(roomObservableList);
     }
     catch (RemoteException e)
     {
-      throw new RuntimeException(e);
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      x.showAndWait();
     }
-    ObservableList<Room> roomObservableList = FXCollections.observableList(
-        allRooms);
-    ObservableList<Customer> customerObservableList = FXCollections.observableList(
-        allCustomer);
-    ObservableList<Employee> employeeObservableList = FXCollections.observableList(
-        allEmployee);
-    ObservableList<Reservation> reservationObservableList = FXCollections.observableList(
-        allReservations);
-    reservations.set(reservationObservableList);
-    employees.set(employeeObservableList);
-    customers.set(customerObservableList);
-    rooms.set(roomObservableList);
-    newReservations.set(roomObservableList);
   }
 
   public Person logOut()
@@ -366,7 +392,7 @@ public void bindHiddenText(StringProperty property){
     model.saveSelectedRoom(room);
   }
 
-  public void filterReservation() throws RemoteException
+  public void filterReservation()
   {
     String state = "";
     if (allBookingFilter.getValue())
@@ -376,15 +402,25 @@ public void bindHiddenText(StringProperty property){
     if (bookingFilter.getValue())
       state = "Booked";
     ArrayList<Reservation> filtered;
-    if (fromDateReservation.getValue() == null
-        || toDateReservation.getValue() == null)
+    try
     {
-      filtered = model.getFilteredReservation(state, null, null);
+      if (fromDateReservation.getValue() == null || toDateReservation.getValue() == null)
+      {
+        filtered = model.getFilteredReservation(state, null, null);
+      }
+      else
+      {
+        filtered = model.getFilteredReservation(state, MyDate.LocalDateToMyDate(fromDateReservation.getValue()),
+            MyDate.LocalDateToMyDate(toDateReservation.getValue()));
+        ObservableList<Reservation> reservationObservableList=FXCollections.observableList(filtered);
+        reservations.set(reservationObservableList);
+      }
     }
-    else
-      filtered=model.getFilteredReservation(state,MyDate.LocalDateToMyDate(fromDateReservation.getValue()),MyDate.LocalDateToMyDate(toDateReservation.getValue()));
-    ObservableList<Reservation> reservationObservableList=FXCollections.observableList(filtered);
-    reservations.set(reservationObservableList);
+    catch (RemoteException e)
+    {
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      x.showAndWait();
+    }
   }
 
   public void simpleFilterEmployee()
@@ -393,13 +429,14 @@ public void bindHiddenText(StringProperty property){
     try
     {
       filterEmployee = model.filterEmployee(filteringEmployee.getValue());
+      ObservableList<Employee> employeeObservableList=FXCollections.observableList(filterEmployee);
+      employees.set(employeeObservableList);
     }
     catch (RemoteException e)
     {
-      throw new RuntimeException(e);
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      x.showAndWait();
     }
-    ObservableList<Employee> employeeObservableList=FXCollections.observableList(filterEmployee);
-    employees.set(employeeObservableList);
   }
 
   public void filterCustomer(String customer)
@@ -408,13 +445,14 @@ public void bindHiddenText(StringProperty property){
     try
     {
       filterEmployee = model.filterCustomer(customer);
+      ObservableList<Customer> employeeObservableList=FXCollections.observableList(filterEmployee);
+      customers.set(employeeObservableList);
     }
     catch (RemoteException e)
     {
-      throw new RuntimeException(e);
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      x.showAndWait();
     }
-    ObservableList<Customer> employeeObservableList=FXCollections.observableList(filterEmployee);
-    customers.set(employeeObservableList);
   }
 
 
@@ -453,7 +491,8 @@ public void bindHiddenText(StringProperty property){
     }
     catch (RemoteException e)
     {
-      throw new RuntimeException(e.detail);
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      x.showAndWait();
     }
   }
 
@@ -507,12 +546,12 @@ public void bindHiddenText(StringProperty property){
     ObservableList<Room> roomObservableList = null;
     try
     {
-      roomObservableList = FXCollections.observableList(
-          model.getFilteredRoom(null,null,temp));
+      roomObservableList = FXCollections.observableList(model.getFilteredRoom(null,null,temp));
     }
     catch (RemoteException e)
     {
-      throw new RuntimeException(e.detail);
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      x.showAndWait();
     }
     rooms.set(roomObservableList);
   }
@@ -522,12 +561,12 @@ public void bindHiddenText(StringProperty property){
     ObservableList<Room> roomObservableList = null;
     try
     {
-      roomObservableList = FXCollections.observableList(
-          model.getSimpleFilteredRoom(filteringRoom.getValue()));
+      roomObservableList = FXCollections.observableList(model.getSimpleFilteredRoom(filteringRoom.getValue()));
     }
     catch (RemoteException e)
     {
-      throw new RuntimeException(e.detail);
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      x.showAndWait();
     }
     rooms.set(roomObservableList);
   }
@@ -583,22 +622,20 @@ public void bindHiddenText(StringProperty property){
       {
         if (MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(MyDate.LocalDateToMyDate(fromDateNewReservation.getValue())))
         {
-          Alert alert = new Alert(Alert.AlertType.ERROR, "The finish date is before from date", ButtonType.OK);
-          alert.setHeaderText(null);
-          alert.setTitle("Error");
-          alert.showAndWait();
+          Alerts x = new Alerts(Alert.AlertType.ERROR,"Error","The finish date is before from date");
+          x.showAndWait();
           return;
         }
         roomObservableList = FXCollections.observableList(model.getFilteredRoom(MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), temp));
       }
       else
-        roomObservableList = FXCollections.observableList(
-            model.getFilteredRoom(null, null, temp));
+        roomObservableList = FXCollections.observableList(model.getFilteredRoom(null, null, temp));
       newReservations.set(roomObservableList);
     }
     catch (RemoteException e)
     {
-      throw new RuntimeException(e.detail);
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      x.showAndWait();
     }
   }
 
@@ -659,7 +696,7 @@ public void bindHiddenText(StringProperty property){
     }
   }
 
-  public void filterEmployee() throws RemoteException
+  public void filterEmployee()
   {
     String[] temp = new String[5];
     int counter = 0;
@@ -688,9 +725,16 @@ public void bindHiddenText(StringProperty property){
       temp[counter] = ", position " + employeePosition.getValue().toLowerCase();
       System.out.println(temp[counter]);
     }
-    ObservableList<Employee> customerObservableList = FXCollections.observableList(
-        model.getFilteredEmployee(temp));
-    employees.set(customerObservableList);
+    try
+    {
+      ObservableList<Employee> customerObservableList = FXCollections.observableList(model.getFilteredEmployee(temp));
+      employees.set(customerObservableList);
+    }
+    catch (RemoteException e)
+    {
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      x.showAndWait();
+    }
   }
 
   public Alerts checkIn()
@@ -730,7 +774,7 @@ public void bindHiddenText(StringProperty property){
     //model.saveSelectedReservation(null);
   }
 
-  public Alerts checkOut() throws RemoteException
+  public Alerts checkOut()
   {
     try
     {

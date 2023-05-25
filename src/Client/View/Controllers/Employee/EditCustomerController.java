@@ -46,7 +46,7 @@ public class EditCustomerController
     viewModel.fill();
   }
 
-  @FXML void save() throws RemoteException
+  @FXML void save()
   {
     Alerts x = viewModel.save();
     x.showAndWait();
@@ -63,8 +63,8 @@ public class EditCustomerController
 
   @FXML void delete() throws RemoteException
   {
-    Alerts conformation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want to delete this customer from the system?",null);
-    if (conformation.getResult().equals(ButtonType.YES))
+    Alerts confirmation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want to delete this customer from the system?",null);
+    if (confirmation.getResult().equals(ButtonType.OK))
     {
       Alerts x = viewModel.delete();
       x.showAndWait();

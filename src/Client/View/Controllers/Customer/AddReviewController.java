@@ -36,7 +36,6 @@ public class AddReviewController
 
   public void reset()
   {
-    //viewModel.update();
   }
 
   @FXML void Home()
@@ -44,7 +43,7 @@ public class AddReviewController
     viewHandler.openView(SceneNames.CustomerHomeNewReservations);
   }
 
-  @FXML void create() throws RemoteException
+  @FXML void create()
   {
     Alerts x = viewModel.addReview();
     x.showAndWait();

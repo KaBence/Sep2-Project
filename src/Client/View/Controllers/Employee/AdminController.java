@@ -99,12 +99,12 @@ public class AdminController
     }
   }
 
-  @FXML void filterEmployee() throws RemoteException
+  @FXML void filterEmployee()
   {
     viewModel.filterEmployee();
   }
 
-  @FXML void simpleFilterEmployee() throws RemoteException
+  @FXML void simpleFilterEmployee()
   {
     viewModel.simpleFilterEmployee();
   }

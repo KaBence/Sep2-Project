@@ -1,9 +1,11 @@
 package Client.View.Controllers.Employee;
 
+import Client.Utility.Alerts;
 import Client.View.Scenes.SceneNames;
 import Client.View.ViewHandler;
 import Client.ViewModel.Employee.EmployeeLoginViewModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
@@ -36,12 +38,15 @@ public class EmployeeLoginController
 
   public void reset()
   {
-
+    employeeIdField.clear();
+    passwordField.clear();
   }
 
-  @FXML void login() throws RemoteException
+  @FXML void login()
   {
-    if (viewModel.logIn(employeeIdField.getText(),passwordField.getText()))
+    Alerts x = viewModel.logIn();
+    x.showAndWait();
+    if (x.getAlertType().equals(Alert.AlertType.NONE))
     {
       if (employeeIdField.getText().equals("admin")&&passwordField.getText().equals("admin"))
       {
@@ -51,15 +56,23 @@ public class EmployeeLoginController
       {
         viewHandler.openView(SceneNames.EmployeeHomeReservations);
       }
+      reset();
     }
-    employeeIdField.clear();
-    passwordField.clear();
+    else
+    {
+      if (x.getContentText().equals("Invalid password"))
+      {
+        passwordField.clear();
+      }
+      else
+      {
+        reset();
+      }
+    }
   }
 
   @FXML void Back()
   {
     viewHandler.openView(SceneNames.Home);
   }
-
-
 }

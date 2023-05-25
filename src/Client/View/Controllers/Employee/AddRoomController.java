@@ -77,7 +77,7 @@ public class AddRoomController
     bathroom.setSelected(false);
   }
 
-  @FXML void Add() throws RemoteException
+  @FXML void Add()
   {
     Alerts x = viewModel.addRoom();
     x.showAndWait();

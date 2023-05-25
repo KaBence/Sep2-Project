@@ -61,7 +61,7 @@ public class AddCustomerViewModel
     property.bindBidirectional(repeatPassword);
   }
 
-  public Alerts addCustomer() throws RemoteException
+  public Alerts addCustomer()
   {
     try
     {
@@ -88,7 +88,7 @@ public class AddCustomerViewModel
         }
       }
     }
-    catch (NumberFormatException | NullPointerException e)
+    catch (NumberFormatException | NullPointerException | RemoteException e)
     {
       return new Alerts(Alert.AlertType.ERROR,"Error","Please fill up the every field");
     }

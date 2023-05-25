@@ -48,7 +48,7 @@ public class CustomerEditReservationController
     viewHandler.openView(SceneNames.CustomerHomeNewReservations);
   }
 
-  @FXML void save() throws RemoteException
+  @FXML void save()
   {
     viewModel.save().showAndWait();
     viewHandler.openView(SceneNames.CustomerHome);
