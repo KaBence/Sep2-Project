@@ -71,7 +71,7 @@ public class AdminViewModel
 
   public Alerts addEmployee()
   {
-    if (password.getValue()!=null && username.getValue()!=null && firstName.getValue()!=null && lastName.getValue()!=null && position.getValue()!=null && phoneNo.getValue()!=null)
+    if (!password.getValue().equals("") && !firstName.getValue().equals("") && !lastName.getValue().equals("") && !phoneNo.getValue().equals(""))
     {
       if (!(password.getValue().equals(repeatPassword.getValue())))
       {
@@ -101,6 +101,10 @@ public class AdminViewModel
         {
           return new Alerts(Alert.AlertType.ERROR, "Error",
               "Some Error occurred");
+        }
+        catch (NullPointerException e)
+        {
+          return new Alerts(Alert.AlertType.ERROR, "Error","Fill mandatory fields");
         }
       }
     }
