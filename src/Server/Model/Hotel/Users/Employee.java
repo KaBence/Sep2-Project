@@ -68,7 +68,7 @@ public class Employee extends Person implements Serializable
 
   public String employeeInfo()
   {
-    return super.info() + ", Position " + position;
+    return super.info() + ", position " + position;
   }
 }
 

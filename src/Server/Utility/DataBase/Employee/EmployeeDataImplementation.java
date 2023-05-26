@@ -127,7 +127,7 @@ public class EmployeeDataImplementation implements EmployeeData
       {
         if (s==null)
           break;
-        if (!employee.employeeInfo().contains(s)){
+        if (!employee.employeeInfo().toLowerCase().contains(s)){
           temp=false;
           break;
         }

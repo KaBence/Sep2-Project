@@ -37,6 +37,7 @@
                   <DatePicker fx:id="fromDateReservation" layoutX="413.0" layoutY="119.0" onAction="#filterReservation" promptText="From" />
                   <DatePicker fx:id="toDateReservation" layoutX="413.0" layoutY="161.0" onAction="#filterReservation" promptText="To" />
                   <Button layoutX="457.0" layoutY="324.0" mnemonicParsing="false" onAction="#deleteReservation" text="Delete" />
+                  <Button layoutX="456.0" layoutY="205.0" mnemonicParsing="false" onAction="#clearDates" text="Clear Dates" />
                </children>
             </AnchorPane>
         </content>

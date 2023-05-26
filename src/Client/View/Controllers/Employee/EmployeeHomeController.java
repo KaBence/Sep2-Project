@@ -366,6 +366,8 @@ public class EmployeeHomeController
   @FXML void clearDates(){
     fromDateNewReservation.setValue(null);
     toDateNewReservation.setValue(null);
+    fromDateReservation.setValue(null);
+    toDateReservation.setValue(null);
   }
 
   @FXML void filterCustomer()

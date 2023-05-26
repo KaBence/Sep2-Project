@@ -58,6 +58,8 @@ public class EditReservationViewModel
     MyDate to=new MyDate(temp2.getDayOfMonth(), temp2.getMonthValue(), temp2.getYear());
     try
     {
+      if (from.isBefore(MyDate.today())|| to.isBefore(MyDate.today()))
+        throw new IllegalDateException(9);
       String state=model.updateReservation(Integer.parseInt(roomNo.getValue()), username.getValue(),from,to, old.getRoomNumber(), old.getUsername(), old.getFromDate(),old.getToDate());
       if (state.equals(DatabaseConnection.SUCCESS))
       {

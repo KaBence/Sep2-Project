@@ -412,9 +412,9 @@ public void bindHiddenText(StringProperty property)
       {
         filtered = model.getFilteredReservation(state, MyDate.LocalDateToMyDate(fromDateReservation.getValue()),
             MyDate.LocalDateToMyDate(toDateReservation.getValue()));
-        ObservableList<Reservation> reservationObservableList=FXCollections.observableList(filtered);
-        reservations.set(reservationObservableList);
       }
+      ObservableList<Reservation> reservationObservableList=FXCollections.observableList(filtered);
+      reservations.set(reservationObservableList);
     }
     catch (RemoteException e)
     {
@@ -467,17 +467,19 @@ public void bindHiddenText(StringProperty property)
     }
     if (!firstNameFilter.getValue().equals(""))
     {
-      temp[counter] = " -> , FirstName " + firstNameFilter.getValue();
+      temp[counter] = " -> , firstname " + firstNameFilter.getValue();
       counter++;
+
     }
     if (!lastNameFilter.getValue().equals(""))
     {
-      temp[counter] = ", LastName " + lastNameFilter.getValue();
+      temp[counter] = ", lastname " + lastNameFilter.getValue();
       counter++;
+
     }
     if (!phoneNumberFilter.getValue().equals(""))
     {
-      temp[counter] = ", PhoneNumber " + phoneNumberFilter.getValue();
+      temp[counter] = ", phonenumber " + phoneNumberFilter.getValue();
       counter++;
     }
     if (!paymentInfoFilter.getValue().equals(""))
@@ -723,7 +725,6 @@ public void bindHiddenText(StringProperty property)
     if (!employeePosition.getValue().equals(""))
     {
       temp[counter] = ", position " + employeePosition.getValue().toLowerCase();
-      System.out.println(temp[counter]);
     }
     try
     {
