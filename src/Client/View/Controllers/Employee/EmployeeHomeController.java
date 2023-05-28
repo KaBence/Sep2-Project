@@ -209,7 +209,7 @@ public class EmployeeHomeController
   @FXML void checkIn()
   {
     Alerts conformation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want to check in this reservation?",null);
-    if (conformation.getResult().equals(ButtonType.YES))
+    if (conformation.getResult().equals(ButtonType.OK))
     {
       Alerts x = viewModel.checkIn();
       x.showAndWait();
@@ -219,7 +219,7 @@ public class EmployeeHomeController
   @FXML void checkOut()
   {
     Alerts conformation = new Alerts(Alert.AlertType.CONFIRMATION,"Do you really want to check out this reservation?",null);
-    if (conformation.getResult().equals(ButtonType.YES))
+    if (conformation.getResult().equals(ButtonType.OK))
     {
       Alerts x = viewModel.checkOut();
       x.showAndWait();
