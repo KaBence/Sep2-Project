@@ -70,27 +70,25 @@ public class AdminViewModel
 
 
 
-  public Alerts addEmployee()
-  {
-    if (!password.getValue().equals("") && !firstName.getValue().equals("") && !lastName.getValue().equals("") && !phoneNo.getValue().equals(""))
-    {
-      if (!(password.getValue().equals(repeatPassword.getValue())))
-      {
+  public Alerts addEmployee() {
+    if (!password.getValue().equals("") && !firstName.getValue().equals("") &&
+        !lastName.getValue().equals("") && !phoneNo.getValue().equals("")) {
+      if (!(password.getValue().equals(repeatPassword.getValue()))) {
         return new Alerts(Alert.AlertType.WARNING, "Invalid password",
             "The two passwords doesn't match");
       }
       else
       {
-        try
-        {
-          String state = model.addEmployee(firstName.getValue(), lastName.getValue(), position.getValue(), phoneNo.getValue(),
-              password.getValue());
+        try {
+          String state = model.addEmployee(firstName.getValue(), lastName.getValue(), position.getValue(),
+              phoneNo.getValue(), password.getValue());
 
           if (state.equals(DatabaseConnection.SUCCESS))
           {
             return new Alerts(Alert.AlertType.INFORMATION,
                 "Employee added successfully",
-                "New Employee login: " + model.getNewEmployee().getUsername() + "\nPassword: " + password.getValue());
+                "New Employee login: " + model.getNewEmployee().getUsername() +
+                    "\nPassword: " + password.getValue());
           }
           else
           {
@@ -98,19 +96,16 @@ public class AdminViewModel
                 "Some Error occurred");
           }
         }
-        catch (RemoteException e)
-        {
+        catch (RemoteException e) {
           return new Alerts(Alert.AlertType.ERROR, "Error",
               "Some Error occurred");
         }
-        catch (NullPointerException e)
-        {
+        catch (NullPointerException e) {
           return new Alerts(Alert.AlertType.ERROR, "Error","Fill mandatory fields");
         }
       }
     }
-    else
-    {
+    else {
       return new Alerts(Alert.AlertType.WARNING,"Error","Mandatory fields cannot be empty");
     }
   }

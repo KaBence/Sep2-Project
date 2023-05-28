@@ -46,7 +46,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <DatePicker fx:id="fromDate" layoutX="412.0" layoutY="82.0" />
-      <DatePicker fx:id="toDate" layoutX="412.0" layoutY="162.0" />
+      <DatePicker fx:id="fromDate" editable="false" layoutX="412.0" layoutY="82.0" />
+      <DatePicker fx:id="toDate" editable="false" layoutX="412.0" layoutY="162.0" />
    </children>
 </AnchorPane>

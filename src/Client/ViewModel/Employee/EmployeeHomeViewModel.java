@@ -578,46 +578,38 @@ public void bindHiddenText(StringProperty property)
   {
     String[] temp = new String[7];
     int counter = 0;
-    if (reserveBalcony.getValue())
-    {
+    if (reserveBalcony.getValue()) {
       temp[counter] = "balcony, ";
       counter++;
     }
-    if (reserveKitchen.getValue())
-    {
+    if (reserveKitchen.getValue()) {
       temp[counter] = "kichenet, ";
       counter++;
     }
-    if (reserveInternet.getValue())
-    {
+    if (reserveInternet.getValue()) {
       temp[counter] = "internet, ";
       counter++;
     }
-    if (reserveBathroom.getValue())
-    {
+    if (reserveBathroom.getValue()) {
       temp[counter] = "bathroom, ";
       counter++;
     }
 
-    if (reservePricePerNight.getValue() != 0)
-    {
+    if (reservePricePerNight.getValue() != 0) {
       temp[counter] = "Price, " + reservePricePerNight.getValue();
       counter++;
     }
 
-    if (!reserveRoomNo.getValue().equals(""))
-    {
+    if (!reserveRoomNo.getValue().equals("")) {
       temp[counter] = "RoomNo: " + reserveRoomNo.getValue() + ", ";
       counter++;
     }
-
-    if (!reserveNoBeds.getValue().equals(""))
-    {
+    if (!reserveNoBeds.getValue().equals("")) {
       temp[counter] = "NoBeds: " + reserveNoBeds.getValue() + ", ";
       counter++;
     }
-    ObservableList<Room> roomObservableList;
 
+    ObservableList<Room> roomObservableList;
     try
     {
       if (toDateNewReservation.getValue() != null && fromDateNewReservation.getValue() != null)
@@ -628,7 +620,8 @@ public void bindHiddenText(StringProperty property)
           x.showAndWait();
           return;
         }
-        roomObservableList = FXCollections.observableList(model.getFilteredRoom(MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), temp));
+        roomObservableList = FXCollections.observableList(model.getFilteredRoom(MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),
+            MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), temp));
       }
       else
         roomObservableList = FXCollections.observableList(model.getFilteredRoom(null, null, temp));
@@ -636,7 +629,8 @@ public void bindHiddenText(StringProperty property)
     }
     catch (RemoteException e)
     {
-      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error","Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
+      Alerts x = new Alerts(Alert.AlertType.ERROR,"Database Error",
+          "Contact the developers of the system\nPhone number: +45 8755 4243\nPhone number: +45 8755 4222");
       x.showAndWait();
     }
   }
@@ -670,11 +664,14 @@ public void bindHiddenText(StringProperty property)
       {
         throw new IllegalDateException(8);
       }
-      else if (MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()).isBefore(MyDate.today())||MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(MyDate.today()))
+      else if (MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()).isBefore(MyDate.today())
+          ||MyDate.LocalDateToMyDate(toDateNewReservation.getValue()).isBefore(MyDate.today()))
       {
         throw new IllegalDateException(9);
       }
-      String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), model.getCurrentCustomer().getUsername(), MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()), MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
+      String state= model.addReservation(Integer.parseInt(hiddenFieldRoomNo.getValue()), model.getCurrentCustomer().getUsername(),
+          MyDate.LocalDateToMyDate(fromDateNewReservation.getValue()),
+          MyDate.LocalDateToMyDate(toDateNewReservation.getValue()), false);
       if (state.equals(DatabaseConnection.SUCCESS))
       {
         return new Alerts(Alert.AlertType.INFORMATION,"Success","Successfully added a new reservation");
