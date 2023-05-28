@@ -239,7 +239,7 @@ public class EmployeeHomeController
   @FXML void editReservation()
   {
     Alerts x = viewModel.saveReservation(reservationListView.getSelectionModel().getSelectedItem());
-    if (x.getAlertType().equals(Alert.AlertType.INFORMATION))
+    if (x.getAlertType().equals(Alert.AlertType.NONE))
     {
       x.showAndWait();
       viewHandler.openView(SceneNames.EditReservation);
