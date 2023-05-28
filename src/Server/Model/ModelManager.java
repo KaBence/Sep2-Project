@@ -101,6 +101,7 @@ public class ModelManager implements Model
 
   @Override public Person logOut(Person user)
   {
+    support.firePropertyChange("logOut",null,"123");
     ArrayList<Person> list = getAllRegisteredUsers();
     for (int i = 0; i < list.size(); i++)
     {
@@ -135,6 +136,7 @@ public class ModelManager implements Model
       int price, String orientation, boolean internet, boolean bathroom,
       boolean kitchen, boolean balcony)
   {
+    support.firePropertyChange("add",null,"123");
     String state=roomData.addNewRoom(roomNumber, numberOfBeds, size, price, orientation, internet, bathroom, kitchen, balcony, "Free");
     if (state.equals(DatabaseConnection.SUCCESS))
       log(Types.Room,roomNumber+" is added to the system");
@@ -144,6 +146,7 @@ public class ModelManager implements Model
   @Override public String addReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate, boolean CheckedIn)
   {
+    support.firePropertyChange("add",null,"123");
     String state=reservationData.addNewReservation(roomNumber, username, fromDate,
         toDate, CheckedIn);
     if (state.equals(DatabaseConnection.SUCCESS))
@@ -153,12 +156,14 @@ public class ModelManager implements Model
 
   @Override public Employee getNewEmployee()
   {
+    support.firePropertyChange("add",null,"123");
     return employeeData.getNewEmployee();
   }
 
   @Override public String addEmployee(String firstName, String lastName,
       String position, String phoneNo, String password)
   {
+    support.firePropertyChange("add",null,"123");
     String state=employeeData.AddEmployee(password, firstName, lastName, phoneNo,
         position);
     if (state.equals(DatabaseConnection.SUCCESS))

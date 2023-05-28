@@ -105,6 +105,7 @@ public class CustomerHomeController
 
   @FXML void Home()
   {
+    viewModel.logOut();
     viewHandler.openView(SceneNames.Home);
     viewModel.previousView();
   }
