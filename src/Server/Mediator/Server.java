@@ -207,6 +207,7 @@ public class Server extends UnicastRemoteObject implements SharedInterface
   @Override public String updateReservation(int roomNumber, String username,
       MyDate fromDate, MyDate toDate,int oldRoomNo,String oldUsername,MyDate oldFromDate,MyDate oldToDate) throws RemoteException
   {
+    support.firePropertyChange("update",null,"123");
     return model.updateReservation(roomNumber, username, fromDate, toDate,oldRoomNo,oldUsername,oldFromDate,oldToDate);
   }
 
@@ -214,6 +215,7 @@ public class Server extends UnicastRemoteObject implements SharedInterface
       String firstName, String lastName, String phoneNo, String paymentInfo)
       throws RemoteException
   {
+    support.firePropertyChange("add",null,"123");
     return model.addCustomer(username,password,firstName,lastName,phoneNo,paymentInfo);
   }
 
@@ -221,7 +223,6 @@ public class Server extends UnicastRemoteObject implements SharedInterface
       throws RemoteException
   {
     support.firePropertyChange("update", null, "123");
-    System.out.println("server");
     return model.checkIn(roomNumber,username,fromDate);
   }
 

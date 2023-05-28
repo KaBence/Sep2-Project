@@ -742,7 +742,7 @@ public void bindHiddenText(StringProperty property)
       Reservation reservation = model.getSelectedReservation();
       if (!(reservation.getFromDate().equals(MyDate.today())))
       {
-        return new Alerts(Alert.AlertType.WARNING,"Check in error","You can not check in because your reservation is valid from"+reservation.getFromDate().toString());
+        return new Alerts(Alert.AlertType.WARNING,"Check in error","You can not check in because your reservation is valid from "+reservation.getFromDate().toString());
       }
       else if (!reservation.isCheckedIn())
       {

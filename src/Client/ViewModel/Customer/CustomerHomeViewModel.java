@@ -184,6 +184,7 @@ public class CustomerHomeViewModel implements PropertyChangeListener
     ArrayList<Reservation> reservations;
     try
     {
+      allCustomers = model.getAllCustomers();
       rooms = model.getAllRooms();
       reviews = model.getAllReviews();
       reservations = model.getAllMyReservation(model.getCurrentCustomer().getUsername());

@@ -3,6 +3,7 @@ package Client.Model;
 import Server.Model.Hotel.Reservation;
 import Server.Model.Hotel.Review;
 import Server.Model.Hotel.Room;
+import Server.Model.Hotel.Users.Customer;
 import Server.Model.Hotel.Users.Person;
 import Server.Model.MyDate;
 
@@ -18,6 +19,7 @@ public interface ModelCustomerSide extends PropertyChangeListener
       RemoteException;
 
   ArrayList<Review> getAllReviews() throws RemoteException;
+  ArrayList<Customer> getAllCustomers() throws RemoteException;
 
   String addReview(String username, int roomNO, MyDate fromDate, MyDate postedDate, String comment) throws RemoteException;
   String addReservation(int roomNumber, String username, MyDate fromDate, MyDate toDate, boolean CheckedIn) throws RemoteException;
