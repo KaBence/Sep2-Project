@@ -36,16 +36,16 @@ public class ModelManager implements Model
   private ArrayList<Person> loggedInUsers;
   private PropertyChangeSupport support;
 
-  private static String homePath = System.getProperty("user.home");
-  private static File downloads = new File(homePath, "Downloads/SepLogs");
+  //private static String homePath = System.getProperty("user.home");
+  //private static File downloads = new File(homePath, "Downloads/SepLogs");
 
 
-  private FileLog logInLogOut=FileLog.getInstance(new File(downloads,"LogInOut.txt"));
-  private FileLog customerLog=FileLog.getInstance(new File(downloads,"CustomerLog.txt"));
-  private FileLog employeeLog=FileLog.getInstance(new File(downloads,"EmployeeLog.txt"));
-  private FileLog reservationLog=FileLog.getInstance(new File(downloads,"ReservationLog.txt"));
-  private FileLog reviewLog=FileLog.getInstance(new File(downloads,"ReviewLog.txt"));
-  private FileLog roomLog=FileLog.getInstance(new File(downloads,"RoomLog.txt"));
+  //private FileLog logInLogOut=FileLog.getInstance(Types.logInOut);
+  //private FileLog customerLog=FileLog.getInstance(Types.Customer);
+  //private FileLog employeeLog=FileLog.getInstance(Types.Employee);
+  //private FileLog reservationLog=FileLog.getInstance(Types.Reservation);
+  //private FileLog reviewLog=FileLog.getInstance(Types.Review);
+  //private FileLog roomLog=FileLog.getInstance(Types.Room);
 
 
   public ModelManager()
@@ -68,14 +68,8 @@ public class ModelManager implements Model
   {
     try
     {
-      switch (type){
-        case logInOut -> logInLogOut.log(message);
-        case Review -> reviewLog.log(message);
-        case Room -> roomLog.log(message);
-        case Customer -> customerLog.log(message);
-        case Employee -> employeeLog.log(message);
-        case Reservation -> reservationLog.log(message);
-      }
+      FileLog log=FileLog.getInstance(type);
+      log.log(message);
       support.firePropertyChange("log",null,message);
     }
     catch (IOException e){

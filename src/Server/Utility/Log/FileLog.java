@@ -6,29 +6,29 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class FileLog
 {
+  private static String homePath = System.getProperty("user.home");
+  private static File downloads = new File(homePath, "Downloads/SepLogs");
   private File logFile;
   private static CurrentTime currentTime;
-  private static final Map<File,FileLog> instances=new HashMap<>();
+  private static final Map<Types,FileLog> instances=new HashMap<>();
 
-
-  private FileLog(File logFile){
-    this.logFile=logFile;
+  private FileLog(Types logFile){
+    this.logFile=new File(downloads,logFile+".txt");
     currentTime=CurrentTime.getInstance();
   }
   public File getLogFile() {
     return logFile;
   }
-
-  public static synchronized  FileLog getInstance(File logFile){
+  public static synchronized  FileLog getInstance(Types logFile){
     if (!instances.containsKey(logFile)){
       instances.put(logFile,new FileLog(logFile));
     }
     return instances.get(logFile);
   }
-
   public void log(String message) throws IOException
   {
     try (
@@ -38,5 +38,4 @@ public class FileLog
       writer.println(logLine);
     }
   }
-
 }
