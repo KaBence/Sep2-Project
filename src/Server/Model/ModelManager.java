@@ -22,7 +22,6 @@ import Server.Utility.Log.Types;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 

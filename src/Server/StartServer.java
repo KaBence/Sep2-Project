@@ -16,7 +16,7 @@ public class StartServer
       throws RemoteException, AlreadyBoundException
   {
     Model model=new ModelManager();
-    ConsoleView consoleView=new ConsoleView(model);
+    new ConsoleView(model);
 
     Registry registry= LocateRegistry.createRegistry(1377);
     Server server=new Server(model);

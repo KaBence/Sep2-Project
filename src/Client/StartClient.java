@@ -7,16 +7,18 @@ import Client.ViewModel.ViewModelFactory;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.IOException;
 import java.rmi.RemoteException;
 
 public class StartClient extends Application
 {
   private Model model;
+
+  public static void main(String[] args) {
+    launch(args);
+  }
   @Override public void start(Stage primaryStage) throws Exception
   {
     model=new ModelManager();

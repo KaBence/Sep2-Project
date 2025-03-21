@@ -14,7 +14,6 @@ import java.io.IOException;
 public class ViewFactory
 {
 
-  private ViewHandler viewHandler;
   private HomeController homeController;
   private EmployeeLoginController employeeLoginController;
   private EmployeeHomeController employeeHomeController;
@@ -29,6 +28,8 @@ public class ViewFactory
   private CustomerEditReservationController customerEditReservationController;
 
   private AddReviewController addReviewController;
+
+  private ViewHandler viewHandler;
   private ViewModelFactory viewModelFactory;
 
   public ViewFactory(ViewHandler viewHandler, ViewModelFactory viewModelFactory)

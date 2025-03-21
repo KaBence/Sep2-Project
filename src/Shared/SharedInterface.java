@@ -9,7 +9,6 @@ import Server.Model.Hotel.Room;
 import Server.Model.Hotel.Users.Person;
 import dk.via.remote.observer.RemotePropertyChangeListener;
 
-import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;

@@ -2,13 +2,9 @@ import Client.Mediator.Client;
 import Client.Model.Model;
 import Client.Model.ModelManager;
 import Client.Utility.Alerts;
-import Client.View.ViewHandler;
 import Client.ViewModel.Employee.EmployeeHomeViewModel;
-import Server.Mediator.Server;
 import Server.Model.Hotel.Reservation;
-import Server.Model.Hotel.Room;
 import Server.Model.Hotel.Users.Employee;
-import Server.Model.Hotel.Users.Person;
 import Server.Model.MyDate;
 import Server.Utility.DataBase.DatabaseConnection;
 import Shared.SharedInterface;
@@ -17,7 +13,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Alert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.converter.ConvertWith;
 import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,11 +24,7 @@ import java.time.LocalDate;
 
 public class EmployeeHomeViewModelTest
 {
-  //test employee home view model
-
-  private Client client;
   private SharedInterface sharedInterface;
-
   private Model model;
   private EmployeeHomeViewModel viewModel;
 
@@ -41,7 +32,7 @@ public class EmployeeHomeViewModelTest
   void setUp() throws IOException, NotBoundException
   {
     sharedInterface= Mockito.mock(SharedInterface.class);
-    client=new Client(sharedInterface);
+    new Client(sharedInterface);
     model=new ModelManager(sharedInterface);
     viewModel=new EmployeeHomeViewModel(model);
   }
@@ -49,7 +40,8 @@ public class EmployeeHomeViewModelTest
   @Test
   void loggingOutReturnPersonThatWasLoggedInIntoTheSystem() throws RemoteException
   {
-    Employee employee = new Employee("testLogOut","Test","LogOut","Mockito","1233456789","qwerty");
+    Employee employee = new Employee("testLogOut","Test","LogOut",
+        "Mockito","1233456789","qwerty");
     Mockito.when(sharedInterface.logIn(employee)).thenReturn(employee);
     model.logIn(employee);
     Mockito.when(sharedInterface.logOut(employee)).thenReturn(employee);

@@ -13,13 +13,11 @@ import dk.via.remote.observer.RemotePropertyChangeListener;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class Client extends UnicastRemoteObject implements
-    RemotePropertyChangeListener
+public class Client extends UnicastRemoteObject implements RemotePropertyChangeListener
 {
   private SharedInterface sharedInterface;
   private PropertyChangeSupport support;

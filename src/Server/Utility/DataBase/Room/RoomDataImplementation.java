@@ -28,12 +28,10 @@ public class RoomDataImplementation implements RoomData
 
   @Override public String  addNewRoom(int roomNumber, int numberOfBeds, int size,int price,
       String orientation, boolean internet, boolean bathroom, boolean kitchen,
-      boolean balcony,String status)
-  {
+      boolean balcony,String status) {
     if (orientation==null)
       return DatabaseConnection.MANDATORY;
-    try (Connection connection = getConnection())
-    {
+    try (Connection connection = getConnection()) {
       PreparedStatement ps = connection.prepareStatement(
           "INSERT INTO room(roomNo, noBeds, size,price, orientation, internet, bathroom, kitchen, balcony,status) VALUES(?,?,?,?,?,?,?,?,?,?)");
       ps.setInt(1, roomNumber);
@@ -49,8 +47,7 @@ public class RoomDataImplementation implements RoomData
 
       ps.executeUpdate();
     }
-    catch (SQLException ex)
-    {
+    catch (SQLException ex) {
       return DatabaseConnection.ERROR;
     }
     return DatabaseConnection.SUCCESS;

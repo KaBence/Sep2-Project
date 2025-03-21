@@ -8,8 +8,6 @@ import Server.Model.Hotel.Room;
 import Server.Model.Hotel.Users.Person;
 
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface Model

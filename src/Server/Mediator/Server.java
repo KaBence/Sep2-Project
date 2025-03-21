@@ -11,7 +11,6 @@ import Shared.SharedInterface;
 import dk.via.remote.observer.RemotePropertyChangeListener;
 import dk.via.remote.observer.RemotePropertyChangeSupport;
 
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 public class Server extends UnicastRemoteObject implements SharedInterface
 {
   private Model model;
-
   private RemotePropertyChangeSupport support;
 
   public Server(Model model) throws RemoteException
